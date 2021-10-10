@@ -1,0 +1,122 @@
+:root {
+    --cyan-color: #16ccca;
+}
+
+footer {
+    padding-top: 1em;
+    color: #6a6a6a;
+}
+
+footer a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #14eb8e;
+}
+
+.back-button {
+    position: sticky;
+    display: grid;
+    align-items: center;
+    text-align: center;
+    top: 1em;
+    left: 1em;
+    background-color: #16ccca;
+    padding: 5px;
+    width: 2em;
+    height: 2em;
+    border-radius: 10px;
+    font-size: 2rem;
+    color: black;
+}
+
+.off-alert {
+    color: red;
+    font-size: large;
+    margin-bottom: 0.4rem;
+}
+
+.status-box {
+    background-color: #121518;
+    width: min-content;
+    padding: 1em;
+    /*box-shadow: 5px 5px 15px black;*/
+}
+
+table {
+    color: white;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+table > * {
+    text-align: left;
+}
+
+td, th {
+    border-bottom: 1px solid #303030;
+    padding: 1.5em 2em;
+}
+
+td {
+    text-align: center;
+}
+
+thead {
+    background-color: #393939;
+}
+
+td > img {
+    width: 25px;
+}
+
+.cookie-banner
+{
+    position: fixed;
+    margin: 0;
+    width: 100%;
+    height: 4rem;
+    bottom: 0;
+    left: 0;
+    display: none;
+    align-content: center;
+    justify-content: center;
+    background-color: black;
+    font-family: 'Ubuntu', sans-serif;
+    color: white;
+}
+.ccontainer
+{
+    width: auto;
+    display: inline-flex;
+}
+.cookie-text
+{
+    margin: auto;
+}
+.close-cookies
+{
+    margin: auto 10px;
+    right: 0;
+    background-color: #ff03c2;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color .3s;
+}
+.close-cookies:hover{
+    background-color: var(--cyan-color);
+}
+
+
+@media (max-width: 1500px) {
+    img {
+        width: 40vw;
+    }
+
+    footer {
+        font-size: 1.2rem;
+    }
+}

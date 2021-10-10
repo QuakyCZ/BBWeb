@@ -1,0 +1,23 @@
+html {
+    height: auto;
+}
+body {
+    height: auto;
+}
+
+.container {
+    background-color: unset;
+    margin: auto;
+    width: auto;
+}
+
+.card {
+    width: 600px;
+    margin: auto;
+    margin-top: 10em;
+    padding: 2em;
+    background-color: rgba(0,0,0, 0.5);
+
+    border-radius: 0;
+    border: 2px solid orange;
+}

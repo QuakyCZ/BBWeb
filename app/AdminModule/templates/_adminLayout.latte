@@ -1,0 +1,49 @@
+{block body}
+    <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">BeastBlock.cz</a> <span style="color: #707986;">Administrace</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav" style="justify-content: right;">
+                {if $user->isLoggedIn()}
+                    <a n:href="Sign:out" class="nav-link text-light">Odhlásit se</a>
+                    <img alt="{$user->identity->name}" src="https://minotar.net/avatar/{$user->identity->name}/250"
+                         class="skin"
+                         style="width: 50px;">
+                {else}
+                    <a n:href="Sign:in" class="nav-link">Přihlásit se</a>
+                {/if}
+            </div>
+        </div>
+
+    </nav>
+    <div class="wrapper">
+
+        <div class="vertical-nav">
+            <div class="vertical-nav-items">
+                <a n:href="Default:">
+                    <div class="vertical-nav-item">
+                        Domů
+                    </div>
+                </a>
+                <a n:href="Users:">
+                    <div class="vertical-nav-item">
+                        Uživatelé
+                    </div>
+                </a>
+                <a n:href="Servers:">
+                    <div class="vertical-nav-item">
+                        Servery
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="container">
+            {include content}
+        </div>
+    </div>
+    </body>
+{/block}

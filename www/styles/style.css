@@ -1,0 +1,616 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap');
+
+:root {
+    --cyan-color: #16ccca;
+    --nav-accent: #c69c3a;
+    --shop-text: #5b727f;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #171b1e url(../img/bg.jpg) no-repeat fixed center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: normal;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+a:hover {
+    text-decoration: none;
+    color: white;
+}
+
+
+footer {
+    padding-top: 1em;
+    color: #6a6a6a;
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    justify-content: space-between;
+}
+
+footer div
+{
+    margin: auto 0;
+}
+
+footer a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #14eb8e;
+}
+
+.container {
+    position: relative;
+    margin-top: 1.3em;
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: max-content;
+}
+
+.wrapper {
+    display: grid;
+    grid-gap: 2em;
+    padding: 0;
+    grid-auto-columns: 1fr 1fr 1fr;
+}
+
+.wrapper > div {
+    padding: 0;
+    margin: 0;
+    height: fit-content;
+}
+
+.wrapper > div > img {
+    overflow: hidden;
+}
+
+.info-box {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    grid-column: 1;
+    grid-row: 2;
+    height: available;
+}
+
+.box-content {
+    margin: auto auto;
+    text-align: center;
+    width: 80%;
+    color: white;
+    font-size: 1.5rem;
+}
+.info-box > .box-content {
+    position: absolute;
+    margin: 0 0 0 0;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: max-content;
+    text-wrap: none;
+    text-shadow: black 3px 3px 5px;
+}
+.time-box {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: #181818;
+    grid-column: 1;
+    grid-row: 3;
+    height: 100%!important;
+}
+
+.box-content > h1 {
+    font-size: 2.3rem;
+}
+
+.time-box-time {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 3em;
+}
+
+.small-tip {
+    display: none;
+}
+
+.time-box > .box-content > h1 {
+    margin-bottom: -0.5em;
+}
+
+.time-box-countdown {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: #292929;
+    border-radius: 10px;
+    width: auto;
+    height: auto;
+    font-weight: bold;
+
+}
+.time-box-countdown > span {
+    font-size: 1.5rem;
+    margin: 1em 0.5em;
+    color: #16ccca;
+}
+#days {
+    color: #ff03c2;
+}
+
+.main-box {
+    position: relative;
+    grid-column: 2/4;
+    grid-row: 2;
+}
+
+.social-box {
+    display: grid;
+    grid-column: 2;
+    grid-row: 3;
+    padding-left: 0.1em;
+    padding-right: 0.1em;
+    grid-row-gap: 2.6em;
+    width: fit-content;
+    height: 100% !important;
+}
+
+.social-box > div {
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
+.social-box > div > a > img {
+    object-fit: fill !important;
+    padding: 0;
+    margin: 0;
+}
+
+#key1, #key2, #key3 {
+    position: absolute;
+    right: -.5em;
+    bottom: 0;
+}
+
+.s-box {
+    grid-column: 3;
+    grid-row: 3;
+}
+
+img {
+    object-fit: contain;
+}
+
+.box {
+    box-shadow: 5px 5px 15px black;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #ff03c2;
+    color: white;
+    height: 3em;
+    cursor: pointer;
+    transition: background-color 1s, color 1s;
+    text-shadow: none;
+    width: auto;
+    margin: auto auto;
+}
+
+.btn:hover {
+    color: black;
+    background-color: #16ccca;
+}
+
+.tooltip {
+    position: relative;
+    width: auto !important;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    position: absolute;
+    background-color: #555;
+    width: max-content!important;
+    color: #fff;
+    text-align: center;
+    padding: 10px 10px;
+    border-radius: 6px;
+    z-index: 1;
+    opacity: 0;
+    transition: visibility 0.1s, opacity 0.6s ;
+
+    top: 135%;
+    left: 50%;
+    transform: translate(-50%,0);
+    text-wrap: none;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #555 transparent;
+    opacity: 1;
+    transform: translate(-50%,0);
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup {
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: rgb(0,0,0);
+    background: -moz-radial-gradient(circle, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.5) 78%, rgba(0,0,0,0) 100%);
+    background: -webkit-radial-gradient(circle, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.5) 78%, rgba(0,0,0,0) 100%);
+    background: radial-gradient(circle, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.5) 78%, rgba(0,0,0,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#000000",GradientType=1);
+    height: 100vh;
+    width: 100vw;
+    display: none;
+}
+.popup-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #161a1d;
+    color: white;
+}
+
+.popup-header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    margin: auto;
+    width: 100%;
+}
+
+.popup-header > div {
+
+}
+
+.popup-content {
+    width: available;
+    margin: 2em 2em;
+}
+
+.popup-content  h1 {
+    font-size: 2rem;
+}
+
+.popup-content > h2 {
+    color: #16ccca;
+}
+
+.popup-content > p {
+    margin-bottom: 2em;
+    text-align: justify;
+}
+
+.shop_wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    flex-basis: auto;
+    justify-content: space-between;
+}
+#shop-content
+{
+    width: fit-content;
+}
+.shop_item_header
+{
+    display: flex;
+    align-items: center;
+    flex-flow: row nowrap;
+    font-size: 2.2rem;
+}
+.shop_item_header p {
+    margin-left: 5%;
+}
+.shop_item_header img {
+    height: 60px;
+}
+.shop_item {
+    flex: 1;
+    height: fit-content;
+    padding: 40px 70px;
+    margin: 2%;
+    background-color: #1c2124;
+    transition: .2s box-shadow;
+    cursor: pointer;
+}
+.shop_item:hover
+{
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+.shop_item_text
+{
+    color: var(--shop-text);
+    font-size: 1.3rem;
+}
+
+.yellow-text {
+    font-weight: lighter;
+    color: #e9c245;
+}
+
+hr {
+    color: #21272b;
+}
+
+.middle {
+    margin: auto 1em;
+    position: static;
+}
+
+.social-box {
+    grid-row-gap: 1rem;
+}
+
+.flex-column {
+    display: flex;
+    flex-flow: column nowrap;
+    margin: auto auto;
+}
+
+.flex-column > * {
+    margin: 0 0 1em;
+}
+
+.flex-column > *:last-child {
+    margin: 0;
+}
+
+.text-center {
+    text-align: center;
+}
+
+h1 {
+    color: white;
+}
+
+.text-cyan {
+    color: var(--cyan-color);
+}
+
+.nav {
+    grid-row: 1;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    color: white;
+    width: 100%;
+    height: 50px;
+    font-weight: bold;
+    text-align: right;
+    font-size: 1.3rem;
+}
+
+.nav > div {
+    margin: auto 0;
+    width: 100%;
+}
+
+
+.controls a
+{
+    text-decoration: none;
+    color: #e3e4e5;
+    margin-right: 2rem;
+    transition: .2s color;
+    cursor: pointer;
+}
+
+.controls:last-child {
+    margin-right: 0;
+}
+
+.controls a:hover
+{
+    color: var(--nav-accent);
+}
+
+.cookie-banner
+{
+    position: fixed;
+    margin: 0;
+    width: 100%;
+    height: 4rem;
+    bottom: 0;
+    left: 0;
+    display: none;
+    align-content: center;
+    justify-content: center;
+    background-color: black;
+    font-family: 'Ubuntu', sans-serif;
+    color: white;
+}
+.ccontainer
+{
+    width: auto;
+    display: inline-flex;
+}
+.cookie-text
+{
+    margin: auto;
+}
+.close-cookies
+{
+    right: 0;
+    margin: auto 10px;
+    background-color: #ff03c2;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color .3s;
+}
+.close-cookies:hover{
+    background-color: var(--cyan-color);
+}
+
+@media (max-width: 1200px) {
+    body {
+        background: black url("../img/bg.jpg") no-repeat center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    .container {
+        width: 80%;
+        max-width: 80%;
+    }
+    .wrapper {
+        display: flex;
+        flex-flow: column;
+        flex-basis: auto;
+        width: 100%;
+    }
+
+    .wrapper >div {
+        padding-bottom: 1em;
+    }
+    .main-box {
+        order: 1;
+    }
+    .social-box {
+        display: flex;
+        flex-direction: column;
+        flex-flow: column;
+        row-gap: 2em;
+    }
+
+    img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .time-box {
+        order: 2;
+    }
+
+    .info-box {
+        order: 3;
+    }
+
+    .social-box {
+        grid-row-gap: 1rem;
+        order: 4;
+    }
+
+    .s-box {
+        order: 5;
+    }
+    .time-box-countdown > span{
+        font-size: 3rem;
+    }
+    .btn {
+        height: 3em;
+        font-size: 3rem;
+    }
+
+    .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+
+    .middle {
+        width: 60vw;
+        font-size: 1.5rem;
+    }
+
+    .time-box-time {
+        display: flex;
+        flex-flow: column;
+    }
+
+    .tooltip .tooltiptext {
+        display: none;
+    }
+
+    .small-tip {
+        display: block;
+        color: white;
+        font-family: 'Ubuntu', sans-serif;
+        margin-top: 0.8rem;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    footer {
+        font-size: 1.2rem;
+
+    }
+    /*#toplist {
+        visibility: hidden;
+        display: none;
+        height: 0;
+    }*/
+}
+
+@media (max-width: 1300px) {
+
+    .nav {
+        display: none;
+    }
+
+    .container {
+        width: 80%;
+        max-width: 80%;
+    }
+    .social-box {
+        grid-row-gap: 1rem;
+        order: 4;
+    }
+}
+
+@media (max-width: 1250px) {
+    .popup-box {
+        width: 80vw;
+        height: 80vh;
+    }
+
+    .middle {
+        width: 60vw;
+    }
+}

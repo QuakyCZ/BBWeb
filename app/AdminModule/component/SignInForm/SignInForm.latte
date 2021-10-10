@@ -1,0 +1,18 @@
+{form form class => "form-horizontal form-normal", role => "form"}
+    <div class="errors" n:if="$form->hasErrors()">
+        <div n:foreach="$form->errors as $error" class="alert alert-danger error" role="alert">
+            <div class="flash-message-body">{$error}</div>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        {label email class => "form-label text-warning"}
+        {input email class => "form-control"}
+    </div>
+    <div class="mb-3">
+        {label password class => "form-label text-warning"}
+        {input password class => "form-control"}
+    </div>
+    {input submit class => "btn btn-outline-warning"}
+{/form}
+

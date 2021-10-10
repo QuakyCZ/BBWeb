@@ -1,0 +1,20 @@
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Jméno</th>
+        <th scope="col">API URL</th>
+        <th scope="col">Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $servers as $server}
+        <tr>
+            <td>{$server['id']}</td>
+            <td>{$server['name']}</td>
+            <td>{$server['api_url']}</td>
+            <td><img src="{$server['api_url']}" alt="X" height="25px"></td>
+        </tr>
+    {/foreach}
+    </tbody>
+</table>

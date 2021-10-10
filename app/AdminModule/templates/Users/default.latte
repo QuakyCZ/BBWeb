@@ -1,0 +1,23 @@
+{block content}
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Nick</th>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
+        <th scope="col">Vytvořen</th>
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $users as $userRow}
+        <tr>
+            <td>{$userRow['username']}</td>
+            <td>{$userRow['email']}</td>
+            <td>{$userRow['roles']|implode:', '}</td>
+            <td>{$userRow['created']|date: 'j. n. Y H:i:s'}</td>
+        </tr>
+    {/foreach}
+    </tbody>
+</table>
+
+<a n:href="Users:addUser" class="btn btn-warning">Přidat</a>

@@ -1,0 +1,75 @@
+{form form class=>"form-horizontal form-normal", role=>"form"}
+    <div class="errors" n:if="$form->hasErrors()">
+        <div n:foreach="$form->errors as $error" class="alert alert-danger error" role="alert">
+            <div class="flash-message-body">{$error}</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            {label username class => "form-label text-warning"}
+            {input username class => "form-control", placeholder => 'Novja'}
+        </div>
+        <div class="col">
+            {label minecraft_nick class => "form-label text-warning"}
+            {input minecraft_nick class => "form-control", placeholder => 'Novja123'}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {label email class => "form-label text-warning"}
+        {input email class => "form-control", placeholder => 'user@beastblock.cz'}
+    </div>
+
+    <div class="form-group row">
+        <div class="col">
+            {label firstname class => "form-label text-warning"}
+            {input firstname class => "form-control", placeholder => 'Jan'}
+        </div>
+        <div class="col">
+            {label lastname class => "form-label text-warning"}
+            {input lastname class => "form-control", placeholder => 'Novák'}
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            {label password class => "form-label text-warning"}
+            {input password class => "form-control"}
+        </div>
+        <div class="col">
+            {label passwordCheck class => "form-label text-warning"}
+            {input passwordCheck class => "form-control"}
+        </div>
+    </div>
+    <div class="form-group">
+
+    </div>
+    {if $user->isInRole('ADMIN')}
+        <div class="form-group row">
+            <div class="col">
+                {label roles class => "form-label text-warning"}
+                {input roles id => 'multiselect', class => "form-select form-select-sm", multiple, aria-label=>"multiple select example"}
+            </div>
+            <div class="col">
+                {label position class => "form-label text-warning"}
+                {input position class => "form-control", placeholder => "Majitel, Youtuber"}
+            </div>
+        </div>
+    {/if}
+    <div class="form-group">
+        {input submit class => "btn btn-outline-warning"}
+    </div>
+{/form}
+
+<script src="{$basePath}/js/msfmultiselect.min.js"></script>
+<script>
+    new MSFmultiSelect(
+        document.querySelector('#multiselect'),
+        {
+            selectAll: true,
+            searchBox: true,
+            placeholder: 'Vybrat',
+            className: 'form-select',
+            width: '100%'
+        }
+    )
+</script>

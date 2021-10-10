@@ -1,0 +1,9 @@
+about:
+    roles:
+        OWNER: 'Majitelé'
+        LEADER: 'Vedení'
+        DEVELOPER: 'Developer tým'
+        BUILDER: 'Builder tým'
+        HELPER: 'Helper tým'
+        TESTER: 'Testeři'
+        SERVER_ADMIN: 'Admin Team'

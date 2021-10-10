@@ -1,0 +1,71 @@
+@import "../msfmultiselect.min.css";
+
+html {
+    height: 100%;
+}
+
+
+body {
+    background-image: url('../../img/bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    height: available;
+    width: 100%;
+}
+
+.container {
+    background-color: #5b727f;
+    margin: 0;
+    padding: 2em;
+    width: 100%;
+}
+
+.vertical-nav {
+    display: flex;
+    flex-flow: column;
+    flex-basis: auto;
+    list-style: none;
+    background-color: #212529;
+    width: min-content;
+    height: content-box;
+    min-width: 20%;
+}
+
+.vertical-nav-items {
+    list-style: none;
+}
+
+.vertical-nav-items > a {
+    text-decoration: none;
+}
+
+.vertical-nav-item {
+    text-align: center;
+    color: white;
+    padding: 1em;
+}
+
+.vertical-nav-item:hover {
+    background-color: #15171a;
+}
+
+.msf_multiselect_container {
+    width: 100%;
+}
+
+.form-group {
+    margin-top: 1em;
+}
+
+.form-control {
+    border-radius: 0;
+}

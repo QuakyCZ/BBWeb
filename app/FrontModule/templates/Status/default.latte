@@ -1,0 +1,60 @@
+{block styles}
+    <link rel="stylesheet" href="{$basePath}/styles/style.css">
+    <link rel="stylesheet" href="{$basePath}/styles/about.css">
+    <link rel="stylesheet" href="{$basePath}/styles/status.css">
+{/block}
+{block beforeContent}
+    <a n:href="Homepage:">
+        <div class="back-button" onmouseover="this.style.backgroundColor='#ff03c2';this.style.color='white';"
+             onmouseout="this.style.backgroundColor='#16ccca';this.style.color='black';">
+            <b><i class="las la-angle-double-left"></i></b>
+        </div>
+    </a>
+{/block}
+{block content}
+<h1 class="oper">Status našich služeb:</h1>
+<div class="status-box">
+    <table>
+        <thead>
+        <tr>
+            <th>Služba</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>Web</th>
+            <td><img src="https://twemoji.maxcdn.com/v/latest/svg/2705.svg" alt="V provozu"></td>
+        </tr>
+        <tr>
+            <th>Proxy&nbsp;server</th>
+            <td><img src="https://api.beastblock.cz/servers/status/14/symbol" alt="API mimo provoz"></td>
+        </tr>
+        <tr>
+            <th>Autentifikační&nbsp;server</th>
+            <td><img src="https://api.beastblock.cz/servers/status/9/symbol" alt="API mimo provoz"></td>
+        </tr>
+        <tr>
+            <th>Lobby&nbsp;1</th>
+            <td><img src="https://api.beastblock.cz/servers/status/10/symbol" alt="API mimo provoz"></td>
+        </tr>
+        <tr>
+            <th>Lobby&nbsp;2</th>
+            <td><img src="https://api.beastblock.cz/servers/status/11/symbol" alt="API mimo provoz"></td>
+        </tr>
+        <tr>
+            <th>Nakashiho&nbsp;Subserver</th>
+            <td><img src="https://api.beastblock.cz/servers/status/12/symbol" alt="API mimo provoz"></td>
+        </tr>
+        <tr>
+            <th>Spartan&nbsp;Survival</th>
+            <td><img src="https://api.beastblock.cz/servers/status/17/symbol" alt="API mimo provoz"></td>
+        </tr>
+        <tr>
+            <th>Discord&nbsp;Tickets</th>
+            <td><img src="https://api.beastblock.cz/servers/status/37/symbol" alt="X"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
