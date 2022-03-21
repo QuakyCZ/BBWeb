@@ -23,39 +23,36 @@ body {
 }
 
 .container {
-    background-color: #5b727f;
+    background-color: white;
     margin: 0;
     padding: 2em;
     width: 100%;
 }
 
-.vertical-nav {
-    display: flex;
-    flex-flow: column;
-    flex-basis: auto;
-    list-style: none;
-    background-color: #212529;
-    width: min-content;
-    height: content-box;
-    min-width: 20%;
+.row {
+    margin: 0;
 }
 
-.vertical-nav-items {
-    list-style: none;
+.nav {
+    background-color: #343a40;
+    height: 100%;
 }
 
-.vertical-nav-items > a {
-    text-decoration: none;
-}
+.nav-link {
+    display: block;
 
-.vertical-nav-item {
     text-align: center;
-    color: white;
-    padding: 1em;
+
+    padding-top: .5em;
+    padding-bottom: .5em;
+
+    color: #bfbfbf;
+
 }
 
-.vertical-nav-item:hover {
-    background-color: #15171a;
+.nav-link:hover {
+    text-decoration: none;
+    background-color: #23272b;
 }
 
 .msf_multiselect_container {

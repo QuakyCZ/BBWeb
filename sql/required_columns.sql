@@ -1,0 +1,2 @@
+ALTER TABLE `table`
+CREATE COLUMN IF NOT EXISTS created

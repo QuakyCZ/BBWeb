@@ -21,11 +21,13 @@
 		"latte/latte": "^2.9",
 		"tracy/tracy": "^2.8",
 		"myclabs/php-enum": "^1.8",
-		"contributte/translation": "^0.9.3"
+		"contributte/translation": "^0.9.3",
+		"ublaboo/datagrid": "^6.9"
 	},
 	"require-dev": {
 		"nette/tester": "^2.3",
-		"symfony/thanks": "^1"
+		"symfony/thanks": "^1",
+		"phpstan/phpstan": "^0.12.99"
 	},
 	"autoload": {
 		"psr-4": {

@@ -3,11 +3,18 @@
 namespace App\Repository;
 
 use Nette\Database\Context;
+use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
 
 class UserRoleRepository extends BaseRepository {
 
     const TABLE_NAME = "user_role";
+
+    public const COLUMN_ID = 'id';
+    public const COLUMN_USER_ID = 'user_id';
+    public const COLUMN_ROLE_ID = 'role_id';
+    public const COLUMN_NOT_DELETED = 'not_deleted';
+
     protected string $tableName = self::TABLE_NAME;
 
     /**
@@ -41,16 +48,26 @@ class UserRoleRepository extends BaseRepository {
     }
 
     public function getForAboutTeamListing(array $excludeRoleIds = []) {
-
-        $string = '';
-        foreach ($excludeRoleIds as $id)
-            $string.=$id.',';
-
         return $this->database->table(self::TABLE_NAME)
-            ->select('role.name, user_id, role_id, MIN(role_id), user.username')
-            ->joinWhere(RoleRepository::TABLE_NAME,'role.id=user_role.role_id AND role.active=1 AND role.not_deleted=1')
-            ->joinWhere(UserRepository::TABLE_NAME, 'user.id=user_role.user_id AND user.active=1 AND user.not_deleted=1')
-            ->where('role_id NOT IN (?) AND user_role.active=1 AND user_role.not_deleted=1', $string)
-            ->group('user_id');
+            ->where('role_id NOT IN (?)', $excludeRoleIds)
+            ->where('user_role.not_deleted=1')
+            ->where('role.not_deleted=1')
+            ->where('user.not_deleted=1')
+            ->where('user.active=1')
+            ->group('user_id')->fetchAll();
+    }
+
+    /**
+     * @param int $roleId
+     * @return ActiveRow[]
+     */
+    public function getUsersByRole(int $roleId): array {
+        /** @var ActiveRow[] $users */
+        $users = [];
+        $userRoles = $this->findBy([self::COLUMN_ROLE_ID => $roleId]);
+        foreach ($userRoles as $userRole) {
+            $users[] = $userRole->user->ref('user_id');
+        }
+        return $users;
     }
 }

@@ -2,6 +2,9 @@
 
 namespace App\Security;
 
+use App\Repository\UserDetailsRepository;
+use App\Repository\UserRepository;
+use App\Repository\UserRoleRepository;
 use Nette;
 use Nette\Security\SimpleIdentity;
 
@@ -11,49 +14,52 @@ class Authenticator implements \Nette\Security\Authenticator
     private $database;
     private $passwords;
 
+    private UserRepository $userRepository;
+    private UserRoleRepository $userRoleRepository;
+    private UserDetailsRepository $userDetailsRepository;
+
     public function __construct(
         Nette\Database\Explorer  $database,
-        Nette\Security\Passwords $passwords
+        Nette\Security\Passwords $passwords,
+        UserRepository $userRepository,
+        UserRoleRepository $userRoleRepository,
+        UserDetailsRepository $userDetailsRepository
     )
     {
         $this->database = $database;
         $this->passwords = $passwords;
+        $this->userRepository = $userRepository;
+        $this->userRoleRepository = $userRoleRepository;
+        $this->userDetailsRepository = $userDetailsRepository;
     }
 
     public function authenticate(string $email, string $password): SimpleIdentity
     {
-        $row = $this->database->table('user')
-            ->where('email=? AND active=1 AND not_deleted=1', $email)
-            ->fetch();
+        $user = $this->userRepository->findByEmail($email);
 
-        if (!$row)
+        if (!$user)
         {
             throw new Nette\Security\AuthenticationException('User not found.');
         }
 
-        if (!$this->passwords->verify($password, $row->password))
+
+        if (!$this->passwords->verify($password, $user->password))
         {
             throw new Nette\Security\AuthenticationException('Invalid password.');
         }
 
-        $roleRows = $this->database->table('user_role')
-            ->where('user_id', $row['id'])
-            ->fetchAll();
+        $roles = $this->userRoleRepository->getUsersRoleNames($user->id);
 
-        $roles = [];
-
-        foreach ($roleRows as $role)
-        {
-            $roles[] = $role->role->name;
-        }
+        $detailsRow = $this->userDetailsRepository->getDetails($user->id);
 
         return new SimpleIdentity(
-            $row->id,
+            $user->id,
             $roles, // nebo pole více rolí
             [
-                'name' => $row->username,
-                'email' => $row->email,
-                'registrationDate' => $row->created
+                'name' => $user->username,
+                'email' => $user->email,
+                'registrationDate' => $user->created,
+                'details' => $detailsRow->fetch()->toArray()
                 ]
         );
     }

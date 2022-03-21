@@ -10,7 +10,7 @@ class RoleRepository extends BaseRepository {
 
     public function getDataForSelect(): array {
         return $this->database->table(self::TABLE_NAME)
-            ->where('active=1 AND not_deleted=1')
+            ->where('not_deleted=1')
             ->fetchPairs('id','name');
     }
 }

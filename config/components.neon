@@ -1,0 +1,6 @@
+services:
+    - App\Modules\WebModule\Component\Team\ITeamFactory
+    - App\Modules\AdminModule\Component\User\IUserFormFactory
+    - App\Modules\AdminModule\Component\User\IUserGridFactory
+    - App\Modules\AdminModule\Component\ServerListing\IServerListingFactory
+    - App\Modules\AdminModule\Component\SignInForm\ISignInFormFactory

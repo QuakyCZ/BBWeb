@@ -1,0 +1,12 @@
+users:
+    roles:
+        ADMIN: 'Web Admin'
+        OWNER: 'Majitel'
+        LEADER: 'Vedení'
+        DEVELOPER: 'Developer'
+        BUILDER: 'Builder'
+        HELPER: 'Helper'
+        TESTER: 'Tester'
+        SERVER_ADMIN: 'Admin'
+    add: 'Přidat uživatele'
+    delete: 'Odstranit'

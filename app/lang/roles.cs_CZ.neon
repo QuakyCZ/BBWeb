@@ -1,3 +1,8 @@
-roles:
-    OWNER: 'Majitel'
-    LEADER: 'Vedení'
+ADMIN: 'Admin'
+OWNER: 'Majitel'
+LEADER: 'Vedení'
+DEVELOPER: 'Developer'
+BUILDER: 'Builder'
+HELPER: 'Helper'
+TESTER: 'Tester'
+SERVER_ADMIN: 'Admin'

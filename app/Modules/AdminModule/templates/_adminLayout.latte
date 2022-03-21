@@ -1,0 +1,54 @@
+{block body}
+    <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">BeastBlock.cz</a> <span style="color: #707986;">Administrace</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav" style="justify-content: right;">
+                {if $user->isLoggedIn()}
+                    <a n:href="Sign:out" class="nav-link text-light">Odhlásit se</a>
+                    <img alt="{$user->identity->details['minecraft_nick']}" src="https://minotar.net/avatar/{$user->identity->details['minecraft_nick']}/250"
+                         class="skin"
+                         style="width: 50px;">
+                {else}
+                    <a n:href="Sign:in" class="nav-link">Přihlásit se</a>
+                {/if}
+            </div>
+        </div>
+
+    </nav>
+    <div class="row">
+        <div class="col col-md-2" style="padding: 0;">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a n:href="Default:" class="nav-link active" id="nav-home-tab" data-toggle="pill" role="tab" aria-controls="nav-home">
+                        <div>
+                            Domů
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a n:href="Users:" class="nav-link" id="nav-users-tab" data-toggle="pill" role="tab" aria-controls="nav-users">
+                        <div>
+                            Uživatelé
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a n:href="Servers:" class="nav-link"  id="nav-servers-tab" data-toggle="pill" role="tab" aria-controls="nav-servers">
+                        <div>
+                            Servery
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col">
+            {include content}
+        </div>
+    </div>
+    </body>
+{/block}

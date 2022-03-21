@@ -1,10 +1,15 @@
+includes:
+    - components.neon
+    - repositories.neon
+
+
 parameters:
 
 
 application:
 	errorPresenter: Error
 	mapping:
-		*: App\*Module\Presenter\*Presenter
+		*: App\Modules\*Module\Presenter\*Presenter
 		Error: App\Presenters\*Presenter
 
 
@@ -22,31 +27,13 @@ services:
 	- App\Router\RouterFactory::createRouter
 	- App\Security\Authenticator
 
-	- App\AdminModule\component\SignInForm\SignInForm
-	- App\AdminModule\component\SignInForm\SignInFormFactory
-
-	- App\AdminModule\component\AddUserForm\AddUserForm
-	- App\AdminModule\component\AddUserForm\IAddUserFormFactory
-
-	- App\FrontModule\Component\Team
-	- App\FrontModule\Component\ITeamFactory
-
-	- App\AdminModule\Component\ServerListing
-	- App\AdminModule\Component\IServerListingFactory
-
-	- App\Repository\UserRepository
-	- App\Repository\RoleRepository
-	- App\Repository\UserRoleRepository
-	- App\Repository\UserDetailsRepository
-	- App\Repository\ServerRepository
-
 extensions:
 	translation: Contributte\Translation\DI\TranslationExtension
 
 translation:
 	locales:
 		whitelist: [en, cs, sk]
-		default: en
+		default: cs
 		fallback: [en]
 	dirs:
 		- %appDir%/lang

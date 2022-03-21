@@ -19,7 +19,7 @@ final class RouterFactory
         $router[] = $adminRouter = new RouteList('Admin');
         $adminRouter[] = new Nette\Application\Routers\Route('[<locale=cs cs|en>/]admin/<presenter>/<action>[/<id>]', 'Default:default');
 
-		$router[] = $frontRouter = new RouteList('Front');
+		$router[] = $frontRouter = new RouteList('Web');
         $frontRouter[] = new Nette\Application\Routers\Route('[<locale=cs cs|en>/]<presenter>/<action>[/<id>]','Homepage:default');
 
 

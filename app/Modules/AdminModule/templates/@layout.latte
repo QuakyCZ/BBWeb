@@ -1,0 +1,23 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
+    <meta name="project" content="BeastBlock.cz">
+    <meta name="author" content="BeastBlock.cz | Quaky">
+
+    <link rel="stylesheet" type="text/css"  href="/webpack/stylesAdmin.bundle.css">
+    <link rel="stylesheet" href="{$basePath}/libs/fontawesome/css/all.css">
+
+    <script src="/webpack/scriptsAdmin.bundle.js"></script>
+
+    <title>Admin</title>
+
+</head>
+{if $user->isLoggedIn()}
+    {import '_adminLayout.latte'}
+{else}
+    {import '_plainLayout.latte'}
+{/if}
+
+{include body}
+</html>

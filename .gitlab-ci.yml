@@ -1,0 +1,7 @@
+stages:
+  - test
+
+test:
+  stage: test
+  script:
+    - vendor/bin/phpstan analyse app --level max

@@ -1,0 +1,6 @@
+services:
+    - App\Repository\UserRepository
+    - App\Repository\RoleRepository
+    - App\Repository\UserRoleRepository
+    - App\Repository\UserDetailsRepository
+    - App\Repository\ServerRepository
