@@ -9,12 +9,13 @@ parameters:
 application:
 	errorPresenter: Error
 	mapping:
+		Error: App\Presenter\*Presenter
 		*: App\Modules\*Module\Presenter\*Presenter
-		Error: App\Presenters\*Presenter
 
 
 session:
 	expiration: 14 days
+	autoStart: true
 
 
 di:
