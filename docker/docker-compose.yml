@@ -21,7 +21,7 @@ services:
             - '..:/application'
             - './phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/8.0/fpm/conf.d/99-overrides.ini'
         environment:
-            - DEBUG=0
+            - DEBUG=1
     npm:
         image: 'node'
         working_dir: /application
