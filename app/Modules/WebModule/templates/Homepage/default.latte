@@ -1,5 +1,8 @@
 {varType string $serverIp}
 {varType string $serverVersion}
+{varType string $facebookUrl}
+{varType string $instagramUrl}
+{varType string $discordUrl}
 
 {block styles}
 <link rel="stylesheet" type="text/css" href="{$basePath}/styles/style.css">
@@ -114,7 +117,7 @@
 	<div class="social-box">
 		<div onmouseout="document.getElementById('fb').src='img/soc.sitě/facebook_banner_noaktive.png';"
 			 onmouseover="document.getElementById('fb').src='img/soc.sitě/facebook_banner_aktive.png';">
-			<a href="https://www.facebook.com/beastblockcz" target="_blank">
+			<a href="{$facebookUrl}" target="_blank">
 				<img src="img/soc.sitě/facebook_banner_noaktive.png"
 					 alt="fb"
 					 id="fb"
@@ -123,7 +126,7 @@
 		</div>
 		<div onmouseout="document.getElementById('ig').src='img/soc.sitě/instagram_banner_noaktive.png';"
 			 onmouseover="document.getElementById('ig').src='img/soc.sitě/instagram_banner_aktive.png';">
-			<a href="https://www.instagram.com/beastblockcz" target="_blank">
+			<a href="{$instagramUrl}" target="_blank">
 				<img src="img/soc.sitě/instagram_banner_noaktive.png"
 					 alt="ig-inactive"
 					 id="ig"
@@ -132,7 +135,7 @@
 		</div>
 		<div onmouseout="document.getElementById('dc').src='img/soc.sitě/discord_banner_noaktive.png';"
 			 onmouseover="document.getElementById('dc').src='img/soc.sitě/discord_banner_aktive.png';">
-			<a href="https://www.discord.gg/invite/PubYyYB" target="_blank">
+			<a href="{$discordUrl}" target="_blank">
 				<img src="img/soc.sitě/discord_banner_noaktive.png"
 					 alt="dc-inactive"
 					 id="dc"
