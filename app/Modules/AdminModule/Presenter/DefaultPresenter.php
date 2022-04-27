@@ -6,5 +6,4 @@ use App\Modules\AdminModule\Presenter\Base\BasePresenter;
 
 class DefaultPresenter extends BasePresenter
 {
-
 }

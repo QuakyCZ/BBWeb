@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Modules\WebModule\Presenter;
 
 use App\Modules\WebModule\Presenter\Base\BasePresenter;
+use Nette\Security\Passwords;
 
 
 class HomepagePresenter extends BasePresenter

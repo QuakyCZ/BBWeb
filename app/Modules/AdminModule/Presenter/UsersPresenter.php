@@ -55,7 +55,6 @@ class UsersPresenter extends Base\BasePresenter {
     }
 
     public function handleDelete(int $id): void {
-        bdump($id);
         $this->userRepository->setNotDeletedNull($id);
         $this->flashMessage("Uživatel byl smazán.");
         if ($this->isAjax()) {

@@ -52,8 +52,6 @@ class SettingsForm extends BaseComponent
 
             $defaults = $row->toArray();
 
-            bdump($defaults);
-
             $form->setDefaults($defaults);
         }
 
