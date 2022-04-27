@@ -7,6 +7,7 @@ use App\Repository\RoleRepository;
 use App\Repository\UserDetailsRepository;
 use App\Repository\UserRepository;
 use App\Repository\UserRoleRepository;
+use Nette\Application\AbortException;
 use Nette\Application\UI\Form;
 use Nette\Security\Passwords;
 use Nette\Utils\ArrayHash;
@@ -96,6 +97,7 @@ class UserForm extends BaseComponent {
     /**
      * @param Form $form
      * @param ArrayHash $data
+     * @throws AbortException
      */
     public function completeForm(Form $form, ArrayHash $data) {
         $user = [
@@ -132,13 +134,14 @@ class UserForm extends BaseComponent {
             }
 
             $this->userRepository->database->commit();
-            $this->flashMessage('Uživatel byl přidán.');
-            $this->presenter->redirect('Users:');
-
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) {
             $this->userRepository->database->rollBack();
             $form->addError('Něco se nepovedlo.');
+            return;
         }
+        $this->flashMessage('Uživatel byl přidán.');
+        $this->presenter->redirect('Users:');
     }
 }
 

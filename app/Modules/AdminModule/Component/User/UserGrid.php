@@ -47,12 +47,14 @@ class UserGrid extends DataGrid
     {
         $this->setDataSource($this->userRepository->findAll());
 
+        $this->setOuterFilterRendering(true);
+
         // username
         $this->addColumnText('username', 'Username')
-            ->setFilterText()
-            ->setCondition(function ($fluent, $value) {
-                $fluent->where("username LIKE '%?%'", $value);
-            });
+            ->setSortable(true);
+
+        $this->addFilterText('username', 'Username', 'username')
+            ->setPlaceholder('Vyhledat username');
 
         // email
         $this->addColumnText('email', 'Email')
@@ -115,6 +117,8 @@ class UserGrid extends DataGrid
         $this->addToolbarButton('Users:add', $this->translator->translate('admin.users.add'))
             ->setIcon('plus')
             ->setClass('btn btn-success');
+
+        $this->autoSubmit = true;
 
         parent::render();
     }

@@ -10,3 +10,14 @@ users:
         SERVER_ADMIN: 'Admin'
     add: 'Přidat uživatele'
     delete: 'Odstranit'
+settings:
+    field:
+        name: 'Název'
+        content: 'Hodnota'
+        nullable: 'Hodnota může být prázná'
+        error:
+            name_required: 'Název je povinný údaj'
+            name_used: 'Tento název je již použit'
+            content_required: 'Hodnota je povinný údaj'
+    error:
+        not_exists: 'Nastavení s tímto ID neexistuje.'

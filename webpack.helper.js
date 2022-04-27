@@ -23,8 +23,8 @@ const scriptsGroups = (APP_DIR) => {
 
 
                 APP_DIR + "/node_modules/ublaboo-datagrid/assets/datagrid.js",
-                APP_DIR + "/node_modules/ublaboo-datagrid/assets/datagrid-instant-url-refresh.js",
                 APP_DIR + "/node_modules/ublaboo-datagrid/assets/datagrid-spinners.js",
+                APP_DIR + "/node_modules/ublaboo-datagrid/assets/datagrid-instant-url-refresh.js",
 
 
             ]

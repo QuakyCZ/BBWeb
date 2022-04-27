@@ -5,7 +5,15 @@ namespace App\Repository;
 use Nette\Database\Context;
 
 class RoleRepository extends BaseRepository {
-    const TABLE_NAME = 'role';
+
+    public const TABLE_NAME = 'role';
+
+    public const COLUMN_ID = 'id';
+    public const COLUMN_NAME = 'name';
+    public const COLUMN_PRIORITY = 'priority';
+    public const COLUMN_CREATED = 'created';
+    public const COLUMN_NOT_DELETED = 'not_deleted';
+
     protected string $tableName = self::TABLE_NAME;
 
     public function getDataForSelect(): array {

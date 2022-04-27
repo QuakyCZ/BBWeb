@@ -4,3 +4,4 @@ services:
     - App\Repository\UserRoleRepository
     - App\Repository\UserDetailsRepository
     - App\Repository\ServerRepository
+    - App\Repository\SettingsRepository

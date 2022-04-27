@@ -1,4 +1,6 @@
-{* This is the welcome page, you can delete it *}
+{varType string $serverIp}
+{varType string $serverVersion}
+
 {block styles}
 <link rel="stylesheet" type="text/css" href="{$basePath}/styles/style.css">
 {/block}
@@ -7,11 +9,11 @@
 <nav class="nav">
 	<div class="controls">
 		<a onclick="showPopUp('popup_shop')" target="_self">OBCHOD</a>
-		<a href="about#team" target="_self">TÝM</a>
-		<a href="about" target="_self">O PROJEKTU</a>
+		<a n:href="About:default#team" target="_self">TÝM</a>
+		<a n:href="About:" target="_self">O PROJEKTU</a>
 		<a href="https://wiki.beastblock.cz" target="_blank">WIKI</a>
 		<a href="status" target="_self">STATUS</a>
-		<a href="about#contact">KONTAKT</a>
+		<a n:href="About:default#contact">KONTAKT</a>
 		<a href="https://feedback.beastblock.cz" target="_blank" style="margin-right: 0;"><i class="las la-bug"></i></a>
 	</div>
 </nav>
@@ -94,7 +96,7 @@
 			<h1>IP Adresa:</h1>
 			<div class="time-box-time">
 				<div class="btn tooltip" onmouseover="showTooltip();" onclick="copyIP();">
-					<span class="middle">play.beastblock.cz | 1.17.1</span>
+					<span class="middle">{$serverIp} | {$serverVersion}</span>
 					<span class="tooltiptext" id="copyTooltip">Klikni pro zkopírování IP</span>
 				</div>
 				<span class="small-tip">Klepni pro zkopírování IP</span>
@@ -103,7 +105,7 @@
 	</div>
 
 	<div class="main-box">
-		<a href="about.php">
+		<a n:href="About:">
 			<img src="img/main_combo.png" class="box" style="width: 100%;"
 				 alt="mainbox">
 		</a>
@@ -139,7 +141,7 @@
 		</div>
 	</div>
 	<div class="s-box">
-		<a href="https://www.gamehosting.cz/?ref=BeastBlock" target="_blank">
+		<a href="{$hostingUrl}" target="_blank" title="{$hosting}">
 			<img src="img/sponsor_banner.png" class="box" alt="sbox">
 		</a>
 	</div>
@@ -162,3 +164,25 @@
 				 src="https://czech-craft.eu/api/server/beastblock-cz/badges/position.svg"/></a>
 	</div>
 </footer>
+{/block}
+{block scripts}
+	<script>
+		function copyIP()
+		{
+			var text = {$serverIp};
+			navigator.clipboard.writeText(text).then(function ()
+			{
+				console.log('Async: Copying to clipboard was successful!');
+			}, function (err)
+			{
+				console.error('Async: Could not copy text: ', err);
+			});
+			document.getElementById("copyTooltip").textContent = "Zkopírováno";
+		}
+
+		function showTooltip()
+		{
+			document.getElementById("copyTooltip").textContent = "Klikni pro zkopírování IP";
+		}
+	</script>
+{/block}

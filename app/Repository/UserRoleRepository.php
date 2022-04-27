@@ -2,7 +2,9 @@
 
 namespace App\Repository;
 
+use Hoa\Iterator\Seekable;
 use Nette\Database\Context;
+use Nette\Database\ResultSet;
 use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
 
@@ -47,14 +49,20 @@ class UserRoleRepository extends BaseRepository {
             ->fetchAll();
     }
 
-    public function getForAboutTeamListing(array $excludeRoleIds = []) {
-        return $this->database->table(self::TABLE_NAME)
-            ->where('role_id NOT IN (?)', $excludeRoleIds)
-            ->where('user_role.not_deleted=1')
-            ->where('role.not_deleted=1')
-            ->where('user.not_deleted=1')
-            ->where('user.active=1')
-            ->group('user_id')->fetchAll();
+    /**
+     * @param array $excludeRoleNames
+     * @return ResultSet
+     */
+    public function getForAboutTeamListing(array $excludeRoleNames = []): ResultSet
+    {
+        return $this->database->query("
+            SELECT r.id, r.name, ud.minecraft_nick, ud.position  FROM `user_role` ur
+            LEFT JOIN role r ON ur.role_id = r.id
+            LEFT JOIN user_details ud ON ur.user_id = ud.user_id
+            WHERE r.name NOT IN (?)
+            GROUP BY ur.user_id
+            ORDER BY r.priority;
+        ", $excludeRoleNames);
     }
 
     /**
@@ -62,12 +70,19 @@ class UserRoleRepository extends BaseRepository {
      * @return ActiveRow[]
      */
     public function getUsersByRole(int $roleId): array {
-        /** @var ActiveRow[] $users */
-        $users = [];
-        $userRoles = $this->findBy([self::COLUMN_ROLE_ID => $roleId]);
-        foreach ($userRoles as $userRole) {
-            $users[] = $userRole->user->ref('user_id');
+        $rows = $this->findAll()
+            ->where(self::COLUMN_ROLE_ID, $roleId)
+            ->where('user.not_deleted = 1')
+            ->where('')
+            ->where('role.not_deleted = 1');
+
+        $result = [];
+
+        foreach ($rows as $row)
+        {
+            $result[] = $row->ref(self::COLUMN_USER_ID);
         }
-        return $users;
+
+        return $result;
     }
 }

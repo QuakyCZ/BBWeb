@@ -4,6 +4,7 @@ namespace App\Modules\WebModule\Component\Team;
 
 use App\Component\BaseComponent;
 use App\Repository\RoleRepository;
+use App\Repository\SettingsRepository;
 use App\Repository\UserDetailsRepository;
 use App\Repository\UserRoleRepository;
 use Nette\Localization\Translator;
@@ -29,8 +30,19 @@ class Team extends BaseComponent {
 
     public function render(): void {
 
-        $result = $this->userRoleRepository->getForAboutTeamListing([1]);
-        bdump($result);
+        $data = $this->userRoleRepository->getForAboutTeamListing(['ADMIN'])->fetchAll();
+
+        $result = [];
+
+        foreach ($data as $row)
+        {
+            $result[$row['id']]['role'] = $this->translator->translate('front.about.roles.'.$row['name']);
+            $result[$row['id']]['members'][] = [
+                'minecraft_nick' => $row['minecraft_nick'],
+                'position' => $row['position']
+            ];
+        }
+
         $this->template->roles = $result;
 
         parent::render();

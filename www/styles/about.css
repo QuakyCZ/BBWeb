@@ -81,7 +81,10 @@ h2 {
 
 .team >h2 {
     color: #707986;
-    margin-top: 2.5em !important;
+    margin-top: 2.5em;
+}
+.team > h2:first-of-type {
+    margin-top: auto;
 }
 
 .contact > h2 {

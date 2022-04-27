@@ -4,10 +4,12 @@ namespace App\Repository;
 
 
 use Nette\Database\Context;
+use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
+use Traversable;
 use function _PHPStan_76800bfb5\React\Promise\reduce;
 
-class BaseRepository
+abstract class BaseRepository
 {
 
     public Context $database;
@@ -22,7 +24,18 @@ class BaseRepository
         $this->database = $database;
     }
 
-    public function save(array $data) {
+    /**
+     * @param array $data
+     * @return array|bool|ActiveRow|int|Selection
+     */
+    public function save(array $data): array|bool|ActiveRow|int|Selection
+    {
+        if (isset($data['id']))
+        {
+            $id = $data['id'];
+            unset($data['id']);
+            return $this->database->table($this->tableName)->get($id)?->update($data);
+        }
         return $this->database->table($this->tableName)->insert($data);
     }
 
@@ -43,7 +56,7 @@ class BaseRepository
         if ($withDeleted)
             return $this->database->table($this->tableName);
 
-        return $this->database->table($this->tableName)->where('not_deleted = 1');
+        return $this->database->table($this->tableName)->where($this->tableName.'.not_deleted = 1');
     }
 
     /**

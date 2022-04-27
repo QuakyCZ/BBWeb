@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace App\Modules\WebModule\Presenter;
 
-use Nette;
+use App\Modules\WebModule\Presenter\Base\BasePresenter;
 
 
-class HomepagePresenter extends Nette\Application\UI\Presenter
+class HomepagePresenter extends BasePresenter
 {
-    private Nette\Security\Passwords $passwords;
-    public function __construct(Nette\Security\Passwords $passwords)
-    {
-        parent::__construct();
-        $this->passwords = $passwords;
-    }
 
+    /**
+     * @return void
+     */
     public function actionDefault(): void
     {
-        bdump($this->passwords->hash('test'));
+        $this->template->serverIp = $this->settingRepository->getSettingValue('server-ip');
+        $this->template->serverVersion = $this->settingRepository->getSettingValue('server-version');
     }
 }

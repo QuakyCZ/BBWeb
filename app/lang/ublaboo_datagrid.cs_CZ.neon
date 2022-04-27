@@ -4,3 +4,4 @@ all: Vše
 per_page_submit: Nastavit počet položek na stránku
 action: Akce
 reset_filter: Resetovat filtr
+no_item_found: Nebyly nalezeny žádné položky

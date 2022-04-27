@@ -93,26 +93,8 @@
     {
         document.getElementById(id).style.display = 'none';
     }
-
-    function copyIP()
-    {
-        var text = "play.beastblock.cz";
-        navigator.clipboard.writeText(text).then(function ()
-        {
-            console.log('Async: Copying to clipboard was successful!');
-        }, function (err)
-        {
-            console.error('Async: Could not copy text: ', err);
-        });
-        document.getElementById("copyTooltip").textContent = "Zkopírováno";
-    }
-
-    function showTooltip()
-    {
-        document.getElementById("copyTooltip").textContent = "Klikni pro zkopírování IP";
-    }
-
 </script>
+{block scripts}{/block}
 <script src="{$basePath}/js/cookies.js"></script>
 </body>
 </html>
