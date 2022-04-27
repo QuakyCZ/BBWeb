@@ -42,24 +42,25 @@ class UserForm extends BaseComponent {
         $form->addProtection();
 
         $form->addText('username', 'Uživatelské jméno')
-            ->setRequired(true)
+            ->setRequired('%label is required')
             ->addRule(Form::MIN_LENGTH, 'Minimální délka jsou %d znaky.', 3);
 
         $form->addText('minecraft_nick', 'Minecraft Nick')
-            ->setRequired(true);
+            ->setRequired('%label is required');
 
         $form->addText('firstname', 'Jméno');
 
         $form->addText('lastname', 'Příjmení');
 
         $form->addEmail('email', 'Email')
-            ->setRequired(true);
+            ->setRequired('%label is required');
 
-        $form->addPassword('password', 'Heslo')
-            ->setRequired(true);
+        $password = $form->addPassword('password', 'Heslo');
 
         $form->addPassword('passwordCheck', 'Kontrola hesla')
-            ->setRequired(true);
+            ->addConditionOn($password, $form::FILLED)
+            ->setRequired()
+            ->endCondition();
 
         $form->addMultiSelect('roles', 'Role', $this->roleRepository->getDataForSelect());
 
@@ -78,14 +79,20 @@ class UserForm extends BaseComponent {
      */
     public function validateForm(Form $form) {
 
-        if($this->userRepository->findByEmail($form->values['email']) != null)
+        if($this->userRepository->findByEmail($form->values['email']) !== null)
+        {
             $form->addError('Uživatel s tímto emailem již existuje.');
+        }
 
-        if($this->userRepository->findByUsername($form->values['username'] != null))
+        if($this->userRepository->findByUsername($form->values['username']) !== null)
+        {
             $form->addError('Uživatel s tímto jménem již existuje.');
+        }
 
-        if($form->values['password'] != $form->values['passwordCheck'])
+        if($form->values['password'] !== $form->values['passwordCheck'])
+        {
             $form->addError('Hesla se neshodují.');
+        }
 
         if(!empty($form->values['roles']) &&
             (!$this->presenter->user->isLoggedIn() || !$this->presenter->user->isInRole('ADMIN'))
