@@ -1,0 +1,17 @@
+{block styles}
+    <link rel="stylesheet" href="{$basePath}/webpack/stylesWeb.bundle.css">
+    <link rel="stylesheet" type="text/css" href="{$basePath}/styles/about.css">
+{/block}
+
+{block beforeContent}
+    <a n:href="Homepage:">
+        <div class="back-button" onmouseover="this.style.backgroundColor='#ff03c2';this.style.color='white';"
+             onmouseout="this.style.backgroundColor='#16ccca';this.style.color='black';">
+            <b><i class="las la-angle-double-left"></i></b>
+        </div>
+    </a>
+{/block}
+
+{block content}
+    {control feedbackForm}
+{/block}

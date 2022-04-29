@@ -6,3 +6,4 @@ services:
     - App\Modules\AdminModule\Component\SignInForm\ISignInFormFactory
     - App\Modules\AdminModule\Component\Settings\ISettingsFormFactory
     - App\Modules\AdminModule\Component\Settings\ISettingsGridFactory
+    - App\Modules\WebModule\Component\Feedback\IFeedbackFormFactory

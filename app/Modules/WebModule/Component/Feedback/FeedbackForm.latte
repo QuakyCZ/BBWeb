@@ -1,0 +1,82 @@
+<style>
+    body {
+        padding-top: 0;
+    }
+
+    .container {
+        padding-top: 0;
+    }
+
+    #feedback-card {
+        border: 2px solid orange;
+        background-color: rgba(0,0,0,0.5);
+        color: white;
+    }
+
+    #feedback-card .form-control {
+        background: none;
+        border: none;
+        border-bottom: 2px solid #292e32;
+        border-radius: 0;
+    }
+
+    #feedback-card .form-control:focus {
+        border: none;
+        border-bottom: 2px solid orange;
+        box-shadow: none;
+    }
+
+    #feedback-card .form-control:focus::placeholder {
+        color: orange;
+    }
+
+    #feedback-card textarea {
+        border-top: 2px solid #292e32 !important;
+    }
+
+    #feedback-card textarea:focus {
+        border-top: 2px solid orange !important;
+    }
+
+    #feedback-card option {
+        background: white !important;
+        color: black;
+    }
+</style>
+<img src="{$basePath}/img/Nakashi.png" alt="nakashi" class="mx-auto d-block" height="300px">
+<div id="feedback-card" class="card p-5">
+    <div class="text-center">
+        <h1 class="text-warning">Zpětná vazba</h1>
+        <p class="text-muted">
+            Našel jsi nějakou chybu nebo máš nápad?
+            <br>
+            Potom budeme rádi, když nám to sdělíš pomocí následujícího formuláře.
+        </p>
+    </div>
+    {form form}
+        <div class="form-group row mb-4">
+            <div class="col-md-4">
+                {input nick, class => form-control, placeholder => 'Nick'}
+            </div>
+            <div class="col-md-4">
+                {input email, class => form-control, placeholder => 'Email'}
+            </div>
+            <div class="col-md-4">
+                {input server_id, class => form-control, placeholder => 'Server'}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col">
+                {input description, class => form-control, placeholder => 'Popis'}
+            </div>
+        </div>
+        <div class="form-group row">
+            <ul class="col errors alert alert-warning" n:if="$form->hasErrors()">
+                <li n:foreach="$form->errors as $error">{$error}</li>
+            </ul>
+        </div>
+        <div class="form-group mt-5 text-center">
+            {input save, class => 'btn btn-outline-warning w-50'}
+        </div>
+    {/form}
+</div>
