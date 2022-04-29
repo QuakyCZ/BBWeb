@@ -66,4 +66,13 @@ abstract class BaseRepository
     public function setNotDeletedNull(int $id): int {
         return $this->findBy(['id' => $id])->update(['not_deleted' => null]);
     }
+
+    /**
+     * @param callable $callback
+     * @return mixed
+     */
+    public function runInTransaction(callable $callback): mixed
+    {
+        return $this->database->transaction($callback);
+    }
 }

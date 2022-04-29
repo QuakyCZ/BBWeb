@@ -27,8 +27,10 @@ module.exports = (env, argv) => {
                 APP_DIR + '/www/styles/imports.scss',
                 APP_DIR + '/www/styles/web/web.scss'
             ],
-            scritsWeb: [
-                APP_DIR + '/www/js/web/web.js'
+            scriptsWeb: [
+                APP_DIR + "/vendor/nette/forms/src/assets/netteForms.js",
+                APP_DIR + "/node_modules/nette-forms/src/assets/netteForms.js",
+                APP_DIR + '/www/js/web/web.js',
             ],
             stylesAdmin: [
                 APP_DIR + '/www/styles/appwork.css',

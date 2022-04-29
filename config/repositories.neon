@@ -5,3 +5,4 @@ services:
     - App\Repository\UserDetailsRepository
     - App\Repository\ServerRepository
     - App\Repository\SettingsRepository
+    - App\Repository\FeedbackRepository

@@ -1,6 +1,7 @@
 includes:
     - components.neon
     - repositories.neon
+    - facades.neon
 
 
 parameters:
@@ -20,7 +21,7 @@ session:
 
 di:
 	export:
-		parameters: no
+		parameters: yes
 		tags: no
 
 
@@ -30,6 +31,7 @@ services:
 
 extensions:
 	translation: Contributte\Translation\DI\TranslationExtension
+	recaptcha: Contributte\ReCaptcha\DI\ReCaptchaExtension
 
 translation:
 	locales:

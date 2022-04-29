@@ -1,0 +1,91 @@
+{varType bool $sent}
+
+{block styles}
+    <link rel="stylesheet" href="{$basePath}/webpack/stylesWeb.bundle.css">
+    <link rel="stylesheet" type="text/css" href="{$basePath}/styles/about.css">
+    <style>
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            padding-top: 0;
+            height: 100%;
+        }
+
+        .container {
+            padding-top: 0;
+        }
+
+        #feedback-card {
+            border: 2px solid orange;
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+        }
+
+        #feedback-card .form-control {
+            background: none;
+            border: none;
+            border-bottom: 2px solid #292e32;
+            border-radius: 0;
+        }
+
+        #feedback-card .form-control:focus {
+            border: none;
+            border-bottom: 2px solid orange;
+            box-shadow: none;
+        }
+
+        #feedback-card .form-control:focus::placeholder {
+            color: orange;
+        }
+
+        #feedback-card textarea {
+            border-top: 2px solid #292e32 !important;
+        }
+
+        #feedback-card textarea:focus {
+            border-top: 2px solid orange !important;
+        }
+
+        #feedback-card option {
+            background: white !important;
+            color: black;
+        }
+    </style>
+{/block}
+
+{block beforeContent}
+    <a n:href="Homepage:">
+        <div class="back-button" onmouseover="this.style.backgroundColor='#ff03c2';this.style.color='white';"
+             onmouseout="this.style.backgroundColor='#16ccca';this.style.color='black';">
+            <b><i class="las la-angle-double-left"></i></b>
+        </div>
+    </a>
+{/block}
+
+{block content}
+<div class="my-auto">
+    <img src="{$basePath}/img/Nakashi.png" alt="nakashi" class="mx-auto d-block" height="200px">
+    <div id="feedback-card" class="card p-5">
+
+        {if $sent}
+            <div class="text-center">
+                <h1>Děkujeme za Vaši zpětnou vazbu.</h1>
+                <p class="text-muted">Doplňující informace Vám byly zaslány na email.</p>
+            </div>
+        {else}
+            <div class="text-center">
+                <h1 class="text-warning">Zpětná vazba</h1>
+                <p class="text-muted">
+                    Našel jsi nějakou chybu nebo máš nápad?
+                    <br>
+                    Potom budeme rádi, když nám to sdělíš pomocí následujícího formuláře.
+                </p>
+            </div>
+            {control feedbackForm}
+        {/if}
+    </div>
+</div>
+{/block}

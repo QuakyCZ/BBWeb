@@ -22,7 +22,8 @@
 		"tracy/tracy": "^2.9",
 		"myclabs/php-enum": "^1.8",
 		"contributte/translation": "^0.9.3",
-		"ublaboo/datagrid": "^6.9"
+		"ublaboo/datagrid": "^6.9",
+		"contributte/recaptcha": "^3.4"
 	},
 	"require-dev": {
 		"nette/tester": "^2.3",

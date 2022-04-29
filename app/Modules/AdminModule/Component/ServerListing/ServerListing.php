@@ -22,7 +22,7 @@ class ServerListing extends BaseComponent {
 
 
     public function render(): void {
-        $this->template->servers = $this->serverRepository->getAll();
+        $this->template->servers = $this->serverRepository->findAll();
 
         parent::render();
     }
