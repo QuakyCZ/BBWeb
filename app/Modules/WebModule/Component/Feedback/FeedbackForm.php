@@ -3,6 +3,7 @@
 namespace App\Modules\WebModule\Component\Feedback;
 
 use App\Component\BaseComponent;
+use App\Facade\MailFacade;
 use App\Repository\FeedbackRepository;
 use App\Repository\ServerRepository;
 use Latte\Engine;
@@ -19,12 +20,13 @@ class FeedbackForm extends BaseComponent
     /**
      * @param ServerRepository $serverRepository
      * @param FeedbackRepository $feedbackRepository
-     * @param Mailer $mailer
+     * @param MailFacade $mailFacade
+     * @param array $recaptchaConfig
      */
     public function __construct(
         private ServerRepository $serverRepository,
         private FeedbackRepository $feedbackRepository,
-        private Mailer $mailer,
+        private MailFacade $mailFacade,
     )
     {
     }
@@ -46,6 +48,9 @@ class FeedbackForm extends BaseComponent
 
         $form->addTextArea('description', 'Popis')
             ->setRequired('%label je povinný údaj.');
+
+        $form->addReCaptcha('recaptcha', 'reCaptcha',)
+            ->setRequired('Potvrďte, prosím, že nejste robot.');
 
         $form->addSubmit('save', 'Odeslat');
         $form->onSuccess[] = [$this, 'saveForm'];
@@ -79,16 +84,19 @@ class FeedbackForm extends BaseComponent
                     $data['server'] = $server['name'];
                     $data['feedbackId'] = $row['id'];
 
-                    $latte = new Engine();
-                    $body = $latte->renderToString(__DIR__.'/../../../../Mail/FeedbackMailSender.latte', $data);
+                    $this->mailFacade->sendMail(
+                        $data['email'],
+                        'Zpětná vazba',
+                        __DIR__.'/../../../../Mail/FeedbackMailSender.latte',
+                        $data
+                    );
 
-                    $message = new Message();
-                    $message->setFrom('noreply@beastblock.cz', 'BeastBlock.cz');
-                    $message->addReplyTo('info@beastblock.cz', 'BeastBlock.cz');
-                    $message->addTo($values['email']);
-                    $message->setSubject('Zpětná vazba.');
-                    $message->setHtmlBody($body);
-                    $this->mailer->send($message);
+                    $this->mailFacade->sendMail(
+                        'info@beastblock.cz',
+                        'Zpětná vazba #' . $row['id'],
+                        __DIR__.'/../../../../Mail/FeedbackMailRecipient.latte',
+                        $data
+                    );
                 });
             $this->presenter->redirect('Feedback:', ['sent' => true]);
         }

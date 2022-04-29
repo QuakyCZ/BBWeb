@@ -3,16 +3,16 @@
 namespace App\Modules\WebModule\Presenter;
 
 use App\Modules\WebModule\Component\Feedback\FeedbackForm;
-use App\Modules\WebModule\Component\Feedback\IFeedbackFormFactory;
+use App\Modules\WebModule\Component\Feedback\FeedbackFormFactory;
 
 class FeedbackPresenter extends Base\BasePresenter
 {
     /**
-     * @param IFeedbackFormFactory $feedbackFormFactory
+     * @param FeedbackFormFactory $feedbackFormFactory
      */
     public function __construct
     (
-        private IFeedbackFormFactory $feedbackFormFactory,
+        private FeedbackFormFactory $feedbackFormFactory,
     )
     {
         parent::__construct();
