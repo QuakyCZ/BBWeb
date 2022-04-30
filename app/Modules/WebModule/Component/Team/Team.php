@@ -3,10 +3,9 @@
 namespace App\Modules\WebModule\Component\Team;
 
 use App\Component\BaseComponent;
-use App\Repository\RoleRepository;
-use App\Repository\SettingsRepository;
-use App\Repository\UserDetailsRepository;
-use App\Repository\UserRoleRepository;
+use App\Repository\Primary\RoleRepository;
+use App\Repository\Primary\UserDetailsRepository;
+use App\Repository\Primary\UserRoleRepository;
 use Nette\Localization\Translator;
 
 class Team extends BaseComponent {
@@ -30,7 +29,7 @@ class Team extends BaseComponent {
 
     public function render(): void {
 
-        $data = $this->userRoleRepository->getForAboutTeamListing(['ADMIN'])->fetchAll();
+        $data = $this->userRoleRepository->getForAboutTeamListing(['ADMIN', 'USER'])->fetchAll();
 
         $result = [];
 

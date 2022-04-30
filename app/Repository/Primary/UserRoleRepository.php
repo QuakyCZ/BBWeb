@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repository\Primary;
 
-use Hoa\Iterator\Seekable;
-use Nette\Database\Context;
+use App\Repository\BaseRepository;
 use Nette\Database\ResultSet;
 use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
@@ -61,7 +60,7 @@ class UserRoleRepository extends BaseRepository {
             LEFT JOIN user_details ud ON ur.user_id = ud.user_id
             WHERE r.name NOT IN (?)
             GROUP BY ur.user_id
-            ORDER BY r.priority;
+            ORDER BY r.priority, ud.id;
         ", $excludeRoleNames);
     }
 

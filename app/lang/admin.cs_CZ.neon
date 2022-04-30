@@ -21,3 +21,9 @@ settings:
             content_required: 'Hodnota je povinný údaj'
     error:
         not_exists: 'Nastavení s tímto ID neexistuje.'
+
+home: 'Domů'
+dungeonEscape:
+    title: 'Dungeon Escape'
+    rooms: 'Místnosti'
+    quests: 'Questy'

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repository\Primary;
 
+use App\Repository\BaseRepository;
 use Nette\Database\Table\ActiveRow;
 
 class SettingsRepository extends BaseRepository

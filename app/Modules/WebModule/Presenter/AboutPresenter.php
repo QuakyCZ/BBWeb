@@ -6,10 +6,6 @@ namespace App\Modules\WebModule\Presenter;
 use App\Modules\WebModule\Component\Team\ITeamFactory;
 use App\Modules\WebModule\Component\Team\Team;
 use App\Modules\WebModule\Presenter\Base\BasePresenter;
-use App\Repository\UserDetailsRepository;
-use App\Repository\UserRoleRepository;
-use Nette\Application\UI\Presenter;
-use Nette\Localization\Translator;
 
 class AboutPresenter extends BasePresenter
 {

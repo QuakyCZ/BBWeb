@@ -4,14 +4,11 @@ namespace App\Modules\WebModule\Component\Feedback;
 
 use App\Component\BaseComponent;
 use App\Facade\MailFacade;
-use App\Repository\FeedbackRepository;
-use App\Repository\ServerRepository;
-use Latte\Engine;
+use App\Repository\Primary\FeedbackRepository;
+use App\Repository\Primary\ServerRepository;
 use Nette\Application\AbortException;
 use Nette\Application\UI\Form;
 use Nette\Database\Explorer;
-use Nette\Mail\Mailer;
-use Nette\Mail\Message;
 use Nette\Utils\ArrayHash;
 use Tracy\Debugger;
 

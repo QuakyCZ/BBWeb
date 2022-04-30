@@ -3,7 +3,7 @@
 namespace App\Modules\AdminModule\Component\ServerListing;
 
 use App\Component\BaseComponent;
-use App\Repository\ServerRepository;
+use App\Repository\Primary\ServerRepository;
 
 class ServerListing extends BaseComponent {
 

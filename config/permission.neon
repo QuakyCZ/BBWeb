@@ -1,0 +1,8 @@
+parameters:
+    permission:
+        USER:
+            - Admin:Default
+            - Admin:Sign
+        ADMIN:
+            - Admin:Settings
+            - Admin:Servers

@@ -3,7 +3,7 @@
 namespace App\Modules\AdminModule\Component\Settings;
 
 use App\Component\BaseComponent;
-use App\Repository\SettingsRepository;
+use App\Repository\Primary\SettingsRepository;
 use Exception;
 use Nette\Application\AbortException;
 use Nette\Application\BadRequestException;

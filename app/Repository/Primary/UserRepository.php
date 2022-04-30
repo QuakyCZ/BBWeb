@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repository\Primary;
 
-use Nette\Database\Context;
+use App\Repository\BaseRepository;
 use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
-use function _PHPStan_76800bfb5\React\Promise\reduce;
 
 class UserRepository extends BaseRepository
 {
-    const TABLE_NAME = "user";
+    public const TABLE_NAME = "user";
     protected string $tableName = self::TABLE_NAME;
 
     /**

@@ -2,7 +2,9 @@ includes:
     - components.neon
     - repositories.neon
     - facades.neon
-
+    - services.neon
+    - permission.neon
+    - menu.neon
 
 parameters:
 
@@ -32,6 +34,7 @@ services:
 extensions:
 	translation: Contributte\Translation\DI\TranslationExtension
 	recaptcha: Contributte\ReCaptcha\DI\ReCaptchaExtension
+	menu: Contributte\MenuControl\DI\MenuExtension
 
 translation:
 	locales:

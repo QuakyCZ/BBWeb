@@ -1,8 +1,8 @@
 services:
-    - App\Repository\UserRepository
-    - App\Repository\RoleRepository
-    - App\Repository\UserRoleRepository
-    - App\Repository\UserDetailsRepository
-    - App\Repository\ServerRepository
-    - App\Repository\SettingsRepository
-    - App\Repository\FeedbackRepository
+    - App\Repository\Primary\UserRepository
+    - App\Repository\Primary\RoleRepository
+    - App\Repository\Primary\UserRoleRepository
+    - App\Repository\Primary\UserDetailsRepository
+    - App\Repository\Primary\ServerRepository
+    - App\Repository\Primary\SettingsRepository
+    - App\Repository\Primary\FeedbackRepository

@@ -9,3 +9,6 @@ bash b:
 
 wd:
 	cd docker && docker-compose run npm npm run build:dev
+
+dc:
+	rm -rf temp/cache/*

@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repository\Primary;
+
+use App\Repository\BaseRepository;
 
 class UserDetailsRepository extends BaseRepository {
 

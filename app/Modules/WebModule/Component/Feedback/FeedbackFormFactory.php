@@ -3,8 +3,8 @@
 namespace App\Modules\WebModule\Component\Feedback;
 
 use App\Facade\MailFacade;
-use App\Repository\FeedbackRepository;
-use App\Repository\ServerRepository;
+use App\Repository\Primary\FeedbackRepository;
+use App\Repository\Primary\ServerRepository;
 
 class FeedbackFormFactory
 {

@@ -3,15 +3,35 @@
 namespace App\Modules\AdminModule\Presenter\Base;
 
 
+use Contributte\MenuControl\UI\IMenuComponentFactory;
+use Contributte\MenuControl\UI\MenuComponent;
 use Latte\MacroNode;
 use Latte\Macros\MacroSet;
 use Latte\PhpWriter;
 use Nette\Application\UI\Presenter;
+use Nette\Security\AuthenticationException;
 
 class BasePresenter extends Presenter
 {
+
+    private IMenuComponentFactory $menuComponentFactory;
+
+    protected $presenterNamesWithPublicAccess = ['Sign', 'Error', 'Error4xx', 'Admin:Sign', 'Admin:Error', 'Admin:Error4xx'];
+
+    public function injectBasePresenter(IMenuComponentFactory $menuComponentFactory)
+    {
+        $this->menuComponentFactory = $menuComponentFactory;
+    }
+
+    /**
+     * @throws AuthenticationException
+     * @throws \Nette\Application\AbortException
+     */
     protected function startup()
     {
+
+        $storage = $this->getUser()->getStorage();
+        $storage->setNamespace('Admin');
 
         $latte = $this->template->getLatte();
 
@@ -25,9 +45,24 @@ class BasePresenter extends Presenter
             }
         );
 
-        parent::startup();
+        if(!in_array($this->name, $this->presenterNamesWithPublicAccess))
+        {
+            if (!$this->user->isLoggedIn())
+            {
+                $key = $this->storeRequest();
+                $this->redirect(':Admin:Sign:in', ['returnKey' => $key]);
+            }
+            else if (!$this->user->isAllowed($this->getName(), $this->action))
+            {
+                throw new AuthenticationException("Nemáte dostatečná oprávnění " . $this->getName() . ":".$this->action);
+            }
+        }
 
-        if(!$this->user->isLoggedIn())
-            $this->redirect('Sign:in');
+        parent::startup();
+    }
+
+    protected function createComponentMenu(): MenuComponent
+    {
+        return $this->menuComponentFactory->create('admin');
     }
 }

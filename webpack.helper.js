@@ -20,15 +20,10 @@ const scriptsGroups = (APP_DIR) => {
                 APP_DIR + "/node_modules/nette.ajax.js/nette.ajax.js",
                 APP_DIR + "/node_modules/nette.ajax.js/extensions/spinner.ajax.js",
                 APP_DIR + "/node_modules/ajax-bootstrap-select/dist/js/ajax-bootstrap-select.js",
-
-
                 APP_DIR + "/node_modules/ublaboo-datagrid/assets/datagrid.js",
                 APP_DIR + "/node_modules/ublaboo-datagrid/assets/datagrid-spinners.js",
                 APP_DIR + "/node_modules/ublaboo-datagrid/assets/datagrid-instant-url-refresh.js",
-
-
             ]
-
         }
     ];
 }

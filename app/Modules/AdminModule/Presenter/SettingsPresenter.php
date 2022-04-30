@@ -6,7 +6,6 @@ use App\Modules\AdminModule\Component\Settings\ISettingsFormFactory;
 use App\Modules\AdminModule\Component\Settings\ISettingsGridFactory;
 use App\Modules\AdminModule\Component\Settings\SettingsForm;
 use App\Modules\AdminModule\Component\Settings\SettingsGrid;
-use App\Repository\SettingsRepository;
 
 class SettingsPresenter extends Base\BasePresenter
 {

@@ -1,0 +1,38 @@
+menu:
+    admin:
+        translator: true
+        templates:
+           menu: %appDir%/Modules/AdminModule/templates/menu.latte
+        items:
+            'admin.home':
+                action: 'Admin:Default:default'
+                data:
+                    icon: 'fas fa-home'
+            'admin.dungeonEscape.title':
+                link: '#'
+                data:
+                    icon: 'fas fa-dungeon'
+                    sublistId: 'dungeonEscape'
+                items:
+                    'admin.dungeonEscape.rooms':
+                        link: '#'
+                        data:
+                            icon: 'fas fa-house-crack'
+                    'admin.dungeonEscape.quests':
+                        link: '#'
+                        data:
+                            icon: 'fas fa-circle-question'
+            'Nastavení':
+                link: '#'
+                data:
+                    icon: 'fas fa-gears'
+                    sublistId: 'settings'
+                items:
+                    'Servery':
+                        action: 'Admin:Servers:default'
+                        data:
+                            icon: 'fas fa-server'
+                    'Proměnné':
+                        action: 'Admin:Settings:default'
+                        data:
+                            icon: 'fas fa-ellipsis'

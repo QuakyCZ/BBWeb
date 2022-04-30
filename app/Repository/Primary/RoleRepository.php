@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repository\Primary;
 
-use Nette\Database\Context;
+use App\Repository\BaseRepository;
 
 class RoleRepository extends BaseRepository {
 

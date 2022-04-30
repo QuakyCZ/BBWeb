@@ -2,9 +2,9 @@
 
 namespace App\Security;
 
-use App\Repository\UserDetailsRepository;
-use App\Repository\UserRepository;
-use App\Repository\UserRoleRepository;
+use App\Repository\Primary\UserDetailsRepository;
+use App\Repository\Primary\UserRepository;
+use App\Repository\Primary\UserRoleRepository;
 use Nette;
 use Nette\Security\SimpleIdentity;
 

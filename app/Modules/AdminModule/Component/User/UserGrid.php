@@ -2,22 +2,16 @@
 
 namespace App\Modules\AdminModule\Component\User;
 
-use _PHPStan_76800bfb5\Symfony\Component\Console\Question\ConfirmationQuestion;
-use App\Component\BaseComponent;
-use App\Repository\RoleRepository;
-use App\Repository\UserRepository;
-use App\Repository\UserRoleRepository;
+use App\Repository\Primary\RoleRepository;
+use App\Repository\Primary\UserRepository;
+use App\Repository\Primary\UserRoleRepository;
 use Contributte\Translation\Exceptions\InvalidArgument;
 use Contributte\Translation\Translator;
-use Nette\ComponentModel\IContainer;
 use Nette\Database\Table\ActiveRow;
-use Ublaboo\DataGrid\Column\Action\Confirmation\CallbackConfirmation;
 use Ublaboo\DataGrid\Column\Action\Confirmation\StringConfirmation;
 use Ublaboo\DataGrid\DataGrid;
-use Ublaboo\DataGrid\DataSource\DibiFluentDataSource;
 use Ublaboo\DataGrid\Exception\DataGridColumnStatusException;
 use Ublaboo\DataGrid\Exception\DataGridException;
-use function _PHPStan_76800bfb5\React\Promise\reduce;
 
 class UserGrid extends DataGrid
 {

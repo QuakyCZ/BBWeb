@@ -3,10 +3,10 @@
 namespace App\Modules\AdminModule\Component\User;
 
 use App\Component\BaseComponent;
-use App\Repository\RoleRepository;
-use App\Repository\UserDetailsRepository;
-use App\Repository\UserRepository;
-use App\Repository\UserRoleRepository;
+use App\Repository\Primary\RoleRepository;
+use App\Repository\Primary\UserDetailsRepository;
+use App\Repository\Primary\UserRepository;
+use App\Repository\Primary\UserRoleRepository;
 use Nette\Application\AbortException;
 use Nette\Application\UI\Form;
 use Nette\Security\Passwords;

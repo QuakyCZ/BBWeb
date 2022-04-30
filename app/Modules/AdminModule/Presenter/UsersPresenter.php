@@ -6,8 +6,8 @@ use App\Modules\AdminModule\Component\User\IUserFormFactory;
 use App\Modules\AdminModule\Component\User\IUserGridFactory;
 use App\Modules\AdminModule\Component\User\UserForm;
 use App\Modules\AdminModule\Component\User\UserGrid;
-use App\Repository\UserRepository;
-use App\Repository\UserRoleRepository;
+use App\Repository\Primary\UserRepository;
+use App\Repository\Primary\UserRoleRepository;
 
 class UsersPresenter extends Base\BasePresenter {
 

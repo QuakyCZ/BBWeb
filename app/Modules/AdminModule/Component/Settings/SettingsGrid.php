@@ -2,9 +2,8 @@
 
 namespace App\Modules\AdminModule\Component\Settings;
 
-use App\Repository\SettingsRepository;
+use App\Repository\Primary\SettingsRepository;
 use Nette\Localization\Translator;
-use Nette\Utils\Html;
 use Ublaboo\DataGrid\DataGrid;
 use Ublaboo\DataGrid\Exception\DataGridException;
 
