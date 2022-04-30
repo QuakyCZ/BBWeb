@@ -6,3 +6,6 @@ services:
     - App\Repository\Primary\ServerRepository
     - App\Repository\Primary\SettingsRepository
     - App\Repository\Primary\FeedbackRepository
+
+    - App\Repository\DungeonEscape\PlayerRepository
+    - App\Modules\ApiModule\Model\PlayerStatistics\PlayerStatisticsRepository

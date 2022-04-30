@@ -1,3 +1,5 @@
 services:
+    - App\Modules\ApiModule\Model\Player\PlayerMapper
+    - App\Modules\ApiModule\Model\PlayerStatistics\PlayerStatisticsMapper
     - App\Security\Authorizator(%permission%)
     - App\Model\LinkGenerator(%baseUrl%)
