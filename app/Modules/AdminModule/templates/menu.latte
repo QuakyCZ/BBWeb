@@ -20,7 +20,7 @@
                             {include menu-branch, $item, false}
                         </div>
                     {else}
-                    <a href="{$item->getRealLink()}" class="btn btn-dark {$item->isActive() ? active}"><i n:class="$item->getData('icon')"></i> {$item->getRealTitle()}</a>
+                        <a href="{$item->getRealLink()}" class="btn btn-dark {$item->isActive() ? active}"><i n:class="$item->getData('icon')"></i> {$item->getRealTitle()}</a>
                     {/if}
                 </li>
             {/foreach}

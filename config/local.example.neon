@@ -1,6 +1,19 @@
 parameters:
+    baseUrl: 'http://localhost:5000'
 
 database:
-	dsn: 'mysql:host=127.0.0.1;dbname=bbweb'
-	user: bbweb
-	password: 'bbweb'
+    primary:
+        dsn: 'mysql:host=127.0.0.1;dbname=bbweb'
+        user: bbweb
+        password: 'bbweb'
+
+recaptcha:
+    siteKey: ''
+    secretKey: ''
+
+mail:
+    smtp: true
+    host: 'smtp.endora.cz'
+    username: ''
+    password: ''
+    secure: 'ssl'

@@ -1,2 +1,3 @@
 services:
     - App\Security\Authorizator(%permission%)
+    - App\Model\LinkGenerator(%baseUrl%)

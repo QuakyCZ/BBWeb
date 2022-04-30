@@ -1,6 +1,7 @@
 menu:
     admin:
         translator: true
+        linkGenerator: @App\Model\LinkGenerator
         templates:
            menu: %appDir%/Modules/AdminModule/templates/menu.latte
         items:
