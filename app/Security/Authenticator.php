@@ -6,14 +6,13 @@ use App\Repository\Primary\UserDetailsRepository;
 use App\Repository\Primary\UserRepository;
 use App\Repository\Primary\UserRoleRepository;
 use Nette;
+use Nette\Security\AuthenticationException;
 use Nette\Security\SimpleIdentity;
 
 class Authenticator implements \Nette\Security\Authenticator
 {
 
-    private $database;
-    private $passwords;
-
+    private Nette\Security\Passwords $passwords;
     private UserRepository $userRepository;
     private UserRoleRepository $userRoleRepository;
     private UserDetailsRepository $userDetailsRepository;
@@ -26,7 +25,6 @@ class Authenticator implements \Nette\Security\Authenticator
         UserDetailsRepository $userDetailsRepository
     )
     {
-        $this->database = $database;
         $this->passwords = $passwords;
         $this->userRepository = $userRepository;
         $this->userRoleRepository = $userRoleRepository;
@@ -39,13 +37,17 @@ class Authenticator implements \Nette\Security\Authenticator
 
         if (!$user)
         {
-            throw new Nette\Security\AuthenticationException('User not found.');
+            throw new AuthenticationException('Uživatel nebyl nalezen.');
         }
 
+        if (!$user[UserRepository::COLUMN_ACTIVE])
+        {
+            throw new Nette\Security\AuthenticationException('Účet není aktivní');
+        }
 
         if (!$this->passwords->verify($password, $user->password))
         {
-            throw new Nette\Security\AuthenticationException('Invalid password.');
+            throw new AuthenticationException('Invalid password.');
         }
 
         $roles = $this->userRoleRepository->getUsersRoleNames($user->id);

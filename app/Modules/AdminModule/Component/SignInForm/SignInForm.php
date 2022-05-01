@@ -47,14 +47,6 @@ class SignInForm extends BaseComponent
         {
             $this->presenter->user->login($values['email'], $values['password']);
             $this->presenter->flashMessage('Přihlášení proběhlo úspěšně');
-        } catch (AuthenticationException $e) {
-            $form->addError($e->getMessage());
-        } catch (\Exception $exception) {
-            Debugger::log($exception, 'login');
-            $form->addError('Nastala neznámá chyba.');
-        }
-        finally
-        {
             $returnKey = $values['returnKey'] ?? null;
             if ($returnKey !== null)
             {
@@ -62,6 +54,13 @@ class SignInForm extends BaseComponent
             }
 
             $this->presenter->redirect($this->defaultRoute);
+        } catch (AbortException $exception) {
+            throw $exception;
+        } catch (AuthenticationException $e) {
+            $form->addError($e->getMessage());
+        } catch (\Exception $exception) {
+            Debugger::log($exception, 'login');
+            $form->addError('Nastala neznámá chyba.');
         }
     }
 }

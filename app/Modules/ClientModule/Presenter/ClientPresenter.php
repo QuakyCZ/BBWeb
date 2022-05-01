@@ -2,6 +2,8 @@
 
 namespace App\Modules\ClientModule\Presenter;
 
+use App\Modules\ApiModule\Model\User\UserFacade;
+use App\Repository\Primary\UserRepository;
 use Contributte\MenuControl\UI\IMenuComponentFactory;
 use Contributte\MenuControl\UI\MenuComponent;
 use Latte\MacroNode;
@@ -14,12 +16,22 @@ abstract class ClientPresenter extends Presenter
 {
 
     private IMenuComponentFactory $menuComponentFactory;
+    private UserRepository $userRepository;
 
     protected $presenterNamesWithPublicAccess = ['Sign', 'Error', 'Error4xx', 'Client:Sign', 'Client:Error', 'Client:Error4xx'];
 
-    public function injectBasePresenter(IMenuComponentFactory $menuComponentFactory)
+    /**
+     * @param IMenuComponentFactory $menuComponentFactory
+     * @param UserRepository $userRepository
+     * @return void
+     */
+    public function injectBasePresenter (
+        IMenuComponentFactory $menuComponentFactory,
+        UserRepository $userRepository
+    ): void
     {
         $this->menuComponentFactory = $menuComponentFactory;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -46,14 +58,20 @@ abstract class ClientPresenter extends Presenter
 
         if(!in_array($this->name, $this->presenterNamesWithPublicAccess))
         {
-            if (!$this->user->isLoggedIn())
+            $user = $this->getUser();
+            $key = $this->storeRequest();
+            if (!$user->isLoggedIn())
             {
-                $key = $this->storeRequest();
                 $this->redirect(':Client:Sign:in', ['returnKey' => $key]);
             }
-            else if (!$this->user->isAllowed($this->getName(), $this->action))
+            else if (!$this->userRepository->isUserActive($user->getId()))
             {
-                throw new AuthenticationException("Nemáte dostatečná oprávnění " . $this->getName() . ":".$this->action);
+                $this->getUser()->logout(true);
+                $this->redirect(':Client:Sign:in', ['returnKey' => $key]);
+            }
+            else if (!$user->isAllowed($this->getName(), $this->getAction()))
+            {
+                throw new AuthenticationException("Nemáte dostatečná oprávnění " . $this->getName() . ":".$this->getAction());
             }
         }
 
