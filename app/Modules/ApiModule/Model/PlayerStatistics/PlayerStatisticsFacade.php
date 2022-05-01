@@ -14,7 +14,7 @@ class PlayerStatisticsFacade
 
     public function getPlayerStatistics(int $statisticsId): ?PlayerStatistics
     {
-        $row = $this->playerStatisticsRepository->findBy(['id' => $statisticsId], true)->fetch();
+        $row = $this->playerStatisticsRepository->getById($statisticsId);
         if ($row === null)
         {
             return null;

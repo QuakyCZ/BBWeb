@@ -65,7 +65,7 @@ class UserFacade
             $this->minecraftAccountRepository->save([
                 UserMinecraftAccountRepository::COLUMN_USER_ID => $userId,
                 UserMinecraftAccountRepository::COLUMN_NICK => $nick,
-                UserMinecraftAccountRepository::COLUMN_UUID => $uuid,
+                UserMinecraftAccountRepository::COLUMN_UUID => hex2bin($uuid),
             ]);
 
             $this->connectTokenRepository->markAsUsed($tokenObject->getId());
