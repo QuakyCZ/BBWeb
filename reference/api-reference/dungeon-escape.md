@@ -2,12 +2,12 @@
 
 ## Get player
 
-{% swagger baseUrl="https://beastblock.cz/api" method="get" path="/dungeon-escape/player" summary="Get player data" %}
+{% swagger baseUrl="https://beastblock.cz/api/v1/dungeon-escape" method="get" path="/player" summary="Get player data" %}
 {% swagger-description %}
-Sends basic data of a player
+Sends basic data of a player. One of the parameters must be provided.
 {% endswagger-description %}
 
-{% swagger-parameter in="query" name="name" %}
+{% swagger-parameter in="query" name="nick" %}
 Player nick
 {% endswagger-parameter %}
 
@@ -18,6 +18,7 @@ Player UUID
 {% swagger-response status="200" description="Player was found" %}
 ```javascript
 {
+    "status": "ok",
     "player": {
         "id": 1,
         "name": "QuakyCZ",
@@ -31,7 +32,8 @@ Player UUID
 {% swagger-response status="400: Bad Request" description="name or uuid must be provided" %}
 ```javascript
 {
-    "error": "Name/UUUID must be provided"
+    "status": "error",
+    "message": "Name/UUID must be provided"
 }
 ```
 {% endswagger-response %}
@@ -39,7 +41,8 @@ Player UUID
 {% swagger-response status="404: Not Found" description="" %}
 ```javascript
 {
-    "error": "Player was not found"
+    "status": "error",
+    "message": "Player was not found"
 }
 ```
 {% endswagger-response %}
@@ -47,12 +50,12 @@ Player UUID
 
 ## Get statistics
 
-{% swagger method="get" path="/statistics" baseUrl="https://beastblock.cz/api/dungeon-escape" summary="Get statistics by ID" %}
+{% swagger method="get" path="/statistics" baseUrl="https://beastblock.cz/api/v1/dungeon-escape/" summary="Get statistics by ID" %}
 {% swagger-description %}
 You can obtain statistics ID from #GetPlayer method
 {% endswagger-description %}
 
-{% swagger-parameter in="path" type="Int" %}
+{% swagger-parameter in="path" type="Int" required="true" %}
 Statistics ID
 {% endswagger-parameter %}
 
