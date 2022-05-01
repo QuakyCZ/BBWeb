@@ -2,18 +2,13 @@
 
 namespace App\Modules\ApiModule\Model\PlayerStatistics;
 
-use App\Model\ContextLocator;
-use App\Repository\BaseRepository;
+use App\Repository\DungeonEscape\DungeonEscapeRepository;
 
-class PlayerStatisticsRepository extends BaseRepository
+class PlayerStatisticsRepository extends DungeonEscapeRepository
 {
 
     public const TABLE_NAME = 'player_statistics';
+    public const COLUMN_ID = 'id';
 
     protected string $tableName = self::TABLE_NAME;
-
-    public function __construct(ContextLocator $contextLocator)
-    {
-        parent::__construct($contextLocator->getDungeonEscape());
-    }
 }

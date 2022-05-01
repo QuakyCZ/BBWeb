@@ -1,0 +1,21 @@
+{varType bool $isMinecraftConnected}
+{varType App\Modules\ApiModule\Model\PlayerStatistics\PlayerStatistics $statistics}
+{block content}
+<h1>Statistiky Dungeon Escape</h1>
+<hr class="bg-light text-light h-5">
+{if $isMinecraftConnected}
+    <table class="table table-bordered table-striped table-hover table-dark">
+        {foreach $statistics->toArray() as $key => $val}
+            {continueIf $key === App\Modules\ApiModule\Model\PlayerStatistics\PlayerStatisticsRepository::COLUMN_ID}
+            <tr>
+                <td>{('common.dungeonEscape.statistics.'.$key)|translate}</td>
+                <th>{$val}</th>
+            </tr>
+        {/foreach}
+    </table>
+{else}
+    <div class="col">
+        <p>Nemáte propojený webový účet s Minecraft účtem.</p>
+        <a n:href="Connections:default" class="btn btn-outline-success"><i class="fas fa-link"></i> Propojit</a>
+    </div>
+{/if}

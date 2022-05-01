@@ -2,9 +2,7 @@
 
 namespace App\Repository\Primary;
 
-use App\Repository\BaseRepository;
-
-class RoleRepository extends BaseRepository {
+class RoleRepository extends PrimaryRepository {
 
     public const TABLE_NAME = 'role';
 

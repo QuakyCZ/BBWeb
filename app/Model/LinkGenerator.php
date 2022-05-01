@@ -20,7 +20,6 @@ class LinkGenerator implements ILinkGenerator
         \Nette\Application\LinkGenerator $linkGenerator
     )
     {
-        bdump($baseUrl);
         $this->linkGenerator = $linkGenerator->withReferenceUrl($baseUrl);
     }
 

@@ -1,2 +1,29 @@
 field:
     save: Uložit
+
+bool:
+    true:
+        text: Ano
+        number: 1
+    false:
+        text: Ne
+        number: 0
+
+yes: Ano
+no: Ne
+dungeonEscape:
+    statistics:
+        id: 'id'
+        normalGamesPlayed: 'Počet Single her'
+        coopGamesPlayed: 'Počet COOP her'
+        battleRoyaleGamesPlayed: 'Počet Battle Royale her'
+        singleWins: 'Počet Single výher'
+        coopWins: 'Počet COOP výher'
+        battleRoyaleWins: 'Počet Battle Royale Výher'
+        deaths: 'Počet smrtí'
+        mobKills: 'Počet zabitých mobů'
+        bossKills: 'Počet zabitých bosů'
+        playerKills: 'Počet zabitých hráčů'
+        highestScore: 'Nejvyšší skóre'
+        totalDealtDamage: 'Celkový udělený damage'
+        totalTakenDamage: 'Celkový utržený damage'

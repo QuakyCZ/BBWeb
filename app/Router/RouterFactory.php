@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Router;
 
 use Nette;
+use Nette\Application\Routers\Route;
 use Nette\Application\Routers\RouteList;
 
 
@@ -17,13 +18,15 @@ final class RouterFactory
 		$router = new RouteList();
 
         $router[] = $adminRouter = new RouteList('Admin');
-        $adminRouter[] = new Nette\Application\Routers\Route('[<locale=cs cs|en>/]admin/<presenter>/<action>[/<id>]', 'Default:default');
+        $adminRouter[] = new Route('[<locale=cs cs|en>/]admin/<presenter>/<action>[/<id>]', 'Default:default');
 
-        $router[] = $apiRouter = new RouteList('Api');
-        $apiRouter[] = new Nette\Application\Routers\Route('api/<presenter>/<action>[/<id>]', 'Default:default');
+        $router[] = new Route('/api/v<version>/<package>[/<apiAction>][/<params>]', 'Api:Api:default');
+
+        $router[] = $clientRouter = new RouteList('Client');
+        $clientRouter[] = new Route('[<locale=cs cs|en/>]client/<presenter>/<action>[/<id>]', 'Dashboard:default');
 
 		$router[] = $frontRouter = new RouteList('Web');
-        $frontRouter[] = new Nette\Application\Routers\Route('[<locale=cs cs|en>/]<presenter>/<action>[/<id>]','Homepage:default');
+        $frontRouter[] = new Route('[<locale=cs cs|en>/]<presenter>/<action>[/<id>]','Homepage:default');
 
 
 

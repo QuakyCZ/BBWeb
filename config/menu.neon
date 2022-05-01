@@ -2,6 +2,7 @@ menu:
     admin:
         translator: true
         linkGenerator: @App\Model\LinkGenerator
+        authorizator: @App\Security\MenuAuthorizator
         templates:
            menu: %appDir%/Modules/AdminModule/templates/menu.latte
         items:
@@ -37,3 +38,28 @@ menu:
                         action: 'Admin:Settings:default'
                         data:
                             icon: 'fas fa-ellipsis'
+    client:
+        translator: true
+        linkGenerator: @App\Model\LinkGenerator
+        authorizator: @App\Security\MenuAuthorizator
+        templates:
+           menu: %appDir%/Modules/ClientModule/templates/menu.latte
+        items:
+            'client.dashboard.title':
+                action: 'Client:Dashboard:default'
+                data:
+                    icon: 'fas fa-house'
+            'client.connections.title':
+                action: 'Client:Connections:default'
+                data:
+                    icon: 'fas fa-link'
+            'admin.dungeonEscape.title':
+                link: '#'
+                data:
+                    icon: 'fas fa-dungeon'
+                    sublistId: 'dungeonEscape'
+                items:
+                    'admin.dungeonEscape.statistics':
+                        action: 'Client:DungeonEscape:default'
+                        data:
+                            icon: 'fas fa-table'

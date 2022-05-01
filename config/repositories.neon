@@ -3,6 +3,9 @@ services:
     - App\Repository\Primary\RoleRepository
     - App\Repository\Primary\UserRoleRepository
     - App\Repository\Primary\UserDetailsRepository
+    - App\Repository\Primary\UserMinecraftAccountRepository
+    - App\Repository\Primary\UserConnectTokenRepository
+    userTokenRepository: App\Repository\Primary\UserTokenRepository
     - App\Repository\Primary\ServerRepository
     - App\Repository\Primary\SettingsRepository
     - App\Repository\Primary\FeedbackRepository

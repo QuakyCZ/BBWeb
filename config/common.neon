@@ -5,6 +5,7 @@ includes:
     - services.neon
     - permission.neon
     - menu.neon
+    - api.neon
 
 parameters:
 
@@ -13,6 +14,7 @@ application:
 	errorPresenter: Error
 	mapping:
 		Error: App\Presenter\*Presenter
+		Api: Tomaj\NetteApi\Presenters\*Presenter
 		*: App\Modules\*Module\Presenter\*Presenter
 
 

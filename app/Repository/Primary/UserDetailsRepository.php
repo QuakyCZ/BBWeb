@@ -2,11 +2,9 @@
 
 namespace App\Repository\Primary;
 
-use App\Repository\BaseRepository;
+class UserDetailsRepository extends PrimaryRepository {
 
-class UserDetailsRepository extends BaseRepository {
-
-    const TABLE_NAME = "user_details";
+    public const TABLE_NAME = "user_details";
     protected string $tableName = self::TABLE_NAME;
 
     public function getDetails(int $userId, string $select = '*') {

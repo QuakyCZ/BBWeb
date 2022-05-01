@@ -1,20 +1,14 @@
-html {
-    height: auto;
-}
-body {
-    height: auto;
-}
-
 .container {
     background-color: unset;
-    margin: auto;
-    width: auto;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -40%);
 }
 
 .card {
     width: 600px;
-    margin: auto;
-    margin-top: 10em;
+    margin: 10em auto auto;
     padding: 2em;
     background-color: rgba(0,0,0, 0.5);
 

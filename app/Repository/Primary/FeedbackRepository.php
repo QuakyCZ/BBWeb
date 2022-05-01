@@ -2,9 +2,7 @@
 
 namespace App\Repository\Primary;
 
-use App\Repository\BaseRepository;
-
-class FeedbackRepository extends BaseRepository
+class FeedbackRepository extends PrimaryRepository
 {
     public const TABLE_NAME = 'feedback';
 

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 
 use Nette\Database\Context;
+use Nette\Database\Explorer;
 use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
 use Traversable;
@@ -12,14 +13,14 @@ use function _PHPStan_76800bfb5\React\Promise\reduce;
 abstract class BaseRepository
 {
 
-    public Context $database;
+    public Explorer $database;
 
     protected string $tableName;
 
     /**
      * @param Context $database
      */
-    public function __construct(Context $database)
+    public function __construct(Explorer $database)
     {
         $this->database = $database;
     }

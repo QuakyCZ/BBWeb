@@ -1,35 +1,39 @@
 {varType string $recaptchaSiteKey}
 
-    {form form}
-        <div class="form-group row mb-4">
-            <div class="col-md-4">
-                {input nick, class => form-control, placeholder => 'Nick'}
-            </div>
-            <div class="col-md-4">
-                {input email, class => form-control, placeholder => 'Email'}
-            </div>
-            <div class="col-md-4">
-                {input server_id, class => form-control, placeholder => 'Server'}
-            </div>
+{form form}
+    <div class="form-group row mb-4">
+        <div class="col-md-4">
+            {input nick, class => form-control, placeholder => 'Nick'}
         </div>
-        <div class="form-group row">
-            <div class="col">
-                {input description, class => form-control, placeholder => 'Popis'}
-            </div>
+        <div class="col-md-4">
+            {input email, class => form-control, placeholder => 'Email'}
         </div>
-        <div class="form-group row">
-            <div class="mx-auto">
-                {input recaptcha, data-theme => 'dark'}
-            </div>
+        <div class="col-md-4">
+            {input server_id, class => form-control, placeholder => 'Server'}
         </div>
-        <div class="form-group row">
-            <ul class="col errors alert alert-warning" n:if="$form->hasErrors()">
-                <li n:foreach="$form->errors as $error">{$error}</li>
-            </ul>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            {input description, class => form-control, placeholder => 'Popis'}
         </div>
-        <div class="form-group mt-5 text-center">
-            {input save, class => "btn btn-outline-warning w-50 my-auto"}
+    </div>
+    <div class="form-group row">
+        <div class="mx-auto">
+            {input recaptcha, data-theme => 'dark'}
         </div>
-    {/form}
-</div>
+    </div>
+    <div class="form-group row">
+        <ul class="col errors alert alert-warning" n:if="$form->hasErrors()">
+            <li n:foreach="$form->errors as $error">{$error}</li>
+        </ul>
+    </div>
+    <div class="form-group mt-5 text-center">
+        {input save, class => "btn btn-outline-warning w-50 my-auto"}
+    </div>
+{/form}
 <script src='https://www.google.com/recaptcha/api.js'></script>
+<script>
+    LiveFormOptions = {
+        messageErrorClass: 'text-warning'
+    }
+</script>

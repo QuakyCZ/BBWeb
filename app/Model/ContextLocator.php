@@ -2,11 +2,11 @@
 
 namespace App\Model;
 
-use Nette\Database\Context;
+use Nette\Database\Explorer;
 
 interface ContextLocator
 {
-    public function getPrimary(): Context;
+    public function getPrimary(): Explorer;
 
-    public function getDungeonEscape(): Context;
+    public function getDungeonEscape(): Explorer;
 }
