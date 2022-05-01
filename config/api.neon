@@ -1,0 +1,10 @@
+services:
+    - Tomaj\NetteApi\Link\ApiLink
+    - Tomaj\NetteApi\Misc\IpDetector
+    - App\Modules\ApiModule\Model\Logger\ApiLogger
+    bearerTokenAuthorization: Tomaj\NetteApi\Authorization\BearerTokenAuthorization(@userTokenRepository)
+    apiDecider:
+        factory: Tomaj\NetteApi\ApiDecider
+        setup:
+          - addApi(\Tomaj\NetteApi\EndpointIdentifier('GET', 1, 'dungeon-escape', 'player'), App\Modules\ApiModule\v1\Handlers\DungeonEscape\PlayerInfoHandler(), @bearerTokenAuthorization)
+          - addApi(Tomaj\NetteApi\EndpointIdentifier('POST', 1, 'users', 'connect-minecraft'), App\Modules\ApiModule\v1\Handlers\Users\UserConnectMinecraftHandler(), @bearerTokenAuthorization)

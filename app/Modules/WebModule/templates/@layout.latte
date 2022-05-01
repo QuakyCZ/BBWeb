@@ -23,8 +23,7 @@
 
 
 
-    <script src="{$basePath}/webpack/scriptsWebVendor.bundle.js"></script>
-    <script src="{$basePath}/webpack/scriptsWeb.bundle.js"></script>
+
 
     {block styles}
     {/block}
@@ -96,8 +95,9 @@
         document.getElementById(id).style.display = 'none';
     }
 </script>
+<script src="{$basePath}/webpack/scriptsWebVendor.bundle.js"></script>
+<script src="{$basePath}/webpack/scriptsWeb.bundle.js"></script>
 {block scripts}{/block}
-<script src="https://nette.github.io/resources/js/3/netteForms.min.js"></script>
 <script src="{$basePath}/js/cookies.js"></script>
 </body>
 </html>

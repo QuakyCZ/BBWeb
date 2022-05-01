@@ -2,10 +2,9 @@
 
 namespace App\Repository\Primary;
 
-use App\Repository\BaseRepository;
 use Nette\Database\Table\ActiveRow;
 
-class SettingsRepository extends BaseRepository
+class SettingsRepository extends PrimaryRepository
 {
     public const TABLE_NAME = 'settings';
 

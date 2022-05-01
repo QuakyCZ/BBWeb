@@ -2,11 +2,10 @@
 
 namespace App\Repository\Primary;
 
-use App\Repository\BaseRepository;
 use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
 
-class UserRepository extends BaseRepository
+class UserRepository extends PrimaryRepository
 {
     public const TABLE_NAME = "user";
     protected string $tableName = self::TABLE_NAME;

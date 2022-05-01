@@ -1,0 +1,32 @@
+{varType Contributte\MenuControl\IMenu $menu}
+{varType Contributte\MenuControl\IMenuItemsContainer $itemsParent}
+{varType Contributte\MenuControl\IMenuItem $item}
+{varType bool $isRoot}
+{define menu-branch, $itemsParent, $isRoot}
+    {if $itemsParent->hasVisibleItemsOnMenu()}
+        <ul class="list-unstyled {$isRoot === false ? 'pl-4': 'ps-0'}">
+            {foreach $itemsParent->getVisibleItemsOnMenu() as $item}
+                <li n:if="$item->isAllowed()">
+                    {if !empty($item->getVisibleItemsOnMenu())}
+                        <button class="btn btn-dark align-items-center collapsed"
+                                data-toggle="collapse"
+                                data-target="#{$item->getData('sublistId')}-collapse"
+                                aria-expanded="{$item->findActiveItem() !== null ? 'true' : 'false'}"
+                                aria-controls="{$item->getData('sublistId')}-collapse"
+                        >
+                            <i n:class="$item->getData('icon')"></i> {$item->getRealTitle()}
+                        </button>
+                        <div id="{$item->getData('sublistId')}-collapse" class="collapse {$item->findActiveItem() !== null ? 'show' : ''}">
+                            {include menu-branch, $item, false}
+                        </div>
+                    {else}
+                        <a href="{$item->getRealLink()}" class="btn btn-dark {$item->isActive() ? active}"><i n:class="$item->getData('icon')"></i> {$item->getRealTitle()}</a>
+                    {/if}
+                </li>
+            {/foreach}
+        </ul>
+    {/if}
+{/define}
+<div class="flex-shrink-0 p-3 bg-dark">
+    {include menu-branch, $menu, true}
+</div>

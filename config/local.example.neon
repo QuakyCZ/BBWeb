@@ -6,6 +6,11 @@ database:
         dsn: 'mysql:host=127.0.0.1;dbname=bbweb'
         user: bbweb
         password: 'bbweb'
+    dungeonEscape:
+        dsn: 'mysql:host=127.0.0.1;dbname=roguelike'
+        user: 'root'
+        password: ''
+        autowired: false
 
 recaptcha:
     siteKey: ''

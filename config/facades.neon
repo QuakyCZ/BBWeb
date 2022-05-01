@@ -1,2 +1,6 @@
 services:
     - App\Facade\MailFacade
+    - App\Modules\ApiModule\Model\Player\PlayerFacade
+    - App\Modules\ApiModule\Model\PlayerStatistics\PlayerStatisticsFacade
+    - App\Modules\ApiModule\Model\User\UserFacade
+    - App\Modules\ApiModule\Model\User\UserConnectTokenFacade

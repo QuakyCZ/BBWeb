@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c22e440ff5f6ec964e51dfa8e10ae824",
+    "content-hash": "1f1b560d9fdb22f965c20e22f427040a",
     "packages": [
         {
             "name": "contributte/application",
@@ -373,6 +373,127 @@
             "time": "2022-02-13T19:28:40+00:00"
         },
         {
+            "name": "gladcodes/keygen",
+            "version": "1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gladchinda/keygen-php.git",
+                "reference": "8806d4440edd37a5545802a82202098b01bbafb9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gladchinda/keygen-php/zipball/8806d4440edd37a5545802a82202098b01bbafb9",
+                "reference": "8806d4440edd37a5545802a82202098b01bbafb9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Keygen\\": "src/Keygen"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Glad Chinda",
+                    "email": "gladxeqs@gmail.com"
+                }
+            ],
+            "description": "A fluent PHP random key generator.",
+            "keywords": [
+                "generator",
+                "key",
+                "key generator",
+                "keygen",
+                "php",
+                "random"
+            ],
+            "support": {
+                "issues": "https://github.com/gladchinda/keygen-php/issues",
+                "source": "https://github.com/gladchinda/keygen-php/tree/master"
+            },
+            "time": "2018-07-15T23:24:35+00:00"
+        },
+        {
+            "name": "justinrainbow/json-schema",
+            "version": "5.2.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/justinrainbow/json-schema.git",
+                "reference": "ad87d5a5ca981228e0e205c2bc7dfb8e24559b60"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/ad87d5a5ca981228e0e205c2bc7dfb8e24559b60",
+                "reference": "ad87d5a5ca981228e0e205c2bc7dfb8e24559b60",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "~2.2.20||~2.15.1",
+                "json-schema/json-schema-test-suite": "1.2.0",
+                "phpunit/phpunit": "^4.8.35"
+            },
+            "bin": [
+                "bin/validate-json"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JsonSchema\\": "src/JsonSchema/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bruno Prieto Reis",
+                    "email": "bruno.p.reis@gmail.com"
+                },
+                {
+                    "name": "Justin Rainbow",
+                    "email": "justin.rainbow@gmail.com"
+                },
+                {
+                    "name": "Igor Wiedler",
+                    "email": "igor@wiedler.ch"
+                },
+                {
+                    "name": "Robert Schönthal",
+                    "email": "seroscho@googlemail.com"
+                }
+            ],
+            "description": "A library to validate a json schema.",
+            "homepage": "https://github.com/justinrainbow/json-schema",
+            "keywords": [
+                "json",
+                "schema"
+            ],
+            "support": {
+                "issues": "https://github.com/justinrainbow/json-schema/issues",
+                "source": "https://github.com/justinrainbow/json-schema/tree/5.2.12"
+            },
+            "time": "2022-04-13T08:02:27+00:00"
+        },
+        {
             "name": "latte/latte",
             "version": "v2.11.2",
             "source": {
@@ -455,6 +576,74 @@
                 "source": "https://github.com/nette/latte/tree/v2.11.2"
             },
             "time": "2022-04-20T00:12:51+00:00"
+        },
+        {
+            "name": "league/fractal",
+            "version": "0.17.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/fractal.git",
+                "reference": "a0b350824f22fc2fdde2500ce9d6851a3f275b0e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/fractal/zipball/a0b350824f22fc2fdde2500ce9d6851a3f275b0e",
+                "reference": "a0b350824f22fc2fdde2500ce9d6851a3f275b0e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "doctrine/orm": "^2.5",
+                "illuminate/contracts": "~5.0",
+                "mockery/mockery": "~0.9",
+                "pagerfanta/pagerfanta": "~1.0.0",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~1.5",
+                "zendframework/zend-paginator": "~2.3"
+            },
+            "suggest": {
+                "illuminate/pagination": "The Illuminate Pagination component.",
+                "pagerfanta/pagerfanta": "Pagerfanta Paginator",
+                "zendframework/zend-paginator": "Zend Framework Paginator"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.13-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\Fractal\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Phil Sturgeon",
+                    "email": "me@philsturgeon.uk",
+                    "homepage": "http://philsturgeon.uk/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Handle the output of complex data structures ready for API output.",
+            "homepage": "http://fractal.thephpleague.com/",
+            "keywords": [
+                "api",
+                "json",
+                "league",
+                "rest"
+            ],
+            "support": {
+                "issues": "https://github.com/thephpleague/fractal/issues",
+                "source": "https://github.com/thephpleague/fractal/tree/master"
+            },
+            "time": "2017-06-12T11:04:56+00:00"
         },
         {
             "name": "myclabs/php-enum",
@@ -2877,6 +3066,119 @@
                 }
             ],
             "time": "2022-01-02T09:53:40+00:00"
+        },
+        {
+            "name": "tomaj/nette-api",
+            "version": "2.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tomaj/nette-api.git",
+                "reference": "729f217c72e6fef1ed7ffe8cb782269f6d2f1b49"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tomaj/nette-api/zipball/729f217c72e6fef1ed7ffe8cb782269f6d2f1b49",
+                "reference": "729f217c72e6fef1ed7ffe8cb782269f6d2f1b49",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-filter": "*",
+                "ext-json": "*",
+                "ext-session": "*",
+                "justinrainbow/json-schema": "^5.2",
+                "league/fractal": "^0.17.0",
+                "nette/application": "^3.0",
+                "nette/http": "^3.0",
+                "php": ">= 7.1.0",
+                "tomaj/nette-bootstrap-form": "^2.0",
+                "tracy/tracy": "^2.6"
+            },
+            "replace": {
+                "phpspec/prophecy": "*"
+            },
+            "require-dev": {
+                "latte/latte": "^2.4",
+                "nette/di": "^3.0",
+                "phpunit/phpunit": ">7.0",
+                "squizlabs/php_codesniffer": "^3.2",
+                "symfony/yaml": "^4.4|5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tomaj\\NetteApi\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tomas Majer",
+                    "email": "tomasmajer@gmail.com",
+                    "homepage": "http://www.tomaj.sk/"
+                }
+            ],
+            "description": "Nette api",
+            "keywords": [
+                "api",
+                "nette"
+            ],
+            "support": {
+                "issues": "https://github.com/tomaj/nette-api/issues",
+                "source": "https://github.com/tomaj/nette-api/tree/2.7.0"
+            },
+            "time": "2022-04-07T04:15:16+00:00"
+        },
+        {
+            "name": "tomaj/nette-bootstrap-form",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tomaj/nette-bootstrap-form.git",
+                "reference": "c4aeee158ede5c64cf2dab588ee181135b8b2e92"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tomaj/nette-bootstrap-form/zipball/c4aeee158ede5c64cf2dab588ee181135b8b2e92",
+                "reference": "c4aeee158ede5c64cf2dab588ee181135b8b2e92",
+                "shasum": ""
+            },
+            "require": {
+                "nette/forms": "^3.0",
+                "php": ">= 7.1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Tomas Majer",
+                    "email": "tomasmajer@gmail.com",
+                    "homepage": "http://www.tomaj.sk/"
+                }
+            ],
+            "description": "Nette bootstrap form renderer",
+            "keywords": [
+                "bootstrap",
+                "form",
+                "nette",
+                "renderer"
+            ],
+            "support": {
+                "issues": "https://github.com/tomaj/nette-bootstrap-form/issues",
+                "source": "https://github.com/tomaj/nette-bootstrap-form/tree/2.0.1"
+            },
+            "time": "2022-01-11T10:41:18+00:00"
         },
         {
             "name": "tracy/tracy",

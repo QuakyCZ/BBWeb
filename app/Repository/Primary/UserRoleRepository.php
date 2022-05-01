@@ -2,14 +2,13 @@
 
 namespace App\Repository\Primary;
 
-use App\Repository\BaseRepository;
 use Nette\Database\ResultSet;
 use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
 
-class UserRoleRepository extends BaseRepository {
+class UserRoleRepository extends PrimaryRepository {
 
-    const TABLE_NAME = "user_role";
+    public const TABLE_NAME = "user_role";
 
     public const COLUMN_ID = 'id';
     public const COLUMN_USER_ID = 'user_id';

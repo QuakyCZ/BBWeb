@@ -3,6 +3,15 @@ parameters:
         USER:
             - Admin:Default
             - Admin:Sign
+            - Client:Dashboard
+            - Client:Connections
+            - Client:DungeonEscape
         ADMIN:
             - Admin:Settings
             - Admin:Servers
+        LEADER: []
+        HELPER: []
+        BUILDER: []
+        SERVER_ADMIN: []
+        DEVELOPER: []
+        TESTER: []

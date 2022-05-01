@@ -11,7 +11,7 @@ use Latte\PhpWriter;
 use Nette\Application\UI\Presenter;
 use Nette\Security\AuthenticationException;
 
-class BasePresenter extends Presenter
+abstract class BasePresenter extends Presenter
 {
 
     private IMenuComponentFactory $menuComponentFactory;
