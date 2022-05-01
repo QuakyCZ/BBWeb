@@ -62,6 +62,8 @@ class UserConnectMinecraftHandler extends \Tomaj\NetteApi\Handlers\BaseHandler
             ]);
         }
 
+        $uuid = str_replace('-', '', $uuid);
+
         if (!ctype_xdigit($uuid) || strlen($uuid) % 2 !== 0)
         {
             return new JsonApiResponse(400, [
@@ -72,7 +74,7 @@ class UserConnectMinecraftHandler extends \Tomaj\NetteApi\Handlers\BaseHandler
 
         if ($this->userFacade->isConnectedToMinecraft($uuid))
         {
-            return new JsonApiResponse(400, [
+            return new JsonApiResponse(200, [
                 'status' => 'error',
                 'message' => 'Tento účet je již spárován.'
             ]);

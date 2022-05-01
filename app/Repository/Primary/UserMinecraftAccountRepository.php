@@ -32,7 +32,7 @@ class UserMinecraftAccountRepository extends PrimaryRepository
     public function getAccountByUUID(string $uuid): ?ActiveRow
     {
         return $this->findBy([
-            self::COLUMN_UUID => $uuid
+            self::COLUMN_UUID => hex2bin($uuid)
         ])->fetch();
     }
 }
