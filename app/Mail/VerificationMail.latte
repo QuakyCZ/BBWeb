@@ -1,0 +1,18 @@
+{layout '@layout.latte'}
+
+{varType string $verificationUrl}
+
+{block content}
+    <h1>Ověření emailu</h1>
+    <p>
+        Vážený hráči,
+        <br>
+        děkujeme za registraci na webu projektu BeastBlock.cz. Abychom věděli, že jste to opravdu vy, kdo se registroval,
+        ověřte svůj email pomocí následujícího odkazu: <a href="{$verificationUrl}">Ověřit</a>.
+    </p>
+    <p>
+        S pozdravem
+        <br>
+        Tým BeastBlock.cz
+    </p>
+{/block}

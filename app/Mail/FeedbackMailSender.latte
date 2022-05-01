@@ -1,61 +1,23 @@
+{layout '@layout.latte'}
 {varType int $feedbackId}
 {varType string $nick}
 {varType string $email}
 {varType string $server}
 {varType string $description}
-<html>
-<head>
-    <style>
-        h1 {
-            color: orange;
-        }
-
-        h2 {
-            color: #fdce76;
-        }
-
-        .container {
-            display: block;
-            width: 100%;
-            background-color: #161a1d;
-            color: darkgray !important;
-            padding: 15px;
-            border-radius: 10px;
-        }
-
-        hr {
-            background-color: gray;
-            color: gray;
-            border: none;
-            height: 3px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div>
-            {* První řádka v Outlooku *}
-            <div style="display: none">Zpětná vazba #{$feedbackId}</div>
-            <a href="https://beastblock.cz" target="_blank">
-                <img src="https://beastblock.cz/img/logo.png" alt="logo" height="100px" style="height: 100px;">
-            </a>
-        </div>
-        <hr>
-        <h1>Děkujeme za zpětnou vazbu!</h1>
-        <p>
-            Právě jsme od Vás obdrželi zpětnou vazbu. Pokud se jedná o vylepšení nebo chybu, budeme reagovat co nejdříve. Děkujeme!
-        </p>
-        <h2>Přepis formuláře</h2>
-        <ul>
-            <li><strong>Id:</strong> {$feedbackId}</li>
-            <li><strong>Nick:</strong> {$nick}</li>
-            <li><strong>Email:</strong> {$email}</li>
-            <li><strong>Server:</strong> {$server}</li>
-            <li><strong>Popis:</strong> {$description}</li>
-        </ul>
-        <hr>
-        <p>Toto je automatická zpráva. Neodpovídejte na ni.</p>
-        <p>BeastBlock.cz ©2022 Všechna práva vyhrazena. NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG.</p>
-    </div>
-</body>
-</html>
+{block content}
+    <h1>Děkujeme za zpětnou vazbu!</h1>
+    <p>
+        Právě jsme od Vás obdrželi zpětnou vazbu. Pokud se jedná o vylepšení nebo chybu, budeme reagovat co nejdříve. Děkujeme!
+    </p>
+    <h2>Přepis formuláře</h2>
+    <ul>
+        <li><strong>Id:</strong> {$feedbackId}</li>
+        <li><strong>Nick:</strong> {$nick}</li>
+        <li><strong>Email:</strong> {$email}</li>
+        <li><strong>Server:</strong> {$server}</li>
+        <li><strong>Popis:</strong> {$description}</li>
+    </ul>
+    <hr>
+    <p>Toto je automatická zpráva. Neodpovídejte na ni.</p>
+    <p>BeastBlock.cz ©2022 Všechna práva vyhrazena. NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG.</p>
+{/block}

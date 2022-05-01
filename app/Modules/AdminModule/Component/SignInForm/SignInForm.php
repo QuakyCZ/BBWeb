@@ -24,8 +24,12 @@ class SignInForm extends BaseComponent
         $form = new Form();
         $form->addHidden('returnKey')
             ->setDefaultValue($this->returnKey);
-        $form->addEmail('email', 'Email')->setRequired('%label je povinný údaj');
-        $form->addPassword('password', 'Heslo')->setRequired('%label je povinný údaj');
+        $form->addEmail('email', 'Email')
+            ->setHtmlAttribute('placeholder', 'Email')
+            ->setRequired('%label je povinný údaj');
+        $form->addPassword('password', 'Heslo')
+            ->setHtmlAttribute('placeholder', 'Heslo')
+            ->setRequired('%label je povinný údaj');
         $form->addSubmit('submit', 'Přihlásit se');
         $form->addProtection();
         $form->onSuccess[] = [$this, 'onFormSuccess'];

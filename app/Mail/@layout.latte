@@ -1,0 +1,43 @@
+{varType string $subject}
+{varType string $email}
+<html>
+<head>
+    <style>
+        h1 {
+            color: orange;
+        }
+
+        h2 {
+            color: #fdce76;
+        }
+
+        .container {
+            display: block;
+            width: 100%;
+            background-color: #161a1d;
+            color: darkgray !important;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        hr {
+            background-color: gray;
+            color: gray;
+            border: none;
+            height: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            {* První řádka v Outlooku *}
+            <div style="display: none">{$subject}</div>
+            <a href="https://www.beastblock.cz" target="_blank">
+                <img src="https://www.beastblock.cz/img/logo.png" alt="logo" height="100px" style="height: 100px;">
+            </a>
+        </div>
+        {block content}{/block}
+    </div>
+</body>
+</html>

@@ -3,19 +3,27 @@
 namespace App\Modules\ApiModule\Model\User;
 
 use App\Enum\EConnectTokenType;
+use App\Facade\MailFacade;
 use App\Repository\Primary\UserConnectTokenRepository;
 use App\Repository\Primary\UserDetailsRepository;
 use App\Repository\Primary\UserMinecraftAccountRepository;
 use App\Repository\Primary\UserRepository;
 use DateInterval;
+use Keygen\Generator;
 use Keygen\Keygen;
 use Nette\Application\BadRequestException;
+use Nette\Application\LinkGenerator;
+use Nette\Application\UI\InvalidLinkException;
+use Nette\Database\Table\ActiveRow;
+use Nette\Mail\Mailer;
 use Nette\NotImplementedException;
 use Nette\Security\Passwords;
+use Nette\Utils\ArrayHash;
 use Nette\Utils\DateTime;
 use Nette\Utils\Json;
 use Nette\Utils\JsonException;
 use Throwable;
+use Tracy\Debugger;
 
 class UserFacade
 {
@@ -25,6 +33,9 @@ class UserFacade
         private UserMinecraftAccountRepository $minecraftAccountRepository,
         private UserConnectTokenRepository $connectTokenRepository,
         private UserConnectTokenMapper $userConnectTokenMapper,
+        private MailFacade $mailFacade,
+        private Passwords $passwords,
+        private LinkGenerator $linkGenerator
     )
     {
     }
@@ -115,5 +126,76 @@ class UserFacade
                         UserMinecraftAccountRepository::COLUMN_NOT_DELETED => null
                     ]);
         }
+    }
+
+    /**
+     * @param ArrayHash $values
+     * @throws \PDOException|\Exception|Throwable
+     * @return ?ActiveRow
+     */
+    public function register(ArrayHash $values): mixed
+    {
+        $verificationToken = Keygen::alphanum(30)->generate();
+
+        return $this->userRepository->runInTransaction(function () use ($values, $verificationToken) {
+
+            $row = $this->userRepository->save([
+                UserRepository::COLUMN_USERNAME => $values[UserRepository::COLUMN_USERNAME],
+                UserRepository::COLUMN_EMAIL => $values[UserRepository::COLUMN_EMAIL],
+                UserRepository::COLUMN_PASSWORD => $this->passwords->hash($values[UserRepository::COLUMN_PASSWORD]),
+                UserRepository::COLUMN_VERIFICATION_TOKEN => $verificationToken
+            ]);
+
+            $this->sendVerificationEmail($values[UserRepository::COLUMN_EMAIL], $row[UserRepository::COLUMN_ID], $verificationToken);
+
+            return $row;
+        });
+    }
+
+    /**
+     * @param string $email
+     * @param string $userId
+     * @param string $token
+     * @return void
+     * @throws InvalidLinkException
+     */
+    public function sendVerificationEmail(string $email, string $userId, string $token): void
+    {
+        $link = $this->linkGenerator->link('Client:Sign:verify', [
+            'userId' => $userId,
+            'token' => $token,
+        ]);
+
+        $this->mailFacade->sendMail($email, 'Ověření emailu', __DIR__.'/../../../../Mail/VerificationMail.latte', [
+            'verificationUrl' => $link
+        ]);
+    }
+
+    /**
+     * @param string $email
+     * @return ActiveRow|null
+     */
+    public function getByEmail(string $email): ?ActiveRow
+    {
+        return $this->userRepository->findByEmail($email);
+    }
+
+    /**
+     * @param string $username
+     * @return ActiveRow|null
+     */
+    public function getByUsername(string $username): ?ActiveRow
+    {
+        return $this->userRepository->findByUsername($username);
+    }
+
+    /**
+     * @param int $userId
+     * @param string $token
+     * @return ActiveRow|null
+     */
+    public function verifyUserToken(int $userId, string $token): ?ActiveRow
+    {
+        return $this->userRepository->verifyUser($userId, $token);
     }
 }

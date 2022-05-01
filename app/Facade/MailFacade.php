@@ -27,6 +27,9 @@ class MailFacade
      */
     public function sendMail(string $email, string $subject, string $lattePath, array $params):void
     {
+        $params['email'] = $email;
+        $params['subject'] = $subject;
+
         $latte = new Engine();
         $body = $latte->renderToString($lattePath, $params);
         $message = new Message();

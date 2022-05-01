@@ -4,6 +4,7 @@ services:
     - App\Modules\AdminModule\Component\User\IUserGridFactory
     - App\Modules\AdminModule\Component\ServerListing\IServerListingFactory
     - App\Modules\AdminModule\Component\SignInForm\ISignInFormFactory
+    - App\Modules\AdminModule\Component\SignUpForm\ISignUpFormFactory
     - App\Modules\AdminModule\Component\Settings\ISettingsFormFactory
     - App\Modules\AdminModule\Component\Settings\ISettingsGridFactory
     - App\Modules\WebModule\Component\Feedback\FeedbackFormFactory

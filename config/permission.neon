@@ -1,12 +1,11 @@
 parameters:
     permission:
         USER:
-            - Admin:Default
-            - Admin:Sign
             - Client:Dashboard
             - Client:Connections
             - Client:DungeonEscape
         ADMIN:
+            - Admin:Default
             - Admin:Settings
             - Admin:Servers
         LEADER: []
