@@ -34,6 +34,11 @@ class SignUpForm extends \App\Component\BaseComponent
 
         $password = $form->addPassword('password', 'Heslo')
             ->setHtmlAttribute('placeholder', 'Heslo')
+            ->addRule($form::MIN_LENGTH, 'Minimální délka hesla je 8 znaků.', 8)
+            ->addRule(function (BaseControl $input) {
+                $value = $input->getValue();
+                return preg_match('/[A-Za-z]/', $value) && preg_match('/\d/', $value);
+            }, 'Heslo musí obsahovat alespoň jedno písmeno a alespoň jednu číslici.')
             ->setRequired('%label je povinný údaj.');
 
         $form->addPassword('passwordCheck', 'Kontrola hesla')

@@ -71,8 +71,9 @@ class SignPresenter extends ClientPresenter
             if ($verifiedUser === null)
             {
                 $this->flashMessage('Neplatný token.', 'warning');
-                $this->redirect('Sign:in');
             }
+            $this->flashMessage('Email byl ověřen.', 'success');
+            $this->redirect('Sign:in');
         } catch (AbortException $exception) {
             throw $exception;
         }

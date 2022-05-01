@@ -59,7 +59,7 @@ class Authenticator implements \Nette\Security\Authenticator
                 'name' => $user->username,
                 'email' => $user->email,
                 'registrationDate' => $user->created,
-                'details' => $detailsRow->fetch()->toArray()
+                'details' => $detailsRow->fetch()?->toArray()
                 ]
         );
     }

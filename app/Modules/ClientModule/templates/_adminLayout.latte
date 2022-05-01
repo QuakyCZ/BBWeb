@@ -9,7 +9,7 @@
             <div class="collapse navbar-collapse" id="navbarNav" style="justify-content: right;">
                 {if $user->isLoggedIn()}
                     <a n:href="Sign:out" class="nav-link text-light">Odhlásit se</a>
-                    <img alt="{$user->identity->details['minecraft_nick']}" src="https://minotar.net/avatar/{$user->identity->details['minecraft_nick']}/250"
+                    <img alt="{$user->identity->details['minecraft_nick'] ?? 'player'}" src="https://minotar.net/avatar/{$user->identity->details['minecraft_nick'] ?? 'player'}/250"
                          class="skin"
                          style="width: 50px;">
                 {else}

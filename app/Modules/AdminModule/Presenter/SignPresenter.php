@@ -75,12 +75,12 @@ class SignPresenter extends BasePresenter
             if ($verifiedUser === null)
             {
                 $this->flashMessage('Neplatný token.', 'warning');
-                $this->redirect('Sign:in');
             }
+            $this->flashMessage('Ověření proběhlo úspěšně', 'success');
+            $this->redirect('Sign:in');
         } catch (AbortException $exception) {
             throw $exception;
-        }
-        catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             Debugger::log($exception, 'exception');
             $this->flashMessage('Nastala chyba.', 'warning');
             $this->redirect('Sign:in');

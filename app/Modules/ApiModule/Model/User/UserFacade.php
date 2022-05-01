@@ -8,6 +8,7 @@ use App\Repository\Primary\UserConnectTokenRepository;
 use App\Repository\Primary\UserDetailsRepository;
 use App\Repository\Primary\UserMinecraftAccountRepository;
 use App\Repository\Primary\UserRepository;
+use App\Repository\Primary\UserRoleRepository;
 use DateInterval;
 use Keygen\Generator;
 use Keygen\Keygen;
@@ -30,6 +31,7 @@ class UserFacade
     public function __construct
     (
         private UserRepository $userRepository,
+        private UserRoleRepository $userRoleRepository,
         private UserMinecraftAccountRepository $minecraftAccountRepository,
         private UserConnectTokenRepository $connectTokenRepository,
         private UserConnectTokenMapper $userConnectTokenMapper,
@@ -146,7 +148,14 @@ class UserFacade
                 UserRepository::COLUMN_VERIFICATION_TOKEN => $verificationToken
             ]);
 
-            $this->sendVerificationEmail($values[UserRepository::COLUMN_EMAIL], $row[UserRepository::COLUMN_ID], $verificationToken);
+            $userId = $row[UserRepository::COLUMN_ID];
+
+            $this->userRoleRepository->save([
+                UserRoleRepository::COLUMN_USER_ID => $userId,
+                UserRoleRepository::COLUMN_ROLE_ID => 9 // User
+            ]);
+
+            $this->sendVerificationEmail($values[UserRepository::COLUMN_EMAIL], $userId, $verificationToken);
 
             return $row;
         });

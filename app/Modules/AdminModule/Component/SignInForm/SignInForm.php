@@ -7,6 +7,7 @@ use Nette\Application\AbortException;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
 use Nette\Security\AuthenticationException;
+use Tracy\Debugger;
 
 class SignInForm extends BaseComponent
 {
@@ -45,8 +46,12 @@ class SignInForm extends BaseComponent
         try
         {
             $this->presenter->user->login($values['email'], $values['password']);
+            $this->presenter->flashMessage('Přihlášení proběhlo úspěšně');
         } catch (AuthenticationException $e) {
             $form->addError($e->getMessage());
+        } catch (\Exception $exception) {
+            Debugger::log($exception, 'login');
+            $form->addError('Nastala neznámá chyba.');
         }
         finally
         {
