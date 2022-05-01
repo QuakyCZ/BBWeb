@@ -17,6 +17,24 @@ class SignPresenter extends ClientPresenter
     }
 
     /**
+     * @return void
+     * @throws AbortException
+     */
+    public function actionIn(): void
+    {
+        if ($this->getUser()->isLoggedIn())
+        {
+            $returnKey = $this->getParameter('returnKey');
+            if ($returnKey !== null)
+            {
+                $this->restoreRequest($returnKey);
+            }
+            $this->redirect('Dashboard:');
+        }
+    }
+
+
+    /**
      * @throws AbortException
      */
     public function actionOut(): void

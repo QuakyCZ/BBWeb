@@ -22,6 +22,8 @@ class SignInForm extends BaseComponent
     public function createComponentForm(): Form
     {
         $form = new Form();
+        $form->addHidden('returnKey')
+            ->setDefaultValue($this->returnKey);
         $form->addEmail('email', 'Email')->setRequired('%label je povinný údaj');
         $form->addPassword('password', 'Heslo')->setRequired('%label je povinný údaj');
         $form->addSubmit('submit', 'Přihlásit se');
@@ -39,15 +41,18 @@ class SignInForm extends BaseComponent
         try
         {
             $this->presenter->user->login($values['email'], $values['password']);
-
-            if ($this->returnKey !== null)
+        } catch (AuthenticationException $e) {
+            $form->addError($e->getMessage());
+        }
+        finally
+        {
+            $returnKey = $values['returnKey'] ?? null;
+            if ($returnKey !== null)
             {
-                $this->presenter->restoreRequest($this->returnKey);
+                $this->presenter->restoreRequest($returnKey);
             }
 
             $this->presenter->redirect($this->defaultRoute);
-        } catch (AuthenticationException $e) {
-            $form->addError($e->getMessage());
         }
     }
 }

@@ -1,4 +1,5 @@
 {form form class => "form-horizontal form-normal", role => "form"}
+    {input returnKey}
     <div class="errors" n:if="$form->hasErrors()">
         <div n:foreach="$form->errors as $error" class="alert alert-danger error" role="alert">
             <div class="flash-message-body">{$error}</div>
