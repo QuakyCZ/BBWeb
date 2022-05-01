@@ -3,6 +3,7 @@
 namespace App\Modules\ClientModule\Presenter;
 
 use App\Modules\ApiModule\Model\User\UserFacade;
+use App\Repository\Primary\UserMinecraftAccountRepository;
 use App\Repository\Primary\UserRepository;
 use Contributte\MenuControl\UI\IMenuComponentFactory;
 use Contributte\MenuControl\UI\MenuComponent;
@@ -17,21 +18,25 @@ abstract class ClientPresenter extends Presenter
 
     private IMenuComponentFactory $menuComponentFactory;
     private UserRepository $userRepository;
+    private UserMinecraftAccountRepository $userMinecraftAccountRepository;
 
     protected $presenterNamesWithPublicAccess = ['Sign', 'Error', 'Error4xx', 'Client:Sign', 'Client:Error', 'Client:Error4xx'];
 
     /**
      * @param IMenuComponentFactory $menuComponentFactory
      * @param UserRepository $userRepository
+     * @param UserMinecraftAccountRepository $userMinecraftAccountRepository
      * @return void
      */
     public function injectBasePresenter (
         IMenuComponentFactory $menuComponentFactory,
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        UserMinecraftAccountRepository $userMinecraftAccountRepository
     ): void
     {
         $this->menuComponentFactory = $menuComponentFactory;
         $this->userRepository = $userRepository;
+        $this->userMinecraftAccountRepository = $userMinecraftAccountRepository;
     }
 
     /**
@@ -76,6 +81,17 @@ abstract class ClientPresenter extends Presenter
         }
 
         parent::startup();
+    }
+
+    protected function beforeRender()
+    {
+        if ($this->getUser()->isLoggedIn())
+        {
+            $minecraft = $this->userMinecraftAccountRepository->getAccountByUserId($this->getUser()->getId());
+            $this->template->minecraftNick = $minecraft !== null ? $minecraft[UserMinecraftAccountRepository::COLUMN_NICK] : $this->getUser()->getIdentity()->getData()['name'];
+        }
+
+        parent::beforeRender();
     }
 
     protected function createComponentMenu(): MenuComponent
