@@ -5,6 +5,7 @@ namespace App\Modules\ClientModule\Presenter;
 use App\Modules\ApiModule\Model\Player\PlayerFacade;
 use App\Modules\ApiModule\Model\PlayerStatistics\PlayerStatisticsFacade;
 use App\Modules\ApiModule\Model\User\UserFacade;
+use Nette\InvalidStateException;
 
 class DungeonEscapePresenter extends ClientPresenter
 {
@@ -32,7 +33,12 @@ class DungeonEscapePresenter extends ClientPresenter
 
         if ($minecraftConnected)
         {
-            $this->template->statistics = $this->playerStatisticsFacade->getPlayerStatistics($player->getId());
+            $statistics = $this->playerStatisticsFacade->getPlayerStatistics($player->getId());
+            if ($statistics === null)
+            {
+                throw new InvalidStateException();
+            }
+            $this->template->statistics = $statistics;
         }
     }
 }
