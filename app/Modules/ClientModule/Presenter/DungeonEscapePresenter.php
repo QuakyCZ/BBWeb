@@ -33,7 +33,7 @@ class DungeonEscapePresenter extends ClientPresenter
 
         if ($minecraftConnected)
         {
-            $statistics = $this->playerStatisticsFacade->getPlayerStatistics($player->getId());
+            $statistics = $this->playerStatisticsFacade->getPlayerStatistics($player->getStatisticsId());
             if ($statistics === null)
             {
                 throw new InvalidStateException();

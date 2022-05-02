@@ -4,6 +4,10 @@ namespace App\Modules\ApiModule\Model\PlayerStatistics;
 
 class PlayerStatisticsFacade
 {
+    /**
+     * @param PlayerStatisticsMapper $playerStatisticsMapper
+     * @param PlayerStatisticsRepository $playerStatisticsRepository
+     */
     public function __construct
     (
         private PlayerStatisticsMapper $playerStatisticsMapper,
@@ -12,6 +16,10 @@ class PlayerStatisticsFacade
     {
     }
 
+    /**
+     * @param int $statisticsId
+     * @return PlayerStatistics|null
+     */
     public function getPlayerStatistics(int $statisticsId): ?PlayerStatistics
     {
         $row = $this->playerStatisticsRepository->getById($statisticsId);

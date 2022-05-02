@@ -16,7 +16,7 @@ class PlayerStatisticsRepository extends DungeonEscapeRepository
     public function getById(int $id): ?ActiveRow
     {
         return $this->findBy([
-            self::COLUMN_ID => 1
+            self::COLUMN_ID => $id
         ])->fetch();
     }
 }
