@@ -38,7 +38,7 @@ Player UUID
 ```
 {% endswagger-response %}
 
-{% swagger-response status="404: Not Found" description="" %}
+{% swagger-response status="404: Not Found" description="Player was not found" %}
 ```javascript
 {
     "status": "error",
@@ -50,7 +50,7 @@ Player UUID
 
 ## Get statistics
 
-{% swagger method="get" path="/statistics" baseUrl="https://beastblock.cz/api/v1/dungeon-escape/" summary="Get statistics by ID" %}
+{% swagger method="get" path="/statistics/<id>" baseUrl="https://beastblock.cz/api/v1/dungeon-escape" summary="Statistiky podle ID (WIP)" %}
 {% swagger-description %}
 You can obtain statistics ID from #GetPlayer method
 {% endswagger-description %}
@@ -62,7 +62,8 @@ Statistics ID
 {% swagger-response status="200: OK" description="Statistics were found" %}
 ```javascript
 {
-  "player_statistics": {
+  "status": "ok",
+  "statistics": {
     "id": 1,
     "normalGamesPlayed": 11,
     "coopGamesPlayed": 0,
@@ -85,7 +86,8 @@ Statistics ID
 {% swagger-response status="400: Bad Request" description="If ID was not specified" %}
 ```javascript
 {
-  "error": "ID must be specified."
+  "status": "error"
+  "message": "ID must be specified."
 }
 ```
 {% endswagger-response %}
@@ -93,7 +95,8 @@ Statistics ID
 {% swagger-response status="404: Not Found" description="Statistics with provided ID were not found" %}
 ```javascript
 {
-    "error": "Statistics were not found."
+    "status": "error"
+    "message": "Statistics were not found."
 }
 ```
 {% endswagger-response %}
