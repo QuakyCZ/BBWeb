@@ -1,21 +1,21 @@
 # Dungeon Escape
 
-## Get player
+## Hráč
 
-{% swagger baseUrl="https://beastblock.cz/api/v1/dungeon-escape" method="get" path="/player" summary="Get player data" %}
+{% swagger baseUrl="https://beastblock.cz/api/v1/dungeon-escape" method="get" path="/player" summary="Hráč podle UUID nebo Nicku" %}
 {% swagger-description %}
 Sends basic data of a player. One of the parameters must be provided.
 {% endswagger-description %}
 
 {% swagger-parameter in="query" name="nick" %}
-Player nick
+Nick hráče
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="uuid" %}
-Player UUID
+UUID hráče
 {% endswagger-parameter %}
 
-{% swagger-response status="200" description="Player was found" %}
+{% swagger-response status="200" description="Hráč byl nalezen" %}
 ```javascript
 {
     "status": "ok",
@@ -29,7 +29,7 @@ Player UUID
 ```
 {% endswagger-response %}
 
-{% swagger-response status="400: Bad Request" description="name or uuid must be provided" %}
+{% swagger-response status="400: Bad Request" description="Nick nebo UUID musí být uvedeno" %}
 ```javascript
 {
     "status": "error",
@@ -38,7 +38,7 @@ Player UUID
 ```
 {% endswagger-response %}
 
-{% swagger-response status="404: Not Found" description="Player was not found" %}
+{% swagger-response status="404: Not Found" description="Hráč nebyl nalezen" %}
 ```javascript
 {
     "status": "error",
@@ -48,7 +48,7 @@ Player UUID
 {% endswagger-response %}
 {% endswagger %}
 
-## Get statistics
+## Statistiky
 
 {% swagger method="get" path="/statistics/<id>" baseUrl="https://beastblock.cz/api/v1/dungeon-escape" summary="Statistiky podle ID (WIP)" %}
 {% swagger-description %}
@@ -56,10 +56,10 @@ You can obtain statistics ID from #GetPlayer method
 {% endswagger-description %}
 
 {% swagger-parameter in="path" type="Int" required="true" %}
-Statistics ID
+ID statistik
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="Statistics were found" %}
+{% swagger-response status="200: OK" description="Statistiky byly nalezeny" %}
 ```javascript
 {
   "status": "ok",
@@ -83,7 +83,7 @@ Statistics ID
 ```
 {% endswagger-response %}
 
-{% swagger-response status="400: Bad Request" description="If ID was not specified" %}
+{% swagger-response status="400: Bad Request" description="ID nebylo specifikováno" %}
 ```javascript
 {
   "status": "error"
@@ -92,7 +92,7 @@ Statistics ID
 ```
 {% endswagger-response %}
 
-{% swagger-response status="404: Not Found" description="Statistics with provided ID were not found" %}
+{% swagger-response status="404: Not Found" description="Statistiky nebyly nalezeny" %}
 ```javascript
 {
     "status": "error"

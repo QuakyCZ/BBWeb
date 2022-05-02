@@ -1,7 +1,7 @@
 # Table of contents
 
 * [Vítejte](README.md)
-* [Start](start.md)
+* [Start](quick-start.md)
 
 ## Reference
 
