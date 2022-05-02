@@ -1,7 +1,7 @@
 # Table of contents
 
-* [Welcome!](README.md)
-* [Quick Start](quick-start.md)
+* [Vítejte](README.md)
+* [Start](start.md)
 
 ## Reference
 
