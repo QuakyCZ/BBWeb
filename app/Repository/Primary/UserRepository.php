@@ -100,11 +100,28 @@ class UserRepository extends PrimaryRepository
         return $user;
     }
 
+    /**
+     * @param int $userId
+     * @return bool
+     */
     public function isUserActive(int $userId): bool
     {
         return  $this->findBy([
             self::COLUMN_ID => $userId,
             self::COLUMN_ACTIVE => 1
         ])->fetch() !== null;
+    }
+
+    /**
+     * @param int $id
+     * @param bool $onlyActive
+     * @return ActiveRow|null
+     */
+    public function findById(int $id, bool $onlyActive = true): ?ActiveRow
+    {
+        return $this->findBy([
+            self::COLUMN_ID => $id,
+            self::COLUMN_ACTIVE => $onlyActive
+        ])->fetch();
     }
 }

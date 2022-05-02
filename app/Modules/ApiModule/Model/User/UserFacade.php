@@ -181,6 +181,16 @@ class UserFacade
     }
 
     /**
+     * @param int $id
+     * @return ActiveRow|null
+     */
+    public function getById(int $id): ?ActiveRow
+    {
+        // TODO return mapper Player object
+        return $this->userRepository->findById($id);
+    }
+
+    /**
      * @param string $email
      * @return ActiveRow|null
      */

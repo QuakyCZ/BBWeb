@@ -3,35 +3,85 @@
 namespace App\Modules\AdminModule\Component\User;
 
 use App\Component\BaseComponent;
+use App\Modules\ApiModule\Model\User\UserFacade;
 use App\Repository\Primary\RoleRepository;
 use App\Repository\Primary\UserDetailsRepository;
 use App\Repository\Primary\UserRepository;
 use App\Repository\Primary\UserRoleRepository;
 use Nette\Application\AbortException;
+use Nette\Application\BadRequestException;
 use Nette\Application\UI\Form;
 use Nette\Security\Passwords;
 use Nette\Utils\ArrayHash;
 
 class UserForm extends BaseComponent {
 
+    private ?int $id;
     private RoleRepository $roleRepository;
+    private UserFacade $userFacade;
     private UserRepository $userRepository;
     private UserRoleRepository $userRoleRepository;
     private UserDetailsRepository $userDetailsRepository;
     private Passwords $passwords;
 
     public function __construct(
+        ?int $id,
         RoleRepository $roleRepository,
+        UserFacade $userFacade,
         UserRepository $userRepository,
         UserRoleRepository $userRoleRepository,
         UserDetailsRepository $userDetailsRepository,
         Passwords $passwords
     ) {
+        $this->id = $id;
         $this->roleRepository = $roleRepository;
+        $this->userFacade = $userFacade;
         $this->userRepository = $userRepository;
         $this->userRoleRepository = $userRoleRepository;
         $this->userDetailsRepository = $userDetailsRepository;
         $this->passwords = $passwords;
+    }
+
+
+    /**
+     * @throws BadRequestException
+     */
+    public function render(): void
+    {
+
+        if ($this->id !== null)
+        {
+            $user = $this->userFacade->getById($this->id);
+            if ($user === null)
+            {
+                throw new BadRequestException('Uživatel nebyl nalezen.', 400);
+            }
+
+            $defaults = $user->toArray();
+
+            /** @var Form $form */
+            $form = $this['form'];
+
+            $roles = $this->userRoleRepository->getUsersRoles($this->id)->fetchPairs(UserRoleRepository::COLUMN_ROLE_ID, UserRoleRepository::COLUMN_ROLE_ID);
+
+            $defaults['role_ids'] = $roles;
+
+            $details = $this->userDetailsRepository->getDetails($this->id)->fetch();
+
+            if ($details !== null)
+            {
+                foreach ($details->toArray() as $key => $value)
+                {
+                    $defaults[$key] = $value;
+                }
+            }
+
+            $form->setDefaults($defaults);
+        }
+
+        $this->template->editedUserId = $this->id;
+
+        parent::render();
     }
 
     /**
@@ -55,14 +105,29 @@ class UserForm extends BaseComponent {
         $form->addEmail('email', 'Email')
             ->setRequired('%label is required');
 
-        $password = $form->addPassword('password', 'Heslo');
+        if ($this->presenter->user->isInRole('ADMIN') || $this->presenter->user->getId() === $this->id)
+        {
+            $password = $form->addPassword('password', 'Heslo');
+            $password->addCondition(Form::FILLED)
+                ->addRule(Form::MIN_LENGTH, 'Minimální délka hesla je 8 znaků.', 8)
+                ->endCondition();
 
-        $form->addPassword('passwordCheck', 'Kontrola hesla')
-            ->addConditionOn($password, $form::FILLED)
-            ->setRequired()
-            ->endCondition();
+            $form->addPassword('passwordCheck', 'Kontrola hesla')
+                ->addConditionOn($password, $form::FILLED)
+                ->setRequired()
+                ->endCondition();
+        }
 
-        $form->addMultiSelect('roles', 'Role', $this->roleRepository->getDataForSelect());
+
+        if ($this->presenter->user->isInRole('ADMIN'))
+        {
+            $roles = $this->roleRepository->getDataForSelect();
+            $form->addMultiSelect('role_ids', 'Role', $roles);
+        }
+        else
+        {
+            $form->addHidden('role_ids');
+        }
 
         $form->addText('position', 'Detail pozice');
 
@@ -77,14 +142,15 @@ class UserForm extends BaseComponent {
     /**
      * @param Form $form
      */
-    public function validateForm(Form $form) {
-
-        if($this->userRepository->findByEmail($form->values['email']) !== null)
+    public function validateForm(Form $form): void {
+        $user = $this->userRepository->findByEmail($form->values['email']);
+        if($user !== null && ($this->id === null xor $user[UserRepository::COLUMN_ID] !== $this->id))
         {
             $form->addError('Uživatel s tímto emailem již existuje.');
         }
 
-        if($this->userRepository->findByUsername($form->values['username']) !== null)
+        $user = $this->userRepository->findByUsername($form->values['username']);
+        if($user !== null && ($this->id === null xor $user[UserRepository::COLUMN_ID] !== $this->id))
         {
             $form->addError('Uživatel s tímto jménem již existuje.');
         }
@@ -94,7 +160,7 @@ class UserForm extends BaseComponent {
             $form->addError('Hesla se neshodují.');
         }
 
-        if(!empty($form->values['roles']) &&
+        if(!empty($form->values['role_ids']) &&
             (!$this->presenter->user->isLoggedIn() || !$this->presenter->user->isInRole('ADMIN'))
         ) {
             $form->addError('Nemáš oprávnění na nastavování rolí.');
@@ -105,13 +171,21 @@ class UserForm extends BaseComponent {
      * @param Form $form
      * @param ArrayHash $data
      * @throws AbortException
+     * @throws BadRequestException
      */
-    public function completeForm(Form $form, ArrayHash $data) {
+    public function completeForm(Form $form, ArrayHash $data): void {
+
+        $sessionUser = $this->getPresenter()?->getUser();
+
         $user = [
             'username'=>$data['username'],
             'email'=>$data['email'],
-            'password'=>$this->passwords->hash($data['password'])
         ];
+
+        if (!empty($data['password']))
+        {
+            $user['password'] = $this->passwords->hash($data['password']);
+        }
 
         $userDetails = [
             'firstname' => $data['firstname'],
@@ -120,7 +194,28 @@ class UserForm extends BaseComponent {
             'position' => $data['position']
         ];
 
-        if($this->presenter->user->isLoggedIn()) {
+        if ($this->id !== null)
+        {
+            $existingUser = $this->userFacade->getById($this->id);
+            if ($existingUser === null)
+            {
+                throw new BadRequestException('Uživatel nebyl nalezen.');
+            }
+
+            $user['id'] = $existingUser[UserRepository::COLUMN_ID];
+
+            $details = $this->userDetailsRepository->getDetails($this->id)->fetch();
+            if ($details !== null)
+            {
+                $userDetails['id'] = $details['id'];
+            }
+            $user['changed_user_id'] = $sessionUser->getId();
+            $user['changed'] = new \DateTime();
+            $userDetails['changed_user_id'] = $sessionUser->getId();
+            $userDetails['changed'] = new \DateTime();
+        }
+        else
+        {
             $user['created_user_id'] = $this->presenter->user->id;
         }
 
@@ -128,11 +223,14 @@ class UserForm extends BaseComponent {
 
         try {
             $newUser = $this->userRepository->save($user);
+
             $userDetails['user_id'] = $newUser['id'];
 
             $this->userDetailsRepository->save($userDetails);
 
-            foreach ($data['roles'] as $role) {
+            $this->userRoleRepository->dropUserRoles($this->id);
+
+            foreach ($data['role_ids'] as $role) {
                 $this->userRoleRepository->save([
                     'user_id' => $newUser['id'],
                     'role_id' => $role,
@@ -147,11 +245,7 @@ class UserForm extends BaseComponent {
             $form->addError('Něco se nepovedlo.');
             return;
         }
-        $this->flashMessage('Uživatel byl přidán.');
+        $this->presenter->flashMessage('Uživatel byl přidán.');
         $this->presenter->redirect('Users:');
     }
-}
-
-interface IUserFormFactory {
-    public function create(): UserForm;
 }
