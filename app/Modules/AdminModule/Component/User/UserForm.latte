@@ -1,3 +1,4 @@
+{varType int $editedUserId}
 {form form class=>"form-horizontal form-normal", role=>"form"}
     <div class="errors" n:if="$form->hasErrors()">
         <div n:foreach="$form->errors as $error" class="alert alert-danger error" role="alert">
@@ -32,30 +33,35 @@
             {input lastname class => "form-control", placeholder => 'Novák'}
         </div>
     </div>
-    <div class="form-group row">
-        <div class="col">
-            {label password class => "form-label " /}
-            {input password class => "form-control"}
+    {if $user->getId() === $editedUserId || $user->isInRole('ADMIN')}
+        <div class="form-group row">
+            <div class="col">
+                {label password class => "form-label " /}
+                {input password class => "form-control"}
+            </div>
+            <div class="col">
+                {label passwordCheck class => "form-label " /}
+                {input passwordCheck class => "form-control"}
+            </div>
         </div>
-        <div class="col">
-            {label passwordCheck class => "form-label " /}
-            {input passwordCheck class => "form-control"}
-        </div>
-    </div>
+    {/if}
     <div class="form-group">
 
     </div>
     {if $user->isInRole('ADMIN')}
         <div class="form-group row">
             <div class="col">
-                {label roles class => "form-label " /}
-                {input roles id => 'multiselect', class => "form-select form-select-sm", multiple, aria-label=>"multiple select example"}
+                {label role_ids class => "form-label " /}
+                {input role_ids class => "form-select form-select-sm multiselect", multiple, aria-label=>"multiple select example"}
             </div>
             <div class="col">
                 {label position class => "form-label " /}
                 {input position class => "form-control", placeholder => "Majitel, Youtuber"}
             </div>
         </div>
+    {else}
+        {input role_ids}
+        {input position}
     {/if}
     <div class="form-group row">
         <div class="col">
@@ -67,7 +73,7 @@
 <script src="{$basePath}/js/msfmultiselect.min.js"></script>
 <script>
     new MSFmultiSelect(
-        document.querySelector('#multiselect'),
+        document.querySelector('.multiselect'),
         {
             selectAll: true,
             searchBox: true,

@@ -35,7 +35,13 @@ abstract class BaseRepository
         {
             $id = $data['id'];
             unset($data['id']);
-            return $this->database->table($this->tableName)->get($id)?->update($data);
+            $row = $this->findBy(['id' => $id])->fetch();
+            if ($row === null)
+            {
+                return false;
+            }
+            $row->update($data);
+            return $row;
         }
         return $this->database->table($this->tableName)->insert($data);
     }

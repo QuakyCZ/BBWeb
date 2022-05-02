@@ -83,4 +83,15 @@ class UserRoleRepository extends PrimaryRepository {
 
         return $result;
     }
+
+    /**
+     * @param int $userId
+     * @return int
+     */
+    public function dropUserRoles(int $userId): int
+    {
+        return $this->findBy([
+            self::COLUMN_USER_ID => $userId
+        ])->delete();
+    }
 }

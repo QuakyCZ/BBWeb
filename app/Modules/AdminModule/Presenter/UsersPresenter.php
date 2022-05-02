@@ -8,8 +8,17 @@ use App\Modules\AdminModule\Component\User\UserForm;
 use App\Modules\AdminModule\Component\User\UserGrid;
 use App\Repository\Primary\UserRepository;
 use App\Repository\Primary\UserRoleRepository;
+use Nette\Application\AbortException;
+use Nette\Database\Table\ActiveRow;
+use Nette\Localization\ITranslator;
+use Symfony\Component\Translation\Translator;
+use Ublaboo\DataGrid\Column\Action\Confirmation\StringConfirmation;
+use Ublaboo\DataGrid\DataGrid;
+use Ublaboo\DataGrid\Exception\DataGridException;
 
 class UsersPresenter extends Base\BasePresenter {
+
+    private ?int $id = null;
 
     private UserRepository $userRepository;
     private UserRoleRepository $userRoleRepository;
@@ -17,17 +26,21 @@ class UsersPresenter extends Base\BasePresenter {
     private IUserFormFactory $userFormFactory;
     private IUserGridFactory $userGridFactory;
 
+    private ITranslator $translator;
+
     public function __construct(
         UserRepository     $userRepository,
         UserRoleRepository $userRoleRepository,
         IUserFormFactory   $userFormFactory,
-        IUserGridFactory   $userGridFactory
+        IUserGridFactory   $userGridFactory,
+        ITranslator         $translator,
     ) {
         parent::__construct();
         $this->userRepository = $userRepository;
         $this->userRoleRepository = $userRoleRepository;
         $this->userFormFactory = $userFormFactory;
         $this->userGridFactory= $userGridFactory;
+        $this->translator = $translator;
     }
 
     public function actionDefault() {
@@ -43,45 +56,69 @@ class UsersPresenter extends Base\BasePresenter {
         $this->template->users = $result;
     }
 
+    public function actionEdit(int $id): void {
+        $this->id = $id;
+    }
+
     /**
      * @return UserForm
      */
     public function createComponentUserForm(): UserForm {
-        return $this->userFormFactory->create();
+        return $this->userFormFactory->create($this->id);
     }
 
-    public function createComponentUserGrid(): UserGrid {
-        return $this->userGridFactory->create();
+    /**
+     * @return DataGrid
+     */
+    public function createComponentUserGrid(): DataGrid {
+        return $this->userGridFactory->create($this)->create();
     }
 
+    /**
+     * @param int $id
+     * @return void
+     * @throws AbortException
+     */
     public function handleDelete(int $id): void {
         $this->userRepository->setNotDeletedNull($id);
         $this->flashMessage("Uživatel byl smazán.");
-        if ($this->isAjax()) {
+        if ($this->presenter->isAjax()) {
             $this->redrawControl('flashes');
-            $this['userGrid']->reload();
+            $this->reload();
         } else {
             $this->redirect('this');
         }
     }
 
+    /**
+     * @param $id
+     * @return void
+     * @throws AbortException
+     */
     public function handleActivate($id): void {
         $this->userRepository->setActive($id,true);
-        if ($this->isAjax()) {
+        if ($this->presenter->isAjax()) {
             $this->redrawControl('flashes');
-            $this['userGrid']->reload();
+            $this->reload();
         } else {
             $this->redirect('this');
         }
     }
 
+    /**
+     * @param $id
+     * @return void
+     * @throws AbortException
+     */
     public function handleDeactivate($id): void {
         $this->userRepository->setActive($id,false);
-        if ($this->isAjax()) {
+        if ($this->presenter->isAjax()) {
             $this->redrawControl('flashes');
-            $this['userGrid']->reload();
+            $this->reload();
         } else {
             $this->redirect('this');
         }
     }
+
+
 }
