@@ -1,13 +1,20 @@
 parameters:
     permission:
         USER:
+            - Error
+            - Error4xx
             - Client:Dashboard
             - Client:Connections
             - Client:DungeonEscape
+            - Client:Error
+            - Client:Error4xx
+            - Admin:Error
+            - Admin:Error4xx
         ADMIN:
             - Admin:Default
             - Admin:Settings
             - Admin:Servers
+            - Admin:Users
         LEADER: []
         HELPER: []
         BUILDER: []

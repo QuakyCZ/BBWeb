@@ -10,6 +10,10 @@ menu:
                 action: 'Admin:Default:default'
                 data:
                     icon: 'fas fa-home'
+            'admin.users.title':
+                action: 'Admin:Users:default'
+                data:
+                    icon: 'fas fa-users'
             'admin.dungeonEscape.title':
                 link: '#'
                 data:

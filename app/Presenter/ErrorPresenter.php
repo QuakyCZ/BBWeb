@@ -7,6 +7,7 @@ namespace App\Presenter;
 use Nette;
 use Nette\Application\Responses;
 use Nette\Http;
+use Tracy\Debugger;
 use Tracy\ILogger;
 
 
@@ -28,9 +29,16 @@ final class ErrorPresenter implements Nette\Application\IPresenter
 	{
 		$exception = $request->getParameter('exception');
 
+        if ($exception instanceof Nette\Security\AuthenticationException) {
+            $exception = new Nette\Application\BadRequestException($exception->getMessage(), 403);
+        }
+
+        Debugger::log($exception);
+
 		if ($exception instanceof Nette\Application\BadRequestException) {
 			[$module, , $sep] = Nette\Application\Helpers::splitName($request->getPresenterName());
-			return new Responses\ForwardResponse($request->setPresenterName($module . $sep . 'Error4xx'));
+            Debugger::log($module);
+            return new Responses\ForwardResponse($request->setPresenterName($module . $sep . 'Error4xx'));
 		}
 
 		$this->logger->log($exception, ILogger::EXCEPTION);

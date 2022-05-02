@@ -1,24 +1,67 @@
-<?php
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width">
+    <meta content="height=device-height">
+    <meta property="og:image" content="https://beastblock.cz/beastblock_logo_icon.png">
+    <meta property="og:title" content="BeastBlock">
+    <meta property="og:description" content="BeastBlock">
+    <meta name="author" content="Quaky & Caidorn & sCrapy">
+    <meta name="project" content="BeastBlock.cz">
+    <meta name="robots" content="noindex">
 
-declare(strict_types=1);
+    <link rel="apple-touch-icon" sizes="180x180" href="{$basePath}/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{$basePath}/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{$basePath}/favicon/favicon-16x16.png">
+    <link rel="manifest" href="{$basePath}/favicon/site.webmanifest">
+    <link rel="mask-icon" href="{$basePath}/favicon/safari-pinned-tab.svg" color="#5bbad5">
 
-header('HTTP/1.1 503 Service Unavailable');
-header('Retry-After: 300'); // 5 minutes in seconds
+    <link rel="stylesheet"
+          href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 
-?>
-<!DOCTYPE html>
-<meta charset="utf-8">
-<meta name="robots" content="noindex">
-<meta name="generator" content="Nette Framework">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+    <title>Chyba serveru</title>
+</head>
+<body>
 <style>
-	body { color: #333; background: white; width: 500px; margin: 100px auto }
-	h1 { font: bold 47px/1.5 sans-serif; margin: .6em 0 }
-	p { font: 21px/1.5 Georgia,serif; margin: 1.5em 0 }
+    body {
+        background-image: url("/img/bg.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-color: #161a1d;
+    }
+
+    a {
+        color: orange;
+    }
+
+    a:hover {
+        color: #bb7e09;
+    }
+
+    .container {
+        padding-top: 10em;
+    }
+
+    .card {
+        background-color: rgba(0,0,0,0.3);
+        padding: 2em;
+        color: white;
+        border: 2px solid orange;
+    }
+
+
 </style>
+<div class="container" style="text-align: center;">
+    <img src="/img/Nakashi.png" alt="nakashi" height="300px">
+    <div class="card">
+        <h2>Údržba</h2>
+        <p>Omlouváme se, aktuálně probíhá údržba webu. Opakujte akci později.</p>
+        <p>Děkujeme za pochopení.</p>
+    </div>
 
-<title>Site is temporarily down for maintenance</title>
-
-<h1>We're Sorry</h1>
-
-<p>The site is temporarily down for maintenance. Please try again in a few minutes.</p>
+</div>
+</body>
+</html>

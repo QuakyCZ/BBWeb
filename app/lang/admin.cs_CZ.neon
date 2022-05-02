@@ -1,5 +1,7 @@
 users:
+    title: 'Uživatelé'
     roles:
+        USER: 'Uživatel'
         ADMIN: 'Web Admin'
         OWNER: 'Majitel'
         LEADER: 'Vedení'

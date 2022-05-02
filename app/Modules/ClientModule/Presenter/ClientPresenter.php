@@ -10,6 +10,7 @@ use Contributte\MenuControl\UI\MenuComponent;
 use Latte\MacroNode;
 use Latte\Macros\MacroSet;
 use Latte\PhpWriter;
+use Nette\Application\BadRequestException;
 use Nette\Application\UI\Presenter;
 use Nette\Security\AuthenticationException;
 
@@ -42,6 +43,7 @@ abstract class ClientPresenter extends Presenter
     /**
      * @throws AuthenticationException
      * @throws \Nette\Application\AbortException
+     * @throws BadRequestException
      */
     protected function startup()
     {
@@ -76,7 +78,7 @@ abstract class ClientPresenter extends Presenter
             }
             else if (!$user->isAllowed($this->getName(), $this->getAction()))
             {
-                throw new AuthenticationException("Nemáte dostatečná oprávnění " . $this->getName() . ":".$this->getAction());
+                throw new BadRequestException("Nemáte dostatečná oprávnění " . $this->getName() . ":".$this->getAction(), 403);
             }
         }
 
