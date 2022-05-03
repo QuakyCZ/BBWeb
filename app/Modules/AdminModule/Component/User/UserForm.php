@@ -13,6 +13,8 @@ use Nette\Application\BadRequestException;
 use Nette\Application\UI\Form;
 use Nette\Security\Passwords;
 use Nette\Utils\ArrayHash;
+use Tracy\Debugger;
+use Tracy\ILogger;
 
 class UserForm extends BaseComponent {
 
@@ -95,15 +97,14 @@ class UserForm extends BaseComponent {
             ->setRequired('%label is required')
             ->addRule(Form::MIN_LENGTH, 'Minimální délka jsou %d znaky.', 3);
 
-        $form->addText('minecraft_nick', 'Minecraft Nick')
-            ->setRequired('%label is required');
+        $form->addEmail('email', 'Email')
+            ->setRequired('%label is required')
+            ->addRule(Form::EMAIL, 'Neplatný formát emailu.');
 
         $form->addText('firstname', 'Jméno');
 
         $form->addText('lastname', 'Příjmení');
 
-        $form->addEmail('email', 'Email')
-            ->setRequired('%label is required');
 
         if ($this->presenter->user->isInRole('ADMIN') || $this->presenter->user->getId() === $this->id)
         {
@@ -190,7 +191,6 @@ class UserForm extends BaseComponent {
         $userDetails = [
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
-            'minecraft_nick' => $data['minecraft_nick'],
             'position' => $data['position']
         ];
 
@@ -203,16 +203,22 @@ class UserForm extends BaseComponent {
             }
 
             $user['id'] = $existingUser[UserRepository::COLUMN_ID];
+            $user['changed_user_id'] = $sessionUser->getId();
+            $user['changed'] = new \DateTime();
 
             $details = $this->userDetailsRepository->getDetails($this->id)->fetch();
             if ($details !== null)
             {
                 $userDetails['id'] = $details['id'];
+                $userDetails['changed_user_id'] = $sessionUser->getId();
+                $userDetails['changed'] = new \DateTime();
             }
-            $user['changed_user_id'] = $sessionUser->getId();
-            $user['changed'] = new \DateTime();
-            $userDetails['changed_user_id'] = $sessionUser->getId();
-            $userDetails['changed'] = new \DateTime();
+            else
+            {
+                $userDetails['created_user_id'] = $sessionUser->getId();
+            }
+
+
         }
         else
         {
@@ -241,6 +247,7 @@ class UserForm extends BaseComponent {
             $this->userRepository->database->commit();
         }
         catch (\Exception $e) {
+            Debugger::log($e, ILogger::EXCEPTION);
             $this->userRepository->database->rollBack();
             $form->addError('Něco se nepovedlo.');
             return;
