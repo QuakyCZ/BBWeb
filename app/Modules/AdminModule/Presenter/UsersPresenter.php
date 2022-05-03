@@ -84,7 +84,7 @@ class UsersPresenter extends Base\BasePresenter {
         $this->flashMessage("Uživatel byl smazán.");
         if ($this->presenter->isAjax()) {
             $this->redrawControl('flashes');
-            $this->reload();
+            $this['userGrid']->reload();
         } else {
             $this->redirect('this');
         }
@@ -99,7 +99,7 @@ class UsersPresenter extends Base\BasePresenter {
         $this->userRepository->setActive($id,true);
         if ($this->presenter->isAjax()) {
             $this->redrawControl('flashes');
-            $this->reload();
+            $this['userGrid']->reload();
         } else {
             $this->redirect('this');
         }
@@ -114,7 +114,7 @@ class UsersPresenter extends Base\BasePresenter {
         $this->userRepository->setActive($id,false);
         if ($this->presenter->isAjax()) {
             $this->redrawControl('flashes');
-            $this->reload();
+            $this['userGrid']->reload();
         } else {
             $this->redirect('this');
         }
