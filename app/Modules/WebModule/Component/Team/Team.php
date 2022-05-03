@@ -37,7 +37,7 @@ class Team extends BaseComponent {
         {
             $result[$row['id']]['role'] = $this->translator->translate('front.about.roles.'.$row['name']);
             $result[$row['id']]['members'][] = [
-                'minecraft_nick' => $row['minecraft_nick'],
+                'minecraft_nick' => $row['nick'] ?? $row['username'],
                 'position' => $row['position']
             ];
         }

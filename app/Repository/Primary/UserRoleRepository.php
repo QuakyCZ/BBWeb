@@ -54,10 +54,12 @@ class UserRoleRepository extends PrimaryRepository {
     public function getForAboutTeamListing(array $excludeRoleNames = []): ResultSet
     {
         return $this->database->query("
-            SELECT r.id, r.name, ud.minecraft_nick, ud.position  FROM `user_role` ur
+            SELECT r.id, r.name, u.username, mc.nick, ud.position  FROM `user_role` ur
             LEFT JOIN role r ON ur.role_id = r.id
-            LEFT JOIN user_details ud ON ur.user_id = ud.user_id
-            WHERE r.name NOT IN (?)
+            JOIN user u ON u.id = ur.user_id
+            LEFT JOIN user_details ud ON ur.user_id = ud.user_id AND ud.not_deleted=1
+            LEFT JOIN user_minecraft_account mc ON mc.user_id = ur.user_id AND mc.not_deleted=1 
+            WHERE u.not_deleted=1 AND r.name NOT IN (?)
             GROUP BY ur.user_id
             ORDER BY r.priority, ud.id;
         ", $excludeRoleNames);
