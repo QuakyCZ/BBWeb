@@ -33,8 +33,6 @@ final class ErrorPresenter implements Nette\Application\IPresenter
             $exception = new Nette\Application\BadRequestException($exception->getMessage(), 403);
         }
 
-        Debugger::log($exception);
-
 		if ($exception instanceof Nette\Application\BadRequestException) {
 			[$module, , $sep] = Nette\Application\Helpers::splitName($request->getPresenterName());
 			return new Responses\ForwardResponse($request->setPresenterName($module . $sep . 'Error4xx'));
