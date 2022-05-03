@@ -88,7 +88,16 @@
         </div>
     </div>
     <div class="form-group row">
+        <div class="form-check">
+            <label class="form-check-label text-secondary ml-3">
+                <input n:name="agree_with_terms" class="form-check-input">
+                Souhlasím s <a href="https://drive.google.com/file/d/1llWAQO7Q0Ljd9pkAP-3bAgyA6Yj08Aeg/view" class="text-secondary" style="text-decoration: underline;">podmínkami</a>
+            </label>
+        </div>
+    </div>
+    <div class="form-group row">
         {input recaptcha, data-theme => 'dark'}
+        <script src='https://www.google.com/recaptcha/api.js'></script>
     </div>
     <div class="errors" n:if="$form->hasErrors()">
         <div n:foreach="$form->errors as $error" class="alert alert-danger error" role="alert">
@@ -99,5 +108,7 @@
         {input submit class => "btn btn-outline-warning"}
         <a href="{plink Sign:in}" class="text-secondary ml-3 my-auto" style="text-decoration: underline;">Už máte účet? Přihlaste se.</a>
     </div>
+    <script type="text/javascript">
+        document.write('<input type="hidden" name="x_url" value="no' + 'spam">');
+    </script>
 {/form}
-<script src='https://www.google.com/recaptcha/api.js'></script>

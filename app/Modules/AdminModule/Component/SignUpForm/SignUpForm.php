@@ -4,6 +4,8 @@ namespace App\Modules\AdminModule\Component\SignUpForm;
 
 use App\Modules\ApiModule\Model\User\UserFacade;
 use Nette\Application\AbortException;
+use Nette\Application\BadRequestException;
+use Nette\Application\ForbiddenRequestException;
 use Nette\Application\UI\Form;
 use Nette\Forms\Controls\BaseControl;
 use Nette\Utils\ArrayHash;
@@ -50,7 +52,11 @@ class SignUpForm extends \App\Component\BaseComponent
                 }, 'Hesla se neshodují.')
             ->endCondition();
 
-        $form->addReCaptcha('recaptcha', '', true, '')->setRequired('Potvrďte, že nejste robot.');
+        $form->addCheckbox('agree_with_terms', 'Souhlas s podmínkami')
+            ->addRule(Form::EQUAL, 'Musíte udělit souhlas s podmínkami.', TRUE)
+            ->setRequired('Musíte udělit souhlas s podmínkami.');
+
+        $form->addReCaptcha('recaptcha', '', true, 'Potvrďte, že nejste robot.')->setRequired('Potvrďte, že nejste robot.');
 
         $form->addSubmit('submit', 'Registrovat');
 
@@ -63,12 +69,25 @@ class SignUpForm extends \App\Component\BaseComponent
     /**
      * @param Form $form
      * @param ArrayHash $values
+     * @throws BadRequestException
      */
     public function validateForm(Form $form, ArrayHash $values): void
     {
         if (!$form->isValid())
         {
             return;
+        }
+
+        $xUrl = $form->getHttpData($form::DATA_TEXT, 'x_url');
+
+        if (empty($xUrl) || $xUrl !== "nospam")
+        {
+            throw new ForbiddenRequestException();
+        }
+
+        if (!isset($values['agree_with_terms']) || $values['agree_with_terms'] === false)
+        {
+            $form->addError('Musíte souhlasit s podmínkami.');
         }
 
         if (empty($values['email']) || empty($values['username']) || empty($values['password']) || empty($values['passwordCheck']))
