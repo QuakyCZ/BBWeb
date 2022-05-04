@@ -1,0 +1,18 @@
+{snippetArea flashes}
+    <script>
+        let toastOptions = [];
+        {foreach $flashes as $flash}
+            toastOptions = {
+                title: {$flash->type},
+                message: {$flash->message},
+                icon: {\App\Enum\EFlashMessageType::TYPE_TO_FA_ICON[$flash->type]},
+                theme: 'dark',
+                position: 'topRight',
+                class: {$flash->type},
+                timeout: 5000,
+                balloon: true
+            };
+            iziToast.show(toastOptions);
+        {/foreach}
+    </script>
+{/snippetArea}
