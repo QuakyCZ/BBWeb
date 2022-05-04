@@ -75,12 +75,10 @@ abstract class ClientPresenter extends Presenter
             else if (!$this->userRepository->isUserActive($user->getId()))
             {
                 $this->getUser()->logout(true);
-                Debugger::log('User '.$user->getId() .' was logged out because of inactive account.');
                 $this->redirect(':Client:Sign:in', ['returnKey' => $key]);
             }
             else if (!$user->isAllowed($this->getName(), $this->getAction()))
             {
-                Debugger::log('No perms for user ' . $user->getId() . ' ' . $this->getName() . ":".$this->getAction());
                 throw new BadRequestException("Nemáte dostatečná oprávnění " . $this->getName() . ":".$this->getAction(), 403);
             }
         }
