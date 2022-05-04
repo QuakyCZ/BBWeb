@@ -21,7 +21,7 @@
     <link rel="stylesheet" type="text/css"  href="/webpack/stylesAdmin.bundle.css">
     <link rel="stylesheet" href="{$basePath}/libs/fontawesome/css/all.css">
 
-    <script src="/webpack/scriptsAdmin.bundle.js"></script>
+
 
     <title>Admin</title>
 
@@ -31,6 +31,8 @@
 {else}
     {import '_plainLayout.latte'}
 {/if}
-
-{include body}
+<body>
+    {include body}
+    <script src="/webpack/scriptsAdmin.bundle.js"></script>
+</body>
 </html>
