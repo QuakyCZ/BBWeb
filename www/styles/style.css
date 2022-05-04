@@ -647,9 +647,6 @@ i.fa-stream:hover, i.fa-stream:active {
     .time-box-countdown > span{
         font-size: 3rem;
     }
-    .btn {
-        font-size: 3rem;
-    }
 
     .popup {
         position: fixed;
@@ -660,7 +657,6 @@ i.fa-stream:hover, i.fa-stream:active {
 
     .middle {
         width: 60vw;
-        font-size: 1.5rem;
     }
 
     .time-box-time {
