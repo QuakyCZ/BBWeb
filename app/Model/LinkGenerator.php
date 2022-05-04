@@ -12,15 +12,14 @@ class LinkGenerator implements ILinkGenerator
     /**
      * @var \Nette\Application\LinkGenerator
      */
-    private $linkGenerator;
+    private \Nette\Application\LinkGenerator $linkGenerator;
 
     public function __construct
     (
-        $baseUrl,
         \Nette\Application\LinkGenerator $linkGenerator
     )
     {
-        $this->linkGenerator = $linkGenerator->withReferenceUrl($baseUrl);
+        $this->linkGenerator = $linkGenerator;
     }
 
     public function link(IMenuItem $item): string

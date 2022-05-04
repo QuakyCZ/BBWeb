@@ -13,6 +13,7 @@ use Latte\PhpWriter;
 use Nette\Application\BadRequestException;
 use Nette\Application\UI\Presenter;
 use Nette\Security\AuthenticationException;
+use Tracy\Debugger;
 
 abstract class ClientPresenter extends Presenter
 {
