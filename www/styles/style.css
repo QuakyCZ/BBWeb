@@ -379,7 +379,12 @@ img {
 
 .yellow-text {
     font-weight: lighter;
-    color: #e9c245;
+    color: var(--yellow-color);
+}
+
+.blue-text {
+    font-weight: lighter;
+    color: var(--cyan-color);
 }
 
 hr {

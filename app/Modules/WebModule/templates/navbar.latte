@@ -1,0 +1,47 @@
+{block navbar}
+    <nav class="navbar navbar-expand-xl navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" n:href="Homepage:">
+                <img src="./img/logo.svg" alt="" width="150px">
+              </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mt-3 mt-xl-0 mb-lg-0">
+              <li class="nav-item">
+                <a type="button" data-bs-toggle="modal" data-bs-target="#storeModal" class="nav-link">OBCHOD</a>
+              </li>
+              <hr class="nav-divider"></hr>
+              <li class="nav-item">
+                <a n:href="About:default#team" target="_self" class="nav-link">TÝM</a>
+              </li>
+              <hr class="nav-divider"></hr>
+              <li class="nav-item">
+                <a n:href="About:" target="_self" class="nav-link text-nowrap">O NÁS</a>
+              </li>
+              <hr class="nav-divider"></hr>
+              <li class="nav-item">
+                <a href="https://wiki.beastblock.cz" target="_blank" class="nav-link">WIKI</a>
+              </li>
+              <hr class="nav-divider"></hr>
+              <li class="nav-item">
+                <a href="https://status.beastblock.cz/" target="_blank" class="nav-link">STATUS</a>
+              </li>
+              <hr class="nav-divider"></hr>
+              <li class="nav-item">
+                <a n:href="About:default#contact" class="nav-link">KONTAKT</a>
+              </li>
+              <hr class="nav-divider"></hr>
+              <li class="nav-item">
+                <a n:href=":Client:Dashboard:default" class="nav-link">PROFIL</a>
+              </li>
+			  <hr class="nav-divider"></hr>
+              <li class="nav-item last">
+                <a n:href="Feedback:" style="margin-right: 0; font-size: 18px;" class="nav-link"><i class="fa-solid fa-bug"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+{/block}
