@@ -8,7 +8,7 @@ const scriptsGroups = (APP_DIR) => {
             list: [
                 APP_DIR + "/node_modules/jquery/dist/jquery.min.js",
                 APP_DIR + "/node_modules/jquery-ui-sortable/jquery-ui.min.js",
-                APP_DIR + "/www/libs/fontawesome/fontawesome.min.js",
+                APP_DIR + "/www/libs/fontawesome/js/all.min.js",
                 APP_DIR + "/node_modules/bootstrap/dist/js/bootstrap.min.js",
                 APP_DIR + "/node_modules/daterangepicker/daterangepicker.js",
                 APP_DIR + "/node_modules/nette.ajax.js/nette.ajax.js",
@@ -22,7 +22,7 @@ const scriptsGroups = (APP_DIR) => {
             list: [
                 APP_DIR + "/node_modules/jquery/dist/jquery.min.js",
                 APP_DIR + "/node_modules/jquery-ui-sortable/jquery-ui.min.js",
-                APP_DIR + "/www/libs/fontawesome/fontawesome.min.js",
+                APP_DIR + "/www/libs/fontawesome/js/all.min.js",
                 APP_DIR + "/node_modules/bootstrap/dist/js/bootstrap.min.js",
                 APP_DIR + "/node_modules/jquery-ui-sortable/jquery-ui.min.js",
                 APP_DIR + "/node_modules/daterangepicker/daterangepicker.js",
