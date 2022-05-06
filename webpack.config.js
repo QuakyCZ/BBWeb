@@ -117,7 +117,7 @@ module.exports = (env, argv) => {
             }),
             new MergeIntoSingleFile({
                 files: helpers.generateArrayForMerge(APP_DIR, isProduction)
-            }),
+            }, function () {}),
             isWatching ? new WatchExternalFilesPlugin.default({
                 files: [
                     APP_DIR + '/www/js/**/*.js'

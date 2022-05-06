@@ -3,6 +3,7 @@
 namespace App\Modules\ClientModule\Presenter;
 
 use App\Enum\EConnectTokenType;
+use App\Enum\EFlashMessageType;
 use App\Modules\ApiModule\Model\User\UserFacade;
 use App\Modules\ClientModule\Component\MinecraftConnect\IMinecraftConnectFormFactory;
 use App\Modules\ClientModule\Component\MinecraftConnect\MinecraftConnectForm;
@@ -45,16 +46,16 @@ class ConnectionsPresenter extends ClientPresenter
         try
         {
             $this->userFacade->disconnect($this->getUser()->getId(), $type);
-            $this->flashMessage('Účet byl odpojen.', 'warning');
+            $this->flashMessage('Účet byl odpojen.', EFlashMessageType::INFO);
         }
         catch (BadRequestException $exception)
         {
-            $this->flashMessage($exception->getMessage());
+            $this->flashMessage($exception->getMessage(), EFlashMessageType::WARNING);
             throw $exception;
         }
         catch (\PDOException $exception)
         {
-            Debugger::log($exception, 'connections');
+            Debugger::log($exception, 'connections', EFlashMessageType::ERROR);
             $this->flashMessage('Při zpracování požadavku nastala chyba.');
         }
 

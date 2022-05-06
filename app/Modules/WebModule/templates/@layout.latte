@@ -19,13 +19,7 @@
     <link rel="manifest" href="{$basePath}/favicon/site.webmanifest">
     <link rel="mask-icon" href="{$basePath}/favicon/safari-pinned-tab.svg" color="#5bbad5">
 
-    <link rel="stylesheet"
-          href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-
-
-
-
-
+    <link rel="stylesheet" href="{$basePath}/webpack/stylesWeb.bundle.css">
 
     {block styles}
     {/block}
@@ -74,7 +68,8 @@
                    alt="TOPlist" width="14" height="14" style="visibility: hidden;"/></noscript>
 </a>
 {block beforeContent}{/block}
-<div class="container">
+{include "navbar.latte"}
+<div class="container my-3">
     {block content}{/block}
 </div>
 <div class="cookie-banner">
@@ -101,5 +96,23 @@
 <script src="{$basePath}/webpack/scriptsWeb.bundle.js"></script>
 {block scripts}{/block}
 <script src="{$basePath}/js/cookies.js"></script>
+{snippet flashes}
+    <script>
+        {foreach $flashes as $flash}
+        iziToast.show({
+            title: {_'flash.'.$flash->type},
+            message: {$flash->message|translate},
+            icon: {\App\Enum\EFlashMessageType::TYPE_TO_FA_ICON[$flash->type]},
+            iconColor: {\App\Enum\EFlashMessageType::TYPE_TO_ICON_COLOR[$flash->type]},
+            theme: 'dark',
+            position: 'topRight',
+            class: {$flash->type},
+            timeout: 5000,
+            progressBar: true
+            //balloon: true
+        });
+        {/foreach}
+    </script>
+{/snippet}
 </body>
 </html>

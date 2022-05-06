@@ -4,13 +4,13 @@
 {varType bool $isRoot}
 {define menu-branch, $itemsParent, $isRoot}
     {if $itemsParent->hasVisibleItemsOnMenu()}
-        <ul class="list-unstyled {$isRoot === false ? 'pl-4': 'ps-0'}">
+        <ul class="list-unstyled {$isRoot === false ? 'ps-4': 'ps-0'}">
             {foreach $itemsParent->getVisibleItemsOnMenu() as $item}
                 <li n:if="$item->isAllowed()">
                     {if !empty($item->getVisibleItemsOnMenu())}
                         <button class="btn btn-dark align-items-center collapsed"
-                                data-toggle="collapse"
-                                data-target="#{$item->getData('sublistId')}-collapse"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#{$item->getData('sublistId')}-collapse"
                                 aria-expanded="{$item->findActiveItem() !== null ? 'true' : 'false'}"
                                 aria-controls="{$item->getData('sublistId')}-collapse"
                         >

@@ -5,11 +5,59 @@
 {varType string $discordUrl}
 
 {block styles}
-<link rel="stylesheet" type="text/css" href="{$basePath}/styles/style.css">
+	<link rel="stylesheet" type="text/css" href="{$basePath}/styles/style.css">
+{/block}
+
+{block navbar}
+    <nav class="navbar navbar-expand-xl navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" n:href="Homepage:">
+                <img src="./img/logo.svg" alt="" width="150px">
+              </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mt-3 mt-xl-0 mb-lg-0">
+              <li class="nav-item">
+                <a type="button" data-bs-toggle="modal" data-bs-target="#storeModal" class="nav-link">OBCHOD</a>
+              </li>
+              <hr class="nav-divider"></hr>
+              <li class="nav-item">
+                <a n:href="About:default#team" target="_self" class="nav-link">TÝM</a>
+              </li>
+              <hr class="nav-divider"></hr>
+              <li class="nav-item">
+                <a n:href="About:" target="_self" class="nav-link text-nowrap">O NÁS</a>
+              </li>
+              <hr class="nav-divider"></hr>
+              <li class="nav-item">
+                <a href="https://wiki.beastblock.cz" target="_blank" class="nav-link">WIKI</a>
+              </li>
+              <hr class="nav-divider"></hr>
+              <li class="nav-item">
+                <a href="https://status.beastblock.cz/" target="_blank" class="nav-link">STATUS</a>
+              </li>
+              <hr class="nav-divider"></hr>
+              <li class="nav-item">
+                <a n:href="About:default#contact" class="nav-link">KONTAKT</a>
+              </li>
+              <hr class="nav-divider"></hr>
+              <li class="nav-item">
+                <a n:href=":Client:Dashboard:default" class="nav-link">PROFIL</a>
+              </li>
+			  <hr class="nav-divider"></hr>
+              <li class="nav-item last">
+                <a n:href="Feedback:" style="margin-right: 0; font-size: 18px;" class="nav-link"><i class="fa-solid fa-bug"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
 {/block}
 
 {block content}
-<nav class="nav">
+<!-- <nav class="nav">
 	<div class="controls">
 		<a onclick="showPopUp('popup_shop')" target="_self">OBCHOD</a>
 		<a n:href="About:default#team" target="_self">TÝM</a>
@@ -20,7 +68,7 @@
 		<a n:href=":Client:Dashboard:default">PROFIL</a>
 		<a n:href="Feedback:" style="margin-right: 0;"><i class="las la-bug"></i></a>
 	</div>
-</nav>
+</nav> -->
 <div class="popup" id="popup">
 	<div class="popup-box box">
 		<div class="popup-content">
@@ -85,27 +133,20 @@
 
 <div class="wrapper">
 
-	<div class="info-box box">
-		<img src="img/pripravujeme.png" alt="pripravujeme" style="position: relative;">
-		<div class="box-content">
-			<h1>Co připravujeme?</h1>
-			<div class="btn" onclick="showPopUp('popup');" style="max-width: 8em;"><span
-						class="middle">Klikni zde</span>
-			</div>
-		</div>
+	<div class="info-box box d-flex flex-column align-items-center">
+		<!--<img src="img/pripravujeme.png" alt="pripravujeme" style="position: relative;">-->
+			<h1 class="fw-bold">Co připravujeme?</h1>
+			<a class="btn btn-primary w-100 btn-informations px-5 py-3" type="button" data-bs-toggle="modal" data-bs-target="#infoModal">Klikni zde</a>
 	</div>
 
-	<div class="time-box box">
-		<div class="flex-column text-center">
-			<h1>IP Adresa:</h1>
-			<div class="time-box-time">
-				<div class="btn tooltip" onmouseover="showTooltip();" onclick="copyIP();">
+	<div class="time-box box d-flex flex-column align-items-center">
+			<h1 class="fw-bold mb-2">IP Adresa:</h1>
+			<div class="time-box-time d-flex flex-column">
+				<button class="btn btn-primary px-3 py-3" onclick="copyIP();" onmouseover="showTooltip();">
 					<span class="middle">{$serverIp} | {$serverVersion}</span>
-					<span class="tooltiptext" id="copyTooltip">Klikni pro zkopírování IP</span>
-				</div>
-				<span class="small-tip">Klepni pro zkopírování IP</span>
+				</button>
+				<span class="tooltiptext text-white" id="copyTooltip">Klikni pro zkopírování IP</span>
 			</div>
-		</div>
 	</div>
 
 	<div class="main-box">
@@ -153,12 +194,8 @@
 
 <footer>
 	<div>
-		<a href="index.php"><span style="color: white">Beast</span><span style="color: red">Block</span><span
-					style="color: white">.CZ</span></a>
-		©2021 Všechna práva vyhrazena. Design by <a href="https://www.facebook.com/scrapyno" target="_blank">sCrapo</a>.
-		Code by <a href="https://www.facebook.com/QuakySoft/" target="_blank">Quaky</a> and
-		<a href="https://www.instagram.com/caidorn" target="_blank">Caidorn</a>. <br>NOT AN OFFICIAL MINECRAFT
-		PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG.
+		<span class="text-muted">©️ BeastBlock.cz 2022 | Všechna práva vyhrazena. Design by <a href="https://www.facebook.com/scrapyno" target="_blank">sCrapo</a>. Code by <a href="https://www.facebook.com/QuakySoft/" target="_blank">Quaky</a> and <a href="https://www.instagram.com/caidorn" target="_blank">Caidorn</a>. Rebuilt by <a href="https://klema.tech/" target="_blank">Kléma</a>. 
+		<br>NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG.</span>
 	</div>
 	<div>
 		<a href="https://czech-craft.eu/server/beastblock-cz/">
@@ -168,7 +205,66 @@
 				 src="https://czech-craft.eu/api/server/beastblock-cz/badges/position.svg"/></a>
 	</div>
 </footer>
+
+<!-- MODALS -->
+<div class="modal fade" id="storeModal" tabindex="-1" aria-labelledby="storeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold" id="storeModalLabel">Vyber způsob platby</h5>
+        <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+			<div class="col-md-6">
+				<div class="card h-100">
+					<div class="card-body w-100 d-flex justify-content-between flex-column">
+						<div>
+							<h5 class="card-title fw-bold"><i class="fa-solid fa-message blue-text me-1"></i> SMS PLATBA</h5>
+							<p class="card-text">Zatím nedostupné. Zkus se vrátit za pár týdnů.</p>
+						</div>
+						<div>
+							<a target="_blank" class="btn btn-primary disabled w-100">Nedostupné</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title fw-bold"><i class="fa-brands fa-paypal blue-text me-1"></i> PAYPAL</h5>
+						<p class="card-text">PayPal je internetový platební systém, který umožňuje platby za nákupy na internetu a převody peněz mezi jednotlivými PayPal účty.</p>
+						<a href="https://store.beastblock.cz" target="_blank" class="btn btn-primary w-100">Přejít na obchod</a>
+					</div>
+				</div>
+			</div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold" id="infoModalLabel">Co na našem serveru najdeš?</h5>
+        <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+		<h4 class="card-title fw-bold">Nakashiho Subserver</h4>
+		<p class="card-text">Komunitní vanilla+ server pro hráče, kteří podporují Nakashiho prostřednictvím Twitch subscribes.</p>
+		<hr>
+		<h4 class="card-title fw-bold mt-3">Dungeon Escape</h4>
+		<p class="card-text">Naše originální minihra na serveru. Postavte se proti monstrům a zdolejte obrovské množství místností až do konečné síně slávy! Zahrajte si sólo, s kamarádem nebo proti dalším 7 lidem v rámci módu Battle Royale.</p>
+		<hr>
+		<p class="card-text">Dále se můžeš těšit na občasné eventy se zajímavou odměnou.</p>
+      </div>
+    </div>
+  </div>
+</div>
 {/block}
+
 {block scripts}
 	<script>
 		function copyIP()

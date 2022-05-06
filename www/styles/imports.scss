@@ -1,9 +1,18 @@
+@import "../libs/fontawesome/scss/fontawesome";
 // boostrap
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 
-@import "~bootstrap/scss/bootstrap.scss";
+@import "~bootstrap/dist/css/bootstrap.min.css";
 
 @import "~ublaboo-datagrid/assets/datagrid.css";
 @import "~ublaboo-datagrid/assets/datagrid-spinners.css";
+
+@import "@sweetalert2/themes/dark/dark.scss";
+
+.iziToast-icon {
+  opacity: 1 !important;
+}
+
+@import "~izitoast/dist/css/iziToast.min.css";

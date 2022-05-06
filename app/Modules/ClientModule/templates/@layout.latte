@@ -32,6 +32,7 @@
 
     <title>Uživatelská zóna</title>
 
+    {include styles}
 </head>
 {if $user->isLoggedIn()}
     {import '_adminLayout.latte'}
@@ -39,8 +40,24 @@
     {import '_plainLayout.latte'}
 {/if}
 <body>
-    {include styles}
     {include body}
 </body>
+{snippet flashes}
+    <script>
+        {foreach $flashes as $flash}
+            iziToast.show({
+                title: {_'flash.'.$flash->type},
+                message: {$flash->message|translate},
+                icon: {\App\Enum\EFlashMessageType::TYPE_TO_FA_ICON[$flash->type]},
+                iconColor: {\App\Enum\EFlashMessageType::TYPE_TO_ICON_COLOR[$flash->type]},
+                theme: 'dark',
+                position: 'topRight',
+                class: {$flash->type},
+                timeout: 5000,
+                progressBar: true
+            });
+        {/foreach}
+    </script>
+{/snippet}
 {block scripts}{/block}
 </html>

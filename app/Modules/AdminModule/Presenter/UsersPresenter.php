@@ -2,6 +2,7 @@
 
 namespace App\Modules\AdminModule\Presenter;
 
+use App\Enum\EFlashMessageType;
 use App\Modules\AdminModule\Component\User\IUserFormFactory;
 use App\Modules\AdminModule\Component\User\IUserGridFactory;
 use App\Modules\AdminModule\Component\User\UserForm;
@@ -12,6 +13,8 @@ use Nette\Application\AbortException;
 use Nette\Database\Table\ActiveRow;
 use Nette\Localization\ITranslator;
 use Symfony\Component\Translation\Translator;
+use Tracy\Debugger;
+use Tracy\ILogger;
 use Ublaboo\DataGrid\Column\Action\Confirmation\StringConfirmation;
 use Ublaboo\DataGrid\DataGrid;
 use Ublaboo\DataGrid\Exception\DataGridException;
@@ -96,7 +99,16 @@ class UsersPresenter extends Base\BasePresenter {
      * @throws AbortException
      */
     public function handleActivate($id): void {
-        $this->userRepository->setActive($id,true);
+        try
+        {
+            $this->userRepository->setActive($id,true);
+            $this->flashMessage('Uživatel byl aktivován.');
+        }
+        catch (\Exception $exception)
+        {
+            Debugger::log($exception);
+            $this->flashMessage($this->translator->translate('common.error'), EFlashMessageType::ERROR);
+        }
         if ($this->presenter->isAjax()) {
             $this->redrawControl('flashes');
             $this['userGrid']->reload();
@@ -111,7 +123,16 @@ class UsersPresenter extends Base\BasePresenter {
      * @throws AbortException
      */
     public function handleDeactivate($id): void {
-        $this->userRepository->setActive($id,false);
+        try
+        {
+            $this->userRepository->setActive($id,false);
+            $this->flashMessage('Uživatel byl deaktivován.');
+        }
+        catch (\Exception $exception)
+        {
+            Debugger::log($exception, ILogger::EXCEPTION);
+            $this->flashMessage($this->translator->translate('common.error'), EFlashMessageType::ERROR);
+        }
         if ($this->presenter->isAjax()) {
             $this->redrawControl('flashes');
             $this['userGrid']->reload();
