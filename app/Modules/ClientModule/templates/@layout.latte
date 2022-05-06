@@ -40,22 +40,37 @@
     {import '_plainLayout.latte'}
 {/if}
 <body>
-    {include body}
+    {snippetArea body}
+        {include body}
+    {/snippetArea}
 </body>
 {snippet flashes}
     <script>
         {foreach $flashes as $flash}
-            iziToast.show({
-                title: {_'flash.'.$flash->type},
-                message: {$flash->message|translate},
-                icon: {\App\Enum\EFlashMessageType::TYPE_TO_FA_ICON[$flash->type]},
-                iconColor: {\App\Enum\EFlashMessageType::TYPE_TO_ICON_COLOR[$flash->type]},
-                theme: 'dark',
-                position: 'topRight',
-                class: {$flash->type},
-                timeout: 5000,
-                progressBar: true
-            });
+            {if str_starts_with($flash->type, 'modal')}
+                Swal.fire({
+                    title: {$flash->title},
+                    icon: {\App\Enum\EFlashMessageType::TYPE_TO_FA_ICON[$flash->type]},
+                    html: {$flash->message},
+                    customClass: {
+                        confirmButton: 'btn btn-outline-success',
+                    },
+                    buttonsStyling: false,
+                    focusConfirm: false
+                });
+            {else}
+                iziToast.show({
+                    title: {_'flash.'.$flash->type},
+                    message: {$flash->message|translate},
+                    icon: {\App\Enum\EFlashMessageType::TYPE_TO_FA_ICON[$flash->type]},
+                    iconColor: {\App\Enum\EFlashMessageType::TYPE_TO_ICON_COLOR[$flash->type]},
+                    theme: 'dark',
+                    position: 'topRight',
+                    class: {$flash->type},
+                    timeout: 5000,
+                    progressBar: true
+                });
+            {/if}
         {/foreach}
     </script>
 {/snippet}

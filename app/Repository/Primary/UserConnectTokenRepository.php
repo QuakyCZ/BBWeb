@@ -3,6 +3,7 @@
 namespace App\Repository\Primary;
 
 use Nette\Database\Table\ActiveRow;
+use Nette\Utils\DateTime;
 
 class UserConnectTokenRepository extends PrimaryRepository
 {
@@ -36,6 +37,7 @@ class UserConnectTokenRepository extends PrimaryRepository
             self::COLUMN_TOKEN => $token,
             self::COLUMN_TYPE => $type
             ])
+            ->where(self::COLUMN_VALID_TO . ' >= ?', new DateTime())
             ->fetch();
     }
 
@@ -49,5 +51,19 @@ class UserConnectTokenRepository extends PrimaryRepository
             ->update([
                 self::COLUMN_USED => true
             ]);
+    }
+
+    /**
+     * @param int $userId
+     * @return int
+     */
+    public function deletePreviousTokens(int $userId): int
+    {
+        return $this->findBy([
+            self::COLUMN_USER_ID => $userId,
+            self::COLUMN_USED => 0
+        ])->update([
+            self::COLUMN_NOT_DELETED => null
+        ]);
     }
 }

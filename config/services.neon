@@ -5,3 +5,4 @@ services:
     - App\Model\LinkGenerator
     - App\Security\MenuAuthorizator
     - App\Modules\ApiModule\Model\User\UserConnectTokenMapper
+    - App\Modules\ApiModule\Model\User\Connector\UserConnectFacadeFactory
