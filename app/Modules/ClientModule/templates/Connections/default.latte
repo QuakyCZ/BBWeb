@@ -11,7 +11,14 @@
             <br>
             <span>Nick: {$minecraftNick}</span>
             <br>
-            <button type="button" class="btn btn-outline-danger w-25" data-toggle="modal" data-target="#disconnectMC" data-account-type="Minecraft" data-link="{link Connections:disconnect 'type' => App\Enum\EConnectTokenType::MINECRAFT}">Odpojit</button>
+            <button type="button" class="btn btn-outline-danger w-25"
+                    data-toggle="sweetalert"
+                    data-type="confirm"
+                    data-action="link"
+                    data-scope="warning"
+                    data-text="Opravdu chcete odpojit svůj Minecraft účet?"
+                    data-link="{link Connections:disconnect 'type' => App\Enum\EConnectTokenType::MINECRAFT}"
+            >Odpojit</button>
         {else}
             <br>
             <span>Příkaz na propojení:</span>
@@ -28,34 +35,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="disconnectMC" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content border border-2 border-warning text-muted" style="background-color: rgba(0,0,0,0.5); border-radius: 0;">
-            <div class="modal-header border-dark">
-                <h5 class="modal-title font-bold" id="exampleModalLongTitle">Odpojit <span class="connectType"></span> účet?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true" class="text-white"><i class="fas fa-times"></i></span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Opravdu chcete odpojit Váš <span class="connectType"></span> účet?
-            </div>
-            <div class="modal-footer border-dark">
-                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Zrušit</button>
-                <a id="successLink" type="button" class="btn btn-outline-danger">Odpojit</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
-    $('#disconnectMC').on('shown.bs.modal', function (event) {
-        let button = $(event.relatedTarget);
-        let successUrl = button.data('link');
-        let accountType = button.data('account-type');
-        $('#disconnectMC').trigger('focus');
-        let modal = $(this);
-        modal.find('#successLink').attr('href',successUrl);
-        modal.find('.connectType').text(accountType);
-    });
+
 </script>

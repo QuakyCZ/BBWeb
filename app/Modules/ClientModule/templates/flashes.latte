@@ -3,14 +3,15 @@
         let toastOptions = [];
         {foreach $flashes as $flash}
             toastOptions = {
-                title: {$flash->type},
-                message: {$flash->message},
+                title: {_'flash.'.$flash->type},
+                message: {$flash->message|translate},
                 icon: {\App\Enum\EFlashMessageType::TYPE_TO_FA_ICON[$flash->type]},
+                iconColor: {\App\Enum\EFlashMessageType::TYPE_TO_ICON_COLOR[$flash->type]},
                 theme: 'dark',
                 position: 'topRight',
                 class: {$flash->type},
                 timeout: 5000,
-                balloon: true
+                //balloon: true
             };
             iziToast.show(toastOptions);
         {/foreach}

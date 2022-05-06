@@ -17,6 +17,9 @@ class EFlashMessageType
     ];
 
     public const TYPE_TO_ICON_COLOR = [
-        self::INFO => '#fff'
+        self::INFO => 'cyan',
+        self::SUCCESS => 'LawnGreen',
+        self::WARNING => 'orange',
+        self::ERROR => 'red'
     ];
 }

@@ -29,25 +29,4 @@
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function () {
-            let toasts = $('.toast');
-            toasts.toast('show');
-            toasts.on('shown.bs.toast', function () {
-                let t = $(this);
-                let bar = t.find('.progress-bar');
-                let delay = t.data('delay')-500;
-                let startMs = + new Date();
-                let coroutine = setInterval(function () {
-                    let currentMs = + new Date();
-                    let msDiff = currentMs - startMs;
-                    let currentValue = 100 - (msDiff / delay) * 100;
-                    bar.attr('aria-valuenow', currentValue);
-                    bar.css('width', currentValue + '%');
-                    if (currentValue < 1)
-                        clearInterval(coroutine);
-                }, 2);
-            })
-        });
-    </script>
 {/block}
