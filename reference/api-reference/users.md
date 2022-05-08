@@ -43,16 +43,25 @@ Nick hráče
 Bearer auth token
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="Token byl vytvořen" %}
+{% swagger-response status="200: OK" description="Účet byl propojen" %}
 ```javascript
 {
     "status": "ok",
-    "token": "XXXX-XXXX-XXXX-XXXX"
+    "user_id": "1"
 }
 ```
 {% endswagger-response %}
 
-{% swagger-response status="200: OK" description="UUID je již propojené s webovým účtem" %}
+{% swagger-response status="400: Bad Request" description="Neznámý typ propojení" %}
+```javascript
+{
+    "status": "error",
+    "message": "Neznámý typ propojení"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="400: Bad Request" description="UUID je již propojené s webovým účtem" %}
 ```javascript
 {
     "status": "error",
@@ -61,11 +70,20 @@ Bearer auth token
 ```
 {% endswagger-response %}
 
-{% swagger-response status="400: Bad Request" description="UUID nebo Nick nejsou vyplněny" %}
+{% swagger-response status="400: Bad Request" description="Chybí parametr" %}
 ```javascript
 {
     "status": "error",
     "message": "Missing required parameter."
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="400: Bad Request" description="Neplatný token" %}
+```javascript
+{
+    "status": "error",
+    "message": "Neplatný token"
 }
 ```
 {% endswagger-response %}
@@ -91,6 +109,15 @@ Bearer auth token
 ```javascript
 {
     // Response
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="500: Internal Server Error" description="Neznámá chyba" %}
+```javascript
+{
+  "status": "error",
+  "message": "Při zpracování požadavku nastala neznámá chyba."
 }
 ```
 {% endswagger-response %}
