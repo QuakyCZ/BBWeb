@@ -42,6 +42,19 @@ class UserDiscordAccountRepository extends PrimaryRepository
 
     /**
      * @param int $userId
+     * @param int $discordId
+     * @return ActiveRow|null
+     */
+    public function connect(int $userId, int $discordId): ?ActiveRow
+    {
+        return $this->save([
+            self::COLUMN_USER_ID => $userId,
+            self::COLUMN_DISCORD_ID => $discordId
+        ]);
+    }
+
+    /**
+     * @param int $userId
      * @return int|null
      */
     public function disconnect(int $userId): ?int

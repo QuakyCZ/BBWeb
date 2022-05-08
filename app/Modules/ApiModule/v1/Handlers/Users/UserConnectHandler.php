@@ -64,7 +64,6 @@ class UserConnectHandler extends \Tomaj\NetteApi\Handlers\BaseHandler
 
     /**
      * @inheritDoc
-     * @throws BadRequestException
      */
     public function handle(array $params): ResponseInterface
     {
@@ -73,6 +72,13 @@ class UserConnectHandler extends \Tomaj\NetteApi\Handlers\BaseHandler
         $data = $params['data'][self::PARAM_DATA];
 
         $connector = $this->userConnectFacadeFactory->getInstanceOf($type);
+        if ($connector === null)
+        {
+            return new JsonApiResponse(400, [
+                'status' => 'error',
+                'message' => 'Neznámý typ propojení'
+            ]);
+        }
 
         $token = $connector->validateToken($token);
 

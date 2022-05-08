@@ -1,0 +1,19 @@
+{varType bool $isConnected}
+{snippet connection}
+    <h2><i class="fa-solid fa-cube text-success"></i> Minecraft</h2>
+    <span>Propojen: {($isConnected ? 'common.yes' : 'common.no')|translate}</span>
+    {if $isConnected}
+        <br>
+        <button type="button" class="btn btn-outline-danger w-25"
+                data-toggle="sweetalert"
+                data-type="confirm"
+                data-action="ajax"
+                data-scope="warning"
+                data-text="Opravdu chcete odpojit svůj Minecraft účet?"
+                data-link="{link disconnect!}"
+        >Odpojit</button>
+    {else}
+        <br>
+        <a n:href="generateToken!" class="ajax btn btn-outline-success w-25">Propojit</a>
+    {/if}
+{/snippet}

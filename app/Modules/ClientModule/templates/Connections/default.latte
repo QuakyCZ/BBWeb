@@ -4,44 +4,14 @@
 {block content}
     <h1>Propojení</h1>
     <hr class="bg-light">
-    <div class="row">
-        <div class="col">
-            <h2><i class="fa-solid fa-cube text-success"></i> Minecraft</h2>
-            <span>Propojen: {($isMinecraftConnected ? 'common.yes' : 'common.no')|translate}</span>
-            {if $isMinecraftConnected}
-                <br>
-                <span>Nick: {$minecraftNick}</span>
-                <br>
-                <button type="button" class="btn btn-outline-danger w-25"
-                        data-toggle="sweetalert"
-                        data-type="confirm"
-                        data-action="link"
-                        data-scope="warning"
-                        data-text="Opravdu chcete odpojit svůj Minecraft účet?"
-                        data-link="{link Connections:disconnect 'type' => App\Enum\EConnectTokenType::MINECRAFT}"
-                >Odpojit</button>
-            {else}
-                <br>
-                <a n:href="generateToken! 'minecraft'" class="ajax btn btn-outline-success w-25">Propojit</a>
-            {/if}
+    {snippetArea connections}
+        <div class="row">
+            <div class="col wrap">
+                {control minecraftConnection}
+            </div>
+            <div class="col">
+                {control discordConnection}
+            </div>
         </div>
-        <div class="col wrap">
-            <h2><i class="fa-brands fa-discord text-primary"></i> Discord</h2>
-            <span>Propojen: {($isDiscordConnected ? 'common.yes' : 'common.no')|translate}</span>
-            {if $isDiscordConnected}
-                <br>
-                <button type="button" class="btn btn-outline-danger w-25"
-                        data-toggle="sweetalert"
-                        data-type="confirm"
-                        data-action="link"
-                        data-scope="warning"
-                        data-text="Opravdu chcete odpojit svůj Discord účet?"
-                        data-link="{link Connections:disconnect 'type' => App\Enum\EConnectTokenType::DISCORD}"
-                >Odpojit</button>
-            {else}
-                <br>
-                <a n:href="generateToken! 'discord'" class="ajax btn btn-outline-success w-25">Propojit</a>
-            {/if}
-        </div>
-    </div>
+    {/snippetArea}
 {/block content}

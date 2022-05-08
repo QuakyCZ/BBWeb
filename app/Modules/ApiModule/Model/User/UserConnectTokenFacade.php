@@ -15,6 +15,9 @@ class UserConnectTokenFacade
     {
     }
 
+    /**
+     * @return string
+     */
     public function generateToken(): string
     {
         return implode('-', str_split(Random::generate(16,'0-9A-Z'),4));
@@ -28,6 +31,9 @@ class UserConnectTokenFacade
      */
     public function saveToken(string $type, int $userId, ?string $token = null): ActiveRow
     {
+
+        $this->userConnectTokenRepository->deletePreviousTokens($userId, $type);
+
         if ($token === null)
         {
             $token = $this->generateToken();
@@ -36,7 +42,8 @@ class UserConnectTokenFacade
         return $this->userConnectTokenRepository->save([
             UserConnectTokenRepository::COLUMN_USER_ID => $userId,
             UserConnectTokenRepository::COLUMN_TOKEN => $token,
-            UserConnectTokenRepository::COLUMN_TYPE => $type
+            UserConnectTokenRepository::COLUMN_TYPE => $type,
+            UserConnectTokenRepository::COLUMN_VALID_TO => (new \DateTime())->add(new \DateInterval('PT30M'))
         ]);
     }
 

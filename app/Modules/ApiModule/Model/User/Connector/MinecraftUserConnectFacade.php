@@ -6,7 +6,9 @@ use App\Enum\EConnectTokenType;
 use App\Modules\ApiModule\Model\User\UserConnectTokenFacade;
 use App\Modules\ApiModule\Model\User\UserFacade;
 use App\Repository\Primary\UserMinecraftAccountRepository;
+use App\Utils\MinecraftUtils;
 use Nette\Application\BadRequestException;
+use Nette\Database\Table\ActiveRow;
 use Nette\Utils\JsonException;
 use Throwable;
 use Tomaj\NetteApi\Response\JsonApiResponse;
@@ -32,8 +34,6 @@ class MinecraftUserConnectFacade extends BaseUserConnectFacade
      * @param int $userId
      * @param array $data
      * @return ResponseInterface
-     * @throws BadRequestException
-     * @throws JsonException
      * @throws Throwable
      */
     public function connect(int $userId, array $data): ResponseInterface
@@ -49,9 +49,17 @@ class MinecraftUserConnectFacade extends BaseUserConnectFacade
             ]);
         }
 
-        $uuid = str_replace('-', '', $uuid);
+        if ($this->isConnected($userId))
+        {
+            return new JsonApiResponse(400, [
+                'status' => 'error',
+                'message' => 'Tento účet je již spárován.'
+            ]);
+        }
 
-        if (!ctype_xdigit($uuid) || strlen($uuid) % 2 !== 0)
+        $uuidBin = MinecraftUtils::uuid2bin($uuid);
+
+        if ($uuidBin === false)
         {
             return new JsonApiResponse(400, [
                 'status' => 'error',
@@ -59,21 +67,9 @@ class MinecraftUserConnectFacade extends BaseUserConnectFacade
             ]);
         }
 
-        if ($this->userMinecraftAccountRepository->getAccountByUUID($uuid) !== null)
-        {
-            return new JsonApiResponse(200, [
-                'status' => 'error',
-                'message' => 'Tento účet je již spárován.'
-            ]);
-        }
-
         try
         {
-            $this->userMinecraftAccountRepository->save([
-                UserMinecraftAccountRepository::COLUMN_USER_ID => $userId,
-                UserMinecraftAccountRepository::COLUMN_NICK => $nick,
-                UserMinecraftAccountRepository::COLUMN_UUID => $uuid
-            ]);
+            $this->userMinecraftAccountRepository->saveAccount($userId, $uuidBin, $nick);
             return new JsonApiResponse(200, [
                 'status' => 'ok',
                 'user_id' => $userId
@@ -89,8 +85,30 @@ class MinecraftUserConnectFacade extends BaseUserConnectFacade
         }
     }
 
+    /**
+     * @param int $userId
+     * @return bool
+     */
+    public function isConnected(int $userId): bool
+    {
+        return $this->userMinecraftAccountRepository->getAccountByUserId($userId) !== null;
+    }
+
+    /**
+     * @param int $userId
+     * @return ActiveRow|null
+     */
+    public function getAccount(int $userId): ?ActiveRow
+    {
+        return $this->userMinecraftAccountRepository->getAccountByUserId($userId);
+    }
+
+    /**
+     * @param int $userId
+     * @return bool
+     */
     public function disconnect(int $userId): bool
     {
-        // TODO: Implement disconnect() method.
+        return $this->userMinecraftAccountRepository->deleteAccount($userId);
     }
 }

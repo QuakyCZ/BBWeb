@@ -21,15 +21,14 @@ final class UserConnectFacadeFactory
 
     /**
      * @param string $type
-     * @return BaseUserConnectFacade
-     * @throws BadRequestException
+     * @return BaseUserConnectFacade|null
      */
-    public function getInstanceOf(string $type): BaseUserConnectFacade
+    public function getInstanceOf(string $type): ?BaseUserConnectFacade
     {
         switch ($type)
         {
             default:
-                throw new BadRequestException('Neznámý typ propojení.');
+                return null;
             case EConnectTokenType::MINECRAFT:
                 return $this->minecraftUserConnectFacade;
             case EConnectTokenType::DISCORD:

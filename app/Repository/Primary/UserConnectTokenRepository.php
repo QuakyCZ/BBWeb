@@ -55,12 +55,14 @@ class UserConnectTokenRepository extends PrimaryRepository
 
     /**
      * @param int $userId
+     * @param string $type
      * @return int
      */
-    public function deletePreviousTokens(int $userId): int
+    public function deletePreviousTokens(int $userId, string $type): int
     {
         return $this->findBy([
             self::COLUMN_USER_ID => $userId,
+            self::COLUMN_TYPE => $type,
             self::COLUMN_USED => 0
         ])->update([
             self::COLUMN_NOT_DELETED => null

@@ -9,4 +9,5 @@ services:
     - App\Modules\AdminModule\Component\Settings\ISettingsGridFactory
     - App\Modules\WebModule\Component\Feedback\FeedbackFormFactory
 
-    - App\Modules\ClientModule\Component\MinecraftConnect\IMinecraftConnectFormFactory
+    - App\Modules\ClientModule\Component\Connection\Minecraft\IMinecraftConnectionFactory
+    - App\Modules\ClientModule\Component\Connection\Discord\IDiscordConnectionFactory

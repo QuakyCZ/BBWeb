@@ -26,13 +26,47 @@ class UserMinecraftAccountRepository extends PrimaryRepository
     }
 
     /**
-     * @param string $uuid
+     * @param string $uuidBin Must be converted to binary. Eg. hex2bin(uuid)
      * @return ActiveRow|null
      */
-    public function getAccountByUUID(string $uuid): ?ActiveRow
+    public function getAccountByUUID(string $uuidBin): ?ActiveRow
     {
         return $this->findBy([
-            self::COLUMN_UUID => hex2bin($uuid)
+            self::COLUMN_UUID => $uuidBin
         ])->fetch();
+    }
+
+    /**
+     * @param int $userId
+     * @param string $uuidBin
+     * @param string $nick
+     * @return ?ActiveRow
+     */
+    public function saveAccount(int $userId, string $uuidBin, string $nick): ?ActiveRow
+    {
+        return $this->save([
+            self::COLUMN_USER_ID => $userId,
+            self::COLUMN_UUID => $uuidBin,
+            self::COLUMN_NICK => $nick
+        ]);
+    }
+
+    /**
+     * @param int $userId
+     * @return bool
+     */
+    public function deleteAccount(int $userId): bool
+    {
+        $row = $this->getAccountByUserId($userId);
+        if ($row === null)
+        {
+            return false;
+        }
+
+        $row->update([
+            self::COLUMN_NOT_DELETED => null
+        ]);
+
+        return true;
     }
 }

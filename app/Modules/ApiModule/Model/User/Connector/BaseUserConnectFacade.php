@@ -25,6 +25,16 @@ abstract class BaseUserConnectFacade
     }
 
     /**
+     * @param int $userId
+     * @return ActiveRow
+     */
+    public function generateToken(int $userId): ActiveRow
+    {
+        $token = $this->userConnectTokenFacade->generateToken();
+        return $this->userConnectTokenFacade->saveToken($this->type, $userId, $token);
+    }
+
+    /**
      * @param string $token
      * @param array|null $data
      * @return ActiveRow|null
@@ -40,6 +50,21 @@ abstract class BaseUserConnectFacade
      * @return ResponseInterface
      */
     abstract public function connect(int $userId, array $data): ResponseInterface;
+
+    /**
+     * @param int $userId
+     * @return bool
+     */
+    public function isConnected(int $userId): bool
+    {
+        return $this->getAccount($userId) !== null;
+    }
+
+    /**
+     * @param int $userId
+     * @return ActiveRow|null
+     */
+    abstract public function getAccount(int $userId): ?ActiveRow;
 
     /**
      * @param int $userId
