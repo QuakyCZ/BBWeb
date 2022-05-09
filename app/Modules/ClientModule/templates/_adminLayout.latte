@@ -1,6 +1,6 @@
 {varType string $minecraftNick}
 {block body}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+ <!--   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"><img src="{$basePath}/img/logo.png" alt="BeastBlock.cz" height="50px"></a> <span style="color: #707986;">Klientská zóna</span>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -18,13 +18,46 @@
                 {/if}
             </div>
         </div>
+    </nav>-->
+    <nav class="navbar navbar-expand-xl navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="https://beastblock.cz/">
+                <img src="../../img/logo.svg" alt="" width="150px">
+              </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mt-3 mt-xl-0 mb-lg-0">
+              <li class="nav-item">
+                <a href="https://discord.beastblock.cz/" class="nav-link">PODPORA</a>
+              </li>
+              <hr class="nav-divider"></hr>
+              <li class="nav-item">
+                <a href="https://beastblock.cz/feedback/" target="_blank" style="margin-right: 0; font-size: 18px;" class="nav-link"><i class="fa-solid fa-bug"></i></a>
+              </li>
+              <hr class="nav-divider"></hr>
+              <li class="nav-item">
+                {if $user->isLoggedIn()}
+                    <a n:href="Sign:out" class="nav-link me-2 text-nowrap">ODHLÁSIT SE</a>
+                    </li>
+                    <img alt="{$minecraftNick ?? 'user'}" src="https://minotar.net/avatar/{$minecraftNick ?? 'user'}/250" class="skin last ms-3 ms-xl-0" style="width: 50px; border-radius: 7px;">
+                {else}
+                    <a n:href="Sign:in" class="nav-link last">Přihlásit se</a>
+                    </li>
+                {/if}
+              <form>
+            </div>
+            </ul>
+          </div>
+        </div>
     </nav>
     <div class="row">
-        <div class="col col-md-2" style="padding: 0;">
+        <div class="col-12 col-md-auto px-0">
             {control menu}
         </div>
-        <div class="col">
-            <div class="card bg-dark text-light px-5 pt-3 pb-5">
+        <div class="col-12 col-md px-0">
+            <div class="card content text-light">
                 {snippetArea content}
                     {include content}
                 {/snippetArea}

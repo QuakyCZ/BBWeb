@@ -9,6 +9,7 @@
     --white-color: #fff;
     --black-color: #242529;
     --nav-accent: #c69c3a;
+    --nav-accent-2: #e4b13a;
     --shop-text: #5b727f;
 }
 
@@ -592,6 +593,69 @@ i.fa-stream:hover, i.fa-stream:active {
     background-color: #1C2124;
 }
 
+.sidebar {
+    height: 89.68vh;
+    width: max(350px, ((100vw - 1050px) / 2) - 0px);
+    background-color: #0d121cc5;
+    padding: 1rem;
+    border-top: 1px solid #21272b;
+}
+
+.sidebar > * > * > .btn {
+    height: 48px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 0 16px;
+}
+
+.collapse > * > * > .btn {
+    height: 36px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 0 16px;
+    background-color: #0d121c5b;
+    border: 1px solid var(--shop-text);
+    font-size: 0.9rem;
+}
+
+.btn-custom-dark {
+    background-color: var(--black-color);
+    color: var(--white-color);
+}
+
+.btn-custom-dark:hover {
+    background-color: var(--shop-text);
+    color: var(--white-color);
+}
+
+.btn.active {
+    background-color: var(--nav-accent) !important;
+    color: var(--white-color) !important;
+}
+
+.btn.active:hover {
+    background-color: var(--nav-accent-2) !important;
+    color: var(--black-color) !important;
+}
+
+.content {
+    height: 89.68vh;
+    border-radius: 0;
+    background-color: #191a1f;
+    padding: 2.5rem;
+}
+
+p {
+    font-size: 1.1rem !important;
+    color: #afb1b9 !important;
+}
+
+.content > hr {
+    color: #3d3f63;
+}
+
 @media (max-width: 1200px) {
     body {
         background: black url("../img/bg.jpg") no-repeat center;
@@ -750,5 +814,12 @@ i.fa-stream:hover, i.fa-stream:active {
 
     .middle {
         width: 60vw;
+    }
+}
+
+@media screen and (max-width: 793px) {
+    .sidebar {
+        height: auto;
+        width: 100%;
     }
 }
