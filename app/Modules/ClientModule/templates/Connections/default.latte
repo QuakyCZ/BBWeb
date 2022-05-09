@@ -1,40 +1,21 @@
 {varType bool $isMinecraftConnected}
+{varType bool $isDiscordConnected}
 {varType string $minecraftNick}
 {block content}
-<h1>Propojení</h1>
-<hr class="bg-light">
-<div class="row">
-    <div class="col">
-        <h2><i class="fa-solid fa-cube text-success"></i> Minecraft</h2>
-        <span>Propojen: {($isMinecraftConnected ? 'common.yes' : 'common.no')|translate}</span>
-        {if $isMinecraftConnected}
-            <br>
-            <span>Nick: {$minecraftNick}</span>
-            <br>
-            <button type="button" class="btn btn-outline-danger w-25"
-                    data-toggle="sweetalert"
-                    data-type="confirm"
-                    data-action="link"
-                    data-scope="warning"
-                    data-text="Opravdu chcete odpojit svůj Minecraft účet?"
-                    data-link="{link Connections:disconnect 'type' => App\Enum\EConnectTokenType::MINECRAFT}"
-            >Odpojit</button>
-        {else}
-            <br>
-            <span>Příkaz na propojení:</span>
-            <div class="card bg-light w-50 text-center">
-                <code>/connectweb</code>
-            </div>
-
-            {control minecraftConnectForm}
-        {/if}
+    <div class="d-flex justify-content-between">
+        <h1 class="fw-bold">Propojení</h1> <span class="badge bg-success d-flex align-items-center justify-content-center px-5">NOVINKA | BETA VERZE</span>
     </div>
-    <div class="col wrap">
-        <h2><i class="fa-brands fa-discord text-primary"></i> Discord</h2>
-        <span>Na této vlastnosti stále pracujeme.</span>
-    </div>
-</div>
-
-<script>
-
-</script>
+    <hr>
+    {snippetArea connections}
+        <div class="row">
+            {snippetArea connectionWrapper}
+                <div class="col-12 col-lg">
+                    {control minecraftConnection}
+                </div>
+                <div class="col-12 col-lg mt-5 mt-lg-0">
+                    {control discordConnection}
+                </div>
+            {/snippetArea}
+        </div>
+    {/snippetArea}
+{/block content}

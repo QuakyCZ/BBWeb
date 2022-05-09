@@ -86,26 +86,29 @@ class UserFacade
     }
 
     /**
+     * @param int $userId
      * @param string $type
-     * @param array $data
      * @return string
-     * @throws JsonException
      */
-    public function createToken(string $type, array $data): string
+    public function createToken(int $userId, string $type): string
     {
+        return $this->connectTokenRepository->runInTransaction(function () use ($userId, $type)
+        {
+            $this->connectTokenRepository->deletePreviousTokens($userId);
 
-        $token = Keygen::alphanum(16)->generate(function($key) {
-            return implode('-', str_split(mb_strtoupper($key), 4));
+            $token = Keygen::alphanum(16)->generate(function ($key)
+            {
+                return implode('-', str_split(mb_strtoupper($key), 4));
+            });
+
+            $this->connectTokenRepository->save([
+                UserConnectTokenRepository::COLUMN_USER_ID => $userId,
+                UserConnectTokenRepository::COLUMN_TOKEN => $token,
+                UserConnectTokenRepository::COLUMN_TYPE => $type,
+                UserConnectTokenRepository::COLUMN_VALID_TO => (new DateTime())->add(new DateInterval('PT30M'))
+            ]);
+            return $token;
         });
-
-        $this->connectTokenRepository->save([
-            UserConnectTokenRepository::COLUMN_TOKEN => $token,
-            UserConnectTokenRepository::COLUMN_TYPE => $type,
-            UserConnectTokenRepository::COLUMN_DATA => Json::encode($data),
-            UserConnectTokenRepository::COLUMN_VALID_TO => (new DateTime())->add(new DateInterval('PT30M'))
-        ]);
-
-        return $token;
     }
 
     public function isConnectedToMinecraft(string $uuid): bool

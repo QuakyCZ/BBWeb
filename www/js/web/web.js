@@ -1,1 +1,2 @@
 $.nette.init();
+naja.initialize;

@@ -15,7 +15,7 @@
   \***************************/
 /***/ (() => {
 
-eval("$.nette.init();\n\n//# sourceURL=webpack://web/./www/js/web/web.js?");
+eval("$.nette.init();\nnaja.initialize;\n\n//# sourceURL=webpack://web/./www/js/web/web.js?");
 
 /***/ })
 

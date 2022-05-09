@@ -2,69 +2,36 @@
 
 namespace App\Modules\ClientModule\Presenter;
 
-use App\Enum\EConnectTokenType;
-use App\Enum\EFlashMessageType;
-use App\Modules\ApiModule\Model\User\UserFacade;
-use App\Modules\ClientModule\Component\MinecraftConnect\IMinecraftConnectFormFactory;
-use App\Modules\ClientModule\Component\MinecraftConnect\MinecraftConnectForm;
-use App\Repository\Primary\UserMinecraftAccountRepository;
-use Nette\Application\AbortException;
-use Nette\Application\BadRequestException;
-use Tracy\Debugger;
+use App\Modules\ClientModule\Component\Connection\Discord\DiscordConnection;
+use App\Modules\ClientModule\Component\Connection\Discord\IDiscordConnectionFactory;
+use App\Modules\ClientModule\Component\Connection\Minecraft\IMinecraftConnectionFactory;
+use App\Modules\ClientModule\Component\Connection\Minecraft\MinecraftConnection;
 
 class ConnectionsPresenter extends ClientPresenter
 {
 
     public function __construct
     (
-        private UserFacade $userFacade,
-        private UserMinecraftAccountRepository $userMinecraftAccountRepository,
-        private IMinecraftConnectFormFactory $minecraftConnectFormFactory
+        private IMinecraftConnectionFactory    $minecraftConnectionFactory,
+        private IDiscordConnectionFactory      $discordConnectionFactory,
     )
     {
         parent::__construct();
     }
 
-    public function actionDefault(): void
+    /**
+     * @return MinecraftConnection
+     */
+    public function createComponentMinecraftConnection(): MinecraftConnection
     {
-        $minecraftConnection = $this->userMinecraftAccountRepository->getAccountByUserId($this->getUser()->getId());
-        $minecraftConnected = $minecraftConnection !== null;
-
-        $this->template->isMinecraftConnected = $minecraftConnected;
-        if ($minecraftConnected)
-        {
-            $this->template->minecraftNick = $minecraftConnection[UserMinecraftAccountRepository::COLUMN_NICK];
-        }
+        return $this->minecraftConnectionFactory->create($this->getUser()->getId());
     }
 
     /**
-     * @throws BadRequestException
-     * @throws AbortException
+     * @return DiscordConnection
      */
-    public function actionDisconnect(string $type): void
+    public function createComponentDiscordConnection(): DiscordConnection
     {
-        try
-        {
-            $this->userFacade->disconnect($this->getUser()->getId(), $type);
-            $this->flashMessage('Účet byl odpojen.', EFlashMessageType::INFO);
-        }
-        catch (BadRequestException $exception)
-        {
-            $this->flashMessage($exception->getMessage(), EFlashMessageType::WARNING);
-            throw $exception;
-        }
-        catch (\PDOException $exception)
-        {
-            Debugger::log($exception, 'connections', EFlashMessageType::ERROR);
-            $this->flashMessage('Při zpracování požadavku nastala chyba.');
-        }
-
-        $this->redirect('Connections:default');
-
-    }
-
-    public function createComponentMinecraftConnectForm(): MinecraftConnectForm
-    {
-        return $this->minecraftConnectFormFactory->create();
+        return $this->discordConnectionFactory->create($this->getUser()->getId());
     }
 }
