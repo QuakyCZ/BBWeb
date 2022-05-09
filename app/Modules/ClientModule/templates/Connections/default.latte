@@ -2,15 +2,17 @@
 {varType bool $isDiscordConnected}
 {varType string $minecraftNick}
 {block content}
-    <h1>Propojení</h1>
-    <hr class="bg-light">
+    <div class="d-flex justify-content-between">
+        <h1 class="fw-bold">Propojení</h1> <span class="badge bg-success d-flex align-items-center justify-content-center px-5">NOVINKA | BETA VERZE</span>
+    </div>
+    <hr>
     {snippetArea connections}
         <div class="row">
             {snippetArea connectionWrapper}
-                <div class="col wrap">
+                <div class="col-12 col-lg">
                     {control minecraftConnection}
                 </div>
-                <div class="col">
+                <div class="col-12 col-lg mt-5 mt-lg-0">
                     {control discordConnection}
                 </div>
             {/snippetArea}

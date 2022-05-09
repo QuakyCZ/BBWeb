@@ -1,6 +1,6 @@
 {varType bool $isConnected}
 {snippet connection}
-    <h2><i class="fa-brands fa-discord text-primary"></i> Discord</h2>
+    <h2 class="fw-bold"><i class="fa-brands fa-discord text-primary"></i> Discord</h2>
     <span>Propojen: {($isConnected ? 'common.yes' : 'common.no')|translate}</span>
     {if $isConnected}
         <br>
@@ -15,7 +15,29 @@
         >Odpojit</button>
     {else}
         <br>
-        <a n:href="generateToken!" id="discord-connect-btn" class="ajax btn btn-outline-success w-25">Propojit</a>
+        <div class="row g-1">
+            <div class="col-3">
+                <a n:href="generateToken!" id="discord-connect-btn" class="ajax btn btn-outline-success w-100">Propojit účet</a>
+            </div>
+            <div class="col-auto">
+                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#dscModal">Informace</button>
+            </div>
+        </div>
+
+<!-- Modal -->
+<div class="modal fade" id="dscModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold" id="exampleModalLabel">Informace o propojení přes Discord</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Pro propojení je potřeba být připojen na našem <a href="https://discord.beastblock.cz" target="_blank">Discord serveru</a>. Příkaz /link ... můžete použít kdekoliv, nikdo neuvidí spuštěný příkaz krom vás. K propojení není třeba vlastnit Discord nitro ani mít propojený Minecraft.
+      </div>
+    </div>
+  </div>
+</div>
     {/if}
 {/snippet}
 <script>
