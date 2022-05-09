@@ -28,7 +28,22 @@ class DiscordConnection extends BaseConnection
      */
     public function handleGenerateToken(): void
     {
+        if ($this->userConnectFacade->isConnected($this->userId))
+        {
+            if ($this->presenter->isAjax())
+            {
+                $this->presenter->redrawControl('flashes');
+                $this->redrawControl('connection');
+            }
+            else
+            {
+                $this->presenter->redirect('default');
+            }
+            return;
+        }
+
         $message = new \stdClass();
+
         try
         {
             $token = $this->userConnectFacade->generateToken($this->userId);
@@ -49,10 +64,11 @@ class DiscordConnection extends BaseConnection
         if ($this->presenter->isAjax())
         {
             $this->presenter->redrawControl('flashes');
+            $this->redrawControl('connection');
         }
         else
         {
-            $this->redirect('default');
+            $this->presenter->redirect('default');
         }
     }
 }

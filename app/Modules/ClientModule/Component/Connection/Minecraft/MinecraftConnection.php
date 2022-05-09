@@ -48,6 +48,7 @@ class MinecraftConnection extends BaseConnection
         if ($this->presenter->isAjax())
         {
             $this->presenter->redrawControl('flashes');
+            $this->redrawControl('connection');
         }
         else
         {

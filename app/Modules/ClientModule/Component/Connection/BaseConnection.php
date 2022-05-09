@@ -79,13 +79,21 @@ abstract class BaseConnection extends BaseComponent
 
         if ($this->presenter->isAjax())
         {
-            $this->redrawControl('flashes');
+            $this->presenter->redrawControl('flashes');
             $this->redrawControl('connection');
         }
         else
         {
             $this->presenter->redirect('default');
         }
+    }
+
+    /**
+     * @throws AbortException
+     */
+    public function handleDefault(): void
+    {
+        $this->presenter->redirect('default');
     }
 
     /**

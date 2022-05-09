@@ -6,12 +6,14 @@
     <hr class="bg-light">
     {snippetArea connections}
         <div class="row">
-            <div class="col wrap">
-                {control minecraftConnection}
-            </div>
-            <div class="col">
-                {control discordConnection}
-            </div>
+            {snippetArea connectionWrapper}
+                <div class="col wrap">
+                    {control minecraftConnection}
+                </div>
+                <div class="col">
+                    {control discordConnection}
+                </div>
+            {/snippetArea}
         </div>
     {/snippetArea}
 {/block content}
