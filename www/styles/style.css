@@ -578,18 +578,26 @@ i.fa-stream:hover, i.fa-stream:active {
 }
 
 .modal-header {
-    background-color: #161A1D;
-    color: var(--white-color) !important;
+    background-color: var(--nav-accent);
+    color: var(--black-color) !important;
     border-bottom-color: #292929 !important;
+    border-radius: 7px;
+    margin-bottom: 12px;
 }
 
 .modal-body {
-    background-color: #171b1e;
+    background-color: var(--black-color);
     color: var(--white-color) !important;
+    border-radius: 7px;
 }
 
 .modal > * > * > * > * > * > .card {
     background-color: #1C2124;
+}
+
+.modal-content {
+    background-color: transparent;
+    border: none;
 }
 
 .full-box {
@@ -660,6 +668,11 @@ p {
 .content > hr {
     color: #3d3f63;
 }
+
+.skin {
+    border: 2px solid var(--nav-accent);
+}
+
 
 @media (max-width: 1200px) {
     body {
