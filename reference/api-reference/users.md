@@ -6,8 +6,10 @@
 
 ## User actions
 
-{% swagger method="post" path="/users/connect" baseUrl="https://www.beastblock.cz/api/v1" summary="Tělo requestu musí být ve formátu JSON. " %}
+{% swagger method="post" path="/users/connect" baseUrl="https://www.beastblock.cz/api/v1" summary="Propojení účtu" %}
 {% swagger-description %}
+Tělo musí být ve formátu JSON.
+
 `{`\
 &#x20; `"type": "minecraft",`\
 &#x20; `"token": "token",`\
@@ -123,7 +125,7 @@ Bearer auth token
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="get" path="/users/account?user_id=int&type=string" baseUrl="https://beastblock.cz/api/v1" summary="Vrátí data o účtu podle typu" %}
+{% swagger method="get" path="/users/account?user_id=int&type=string" baseUrl="https://beastblock.cz/api/v1" summary="Účet podle typu" %}
 {% swagger-description %}
 
 {% endswagger-description %}
