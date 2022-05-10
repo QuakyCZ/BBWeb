@@ -673,6 +673,30 @@ p {
     border: 2px solid var(--nav-accent);
 }
 
+.announce {
+    background-color: #ff0e42;
+    color: var(--white-color);
+    border-radius: 0;
+    padding: 0.35rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #8b0f2a;
+    height: 28px;
+    width: 28px;
+    border-radius: 7px;
+}
+
+.icon-box svg {
+    transform: rotate(-20deg);
+}
+
 
 @media (max-width: 1200px) {
     body {
