@@ -554,6 +554,7 @@ i.fa-stream:hover, i.fa-stream:active {
 
 .nav-link:hover, .nav-link:active, .active {
     color: #D1B258 !important;
+    background-color: transparent;
 }
 
 .header-text {
@@ -671,6 +672,32 @@ p {
 
 .skin {
     border: 2px solid var(--nav-accent);
+}
+
+.announce {
+    color: var(--white-color);
+    border-radius: 0;
+    padding: 0.35rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.announce p {
+    color: unset;
+}
+
+.icon-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 28px;
+    width: 28px;
+    border-radius: 7px;
+}
+
+.icon-box svg {
+    transform: rotate(-20deg);
 }
 
 

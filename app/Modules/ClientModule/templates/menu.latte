@@ -8,14 +8,30 @@
             {foreach $itemsParent->getVisibleItemsOnMenu() as $item}
                 <li n:if="$item->isAllowed()" class="col-12 px-0 mb-2">
                     {if !empty($item->getVisibleItemsOnMenu())}
-                        <button type="button" class="btn btn-custom-dark text-nowrap align-items-center collapsed w-100" data-bs-toggle="collapse" data-bs-target="#{$item->getData('sublistId')}-collapse" aria-expanded="{$item->findActiveItem() !== null ? 'true' : 'false'}" aria-controls="{$item->getData('sublistId')}-collapse">
-                            <i n:class="$item->getData('icon')"></i> <div class="mx-2"></div> {$item->getRealTitle()}
+                        <button
+                                type="button"
+                                class="btn btn-custom-dark text-nowrap align-items-center collapsed w-100"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#{$item->getData('sublistId')}-collapse"
+                                aria-expanded="{$item->findActiveItem() !== null ? 'true' : 'false'}"
+                                aria-controls="{$item->getData('sublistId')}-collapse">
+                            <i n:class="$item->getData('icon')"></i>
+                            <div class="mx-2"></div>
+                            {$item->getRealTitle()}
                         </button>
                         <div id="{$item->getData('sublistId')}-collapse" class="collapse {$item->findActiveItem() !== null ? 'show' : ''} mt-2">
                             {include menu-branch, $item, false}
                         </div>
                     {else}
-                        <a href="{$item->getRealLink()}" class="btn btn-custom-dark w-100 text-nowrap {$item->isActive() ? active}"><div class="d-flex align-items-center"><i n:class="$item->getData('icon')"></i> <div class="mx-2"></div> <div class="col-10 text-truncate text-start">{$item->getRealTitle()}</div></div></a>
+                        <a href="{$item->getRealLink()}" class="btn btn-custom-dark w-100 text-nowrap {$item->isActive() ? active}">
+                            <div class="d-flex align-items-center">
+                                <i n:class="$item->getData('icon')"></i>
+                                <div class="mx-2"></div>
+                                <div class="col-10 text-truncate text-start">
+                                    {$item->getRealTitle()}
+                                </div>
+                            </div>
+                        </a>
                     {/if}
                 </li>
             {/foreach}
