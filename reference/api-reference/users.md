@@ -122,3 +122,66 @@ Bearer auth token
 ```
 {% endswagger-response %}
 {% endswagger %}
+
+{% swagger method="get" path="/users/account" baseUrl="https://beastblock.cz/api/v1" summary="Vrátí data o účtu podle typu" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+
+{% swagger-parameter in="query" name="user_id" required="true" %}
+ID webového uživatele
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="type" required="true" %}
+Typ účtu - minecraft / discord
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="Účet byl nalezen" %}
+```javascript
+{
+    "status": "ok",
+    "account": {
+        //minecraft:
+        "uuid": "uuid",
+        "nick": "nick"
+        //discord
+        "discord_id": "dc_id"
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="400: Bad Request" description="Typ účtu neexistuje" %}
+```javascript
+{
+    "status": "error",
+    "message": "Neexistující typ účtu"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="404: Not Found" description="Účet nebyl nalezen - webový / požadovaný" %}
+```javascript
+{
+    // Response
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="401: Unauthorized" description="" %}
+```javascript
+{
+    // Response
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="403: Forbidden" description="" %}
+```javascript
+{
+    // Response
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
