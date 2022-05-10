@@ -12,3 +12,5 @@ wd:
 
 dc:
 	rm -rf temp/cache/*
+npm-install:
+	cd docker && docker-compose run npm npm install
