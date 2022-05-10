@@ -13,7 +13,7 @@ class BasePresenter extends Presenter {
     /** @var Translator @inject */
     public $translator;
 
-    protected SettingsRepository $settingRepository;
+    protected SettingsRepository $settingsRepository;
 
     /**
      * @param SettingsRepository $settingRepository
@@ -24,7 +24,7 @@ class BasePresenter extends Presenter {
         SettingsRepository $settingRepository
     ): void
     {
-        $this->settingRepository = $settingRepository;
+        $this->settingsRepository = $settingRepository;
     }
 
     protected function startup() {
@@ -41,8 +41,8 @@ class BasePresenter extends Presenter {
 
     protected function beforeRender()
     {
-        $this->template->hosting = $this->settingRepository->getSettingValue('hosting');
-        $this->template->hostingUrl = $this->settingRepository->getSettingValue('hosting-url');
+        $this->template->hosting = $this->settingsRepository->getSettingValue('hosting');
+        $this->template->hostingUrl = $this->settingsRepository->getSettingValue('hosting-url');
 
         $alertEnabled = $this->settingsRepository->getByName('alert-enabled')['content'];
         $this->template->alertEnabled = $alertEnabled;
