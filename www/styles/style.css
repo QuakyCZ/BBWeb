@@ -700,6 +700,10 @@ p {
     transform: rotate(-20deg);
 }
 
+.nav-link:hover {
+    background-color: transparent;
+}
+
 
 @media (max-width: 1200px) {
     body {
