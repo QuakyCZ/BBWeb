@@ -3,6 +3,7 @@
 namespace App\Modules\ClientModule\Presenter;
 
 use App\Modules\ApiModule\Model\User\UserFacade;
+use App\Repository\Primary\SettingsRepository;
 use App\Repository\Primary\UserMinecraftAccountRepository;
 use App\Repository\Primary\UserRepository;
 use Contributte\MenuControl\UI\IMenuComponentFactory;
@@ -21,6 +22,7 @@ abstract class ClientPresenter extends Presenter
     private IMenuComponentFactory $menuComponentFactory;
     private UserRepository $userRepository;
     private UserMinecraftAccountRepository $userMinecraftAccountRepository;
+    protected SettingsRepository $settingsRepository;
 
     protected $presenterNamesWithPublicAccess = ['Sign', 'Error', 'Error4xx', 'Client:Sign', 'Client:Error', 'Client:Error4xx'];
 
@@ -28,17 +30,20 @@ abstract class ClientPresenter extends Presenter
      * @param IMenuComponentFactory $menuComponentFactory
      * @param UserRepository $userRepository
      * @param UserMinecraftAccountRepository $userMinecraftAccountRepository
+     * @param SettingsRepository $settingsRepository
      * @return void
      */
     public function injectBasePresenter (
         IMenuComponentFactory $menuComponentFactory,
         UserRepository $userRepository,
-        UserMinecraftAccountRepository $userMinecraftAccountRepository
+        UserMinecraftAccountRepository $userMinecraftAccountRepository,
+        SettingsRepository $settingsRepository
     ): void
     {
         $this->menuComponentFactory = $menuComponentFactory;
         $this->userRepository = $userRepository;
         $this->userMinecraftAccountRepository = $userMinecraftAccountRepository;
+        $this->settingsRepository = $settingsRepository;
     }
 
     /**
@@ -88,6 +93,21 @@ abstract class ClientPresenter extends Presenter
 
     protected function beforeRender()
     {
+
+        $alertEnabled = $this->settingsRepository->getByName('alert-enabled')['content'];
+        $this->template->alertEnabled = $alertEnabled;
+
+        if ($alertEnabled)
+        {
+            $alert = new \stdClass();
+            $alert->icon = $this->settingsRepository->getByName('alert-icon')['content'];
+            $alert->message = $this->settingsRepository->getByName('alert-message')['content'];
+            $alert->backgroundColor = $this->settingsRepository->getByName('alert-bg-color')['content'];
+            $alert->fontColor = $this->settingsRepository->getByName('alert-font-color')['content'];
+            $alert->iconBackgroundColor = $this->settingsRepository->getByName('alert-icon-background-color')['content'];
+            $this->template->alert = $alert;
+        }
+
         if ($this->getUser()->isLoggedIn())
         {
             $minecraft = $this->userMinecraftAccountRepository->getAccountByUserId($this->getUser()->getId());

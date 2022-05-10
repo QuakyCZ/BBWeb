@@ -1,16 +1,20 @@
 {block alert}
-  <div class="announce">
-    <div class="row d-flex">
-      <div class="col-auto d-flex justify-content-center align-items-center">
-        <div class="icon-box">
-          <i class="fas fa-bullhorn"></i>
+    {varType bool $alertEnabled}
+    {varType \stdClass $alert}
+    <div n:if="$alertEnabled" class="announce" style="background-color: {$alert->backgroundColor|noescape}; color: {$alert->fontColor|noescape} !important;">
+        <div class="row d-flex">
+            <div class="col-auto d-flex justify-content-center align-items-center">
+                <div class="icon-box" style="background-color: {$alert->iconBackgroundColor|noescape}">
+                    <i class="{$alert->icon}"></i>
+                </div>
+            </div>
+            <div class="col d-flex align-items-center">
+                <p class="m-0 fw-bold fs-6" style="color: {$alert->fontColor|noescape} !important;">
+                    {$alert->message}
+                </p>
+            </div>
         </div>
-      </div>
-      <div class="col d-flex align-items-center">
-        <p class="m-0 fw-bold text-light fs-6">Stránka se nyní nachází v beta verzi! Jakékoliv chyby nahlašte podpoře/přes ikonku brouka níže.</p>
-      </div>
     </div>
-  </div>
 {/block}
 
 
@@ -19,82 +23,89 @@
         <div class="container-fluid">
             <a class="navbar-brand" n:href="Homepage:">
                 <img src="./img/logo.svg" alt="" width="150px">
-              </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mt-3 mt-xl-0 mb-lg-0">
-              <li class="nav-item">
-                <a type="button" data-bs-toggle="modal" data-bs-target="#storeModal" class="nav-link">OBCHOD</a>
-              </li>
-              <hr class="nav-divider"></hr>
-              <li class="nav-item">
-                <a n:href="About:default#team" target="_self" class="nav-link">TÝM</a>
-              </li>
-              <hr class="nav-divider"></hr>
-              <li class="nav-item">
-                <a n:href="About:" target="_self" class="nav-link text-nowrap">O NÁS</a>
-              </li>
-              <hr class="nav-divider"></hr>
-              <li class="nav-item">
-                <a href="https://wiki.beastblock.cz" target="_blank" class="nav-link">WIKI</a>
-              </li>
-              <hr class="nav-divider"></hr>
-              <li class="nav-item">
-                <a href="https://status.beastblock.cz/" target="_blank" class="nav-link">STATUS</a>
-              </li>
-              <hr class="nav-divider"></hr>
-              <li class="nav-item">
-                <a n:href="About:default#contact" class="nav-link">KONTAKT</a>
-              </li>
-              <hr class="nav-divider"></hr>
-              <li class="nav-item">
-                <a n:href=":Client:Dashboard:default" class="nav-link">PROFIL</a>
-              </li>
-			  <hr class="nav-divider"></hr>
-              <li class="nav-item last">
-                <a n:href="Feedback:" style="margin-right: 0; font-size: 18px;" class="nav-link"><i class="fa-solid fa-bug"></i></a>
-              </li>
-            </ul>
-          </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mt-3 mt-xl-0 mb-lg-0">
+                    <li class="nav-item">
+                        <a type="button" data-bs-toggle="modal" data-bs-target="#storeModal" class="nav-link">OBCHOD</a>
+                    </li>
+                    <hr class="nav-divider">
+                    <li class="nav-item">
+                        <a n:href="About:default#team" target="_self" class="nav-link">TÝM</a>
+                    </li>
+                    <hr class="nav-divider">
+                    <li class="nav-item">
+                        <a n:href="About:" target="_self" class="nav-link text-nowrap">O NÁS</a>
+                    </li>
+                    <hr class="nav-divider">
+                    <li class="nav-item">
+                        <a href="https://wiki.beastblock.cz" target="_blank" class="nav-link">WIKI</a>
+                    </li>
+                    <hr class="nav-divider">
+                    <li class="nav-item">
+                        <a href="https://status.beastblock.cz/" target="_blank" class="nav-link">STATUS</a>
+                    </li>
+                    <hr class="nav-divider">
+                    <li class="nav-item">
+                        <a n:href="About:default#contact" class="nav-link">KONTAKT</a>
+                    </li>
+                    <hr class="nav-divider">
+                    <li class="nav-item">
+                        <a n:href=":Client:Dashboard:default" class="nav-link">PROFIL</a>
+                    </li>
+                    <hr class="nav-divider">
+                    <li class="nav-item last">
+                        <a n:href="Feedback:" style="margin-right: 0; font-size: 18px;" class="nav-link"><i
+                                    class="fa-solid fa-bug"></i></a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
-<div class="modal fade" id="storeModal" tabindex="-1" aria-labelledby="storeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title fw-bold" id="storeModalLabel">Vyber způsob platby</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-			<div class="col-md-6">
-				<div class="card h-100">
-					<div class="card-body w-100 d-flex justify-content-between flex-column">
-						<div>
-							<h5 class="card-title fw-bold"><i class="fa-solid fa-message blue-text me-1"></i> SMS PLATBA</h5>
-							<p class="card-text">Zatím nedostupné. Zkus se vrátit za pár týdnů.</p>
-						</div>
-						<div>
-							<a target="_blank" class="btn btn-primary disabled w-100">Nedostupné</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="card">
-					<div class="card-body">
-						<h5 class="card-title fw-bold"><i class="fa-brands fa-paypal blue-text me-1"></i> PAYPAL</h5>
-						<p class="card-text">PayPal je internetový platební systém, který umožňuje platby za nákupy na internetu a převody peněz mezi jednotlivými PayPal účty.</p>
-						<a href="https://store.beastblock.cz" target="_blank" class="btn btn-primary w-100">Přejít na obchod</a>
-					</div>
-				</div>
-			</div>
-		</div>
-      </div>
+    <div class="modal fade" id="storeModal" tabindex="-1" aria-labelledby="storeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="storeModalLabel">Vyber způsob platby</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body w-100 d-flex justify-content-between flex-column">
+                                    <div>
+                                        <h5 class="card-title fw-bold"><i
+                                                    class="fa-solid fa-message blue-text me-1"></i> SMS PLATBA</h5>
+                                        <p class="card-text">Zatím nedostupné. Zkus se vrátit za pár týdnů.</p>
+                                    </div>
+                                    <div>
+                                        <a target="_blank" class="btn btn-primary disabled w-100">Nedostupné</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold"><i class="fa-brands fa-paypal blue-text me-1"></i>
+                                        PAYPAL</h5>
+                                    <p class="card-text">PayPal je internetový platební systém, který umožňuje platby za
+                                        nákupy na internetu a převody peněz mezi jednotlivými PayPal účty.</p>
+                                    <a href="https://store.beastblock.cz" target="_blank" class="btn btn-primary w-100">Přejít
+                                        na obchod</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 {/block}

@@ -675,7 +675,6 @@ p {
 }
 
 .announce {
-    background-color: #ff0e42;
     color: var(--white-color);
     border-radius: 0;
     padding: 0.35rem 2rem;
@@ -684,11 +683,14 @@ p {
     align-items: center;
 }
 
+.announce p {
+    color: unset;
+}
+
 .icon-box {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #8b0f2a;
     height: 28px;
     width: 28px;
     border-radius: 7px;
