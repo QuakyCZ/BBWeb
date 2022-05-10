@@ -123,7 +123,7 @@ Bearer auth token
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="get" path="/users/account" baseUrl="https://beastblock.cz/api/v1" summary="Vrátí data o účtu podle typu" %}
+{% swagger method="get" path="/users/account?user_id=int&type=string" baseUrl="https://beastblock.cz/api/v1" summary="Vrátí data o účtu podle typu" %}
 {% swagger-description %}
 
 {% endswagger-description %}
