@@ -554,6 +554,7 @@ i.fa-stream:hover, i.fa-stream:active {
 
 .nav-link:hover, .nav-link:active, .active {
     color: #D1B258 !important;
+    background-color: transparent;
 }
 
 .header-text {
