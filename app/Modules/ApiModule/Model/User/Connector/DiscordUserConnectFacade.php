@@ -35,9 +35,9 @@ class DiscordUserConnectFacade extends BaseUserConnectFacade
      */
     public function connect(int $userId, array $data): ResponseInterface
     {
-        $id = $data['discord_id'] ?? null;
+        $discordId = $data['discord_id'] ?? null;
 
-        if ($id === null)
+        if ($discordId === null)
         {
             return new JsonApiResponse(400, [
                 'status' => 'error',
@@ -55,7 +55,7 @@ class DiscordUserConnectFacade extends BaseUserConnectFacade
 
         try
         {
-            $this->userDiscordAccountRepository->connect($id,$userId);
+            $this->userDiscordAccountRepository->connect($userId,$discordId);
 
             return new JsonApiResponse(200, [
                 'status' => 'ok',
