@@ -4,14 +4,16 @@
     <span>Propojen: {($isConnected ? 'common.yes' : 'common.no')|translate}</span>
     {if $isConnected}
         <br>
-        <button type="button" class="btn btn-outline-danger w-25"
-
+        <button type="button"
+                id="discord-disconnect-btn"
+                class="btn btn-outline-danger w-25 loading-btn mt-3"
                 data-toggle="sweetalert"
                 data-type="confirm"
                 data-action="ajax"
                 data-scope="warning"
                 data-text="Opravdu chcete odpojit svůj Discord účet?"
                 data-link="{link disconnect!}"
+                data-cancel-callback="resetButton()"
         >Odpojit</button>
     {else}
         <br>
