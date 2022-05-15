@@ -26,7 +26,8 @@
 		"contributte/recaptcha": "^3.4",
 		"contributte/menu-control": "^2.2",
 		"gladcodes/keygen": "^1.1",
-		"tomaj/nette-api": "^2.7"
+		"tomaj/nette-api": "^2.7",
+		"marc-mabe/php-enum": "^4.7"
 	},
 	"require-dev": {
 		"nette/tester": "^2.3",

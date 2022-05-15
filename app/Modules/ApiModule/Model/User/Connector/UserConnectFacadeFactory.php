@@ -3,7 +3,6 @@
 namespace App\Modules\ApiModule\Model\User\Connector;
 
 use App\Enum\EConnectTokenType;
-use Nette\Application\BadRequestException;
 
 final class UserConnectFacadeFactory
 {
