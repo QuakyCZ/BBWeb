@@ -6,6 +6,11 @@ services:
     apiDecider:
         factory: Tomaj\NetteApi\ApiDecider
         setup:
-          - addApi(\Tomaj\NetteApi\EndpointIdentifier('GET', 1, 'dungeon-escape', 'player'), App\Modules\ApiModule\v1\Handlers\DungeonEscape\PlayerInfoHandler(), @bearerTokenAuthorization)
-          - addApi(\Tomaj\NetteApi\EndpointIdentifier('POST', 1, 'users', 'connect'), App\Modules\ApiModule\v1\Handlers\Users\UserConnectHandler() , @bearerTokenAuthorization)
-          - addApi(\Tomaj\NetteApi\EndpointIdentifier('GET', 1, 'users', 'account'), App\Modules\ApiModule\v1\Handlers\Users\UserAccountHandler(), @bearerTokenAuthorization)
+          # Users
+            - addApi(\Tomaj\NetteApi\EndpointIdentifier('GET', 1, 'users', 'account'), App\Modules\ApiModule\v1\Handlers\Users\UserAccountHandler(), @bearerTokenAuthorization)
+            - addApi(\Tomaj\NetteApi\EndpointIdentifier('POST', 1, 'users', 'connect'), App\Modules\ApiModule\v1\Handlers\Users\UserConnectHandler(), @bearerTokenAuthorization)
+            - addApi(\Tomaj\NetteApi\EndpointIdentifier('POST', 1, 'users', 'disconnect'), App\Modules\ApiModule\v1\Handlers\Users\UserDisconnectHandler(), @bearerTokenAuthorization)
+          # Dungeon Escpape
+            - addApi(\Tomaj\NetteApi\EndpointIdentifier('GET', 1, 'dungeon-escape', 'player'), App\Modules\ApiModule\v1\Handlers\DungeonEscape\PlayerInfoHandler(), @bearerTokenAuthorization)
+
+

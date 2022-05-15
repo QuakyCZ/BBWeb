@@ -55,13 +55,22 @@ class UserDiscordAccountRepository extends PrimaryRepository
 
     /**
      * @param int $userId
-     * @return int|null
+     * @return bool
      */
-    public function disconnect(int $userId): ?int
+    public function disconnect(int $userId): bool
     {
-        return $this->getAccountByUserId($userId)?->update([
+        $row = $this->getAccountByUserId($userId);
+
+        if ($row === null)
+        {
+            return false;
+        }
+
+        $row->update([
             self::COLUMN_NOT_DELETED => null
         ]);
+
+        return true;
     }
 
 }

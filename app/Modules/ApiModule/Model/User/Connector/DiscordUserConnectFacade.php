@@ -87,6 +87,6 @@ class DiscordUserConnectFacade extends BaseUserConnectFacade
      */
     public function disconnect(int $userId): bool
     {
-        return $this->userDiscordAccountRepository->disconnect($userId) !== null;
+        return $this->userDiscordAccountRepository->disconnect($userId);
     }
 }
