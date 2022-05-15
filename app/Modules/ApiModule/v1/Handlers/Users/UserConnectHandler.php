@@ -49,7 +49,7 @@ class UserConnectHandler extends \Tomaj\NetteApi\Handlers\BaseHandler
             'properties' => [
                 self::PARAM_TYPE => [
                     'type' => 'string',
-                    'enum' => EConnectTokenType::$array
+                    'enum' => EConnectTokenType::getValues()
                 ],
                 self::PARAM_TOKEN => 'string',
                 self::PARAM_DATA => 'object'
