@@ -67,9 +67,9 @@ class UserConnectHandler extends \Tomaj\NetteApi\Handlers\BaseHandler
      */
     public function handle(array $params): ResponseInterface
     {
-        $type = $params['data'][self::PARAM_TYPE];
-        $token = $params['data'][self::PARAM_TOKEN];
-        $data = $params['data'][self::PARAM_DATA];
+        $type = $params[self::PARAM_DATA][self::PARAM_TYPE];
+        $token = $params[self::PARAM_DATA][self::PARAM_TOKEN];
+        $data = $params[self::PARAM_DATA][self::PARAM_DATA];
 
         $connector = $this->userConnectFacadeFactory->getInstanceOf($type);
         if ($connector === null)

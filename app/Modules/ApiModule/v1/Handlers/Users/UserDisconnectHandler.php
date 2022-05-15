@@ -7,6 +7,8 @@ use App\Modules\ApiModule\Model\User\Connector\UserConnectFacadeFactory;
 use App\Modules\ApiModule\v1\Enum\EErrorScopeType;
 use App\Modules\ApiModule\v1\Handlers\AbstractHandler;
 use League\Fractal\ScopeFactoryInterface;
+use Nette\Utils\Json;
+use Tomaj\NetteApi\Params\JsonInputParam;
 use Tomaj\NetteApi\Params\PostInputParam;
 use Tomaj\NetteApi\Response\JsonApiResponse;
 use Tomaj\NetteApi\Response\ResponseInterface;
@@ -15,7 +17,7 @@ use Tracy\ILogger;
 
 class UserDisconnectHandler extends AbstractHandler
 {
-
+    public const PARAM_DATA = 'data';
     public const PARAM_USER_ID = 'user_id';
     public const PARAM_TYPE = 'type';
 
@@ -34,9 +36,19 @@ class UserDisconnectHandler extends AbstractHandler
 
     public function params(): array
     {
+        $schema = [
+            'type' => 'object',
+            'properties' => [
+                self::PARAM_USER_ID => 'int',
+                self::PARAM_TYPE => [
+                    'type' => 'string',
+                    'enum' => EConnectTokenType::getValues()
+                ],
+            ],
+            'required' => [self::PARAM_USER_ID, self::PARAM_TYPE],
+        ];
         return [
-            (new PostInputParam(self::PARAM_USER_ID))->setRequired(),
-            (new PostInputParam(self::PARAM_TYPE))->setRequired()
+            (new JsonInputParam(self::PARAM_DATA, Json::encode($schema)))->setRequired()
         ];
     }
 
@@ -46,7 +58,7 @@ class UserDisconnectHandler extends AbstractHandler
      */
     protected function verifyParams(array $params): bool|ResponseInterface
     {
-        $userId = $params[self::PARAM_USER_ID];
+        $userId = $params[self::PARAM_DATA][self::PARAM_USER_ID];
         if (!is_int($userId))
         {
             return new JsonApiResponse(400, [
@@ -56,9 +68,9 @@ class UserDisconnectHandler extends AbstractHandler
             ]);
         }
 
-        $type = $params[self::PARAM_TYPE];
+        $type = $params[self::PARAM_DATA][self::PARAM_TYPE];
 
-        if (EConnectTokenType::hasValue($type))
+        if (!EConnectTokenType::hasValue($type))
         {
             return new JsonApiResponse(400, [
                 'status' => 'error',
@@ -72,7 +84,7 @@ class UserDisconnectHandler extends AbstractHandler
 
     protected function handleRequest(array $params): ResponseInterface
     {
-        $type = $params[self::PARAM_TYPE];
+        $type = $params[self::PARAM_DATA][self::PARAM_TYPE];
 
         $connector = $this->userConnectFacadeFactory->getInstanceOf($type);
 
@@ -85,7 +97,7 @@ class UserDisconnectHandler extends AbstractHandler
             ]);
         }
 
-        $userId = $params[self::PARAM_USER_ID];
+        $userId = $params[self::PARAM_DATA][self::PARAM_USER_ID];
 
         if (!$connector->isConnected($userId))
         {
