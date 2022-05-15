@@ -6,14 +6,11 @@
         <br>
         <button type="button"
                 id="discord-disconnect-btn"
-                class="btn btn-outline-danger w-25 loading-btn mt-3"
+                class="btn btn-outline-danger w-25 mt-3"
                 data-toggle="sweetalert"
-                data-type="confirm"
-                data-action="ajax"
+                data-type="modal"
                 data-scope="warning"
-                data-text="Opravdu chcete odpojit svůj Discord účet?"
-                data-link="{link disconnect!}"
-                data-cancel-callback="resetButton()"
+                data-html="Účet odpojíte zadáním následujícího příkazu na Discord serveru: <br><br> <code>/unlink</code>"
         >Odpojit</button>
     {else}
         <br>
@@ -61,17 +58,10 @@
             $(this).addClass('disabled');
             $(this).html("<div class='spinner-border text-success' role='status'><span class='sr-only'>Loading...</span></div>");
         });
-
-        $('#discord-disconnect-btn').click(function ()
-        {
-            $(this).addClass('disabled');
-            $(this).html("<div class='spinner-border text-danger' role='status'><span class='sr-only'>Loading...</span></div>");
-        });
     }
 
     function resetButton()
     {
         $('#discord-connect-btn').removeClass('disabled').text('Propojit');
-        $('#discord-disconnect-btn').removeClass('disabled').text('Odpojit');
     }
 </script>

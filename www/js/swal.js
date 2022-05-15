@@ -4,6 +4,7 @@ $(document).ready(function() {
         let options = {
             title: $(this).data('title'),
             text: $(this).data('text'),
+            html: $(this).data('html'),
             icon: $(this).data('scope'),
         }
 
