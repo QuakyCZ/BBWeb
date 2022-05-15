@@ -6,6 +6,68 @@
 
 ## User actions
 
+{% swagger method="get" path="/users/account?user_id=int&type=string" baseUrl="https://beastblock.cz/api/v1" summary="Účet podle typu" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+
+{% swagger-parameter in="query" name="user_id" required="true" %}
+ID webového uživatele
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="type" required="true" %}
+Typ účtu - minecraft / discord
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="Účet byl nalezen" %}
+```javascript
+{
+    "status": "ok",
+    "account": {
+        //minecraft:
+        "uuid": "uuid",
+        "nick": "nick"
+        //discord
+        "discord_id": "dc_id"
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="400: Bad Request" description="Typ účtu neexistuje" %}
+```javascript
+{
+    "status": "error",
+    "message": "Neexistující typ účtu"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="404: Not Found" description="Účet nebyl nalezen - webový / požadovaný" %}
+```javascript
+{
+    // Response
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="401: Unauthorized" description="" %}
+```javascript
+{
+    // Response
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="403: Forbidden" description="" %}
+```javascript
+{
+    // Response
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
 {% swagger method="post" path="/users/connect" baseUrl="https://www.beastblock.cz/api/v1" summary="Propojení účtu" %}
 {% swagger-description %}
 Tělo musí být ve formátu JSON.
@@ -125,65 +187,74 @@ Bearer auth token
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="get" path="/users/account?user_id=int&type=string" baseUrl="https://beastblock.cz/api/v1" summary="Účet podle typu" %}
+{% swagger method="post" path="/users/disconnect" baseUrl="https://beastblock.cz/api/v1" summary="Odpojení účtu" %}
 {% swagger-description %}
-
+Odpojí účet od serveru podle typu.
 {% endswagger-description %}
 
-{% swagger-parameter in="query" name="user_id" required="true" %}
-ID webového uživatele
+{% swagger-parameter in="body" name="user_id" type="int" %}
+id uživatele webu
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="type" required="true" %}
-Typ účtu - minecraft / discord
+{% swagger-parameter in="body" name="type" %}
+Typ propojení minecraft/discord
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="Účet byl nalezen" %}
+{% swagger-response status="200: OK" description="" %}
 ```javascript
 {
-    "status": "ok",
-    "account": {
-        //minecraft:
-        "uuid": "uuid",
-        "nick": "nick"
-        //discord
-        "discord_id": "dc_id"
-    }
+    // Response
 }
 ```
 {% endswagger-response %}
 
-{% swagger-response status="400: Bad Request" description="Typ účtu neexistuje" %}
+{% swagger-response status="400: Bad Request" description="user_id není int" %}
 ```javascript
 {
     "status": "error",
-    "message": "Neexistující typ účtu"
+    "scope": "api-error",
+    "message": "Parametr user_id musí být celé číslo"
 }
 ```
 {% endswagger-response %}
 
-{% swagger-response status="404: Not Found" description="Účet nebyl nalezen - webový / požadovaný" %}
+{% swagger-response status="400: Bad Request" description="Neplatný typ propojení" %}
 ```javascript
 {
-    // Response
+    "status": "error",
+    "scope": "api-error",
+    "message": "Neplatný typ propojení"
 }
 ```
 {% endswagger-response %}
 
-{% swagger-response status="401: Unauthorized" description="" %}
+{% swagger-response status="400: Bad Request" description="Účet není propojen" %}
 ```javascript
 {
-    // Response
+    "status": "error",
+    "scope": "logical-error",
+    "message": "Tento účet není propojen s %type% serverem."
 }
 ```
 {% endswagger-response %}
 
-{% swagger-response status="403: Forbidden" description="" %}
+{% swagger-response status="404: Not Found" description="Uživatel nebyl nalezen" %}
 ```javascript
 {
-    // Response
+    "status": "error",
+    "scope": "logical-error",
+    "message": "Uživatel nebyl nalezen."
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="500: Internal Server Error" description="Neznámá chyba" %}
+```javascript
+{
+    "status": "error",
+    "scope": "server-error",
+    "message": "Při zpracování požadavku nastala neznámá chyba."
 }
 ```
 {% endswagger-response %}
 {% endswagger %}
-
