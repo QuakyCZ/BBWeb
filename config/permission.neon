@@ -15,6 +15,7 @@ parameters:
             - Admin:Settings
             - Admin:Servers
             - Admin:Users
+        OWNER: []
         LEADER: []
         HELPER: []
         BUILDER: []
