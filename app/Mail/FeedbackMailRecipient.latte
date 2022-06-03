@@ -2,6 +2,7 @@
 {varType int $feedbackId}
 {varType string $nick}
 {varType string $email}
+{varType string $emailSender}
 {varType string $server}
 {varType string $description}
 {block content}
@@ -15,7 +16,7 @@
     <ul>
         <li><strong>Id:</strong> {$feedbackId}</li>
         <li><strong>Nick:</strong> {$nick}</li>
-        <li><strong>Email:</strong> {$email}</li>
+        <li><strong>Email:</strong> {$emailSender}</li>
         <li><strong>Server:</strong> {$server}</li>
         <li><strong>Popis:</strong> {$description}</li>
     </ul>

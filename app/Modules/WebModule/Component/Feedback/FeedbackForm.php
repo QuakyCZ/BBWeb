@@ -74,9 +74,9 @@ class FeedbackForm extends BaseComponent
         try
         {
             $repo->runInTransaction(
-                function(Explorer $database) use ($values, $server, $repo) {
+                function() use ($values, $server, $repo) {
                     $data = (array)$values;
-                    $row = $database->table(FeedbackRepository::TABLE_NAME)->insert($data);
+                    $row = $repo->save($data);
 
                     $data['server'] = $server['name'];
                     $data['feedbackId'] = $row['id'];
@@ -87,6 +87,8 @@ class FeedbackForm extends BaseComponent
                         __DIR__.'/../../../../Mail/FeedbackMailSender.latte',
                         $data
                     );
+
+                    $data['emailSender'] = $data['email'];
 
                     $this->mailFacade->sendMail(
                         'info@beastblock.cz',
