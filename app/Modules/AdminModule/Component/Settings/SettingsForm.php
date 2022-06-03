@@ -66,8 +66,6 @@ class SettingsForm extends BaseComponent
         $form = new Form();
 
         $nullable = $form->addCheckbox(SettingsRepository::COLUMN_NULLABLE, $this->translator->translate('admin.settings.field.nullable'))
-            ->setHtmlAttribute("class", "form-control")
-            ->setHtmlAttribute("style", "width: auto;")
             ->setDefaultValue(false);
 
         $form->addText(SettingsRepository::COLUMN_NAME, $this->translator->translate('admin.settings.field.name'))
@@ -75,9 +73,7 @@ class SettingsForm extends BaseComponent
             ->setRequired($this->translator->translate('admin.settings.field.error.name_required'));
 
         $form->addText(SettingsRepository::COLUMN_CONTENT, $this->translator->translate('admin.settings.field.content'))
-            ->setHtmlAttribute("class", "form-control")
-            ->addConditionOn($nullable, Form::FILLED)
-            ->setRequired($this->translator->translate('admin.settings.field.error.content_required'));
+            ->setHtmlAttribute("class", "form-control");
 
         $form->addSubmit('save', $this->translator->translate('common.field.save'))
             ->setHtmlAttribute("class", "btn btn-info");
