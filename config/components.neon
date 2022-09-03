@@ -12,6 +12,9 @@ services:
     - App\Modules\AdminModule\Component\Settings\ISettingsFormFactory
     - App\Modules\AdminModule\Component\Settings\ISettingsGridFactory
     - App\Modules\WebModule\Component\Feedback\FeedbackFormFactory
+    - App\Modules\AdminModule\Component\Article\IArticleFormFactory
+    - App\Modules\AdminModule\Component\Article\IArticleGridFactory
+    - App\Modules\WebModule\Component\ArticlesListing\IArticlesListingFactory
 
     - App\Modules\ClientModule\Component\Connection\Minecraft\IMinecraftConnectionFactory
     - App\Modules\ClientModule\Component\Connection\Discord\IDiscordConnectionFactory

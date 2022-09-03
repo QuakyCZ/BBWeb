@@ -1,0 +1,34 @@
+{varType Nette\Database\Table\ActiveRow $article}
+
+{block styles}
+    <link rel="stylesheet" type="text/css" href="{$basePath}/styles/about.css">
+{/block}
+{block beforeContent}
+    <a n:href="Homepage:">
+        <div class="back-button" onmouseover="this.style.backgroundColor='#ff03c2';this.style.color='white';"
+             onmouseout="this.style.backgroundColor='#16ccca';this.style.color='black';">
+            <b><i class="fa-solid fa-angles-left"></i></b>
+        </div>
+    </a>
+{/block}
+
+{block content}
+    <h1>{$article[App\Repository\Primary\ArticleRepository::COLUMN_TITLE]}</h1>
+    <div>
+        Vytvořeno:
+        <i class="fas fa-user"></i>
+        {$article->created_user['username']}
+        <i class="fas fa-calendar"></i>
+        {$article[App\Repository\Primary\ArticleRepository::COLUMN_CREATED]|date: 'd. m. Y H:i'}
+        {if $article[App\Repository\Primary\ArticleRepository::COLUMN_CHANGED]}
+            Upraveno:
+            <i class="fas fa-user"></i>
+            {$article->changed_user['username']}
+            <i class="fas fa-calendar"></i>
+            {$article[App\Repository\Primary\ArticleRepository::COLUMN_CHANGED]|date: 'd. m. Y H:i'}
+        {/if}
+    </div>
+    <div>
+        {$article[App\Repository\Primary\ArticleRepository::COLUMN_TEXT]}
+    </div>
+{/block}

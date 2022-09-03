@@ -16,6 +16,7 @@ parameters:
             - Admin:Settings
             - Admin:Servers
             - Admin:Users
+            - Admin:Article
             - Admin:Poll
         OWNER:
             - Admin:Default

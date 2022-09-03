@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Modules\WebModule\Presenter;
+
+use App\Modules\WebModule\Component\ArticlesListing\ArticlesListing;
+use App\Modules\WebModule\Component\ArticlesListing\IArticlesListingFactory;
+use App\Repository\Primary\ArticleRepository;
+use Nette\Application\BadRequestException;
+
+class ArticlesPresenter extends Base\BasePresenter
+{
+
+    private const ARTICLES_PER_PAGE = 10;
+
+    /**
+     * @param ArticleRepository $articleRepository
+     * @param IArticlesListingFactory $articlesListingFactory
+     */
+    public function __construct(
+        private ArticleRepository $articleRepository,
+        private IArticlesListingFactory $articlesListingFactory,
+    )
+    {
+        parent::__construct();
+    }
+
+
+    /**
+     * @param int $id id clanku
+     * @return void
+     * @throws BadRequestException
+     */
+    public function actionShow(int $id): void
+    {
+        $article = $this->articleRepository->findRow($id);
+        if ($article === null)
+        {
+            throw new BadRequestException();
+        }
+
+        $this->template->article = $article;
+    }
+
+    public function createComponentArticlesListing(): ArticlesListing
+    {
+        return $this->articlesListingFactory->create();
+    }
+}

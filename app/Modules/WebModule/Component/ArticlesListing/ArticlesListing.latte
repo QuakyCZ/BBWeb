@@ -1,0 +1,32 @@
+{varType Nette\Database\Table\ActiveRow[] $articles}
+{varType int $page}
+{varType int $pages}
+
+{snippet articles}
+    {foreach $articles as $article}
+        <div>
+            <div>
+                {if ((bool) $article[App\Repository\Primary\ArticleRepository::COLUMN_IS_PINNED]) === true}
+                    <i class="fas fa-thumbtack text-danger"></i>
+                {/if}
+                <h2><a href="{plink Articles:show 'id' => $article[App\Repository\Primary\ArticleRepository::COLUMN_ID]}">{$article[App\Repository\Primary\ArticleRepository::COLUMN_TITLE]}</a></h2>
+            </div>
+            <div>
+                <i class="fas fa-user"></i>
+                {$article->created_user['username']}
+                <i class="fas fa-calendar"></i>
+                {$article[App\Repository\Primary\ArticleRepository::COLUMN_CREATED]|date: 'd. m. Y H:i'}
+            </div>
+            <div>
+                {$article[App\Repository\Primary\ArticleRepository::COLUMN_TEXT]}
+            </div>
+        </div>
+    {/foreach}
+    {for $i = 0; $i < $pages; $i++}
+        {if $i+1 === $page}
+            {$i + 1}
+        {else}
+            <a n:href="page! 'page' => $i + 1" class="ajax">{$i + 1}</a>
+        {/if}
+    {/for}
+{/snippet}

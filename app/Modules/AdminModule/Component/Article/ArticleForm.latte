@@ -1,0 +1,26 @@
+{form form}
+    <div class="row" n:if="$form->hasErrors()">
+        <div class="alert alert-danger" n:foreach="$form->getErrors() as $error">{$error}</div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-2 form-label right col-form-label">{label title class => 'required' /}</div>
+        <div class="col-md-8">{input title class => "form-control"}</div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-2 form-label right col-form-label">{label text class => 'required' /}</div>
+        <div class="col-md-8">{input text class => 'form-control'}</div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-2 form-label right col-form-label">{label App\Repository\Primary\ArticleRepository::COLUMN_IS_PUBLISHED /}</div>
+        <div class="col-md-8">{input App\Repository\Primary\ArticleRepository::COLUMN_IS_PUBLISHED class => 'form-control'}</div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-2 form-label right col-form-label">{label App\Repository\Primary\ArticleRepository::COLUMN_IS_PINNED /}</div>
+        <div class="col-md-8">{input App\Repository\Primary\ArticleRepository::COLUMN_IS_PINNED class => 'form-control'}</div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-2 text-right">
+            {input save class => 'btn btn-info'}
+        </div>
+    </div>
+{/form}

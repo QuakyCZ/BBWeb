@@ -6,6 +6,7 @@ services:
     - App\Repository\Primary\UserMinecraftAccountRepository
     - App\Repository\Primary\UserDiscordAccountRepository
     - App\Repository\Primary\UserConnectTokenRepository
+    - App\Repository\Primary\ArticleRepository
     userTokenRepository: App\Repository\Primary\UserTokenRepository
     - App\Repository\Primary\ServerRepository
     - App\Repository\Primary\SettingsRepository

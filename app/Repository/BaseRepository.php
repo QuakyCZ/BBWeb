@@ -46,6 +46,24 @@ abstract class BaseRepository
         return $this->database->table($this->tableName)->insert($data);
     }
 
+    /**
+     * @param mixed $primary
+     * @param bool $withDeleted
+     * @return ActiveRow|null
+     */
+    public function findRow(mixed $primary, bool $withDeleted = false): ?ActiveRow
+    {
+        $selection = $this->database->table($this->tableName)
+            ->wherePrimary($primary);
+
+        if (!$withDeleted)
+        {
+            $selection->where('not_deleted', 1);
+        }
+
+        return $selection->fetch();
+    }
+
     public function findBy(array $conditions, bool $withDeleted = false): Selection {
         if ($withDeleted === false) {
             $conditions[$this->tableName . '.not_deleted'] = 1;
@@ -87,5 +105,17 @@ abstract class BaseRepository
     public function runInTransaction(callable $callback): mixed
     {
         return $this->database->transaction($callback);
+    }
+
+    /**
+     * @param int $page
+     * @param int $maxPerPage
+     * @param int $pageCount
+     * @return Selection
+     */
+    public function page(int $page, int $maxPerPage, int & $pageCount): Selection
+    {
+        return $this->findAll()
+            ->page($page, $maxPerPage, $pageCount);
     }
 }
