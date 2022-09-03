@@ -4,12 +4,12 @@
 
 {snippet articles}
     {foreach $articles as $article}
-        <div>
+        <div class = "link-container">
             <div>
                 {if ((bool) $article[App\Repository\Primary\ArticleRepository::COLUMN_IS_PINNED]) === true}
                     <i class="fas fa-thumbtack text-danger"></i>
                 {/if}
-                <h2><a href="{plink Articles:show 'id' => $article[App\Repository\Primary\ArticleRepository::COLUMN_ID]}">{$article[App\Repository\Primary\ArticleRepository::COLUMN_TITLE]}</a></h2>
+                <h2><a class="link-title" href="{plink Articles:show 'id' => $article[App\Repository\Primary\ArticleRepository::COLUMN_ID]}">{$article[App\Repository\Primary\ArticleRepository::COLUMN_TITLE]}</a></h2>
             </div>
             <div>
                 <i class="fas fa-user"></i>

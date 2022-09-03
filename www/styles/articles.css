@@ -1,0 +1,16 @@
+.link-title {
+    text-decoration: none;
+    color: #fac72e;
+    transition: .2s color;
+}
+
+.link-title:hover {
+    color: #AB8000;
+}
+
+.link-container {
+    background: #121720;
+    border-radius: 0.8rem;
+    padding: 1rem;
+    color: white;
+}
