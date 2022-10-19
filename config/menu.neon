@@ -82,6 +82,6 @@ menu:
                         data:
                             icon: 'fas fa-table'
             'admin.poll.title':
-                link: 'Client:Poll:default'
+                action: 'Client:Poll:default'
                 data:
                     icon: 'fas fa-poll'
