@@ -27,7 +27,7 @@ body {
     font-family: 'Ubuntu', sans-serif !important;
     font-weight: normal;
     padding: 0;
-    margin: 0;s
+    margin: 0;
 }
 
 h1 {
@@ -871,4 +871,12 @@ p {
         height: auto;
         width: 100%;
     }
+}
+
+.msf_multiselect {
+    color: black !important;
+}
+
+.msf_multiselect input {
+    margin-right: 5px;
 }

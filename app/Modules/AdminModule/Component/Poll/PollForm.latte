@@ -1,0 +1,106 @@
+{snippetArea  pollForm}
+    {form form class=>"form-horizontal form-normal", role=>"form"}
+        <div class="errors" n:if="$form->hasErrors()">
+            <div n:foreach="$form->errors as $error" class="alert alert-danger error" role="alert">
+                <div class="flash-message-body">{$error}</div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-2 form-label-column col-form-label">
+                {label question class => "form-label required" /}
+            </div>
+            <div class="col-sm-10 form-control-column">
+                {input question class => "form-control"}
+            </div>
+        </div>
+        {snippet options}
+            {var $i = 1}
+            <div n:multiplier="options" class="form-group row">
+                <div class="col-sm-2 form-label-column col-form-label required">
+                    {label App\Repository\Primary\PollOptionRepository::COLUMN_TEXT, class => 'form-label' /} {$i}
+                </div>
+                <div class="col-sm-10 row form-control-column">
+                    <div class="col-10">
+                        {input App\Repository\Primary\PollOptionRepository::COLUMN_TEXT, class => 'form-control'}
+                    </div>
+                    <div class="col-2">
+                        {btnRemove 'class' => 'btn btn-danger ajax'}
+                    </div>
+                </div>
+                {var $i = $i + 1}
+            </div>
+
+            {btnCreate options class => 'btn btn-secondary btn-block ajax'}
+        {/snippet}
+
+
+
+        <div class="form-group row">
+            <div class="col-sm-2 form-label-column col-form-label">
+                {label active class => "form-label required" /}
+            </div>
+            <div class="col-sm-10 form-control-column">
+                {input active class => "form-control"}
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <div class="col-sm-2 form-label-column col-form-label">
+                {label App\Repository\Primary\PollRepository::COLUMN_IS_PRIVATE class => "form-label" /}
+            </div>
+            <div class="col-sm-10 form-control-column">
+                {input App\Repository\Primary\PollRepository::COLUMN_IS_PRIVATE class => "form-control"}
+            </div>
+        </div>
+
+        <div id="participants-container">
+            <div class="form-group row">
+                <div class="col-sm-2 form-label-column col-form-label">
+                    {label user_ids class => "form-label required" /}
+                </div>
+                <div class="col-sm-10 form-control-column">
+                    {input user_ids class => "form-select form-select-sm multiselect", multiple, aria-label=>"multiple select example"}
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-2 form-label-column col-form-label">
+                    {label role_ids class => "form-label required" /}
+                </div>
+                <div class="col-sm-10 form-control-column">
+                    {input role_ids class => "form-select form-select-sm multiselect", multiple, aria-label=>"multiple select example"}
+                </div>
+            </div>
+        </div>
+
+        {input save, class => 'btn btn-success'}
+    {/form}
+{/snippetArea}
+
+<script src="{$basePath}/js/msfmultiselect.min.js"></script>
+<script>
+
+    $('.multiselect').each((i, el) => {
+        new MSFmultiSelect(
+            el,
+            {
+                selectAll: false,
+                searchBox: true,
+                placeholder: 'Vybrat',
+                className: 'form-select',
+                width: '100%'
+            }
+        );
+    })
+
+
+    console.log($('input[name="active"]').val());
+    $('input[name="active"]').daterangepicker({
+        timePicker: true,
+        locale: {
+            format: 'YYYY/MM/DD HH:mm'
+        },
+        timePicker24Hour: true
+    });
+</script>

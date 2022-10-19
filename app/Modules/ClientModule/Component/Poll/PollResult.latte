@@ -1,0 +1,8 @@
+{varType Nette\Database\Table\ActiveRow $poll}
+{varType int[] $pollResults}
+{var $pollOptions = $poll->related(App\Repository\Primary\PollOptionRepository::TABLE_NAME)->fetchAll()}
+{foreach $pollOptions as $option}
+    <div class="row">
+        <span><b>{$option[App\Repository\Primary\PollOptionRepository::COLUMN_TEXT]}: </b>{$pollResults[$option[App\Repository\Primary\PollOptionRepository::COLUMN_ID]] ?? 0}</span>
+    </div>
+{/foreach}

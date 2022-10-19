@@ -30,3 +30,7 @@ dungeonEscape:
     rooms: 'Místnosti'
     quests: 'Questy'
     statistics: 'Statistiky'
+poll:
+    title: 'Hlasování'
+    add: 'Přidat'
+    list: 'Seznam'

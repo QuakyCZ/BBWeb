@@ -11,7 +11,7 @@ use Ublaboo\DataGrid\Exception\DataGridException;
 
 abstract class BaseDataGrid
 {
-    private IContainer $parent;
+    protected IContainer $parent;
 
     protected DataGrid $grid;
 
@@ -39,7 +39,7 @@ abstract class BaseDataGrid
      */
     final public function create(): DataGrid
     {
-        $this->grid = new DataGrid($this->parent, $this->name);
+        $this->grid = new DataGrid(null, $this->name);
         $this->grid->setDataSource($this->getSelection());
         $this->grid->setTranslator($this->translator);
         $this->createGrid();

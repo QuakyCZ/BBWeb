@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f4161829714faf84559174a1ad03aa04",
+    "content-hash": "f64ddbb5e3a72c16caca804207ac248f",
     "packages": [
         {
             "name": "contributte/application",
@@ -152,6 +152,72 @@
                 "source": "https://github.com/contributte/di/tree/v0.5.1"
             },
             "time": "2020-12-26T17:02:42+00:00"
+        },
+        {
+            "name": "contributte/forms-multiplier",
+            "version": "v3.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/contributte/forms-multiplier.git",
+                "reference": "5bafb566431294220f7723616d8417cc631d0a43"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/contributte/forms-multiplier/zipball/5bafb566431294220f7723616d8417cc631d0a43",
+                "reference": "5bafb566431294220f7723616d8417cc631d0a43",
+                "shasum": ""
+            },
+            "require": {
+                "nette/forms": "^3.1.0",
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "codeception/codeception": "^4.0.0",
+                "codeception/module-asserts": "^1.3",
+                "codeception/module-phpbrowser": "^1.0",
+                "latte/latte": "^3.0.0",
+                "nette/application": "^3.0.0",
+                "nette/di": "^3.0.0",
+                "ninjify/qa": "^0.12",
+                "phpstan/phpstan": "^1.0",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-nette": "^1.0",
+                "webchemistry/testing-helpers": "~2.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Contributte\\FormMultiplier\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Multiplier for nette forms",
+            "keywords": [
+                "Forms",
+                "contributte",
+                "multiplier",
+                "nette"
+            ],
+            "support": {
+                "issues": "https://github.com/contributte/forms-multiplier/issues",
+                "source": "https://github.com/contributte/forms-multiplier/tree/v3.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://contributte.org/partners.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/f3l1x",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-08-05T10:06:02+00:00"
         },
         {
             "name": "contributte/menu-control",
@@ -3628,5 +3694,5 @@
         "php": ">= 8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.0.0"
 }

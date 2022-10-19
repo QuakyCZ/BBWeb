@@ -2,31 +2,43 @@
 {varType Contributte\MenuControl\IMenuItemsContainer $itemsParent}
 {varType Contributte\MenuControl\IMenuItem $item}
 {varType bool $isRoot}
-{define menu-branch, $itemsParent, $isRoot}
+{define menu-branch, Contributte\MenuControl\IMenuItemsContainer $itemsParent, bool $isRoot}
     {if $itemsParent->hasVisibleItemsOnMenu()}
-        <ul class="list-unstyled {$isRoot === false ? 'ps-4': 'ps-0'}">
+        <ul class="list-unstyled row flex-column {$isRoot === false ? 'ps-4': 'ps-0'}">
             {foreach $itemsParent->getVisibleItemsOnMenu() as $item}
-                <li n:if="$item->isAllowed()">
+                {varType Contributte\MenuControl\IMenuItem $item}
+                <li n:if="$item->isAllowed()" class="col-12 px-0 mb-2">
                     {if !empty($item->getVisibleItemsOnMenu())}
-                        <button class="btn btn-dark align-items-center collapsed"
+                        <button
+                                type="button"
+                                class="btn btn-custom-dark text-nowrap align-items-center collapsed w-100"
                                 data-bs-toggle="collapse"
                                 data-bs-target="#{$item->getData('sublistId')}-collapse"
                                 aria-expanded="{$item->findActiveItem() !== null ? 'true' : 'false'}"
-                                aria-controls="{$item->getData('sublistId')}-collapse"
-                        >
-                            <i n:class="$item->getData('icon')"></i> {$item->getRealTitle()}
+                                aria-controls="{$item->getData('sublistId')}-collapse">
+                            <i n:class="$item->getData('icon')"></i>
+                            <div class="mx-2"></div>
+                            {$item->getRealTitle()}
                         </button>
-                        <div id="{$item->getData('sublistId')}-collapse" class="collapse {$item->findActiveItem() !== null ? 'show' : ''}">
+                        <div id="{$item->getData('sublistId')}-collapse" class="collapse {$item->findActiveItem() !== null ? 'show' : ''} mt-2">
                             {include menu-branch, $item, false}
                         </div>
                     {else}
-                        <a href="{$item->getRealLink()}" class="btn btn-dark {$item->isActive() ? active}"><i n:class="$item->getData('icon')"></i> {$item->getRealTitle()}</a>
+                        <a href="{$item->getRealLink()}" class="btn btn-custom-dark w-100 text-nowrap {$item->isActive() ? active}">
+                            <div class="d-flex align-items-center">
+                                <i n:class="$item->getData('icon')"></i>
+                                <div class="mx-2"></div>
+                                <div class="col-10 text-truncate text-start">
+                                    {$item->getRealTitle()}
+                                </div>
+                            </div>
+                        </a>
                     {/if}
                 </li>
             {/foreach}
         </ul>
     {/if}
 {/define}
-<div class="flex-shrink-0 p-3 bg-dark">
+<div class="flex-shrink-0 p-3 sidebar">
     {include menu-branch, $menu, true}
 </div>

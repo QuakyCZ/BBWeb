@@ -137,6 +137,19 @@ class UserRepository extends PrimaryRepository
 
 
     /**
+     * @param bool $onlyAdmins
+     * @return array
+     */
+    public function fetchForChoiceControl(bool $onlyAdmins = false): array {
+        $result = $this->findAll();
+        if ($onlyAdmins) {
+            $result->where(':' . UserRoleRepository::TABLE_NAME . '.' . UserRoleRepository::COLUMN_ROLE_ID . '.' . RoleRepository::COLUMN_NAME, 'ADMIN');
+        }
+        return $result->fetchPairs('id', 'username');
+    }
+
+
+    /**
      * @param ActiveRow $row
      * @param string $salt
      * @return string

@@ -1,0 +1,9 @@
+{varType Nette\Database\Table\ActiveRow[] $polls}
+{block content}
+
+<ul>
+
+{foreach $polls as $poll}
+    <li><a n:href="Poll:vote $poll[App\Repository\Primary\PollRepository::COLUMN_ID]">{$poll[App\Repository\Primary\PollRepository::COLUMN_QUESTION]}</a></li>
+{/foreach}
+</ul>
