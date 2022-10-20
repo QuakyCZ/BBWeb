@@ -4,9 +4,10 @@
 <h4 class="fw-normal">{$pollQuestion}</h4>
 <hr>
 <div class="row" n:foreach="$pollResults as $text => $count">
+    {var $percents = ($count / $pollVoters) * 100}
     <span class="mb-3"><b>{$text}: </b>{$count} 
     <div class="progress">
-        <div class="progress-bar" role="progressbar" aria-label="Basic example" aria-valuenow="{($count / $pollVoters) * 100}%" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: {$percents}%" aria-valuenow="{$percents}%" aria-valuemin="0" aria-valuemax="100">{$percents}%</div>
     </div>
     </span>
 </div>

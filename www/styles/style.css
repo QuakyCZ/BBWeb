@@ -803,6 +803,8 @@ textarea.logger {
 .progress-bar {
     border-radius: 10px;
     background-color: var(--nav-accent);
+    color: var(--black-color);
+    font-weight: 600;
 }
 
 .progress {
