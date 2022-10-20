@@ -6,35 +6,40 @@
         }
 
         #frm-signUpForm-form .form-control {
-            background: none;
+            background-color: #212127;
             border: none;
             border-bottom: 2px solid #292e32;
-            border-radius: 0;
+            color: #fff !important;
+            border-radius: 5px 5px 3px 3px;
         }
 
         #frm-signUpForm-form .form-control:focus {
             border: none;
             border-bottom: 2px solid orange;
             box-shadow: none;
+            color: #fff !important;
         }
 
         #frm-signUpForm-form .form-control:focus::placeholder {
-            color: orange;
+            color: #fff !important;
         }
 
         #frm-signUpForm-form textarea {
             border-top: 2px solid #292e32 !important;
+            color: #fff !important;
         }
 
         #frm-signUpForm-form textarea:focus {
             border-top: 2px solid orange !important;
+            color: #fff !important;
         }
 
         .input-icon {
             position: absolute;
-            left: 15px;
-            top: 8px;
-            font-size: 1.3rem;
+            left: 24px;
+            top: 10px;
+            font-size: 1rem;
+            color: orange;
         }
 
         .input-with-icon {
@@ -87,11 +92,11 @@
             {input passwordCheck class => "form-control"}
         </div>
     </div>
-    <div class="form-group row">
-        <div class="form-check">
+    <div class="form-group row my-0 mx-2">
+        <div class="form-check mx-1">
             <label class="form-check-label text-secondary ml-3">
-                <input n:name="agree_with_terms" class="form-check-input">
-                Souhlasím s <a href="https://drive.google.com/file/d/1llWAQO7Q0Ljd9pkAP-3bAgyA6Yj08Aeg/view" class="text-secondary" style="text-decoration: underline;">podmínkami</a>
+                <input n:name="agree_with_terms" class="form-check-input text-white">
+                <span class="text-white">Souhlasím s</span> <a href="https://drive.google.com/file/d/1llWAQO7Q0Ljd9pkAP-3bAgyA6Yj08Aeg/view" class="text-warning" style="text-decoration: underline;">podmínkami</a>
             </label>
         </div>
     </div>
@@ -105,8 +110,8 @@
         </div>
     </div>
     <div class="form-group row mb-0">
-        {input submit class => "btn btn-outline-warning"}
-        <a href="{plink Sign:in}" class="text-secondary ml-3 my-auto" style="text-decoration: underline;">Už máte účet? Přihlaste se.</a>
+        {input submit class => "btn btn-outline-warning py-2"}
+        <a href="{plink Sign:in}" class="text-white ml-3 my-auto mt-3" style="text-decoration: underline;">Už máte účet? Přihlaste se.</a>
     </div>
     <script type="text/javascript">
         document.write('<input type="hidden" name="x_url" value="no' + 'spam">');
