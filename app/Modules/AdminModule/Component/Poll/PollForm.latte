@@ -20,7 +20,7 @@
                     {label App\Repository\Primary\PollOptionRepository::COLUMN_TEXT, class => 'form-label' /} {$i}
                 </div>
                 <div class="col-sm-10 row form-control-column">
-                    <div class="col-10">
+                    <div class="col-12 px-0">
                         {input App\Repository\Primary\PollOptionRepository::COLUMN_TEXT, class => 'form-control'}
                     </div>
                     <div class="col-2">
@@ -46,13 +46,13 @@
 
 
         <div class="form-group row">
-            <div class="form-check">
+            <div class="form-check row d-flex px-0">
                 <div class="col-sm-2 form-label-column col-form-label">
                     {var Nette\Forms\Controls\Checkbox $checkbox = $form[App\Repository\Primary\PollRepository::COLUMN_IS_PRIVATE]}
                     <label n:name="is_private" class="form-check-label">{$checkbox->getCaption()}</label>
                 </div>
-                <div class="col-sm-10 form-control-column">
-                    <input n:name="is_private" class="form-check-input">
+                <div class="col-sm-10 form-control-column d-flex align-items-center">
+                    <input n:name="is_private" class="form-check-input ms-0">
                 </div>
             </div>
         </div>

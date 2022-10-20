@@ -793,6 +793,23 @@ textarea.logger {
     padding: 6px !important;
 }
 
+.form-check-input:checked {
+    background-color: var(--nav-accent);
+    border: 1px solid var(--nav-accent);
+    color: var(--black-color);
+    box-shadow: 0px 0px 10px #000;
+}
+
+.progress-bar {
+    border-radius: 10px;
+    background-color: var(--nav-accent);
+}
+
+.progress {
+    border-radius: 10px;
+    background-color: var(--black-color);
+}
+
 @media (max-width: 1200px) {
     body {
         background: black url("../img/bg.jpg") no-repeat center;
