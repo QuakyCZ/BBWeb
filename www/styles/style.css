@@ -801,15 +801,18 @@ textarea.logger {
 }
 
 .progress-bar {
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: var(--nav-accent);
-    color: var(--black-color);
+    color: var(--white-color);
     font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.5px;
 }
 
 .progress {
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: var(--black-color);
+    height: 26px;
 }
 
 @media (max-width: 1200px) {

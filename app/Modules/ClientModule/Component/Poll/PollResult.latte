@@ -5,7 +5,7 @@
 <hr>
 <div class="row" n:foreach="$pollResults as $text => $count">
     {var $percents = ($count / $pollVoters) * 100}
-    <span class="mb-3"><b>{$text}: </b>{$count} 
+    <span class="mb-3"><h5 class="fw-bold">{$text}: {$count}</h5>
     <div class="progress">
         <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: {$percents}%" aria-valuenow="{$percents}%" aria-valuemin="0" aria-valuemax="100">{$percents}%</div>
     </div>
