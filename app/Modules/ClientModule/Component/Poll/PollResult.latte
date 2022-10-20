@@ -7,7 +7,7 @@
     {var $percents = ($count / $pollVoters) * 100}
     <span class="mb-3"><h5 class="fw-bold">{$text}: {$count}</h5>
     <div class="progress">
-        <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: {$percents}%" aria-valuenow="{$percents}%" aria-valuemin="0" aria-valuemax="100">{$percents}%</div>
+        <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: {$percents|noescape}%" aria-valuenow="{$percents|noescape}%" aria-valuemin="0" aria-valuemax="100">{$percents|number: 0}%</div>
     </div>
     </span>
 </div>
