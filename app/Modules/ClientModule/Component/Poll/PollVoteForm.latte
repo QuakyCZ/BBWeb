@@ -13,7 +13,11 @@
             {label App\Repository\Primary\PollParticipantRepository::COLUMN_POLL_OPTION_ID class => 'form-label required fw-bold fs-4' /}
         </div>
         <div class="col-12 column-label input-column">
-            {input App\Repository\Primary\PollParticipantRepository::COLUMN_POLL_OPTION_ID class => 'form-control'}
+            {foreach $form[App\Repository\Primary\PollParticipantRepository::COLUMN_POLL_OPTION_ID]->items as $key => $label}
+                <div class="form-check">
+                    {input App\Repository\Primary\PollParticipantRepository::COLUMN_POLL_OPTION_ID:$key class => 'form-check-input'} {label App\Repository\Primary\PollParticipantRepository::COLUMN_POLL_OPTION_ID:$key class => 'form-check-label'/}
+                </div>
+            {/foreach}
         </div>
     </div>
     <div class="form-group row">

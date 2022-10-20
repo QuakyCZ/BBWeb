@@ -53,6 +53,8 @@ class PollVoteForm extends BaseComponent
     }
 
     public function saveForm(Form $form, ArrayHash $values): void {
+        bdump($values);
+        die();
         if (!is_int($values[PollParticipantRepository::COLUMN_POLL_OPTION_ID])) {
             $form->addError('Neplatná odpověď.');
             return;
