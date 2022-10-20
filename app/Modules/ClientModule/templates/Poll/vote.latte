@@ -2,7 +2,7 @@
 {varType Nette\Database\Table\ActiveRow $poll}
 {block content}
 {if $hasVoted}
-    <h2>Výsledky hlasování</h2>
+    <h1 class="fw-bold">Výsledky hlasování</h1>
     {control pollResult}
 {else}
     {control voteForm}

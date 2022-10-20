@@ -8,9 +8,11 @@
     --yellow-color: #D1B258;
     --white-color: #fff;
     --black-color: #242529;
+    --border-black-color: #34363f;
     --nav-accent: #c69c3a;
     --nav-accent-2: #e4b13a;
     --shop-text: #5b727f;
+    --muted-text: #adaec4;
 }
 
 html {
@@ -704,6 +706,92 @@ p {
     background-color: transparent;
 }
 
+.small {
+    font-size: 14px !important;
+    color: var(--muted-text) !important;
+    text-decoration: none;
+    letter-spacing: -0.1px;
+}
+
+.poll-vote {
+    background-color: var(--black-color);
+    border: 1px solid var(--border-black-color);
+    padding: 12px 24px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none !important;
+    margin-bottom: 12px;
+    transition: background-color 0.2s ease-in-out, border 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.poll-vote > * > * > * > h5 {
+    color: var(--white-color) !important;
+}
+
+date {
+    color: var(--nav-accent);
+    font-weight: 600;
+}
+
+.poll-vote:hover, .poll-vote:focus, .poll-vote:active {
+    background-color: var(--border-black-color);
+    border: 1px solid var(--shop-text);
+}
+
+.poll-vote > div > svg {
+    transition: transform 0.2s ease-in-out;
+}
+
+.poll-vote:hover > div > svg {
+    transform: translateX(5px);
+}
+
+input[type="radio" i], input[type="checkbox" i] {
+    margin-right: 8px;
+}
+
+.form-control {
+    border-radius: 5px;
+    background-color: var(--black-color);
+    border: 1px solid var(--border-black-color);
+    color: var(--white-color);
+}
+
+.form-control:hover, .form-control:focus, .form-control:active {
+    background-color: var(--border-black-color);
+    border: 1px solid var(--shop-text);
+    color: var(--white-color);
+}
+
+.btn-secondary.btn-block.ajax {
+    margin-top: 24px;
+    margin-bottom: 48px;
+}
+
+.applyBtn {
+    background-color: var(--nav-accent) !important;
+    border: 1px solid var(--nav-accent) !important;
+    color: var(--black-color) !important;
+}
+
+.daterangepicker {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.daterangepicker td.active, .daterangepicker td.active:hover {
+    background-color: var(--nav-accent) !important;
+    color: var(--black-color) !important;
+}
+
+textarea.logger {
+    background-color: var(--black-color) !important;
+    border: 1px solid var(--border-black-color) !important;
+    color: var(--white-color) !important;
+    border-radius: 5px !important;
+    padding: 6px !important;
+}
 
 @media (max-width: 1200px) {
     body {

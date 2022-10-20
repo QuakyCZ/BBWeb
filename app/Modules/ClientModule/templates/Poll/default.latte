@@ -1,9 +1,24 @@
 {varType Nette\Database\Table\ActiveRow[] $polls}
 {block content}
 
-<ul>
 
 {foreach $polls as $poll}
-    <li><a n:href="Poll:vote $poll[App\Repository\Primary\PollRepository::COLUMN_ID]">{$poll[App\Repository\Primary\PollRepository::COLUMN_QUESTION]}</a></li>
+<a n:href="Poll:vote $poll[App\Repository\Primary\PollRepository::COLUMN_ID]" class="poll-vote">
+    <div class="d-flex justify-content-start align-items-center">
+        <div>
+            <i class="fas fa-hammer fs-4 me-3 text-white"></i>
+        </div>
+        <div>
+            <div>
+                <h5 class="fw-bold mb-0">{$poll[App\Repository\Primary\PollRepository::COLUMN_QUESTION]}</h4>
+            </div>
+            <div>
+                <p class="small mb-0"><b>Možnost hlasovat:</b> od <date>{$poll['from']|date:'d. m. Y H:i'}</date> do <date>{$poll['to']|date:'d. m. Y H:i'}</date></p>
+            </div>
+        </div>
+    </div>
+    <div>
+        <i class="fa-solid fa-angle-right fs-4 text-white arrow"></i>
+    </div>
+</a>
 {/foreach}
-</ul>

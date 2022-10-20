@@ -1,6 +1,7 @@
 {varType string $pollQuestion}
 {varType int[] $pollResults}
-<h2>{$pollQuestion}</h2>
+<h4 class="fw-normal">{$pollQuestion}</h4>
+<hr>
 <div class="row" n:foreach="$pollResults as $text => $count">
     <span><b>{$text}: </b>{$count}</span>
 </div>
