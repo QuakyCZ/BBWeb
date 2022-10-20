@@ -3,7 +3,10 @@
 namespace App\Modules\ClientModule\Component\Poll;
 
 use App\Facade\PollFacade;
+use App\Repository\Primary\PollOptionRepository;
+use App\Repository\Primary\PollRepository;
 use Nette\Application\BadRequestException;
+use Nette\Database\Table\ActiveRow;
 
 class PollResult extends \App\Component\BaseComponent
 {
@@ -26,8 +29,7 @@ class PollResult extends \App\Component\BaseComponent
             throw new BadRequestException();
         }
 
-
-        $this->template->poll = $poll;
+        $this->template->pollQuestion = $poll[PollRepository::COLUMN_QUESTION];
         $this->template->pollResults = $this->pollFacade->getResults($this->id);
         bdump($this->template->pollResults);
 

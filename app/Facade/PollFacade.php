@@ -215,7 +215,7 @@ class PollFacade
     /**
      * TODO: Udělat samotnou třídu pro poll
      * @param int $id
-     * @return ActiveRow
+     * @return ?ActiveRow
      */
     public function getPoll(int $id): ?ActiveRow
     {
@@ -223,16 +223,24 @@ class PollFacade
     }
 
     /**
+     * [
+     *  'Text' => number_of_votes
+     * ]
      * @param int $pollId
      * @return int[]
      */
     public function getResults(int $pollId): array
     {
-        return $this->pollParticipantRepository->database->query(
-            "SELECT poll_option_id, COUNT(*) as answers FROM " . PollParticipantRepository::TABLE_NAME .
-            " WHERE " . PollParticipantRepository::COLUMN_POLL_ID . " = ? AND poll_option_id IS NOT NULL " .
-            "GROUP BY " . PollParticipantRepository::COLUMN_POLL_OPTION_ID, $pollId
-        )->fetchPairs('poll_option_id', 'answers');
+        $votesAlias = 'votes';
+
+        return $this->pollOptionRepository->findBy([
+            PollOptionRepository::TABLE_NAME . '.' . PollOptionRepository::COLUMN_POLL_ID => $pollId
+        ])
+            ->select(PollOptionRepository::TABLE_NAME . '.' . PollOptionRepository::COLUMN_TEXT)
+            ->select('COUNT(:'. PollParticipantRepository::TABLE_NAME . '.' . PollParticipantRepository::COLUMN_POLL_OPTION_ID . ') AS ' . $votesAlias)
+            ->group(PollOptionRepository::TABLE_NAME . '.' . PollOptionRepository::COLUMN_ID)
+            ->order($votesAlias . ' DESC, ' . PollOptionRepository::TABLE_NAME . '.' . PollOptionRepository::COLUMN_TEXT . ' ASC')
+            ->fetchPairs(PollOptionRepository::COLUMN_TEXT, $votesAlias);
     }
 
 }

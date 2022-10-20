@@ -55,6 +55,8 @@ class PollGrid extends BaseDataGrid
         $this->grid->addColumnDateTime(PollRepository::COLUMN_TO, 'Aktivní do')
             ->setFormat('d. m. Y H:i');
 
+        $this->grid->addAction('result', 'Výsledky', ':Admin:Poll:result', ['id' => 'id']);
+
         $this->grid->addActionCallback('activate', 'Aktivovat', function (string $id) {
             $poll = $this->pollRepository->getRow($id);
             if ($poll === null) {

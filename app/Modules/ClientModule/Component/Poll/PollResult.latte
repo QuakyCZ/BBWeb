@@ -1,8 +1,6 @@
-{varType Nette\Database\Table\ActiveRow $poll}
+{varType string $pollQuestion}
 {varType int[] $pollResults}
-{var $pollOptions = $poll->related(App\Repository\Primary\PollOptionRepository::TABLE_NAME)->fetchAll()}
-{foreach $pollOptions as $option}
-    <div class="row">
-        <span><b>{$option[App\Repository\Primary\PollOptionRepository::COLUMN_TEXT]}: </b>{$pollResults[$option[App\Repository\Primary\PollOptionRepository::COLUMN_ID]] ?? 0}</span>
-    </div>
-{/foreach}
+<h2>{$pollQuestion}</h2>
+<div class="row" n:foreach="$pollResults as $text => $count">
+    <span><b>{$text}: </b>{$count}</span>
+</div>
