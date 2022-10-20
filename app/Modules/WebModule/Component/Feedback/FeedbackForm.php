@@ -40,8 +40,9 @@ class FeedbackForm extends BaseComponent
         $form->addEmail('email', 'Email')
             ->setRequired('%label je povinný údaj.');
 
-        $form->addSelect('server_id', 'Server', $this->serverRepository->fetchItemsForChoiceControl())
-            ->setRequired('%label je povinný údaj.');
+        $form->addSelect('server_id', 'Služba', $this->serverRepository->fetchItemsForChoiceControl())
+            ->setRequired('%label je povinný údaj.')
+            ->setPrompt('Služba');
 
         $form->addTextArea('description', 'Popis')
             ->setRequired('%label je povinný údaj.');
