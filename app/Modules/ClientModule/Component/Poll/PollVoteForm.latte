@@ -5,13 +5,14 @@
         </div>
     </div>
 
-    <b>{$poll[App\Repository\Primary\PollRepository::COLUMN_QUESTION]}</b>
+    <h1 class="fw-bold">{$poll[App\Repository\Primary\PollRepository::COLUMN_QUESTION]}</h1>
+    <hr>
 
     <div class="form-group row">
-        <div class="col-md-2 column-label label-column">
+        <div class="col-12 column-label label-column">
             {label App\Repository\Primary\PollParticipantRepository::COLUMN_POLL_OPTION_ID class => 'form-label required' /}
         </div>
-        <div class="col-md-10 column-label input-column">
+        <div class="col-12 column-label input-column">
             {input App\Repository\Primary\PollParticipantRepository::COLUMN_POLL_OPTION_ID class => 'form-control'}
         </div>
     </div>

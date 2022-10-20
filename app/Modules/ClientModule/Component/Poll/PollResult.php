@@ -11,7 +11,7 @@ use Nette\Database\Table\ActiveRow;
 class PollResult extends \App\Component\BaseComponent
 {
     public function __construct(
-        private ?int $id = null,
+        private ?int $id,
         private PollFacade $pollFacade
     )
     {
