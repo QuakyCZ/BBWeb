@@ -182,7 +182,8 @@ class PollFacade
         }
 
         $participant = $this->pollParticipantRepository->findBy([
-            PollParticipantRepository::COLUMN_USER_ID => $userId
+            PollParticipantRepository::COLUMN_USER_ID => $userId,
+            PollParticipantRepository::COLUMN_POLL_ID => $pollRow[PollRepository::COLUMN_ID]
         ])->fetch();
 
         if ($participant !== null) {

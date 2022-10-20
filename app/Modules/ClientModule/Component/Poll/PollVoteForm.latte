@@ -1,5 +1,12 @@
 {form form}
+    <div class="errors" n:if="$form->hasErrors()">
+        <div n:foreach="$form->errors as $error" class="alert alert-danger error" role="alert">
+            <div class="flash-message-body">{$error}</div>
+        </div>
+    </div>
+
     <b>{$poll[App\Repository\Primary\PollRepository::COLUMN_QUESTION]}</b>
+
     <div class="form-group row">
         <div class="col-md-2 column-label label-column">
             {label App\Repository\Primary\PollParticipantRepository::COLUMN_POLL_OPTION_ID class => 'form-label required' /}
