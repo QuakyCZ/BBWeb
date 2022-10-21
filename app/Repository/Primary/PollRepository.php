@@ -16,6 +16,7 @@ class PollRepository extends PrimaryRepository
     public const COLUMN_IS_ACTIVE = 'is_active';
     public const COLUMN_FROM = 'from';
     public const COLUMN_TO = 'to';
+    public const COLUMN_ICON = 'icon';
 
     public const COLUMN_CREATED = 'created';
     public const COLUMN_CREATED_USER_ID = 'created_user_id';

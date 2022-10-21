@@ -8,6 +8,7 @@ use App\Repository\Primary\PollRepository;
 use App\Repository\Primary\PollRoleRepository;
 use App\Repository\Primary\UserRepository;
 use App\Repository\Primary\UserRoleRepository;
+use DateTime;
 use http\Client\Curl\User;
 use Nette\Application\BadRequestException;
 use Nette\Database\Table\ActiveRow;
@@ -65,7 +66,16 @@ class PollFacade
         $this->pollRepository->runInTransaction(function () use ($formValues, $userId, $pollId) {
 
             $dates = explode(' - ', $formValues['active']);
+
+
             if (count($dates) !== 2) {
+                throw new BadRequestException('Špatný formát od do.');
+            }
+
+            $from = DateTime::createFromFormat('d. m. Y H:i', $dates[0]);
+            $to = DateTime::createFromFormat('d. m. Y H:i', $dates[1]);
+
+            if (!$from || !$to) {
                 throw new BadRequestException('Špatný formát od do.');
             }
 
@@ -75,8 +85,9 @@ class PollFacade
                 PollRepository::COLUMN_QUESTION => $formValues['question'],
                 PollRepository::COLUMN_CREATED_USER_ID => $userId,
                 PollRepository::COLUMN_IS_PRIVATE => $formValues[PollRepository::COLUMN_IS_PRIVATE],
-                PollRepository::COLUMN_FROM => $dates[0],
-                PollRepository::COLUMN_TO => $dates[1],
+                PollRepository::COLUMN_FROM => $from,
+                PollRepository::COLUMN_TO => $to,
+                PollRepository::COLUMN_ICON => $formValues[PollRepository::COLUMN_ICON],
             ]);
 
             $pollId = $poll[PollRepository::COLUMN_ID];
@@ -192,7 +203,7 @@ class PollFacade
             }
             $participant->update([
                 PollParticipantRepository::COLUMN_POLL_OPTION_ID => $optionId,
-                PollParticipantRepository::COLUMN_CHANGED => new \DateTime()
+                PollParticipantRepository::COLUMN_CHANGED => new DateTime()
             ]);
             return;
         }
@@ -201,7 +212,7 @@ class PollFacade
             PollParticipantRepository::COLUMN_POLL_ID => $pollRow[PollRepository::COLUMN_ID],
             PollParticipantRepository::COLUMN_USER_ID => $userId,
             PollParticipantRepository::COLUMN_POLL_OPTION_ID => $optionId,
-            PollParticipantRepository::COLUMN_CHANGED => new \DateTime()
+            PollParticipantRepository::COLUMN_CHANGED => new DateTime()
         ]);
     }
 

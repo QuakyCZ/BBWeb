@@ -1,3 +1,27 @@
+<style>
+    .input-icon {
+        position: absolute;
+        left: 24px;
+        top: 10px;
+        font-size: 1rem;
+        color: orange;
+    }
+
+    .input-with-icon {
+        position: relative;
+    }
+
+    .input-with-icon input {
+        padding-left: 3rem !important;
+        color: var(--secondary);
+        margin: auto 0;
+    }
+
+    .input-with-icon:focus-within > .input-icon {
+        color: var(--warning);
+    }
+</style>
+
 {snippetArea  pollForm}
     {form form class=>"form-horizontal form-normal", role=>"form"}
         <div class="errors" n:if="$form->hasErrors()">
@@ -77,12 +101,24 @@
             </div>
         </div>
 
+        <div class="form-group row no-wrap">
+            <div class="col-sm-2 form-label-column col-form-label">
+                {label App\Repository\Primary\PollRepository::COLUMN_ICON class => "form-label required" /} (<a href="https://fontawesome.com/search?o=a&m=free" target="_blank" onclick="window.open('https://fontawesome.com/search?o=a&m=free', 'fontawesome', 'width=800, height=600'); return false;">Seznam ikon</a>)
+            </div>
+            <div class="col-sm-10 form-control-column input-with-icon">
+                <span class="input-icon" id="icon-preview"></span>
+                {input App\Repository\Primary\PollRepository::COLUMN_ICON class => "form-control"}
+            </div>
+        </div>
         {input save, class => 'btn btn-success w-100 mt-4 py-3'}
     {/form}
 {/snippetArea}
 
 <script src="{$basePath}/js/msfmultiselect.min.js"></script>
 <script>
+
+$(document).ready(function () {
+
 
     $('.multiselect').each((i, el) => {
         new MSFmultiSelect(
@@ -102,8 +138,16 @@
     $('input[name="active"]').daterangepicker({
         timePicker: true,
         locale: {
-            format: 'YYYY/MM/DD HH:mm'
+            format: 'DD. MM. YYYY HH:mm'
         },
         timePicker24Hour: true
     });
+
+    $('#icon-preview').html('<i class="' + $('input[name="icon"]').val() + '"></i>');
+
+    $('input[name="icon"]')
+        .change(function() {
+            $('#icon-preview').html('<i class="' + $(this).val() + '"></i>');
+        });
+});
 </script>

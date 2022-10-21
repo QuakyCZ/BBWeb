@@ -81,8 +81,6 @@ class PollForm extends BaseComponent
                 ])->fetchPairs('role_id', 'role_id');
             }
 
-            bdump($defaults);
-
             $form = $this['form'];
             $form->setDefaults($defaults);
         }
@@ -97,7 +95,8 @@ class PollForm extends BaseComponent
     {
         $form = new Form();
         $form->getElementPrototype()->class("ajax");
-        $form->addTextArea(PollRepository::COLUMN_QUESTION, 'Otázka', null, 2);
+        $form->addTextArea(PollRepository::COLUMN_QUESTION, 'Otázka', null, 2)
+            ->setRequired();
 
         /** @var Multiplier $multiplier */
         $multiplier = $form->addMultiplier('options', function(Container $container) {
@@ -111,11 +110,12 @@ class PollForm extends BaseComponent
         $multiplier->addRemoveButton('Odebrat')
             ->addClass('btn btn-danger');
 
-        $from = (new \DateTime())->format('Y/m/d H:i');
-        $to = (new \DateTime())->add(new \DateInterval('PT1H'))->format('Y/m/d H:i');
+        $from = (new \DateTime())->format('d. m. Y H:i');
+        $to = (new \DateTime())->add(new \DateInterval('PT1H'))->format('d. m. Y H:i');
 
         $form->addText('active', 'Hlasování od/do')
-            ->setDefaultValue($from . ' - ' . $to);
+            ->setDefaultValue($from . ' - ' . $to)
+            ->setRequired();
 
         $privateCheckbox = $form->addCheckbox(PollRepository::COLUMN_IS_PRIVATE, 'Soukromé');
 
@@ -133,7 +133,12 @@ class PollForm extends BaseComponent
             ->addConditionOn($userIds, Form::BLANK)
             ->setRequired();
 
-        $form->addSubmit('save', 'Vytvořit');
+        $form->addText(PollRepository::COLUMN_ICON, 'Ikona')
+            ->setHtmlAttribute('placeholder', 'fa-solid fa-question')
+            ->setDefaultValue('fa-solid fa-question')
+            ->setRequired();
+
+        $form->addSubmit('save', 'Uložit');
 
         $form->onAnchor[] = [$this, 'anchorForm'];
         $form->onSuccess[] = [$this, 'saveForm'];
@@ -162,7 +167,7 @@ class PollForm extends BaseComponent
     public function saveForm(Form $form, ArrayHash $values): void {
         try
         {
-                $this->pollFacade->savePoll($values, $this->presenter->user->id, $this->id);
+            $this->pollFacade->savePoll($values, $this->presenter->user->id, $this->id);
             $this->presenter->flashMessage('Hlasování bylo vytvořeno', EFlashMessageType::SUCCESS);
             $this->presenter->redirect(':Admin:Poll:default');
         }
