@@ -291,7 +291,7 @@ class PollFacade
                 (SELECT pp.user_id FROM poll_participant pp WHERE pp.poll_id = ?)
                 UNION 
                 (SELECT ur.user_id FROM poll_role pr JOIN user_role ur ON ur.role_id=pr.role_id WHERE pr.poll_id = ?)
-            );
+            ) AND not_deleted = 1;
         ",
             $pollId,
             $pollId
