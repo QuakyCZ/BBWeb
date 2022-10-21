@@ -20,3 +20,4 @@ services:
     - App\Modules\AdminModule\Component\Poll\IPollGridFactory
     - App\Modules\ClientModule\Component\Poll\IPollVoteFormFactory
     - App\Modules\ClientModule\Component\Poll\IPollResultFactory
+    - App\Modules\AdminModule\Component\Poll\IPollResultAdminFactory

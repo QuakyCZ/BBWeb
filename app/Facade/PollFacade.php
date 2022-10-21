@@ -22,7 +22,8 @@ class PollFacade
         private PollRoleRepository $pollRoleRepository,
         private PollOptionRepository $pollOptionRepository,
         private PollParticipantRepository $pollParticipantRepository,
-        private UserRoleRepository $userRoleRepository
+        private UserRoleRepository $userRoleRepository,
+        private UserRepository $userRepository,
     )
     {
     }
@@ -152,7 +153,8 @@ class PollFacade
             $this->pollParticipantRepository->save([
                 PollParticipantRepository::COLUMN_POLL_ID => $pollId,
                 PollParticipantRepository::COLUMN_POLL_OPTION_ID => NULL,
-                PollParticipantRepository::COLUMN_USER_ID => $userId
+                PollParticipantRepository::COLUMN_USER_ID => $userId,
+                PollParticipantRepository::COLUMN_IS_EXTRA => true
             ]);
         }
     }
@@ -257,14 +259,43 @@ class PollFacade
     {
         $votesAlias = 'votes';
 
-        return $this->pollOptionRepository->findBy([
+        $optionVotes = $this->pollOptionRepository->findBy([
             PollOptionRepository::TABLE_NAME . '.' . PollOptionRepository::COLUMN_POLL_ID => $pollId
         ])
+            ->select(PollOptionRepository::TABLE_NAME . '.' . PollOptionRepository::COLUMN_ID)
             ->select(PollOptionRepository::TABLE_NAME . '.' . PollOptionRepository::COLUMN_TEXT)
             ->select('COUNT(:'. PollParticipantRepository::TABLE_NAME . '.' . PollParticipantRepository::COLUMN_POLL_OPTION_ID . ') AS ' . $votesAlias)
             ->group(PollOptionRepository::TABLE_NAME . '.' . PollOptionRepository::COLUMN_ID)
             ->order($votesAlias . ' DESC, ' . PollOptionRepository::TABLE_NAME . '.' . PollOptionRepository::COLUMN_TEXT . ' ASC')
-            ->fetchPairs(PollOptionRepository::COLUMN_TEXT, $votesAlias);
+            ->fetchAll();
+
+        $result = [];
+
+        foreach ($optionVotes as $option) {
+            $result[$option[PollOptionRepository::COLUMN_ID]] = [
+                'text' => $option[PollOptionRepository::COLUMN_TEXT],
+                'votes' => $option[$votesAlias]
+            ];
+        }
+
+        return $result;
+    }
+
+
+    public function getNumberOfAllParticipants(int $pollId): int {
+        if (!$this->getPoll($pollId)[PollRepository::COLUMN_IS_PRIVATE]) {
+            return $this->userRepository->findAll()->select('COUNT(*) AS c')->fetch()['c'] ?? 0;
+        }
+        return $this->pollRepository->database->query("
+            SELECT COUNT(*) as participants FROM " . UserRepository::TABLE_NAME . " WHERE ". UserRepository::COLUMN_ID ." IN (
+                (SELECT pp.user_id FROM poll_participant pp WHERE pp.poll_id = ?)
+                UNION 
+                (SELECT ur.user_id FROM poll_role pr JOIN user_role ur ON ur.role_id=pr.role_id WHERE pr.poll_id = ?)
+            );
+        ",
+            $pollId,
+            $pollId
+        )->fetch()['participants'];
     }
 
 }

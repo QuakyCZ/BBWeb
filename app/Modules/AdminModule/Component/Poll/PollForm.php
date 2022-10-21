@@ -73,7 +73,8 @@ class PollForm extends BaseComponent
 
             if ($poll[PollRepository::COLUMN_IS_PRIVATE]) {
                 $defaults['user_ids'] = $this->pollParticipantRepository->findBy([
-                    PollParticipantRepository::COLUMN_POLL_ID => $this->id
+                    PollParticipantRepository::COLUMN_POLL_ID => $this->id,
+                    PollParticipantRepository::COLUMN_IS_EXTRA => true
                 ])->fetchPairs('user_id', 'user_id');
 
                 $defaults['role_ids'] = $this->pollRoleRepository->findBy([

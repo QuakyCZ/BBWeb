@@ -4,6 +4,7 @@ namespace App\Modules\AdminModule\Presenter;
 
 use App\Modules\AdminModule\Component\Poll\IPollFormFactory;
 use App\Modules\AdminModule\Component\Poll\IPollGridFactory;
+use App\Modules\AdminModule\Component\Poll\IPollResultAdminFactory;
 use App\Modules\AdminModule\Component\Poll\PollForm;
 use App\Modules\AdminModule\Presenter\Base\BasePresenter;
 use App\Modules\ClientModule\Component\Poll\IPollResultFactory;
@@ -18,7 +19,7 @@ class PollPresenter extends BasePresenter
     public function __construct(
         private IPollFormFactory $votingFormFactory,
         private IPollGridFactory $pollGridFactory,
-        private IPollResultFactory $pollResultFactory,
+        private IPollResultAdminFactory $pollResultFactory,
     )
     {
         parent::__construct();

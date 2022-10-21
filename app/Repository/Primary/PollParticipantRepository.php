@@ -13,6 +13,7 @@ class PollParticipantRepository extends PrimaryRepository
     public const COLUMN_USER_ID = 'user_id';
     public const COLUMN_CREATED = 'created';
     public const COLUMN_CHANGED = 'changed';
+    public const COLUMN_IS_EXTRA = 'is_extra';
 
     /**
      * @param int $pollId

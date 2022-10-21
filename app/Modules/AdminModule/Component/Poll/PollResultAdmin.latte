@@ -1,0 +1,48 @@
+{varType Nette\Database\Table\ActiveRow $poll}
+{varType int[][] $pollResults}
+{varType int $pollVoters}
+{varType int $participants}
+{varType Nette\Database\Table\ActiveRow[][] $usersByOption}
+<h4 class="fw-normal"><i class="{$poll[App\Repository\Primary\PollRepository::COLUMN_ICON]}" style="color: #d98e04; font-size: 20pt;"></i> {$poll[App\Repository\Primary\PollRepository::COLUMN_QUESTION]}</h4>
+<span>Hlasoval{if $pollVoters > 1 && $pollVoters < 5}i{elseif $pollVoters === 0 || $pollVoters >= 5}o{/if} {$pollVoters} z {$participants} uživatel{if $participants === 1}e{else}ů{/if}.</span>
+<hr>
+<div class="row" n:foreach="$pollResults as $id => $option">
+    {var $percents = $pollVoters === 0 ? 0 : ($option['votes'] / $pollVoters) * 100}
+    <div class="mb-3">
+        <h5 class="fw-bold" style="width: min-content; white-space: nowrap;">{$option['text']}: {$option['votes']} <a href="#" data-toggle="modal" data-target="#voters-{$id}" n:if="$option['votes'] > 0"><i class="fas fa-users"></i></a></h5>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: {$percents|noescape}%" aria-valuenow="{$percents|noescape}%" aria-valuemin="0" aria-valuemax="100">{$percents|number: 0}%</div>
+        </div>
+    </div>
+
+
+    {* Modal s hlasujicimi *}
+    <div n:if="$option['votes'] > 0" class="modal fade" id="voters-{$id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Hlasující pro {$option['text']}</h5>
+                    <a class="link link-dark" aria-hidden="true" data-dismiss="#voters-{$id}" onclick="closeModal('#voters-{$id}');" style="cursor: pointer;"><i class="fas fa-times"></i></a>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li n:foreach="$usersByOption[$id] as $u">{$u}</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="#voters-{$id}" onclick="closeModal('#voters-{$id}');">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('a[data-toggle="modal"]').click(function () {
+        $($(this).data('target')).modal('show');
+    });
+
+    function closeModal(el) {
+        $(el).modal('hide');
+    }
+</script>
