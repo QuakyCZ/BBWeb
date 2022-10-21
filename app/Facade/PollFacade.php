@@ -159,7 +159,7 @@ class PollFacade
 
     /**
      * @param int $userId
-     * @return ActiveRow[]
+     * @return ActiveRow[][]
      */
     public function getPollsForUser(int $userId): array
     {
@@ -167,13 +167,25 @@ class PollFacade
         $roles = $this->userRoleRepository->getUsersRoles($userId)->fetchPairs(UserRoleRepository::COLUMN_ROLE_ID, UserRoleRepository::COLUMN_ROLE_ID);
 
 
-        return $this->pollRepository->getActivePolls()
+        $active = $this->pollRepository->getActivePolls()
             ->whereOr([
                 PollRepository::COLUMN_IS_PRIVATE => 0,
                 ':' . PollParticipantRepository::TABLE_NAME . '.' . PollParticipantRepository::COLUMN_USER_ID => $userId,
                 ':' . PollRoleRepository::TABLE_NAME . '.' . PollRoleRepository::COLUMN_ROLE_ID . ' IN (?)' => $roles
             ])
             ->fetchAll();
+
+        $finished = $this->pollRepository->getFinishedPolls()
+            ->whereOr([
+                PollRepository::COLUMN_IS_PRIVATE => 0,
+                ':' . PollParticipantRepository::TABLE_NAME . '.' . PollParticipantRepository::COLUMN_USER_ID => $userId,
+                ':' . PollRoleRepository::TABLE_NAME . '.' . PollRoleRepository::COLUMN_ROLE_ID . ' IN (?)' => $roles
+            ])->fetchAll();
+
+        return [
+            'active' => $active,
+            'finished' => $finished
+        ];
     }
 
 

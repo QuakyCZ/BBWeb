@@ -39,6 +39,13 @@ class PollRepository extends PrimaryRepository
     public function getActivePolls(): Selection {
         $now = new DateTime();
         return $this->findBy([self::COLUMN_IS_ACTIVE => 1])
-            ->where(self::COLUMN_FROM . ' <= ? AND ' . self::COLUMN_TO . ' > ?', $now, $now);
+            ->where(self::COLUMN_FROM . ' <= ? AND ' . self::COLUMN_TO . ' > ?', $now, $now)
+            ->order(self::COLUMN_CREATED.' ASC');
+    }
+
+    public function getFinishedPolls(): Selection {
+        return $this->findBy([self::COLUMN_IS_ACTIVE => 1])
+            ->where(self::COLUMN_TO . ' < ?', new DateTime())
+            ->order(self::COLUMN_TO.' DESC');
     }
 }

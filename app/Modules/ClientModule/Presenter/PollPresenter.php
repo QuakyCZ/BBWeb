@@ -7,6 +7,7 @@ use App\Modules\ClientModule\Component\Poll\IPollResultFactory;
 use App\Modules\ClientModule\Component\Poll\IPollVoteFormFactory;
 use App\Modules\ClientModule\Component\Poll\PollResult;
 use App\Modules\ClientModule\Component\Poll\PollVoteForm;
+use App\Repository\Primary\PollRepository;
 use Nette\Application\BadRequestException;
 use Nette\Application\ForbiddenRequestException;
 
@@ -45,7 +46,7 @@ class PollPresenter extends ClientPresenter
         }
 
         $this->template->poll = $poll;
-        $this->template->hasVoted = $this->pollFacade->hasVoted($id, $this->user->id);
+        $this->template->hasVoted = $this->pollFacade->hasVoted($id, $this->user->id) || $poll[PollRepository::COLUMN_TO] < new \DateTime();
 
     }
 
