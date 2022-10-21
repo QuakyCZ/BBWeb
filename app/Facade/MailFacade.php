@@ -8,6 +8,12 @@ use Nette\Mail\Message;
 
 class MailFacade
 {
+
+    public const TEMPLATE_FEEDBACK_MAIL_RECIPIENT = __DIR__ . '/../Mail/FeedbackMailRecipient.latte';
+    public const TEMPLATE_FEEDBACK_MAIL_SENDER = __DIR__ . '/../Mail/FeedbackMailSender.latte';
+    public const TEMPLATE_RESET_PASSWORD = __DIR__ . '/../Mail/ResetPasswordMail.latte';
+    public const TEMPLATE_VERIFICATION_EMAIL = __DIR__ . '/../Mail/VerificationMail.latte';
+
     /**
      * @param Mailer $mailer
      */
@@ -25,7 +31,7 @@ class MailFacade
      * @param array $params
      * @return void
      */
-    public function sendMail(string $email, string $subject, string $lattePath, array $params):void
+    public function sendMail(string $email, string $subject, string $lattePath, array $params): void
     {
         $params['email'] = $email;
         $params['subject'] = $subject;
@@ -39,5 +45,16 @@ class MailFacade
         $message->setSubject($subject);
         $message->setHtmlBody($body);
         $this->mailer->send($message);
+    }
+
+    /**
+     * @param string $email
+     * @param string $resetUrl
+     * @return void
+     */
+    public function sendResetPasswordMail(string $email, string $resetUrl): void {
+        $this->sendMail($email, 'Požadavek na změnu hesla', self::TEMPLATE_RESET_PASSWORD, [
+            'url' => $resetUrl
+        ]);
     }
 }

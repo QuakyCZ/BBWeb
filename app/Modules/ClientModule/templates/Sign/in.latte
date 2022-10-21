@@ -3,9 +3,6 @@
 <img src="/img/logo.png" alt="logo" class="mx-auto d-block mb-5" style="height: 100px;">
 
 <div class="card mt-0">
-    <div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">
-        {$flash->message}
-    </div>
     <h1 class="text-secondary mb-4 fw-bold text-white">Přihlášení</h1>
     {control signInForm}
 </div>

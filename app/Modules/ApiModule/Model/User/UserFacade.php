@@ -5,26 +5,20 @@ namespace App\Modules\ApiModule\Model\User;
 use App\Enum\EConnectTokenType;
 use App\Facade\MailFacade;
 use App\Repository\Primary\UserConnectTokenRepository;
-use App\Repository\Primary\UserDetailsRepository;
 use App\Repository\Primary\UserMinecraftAccountRepository;
 use App\Repository\Primary\UserRepository;
 use App\Repository\Primary\UserRoleRepository;
 use DateInterval;
-use Keygen\Generator;
 use Keygen\Keygen;
 use Nette\Application\BadRequestException;
 use Nette\Application\LinkGenerator;
 use Nette\Application\UI\InvalidLinkException;
 use Nette\Database\Table\ActiveRow;
-use Nette\Mail\Mailer;
-use Nette\NotImplementedException;
 use Nette\Security\Passwords;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\DateTime;
-use Nette\Utils\Json;
 use Nette\Utils\JsonException;
 use Throwable;
-use Tracy\Debugger;
 
 class UserFacade
 {
@@ -147,7 +141,7 @@ class UserFacade
             $row = $this->userRepository->save([
                 UserRepository::COLUMN_USERNAME => $values[UserRepository::COLUMN_USERNAME],
                 UserRepository::COLUMN_EMAIL => $values[UserRepository::COLUMN_EMAIL],
-                UserRepository::COLUMN_PASSWORD => $this->passwords->hash($values[UserRepository::COLUMN_PASSWORD]),
+                UserRepository::COLUMN_PASSWORD => $this->userRepository->getPasswordHash($values[UserRepository::COLUMN_PASSWORD]),
                 UserRepository::COLUMN_VERIFICATION_TOKEN => $verificationToken
             ]);
 
