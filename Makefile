@@ -14,3 +14,6 @@ dc:
 	rm -rf temp/cache/*
 npm-install:
 	cd docker && docker-compose run npm npm install
+
+nb:
+	cd docker && docker-compose run npm sh

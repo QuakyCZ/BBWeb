@@ -15,3 +15,9 @@ services:
 
     - App\Modules\ClientModule\Component\Connection\Minecraft\IMinecraftConnectionFactory
     - App\Modules\ClientModule\Component\Connection\Discord\IDiscordConnectionFactory
+
+    - App\Modules\AdminModule\Component\Poll\IPollFormFactory
+    - App\Modules\AdminModule\Component\Poll\IPollGridFactory
+    - App\Modules\ClientModule\Component\Poll\IPollVoteFormFactory
+    - App\Modules\ClientModule\Component\Poll\IPollResultFactory
+    - App\Modules\AdminModule\Component\Poll\IPollResultAdminFactory

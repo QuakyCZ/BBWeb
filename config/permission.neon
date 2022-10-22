@@ -6,6 +6,7 @@ parameters:
             - Client:Dashboard
             - Client:Connections
             - Client:DungeonEscape
+            - Client:Poll
             - Client:Error
             - Client:Error4xx
             - Admin:Error
@@ -15,10 +16,17 @@ parameters:
             - Admin:Settings
             - Admin:Servers
             - Admin:Users
-        OWNER: []
-        LEADER: []
-        HELPER: []
-        BUILDER: []
-        SERVER_ADMIN: []
-        DEVELOPER: []
+            - Admin:Poll
+        OWNER:
+            - Admin:Default
+        LEADER:
+            - Admin:Poll
+        HELPER:
+            - Admin:Default
+        BUILDER:
+            - Admin:Default
+        SERVER_ADMIN:
+            - Admin:Default
+        DEVELOPER:
+            - Admin:Default
         TESTER: []

@@ -13,3 +13,8 @@ services:
 
     - App\Repository\DungeonEscape\PlayerRepository
     - App\Modules\ApiModule\Model\PlayerStatistics\PlayerStatisticsRepository
+
+    - App\Repository\Primary\PollRepository
+    - App\Repository\Primary\PollOptionRepository
+    - App\Repository\Primary\PollParticipantRepository
+    - App\Repository\Primary\PollRoleRepository

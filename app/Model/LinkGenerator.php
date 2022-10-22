@@ -9,31 +9,21 @@ use Contributte\MenuControl\LinkGenerator\NetteLinkGenerator;
 class LinkGenerator implements ILinkGenerator
 {
 
-    /**
-     * @var \Nette\Application\LinkGenerator
-     */
-    private \Nette\Application\LinkGenerator $linkGenerator;
-
     public function __construct
     (
-        \Nette\Application\LinkGenerator $linkGenerator
+        private \Nette\Application\LinkGenerator $linkGenerator
     )
     {
-        $this->linkGenerator = $linkGenerator;
     }
 
     public function link(IMenuItem $item): string
     {
         $action = $item->getAction();
+
         if ($action !== null) {
             return $this->linkGenerator->link($action, $item->getActionParameters());
         }
 
-        $link = $item->getLink();
-        if ($link !== null) {
-            return $link;
-        }
-
-        return '#';
+        return $item->getLink() ?? '#';
     }
 }

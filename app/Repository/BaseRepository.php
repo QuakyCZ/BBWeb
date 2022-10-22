@@ -47,8 +47,8 @@ abstract class BaseRepository
     }
 
     public function findBy(array $conditions, bool $withDeleted = false): Selection {
-        if ($withDeleted == false) {
-            $conditions['not_deleted'] = 1;
+        if ($withDeleted === false) {
+            $conditions[$this->tableName . '.not_deleted'] = 1;
         }
 
         $selection = $this->database->table($this->tableName);
@@ -64,6 +64,12 @@ abstract class BaseRepository
             return $this->database->table($this->tableName);
 
         return $this->database->table($this->tableName)->where($this->tableName.'.not_deleted = 1');
+    }
+
+    public function getRow(int $id): ?ActiveRow {
+        return $this->findBy([
+            'id' => $id
+        ])->fetch();
     }
 
     /**

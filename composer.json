@@ -25,10 +25,12 @@
 		"ublaboo/datagrid": "^6.9",
 		"contributte/recaptcha": "^3.4",
 		"contributte/menu-control": "^2.2",
+		"contributte/forms-multiplier": "^3.3",
 		"gladcodes/keygen": "^1.1",
 		"tomaj/nette-api": "^2.7",
-		"marc-mabe/php-enum": "^4.7"
-	},
+		"marc-mabe/php-enum": "^4.7",
+      	"ext-pdo": "*"
+    },
 	"require-dev": {
 		"nette/tester": "^2.3",
 		"symfony/thanks": "^1",

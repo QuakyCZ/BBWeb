@@ -20,6 +20,8 @@
 
     <link rel="stylesheet" type="text/css"  href="/webpack/stylesAdmin.bundle.css">
     <link rel="stylesheet" href="{$basePath}/libs/fontawesome/css/all.css">
+    <link rel="stylesheet" href="{$basePath}/styles/style.css">
+    {block head}{/block}
 
     <title>Admin</title>
 
@@ -30,9 +32,11 @@
     {import '_plainLayout.latte'}
 {/if}
 <body>
+    <script src="{$basePath}/webpack/scriptsAdmin.bundle.js"></script>
+    {block scripts}{/block}
+
     {include body}
 
-    <script src="/webpack/scriptsAdmin.bundle.js"></script>
     {snippet flashes}
         <script>
             {foreach $flashes as $flash}
@@ -51,6 +55,7 @@
             {/foreach}
         </script>
     {/snippet}
-    {block scripts}{/block}
+
+
 </body>
 </html>

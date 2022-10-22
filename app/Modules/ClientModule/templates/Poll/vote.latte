@@ -1,0 +1,9 @@
+{varType bool $hasVoted}
+{varType Nette\Database\Table\ActiveRow $poll}
+{block content}
+{if $hasVoted}
+    <h1 class="fw-bold">Výsledky hlasování</h1>
+    {control pollResult}
+{else}
+    {control voteForm}
+{/if}

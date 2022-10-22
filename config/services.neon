@@ -6,3 +6,5 @@ services:
     - App\Security\MenuAuthorizator
     - App\Modules\ApiModule\Model\User\UserConnectTokenMapper
     - App\Modules\ApiModule\Model\User\Connector\UserConnectFacadeFactory
+extensions:
+    - Contributte\FormMultiplier\DI\MultiplierExtension
