@@ -3,25 +3,33 @@
 namespace App\Modules\AdminModule\Presenter;
 
 
+use App\Enum\EFlashMessageType;
+use App\Modules\AdminModule\Component\ForgottenPasswordForm\ForgottenPasswordForm;
+use App\Modules\AdminModule\Component\ForgottenPasswordForm\IForgottenPasswordFormFactory;
+use App\Modules\AdminModule\Component\ResetPasswordForm\IResetPasswordFormFactory;
+use App\Modules\AdminModule\Component\ResetPasswordForm\ResetPasswordForm;
 use App\Modules\AdminModule\Component\SignInForm\ISignInFormFactory;
 use App\Modules\AdminModule\Component\SignInForm\SignInForm;
 use App\Modules\AdminModule\Component\SignUpForm\ISignUpFormFactory;
 use App\Modules\AdminModule\Component\SignUpForm\SignUpForm;
 use App\Modules\AdminModule\Presenter\Base\BasePresenter;
 use App\Modules\ApiModule\Model\User\UserFacade;
-use Latte\MacroNode;
-use Latte\Macros\MacroSet;
-use Latte\PhpWriter;
+use App\Repository\Primary\UserRepository;
 use Nette\Application\AbortException;
-use Nette\Application\UI\Presenter;
+use Nette\Application\BadRequestException;
+use Nette\Application\UI\Form;
 use Tracy\Debugger;
 
 class SignPresenter extends BasePresenter
 {
+
     public function __construct(
+        private UserFacade $userFacade,
+        private UserRepository $userRepository,
         private ISignInFormFactory $signInFormFactory,
         private ISignUpFormFactory $signUpFormFactory,
-        private UserFacade $userFacade
+        private IForgottenPasswordFormFactory $forgottenPasswordFormFactory,
+        private IResetPasswordFormFactory $resetPasswordFormFactory,
     )
     {
         parent::__construct();
@@ -87,6 +95,49 @@ class SignPresenter extends BasePresenter
         }
     }
 
+
+    /**
+     * @param int $id
+     * @param string $email
+     * @param string $token
+     * @param int $t
+     * @return void
+     * @throws AbortException
+     * @throws BadRequestException
+     */
+    public function actionResetPassword(int $id, string $email, string $token, int $t): void {
+        if (time() - $t > 5*60) {
+            $this->flashMessage('Platnost tokenu vypršela.', EFlashMessageType::ERROR);
+            $this->redirect('Sign:forgottenPassword');
+        }
+
+        $user = $this->userRepository->findBy([
+            UserRepository::COLUMN_ID => $id,
+            UserRepository::COLUMN_EMAIL => $email,
+        ])->fetch();
+
+        if ($user === null) {
+            throw new BadRequestException();
+        }
+
+        if (!$this->userRepository->checkVerificationToken($token, $user, $t)) {
+            throw new BadRequestException();
+        }
+
+        /** @var ResetPasswordForm $form */
+        $rpf = $this->getComponent('resetPasswordForm');
+
+        /** @var Form $form */
+        $form = $rpf->getComponent('form');
+
+        $form->setDefaults([
+            'id' => $id,
+            'email' => $email,
+            'token' => $token,
+            't' => $t
+        ]);
+    }
+
     /**
      * @return SignInForm
      */
@@ -99,5 +150,17 @@ class SignPresenter extends BasePresenter
      */
     public function createComponentSignUpForm(): SignUpForm {
         return $this->signUpFormFactory->create();
+    }
+
+
+    public function createComponentForgottenPasswordForm(): ForgottenPasswordForm {
+        return $this->forgottenPasswordFormFactory->create();
+    }
+
+    /**
+     * @return ResetPasswordForm
+     */
+    public function createComponentResetPasswordForm(): ResetPasswordForm {
+        return $this->resetPasswordFormFactory->create();
     }
 }

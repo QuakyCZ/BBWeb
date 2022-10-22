@@ -2,8 +2,10 @@
 
 namespace App\Repository\Primary;
 
+use App\Model\ContextLocator;
 use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
+use Nette\Security\Passwords;
 
 class UserRepository extends PrimaryRepository
 {
@@ -23,6 +25,14 @@ class UserRepository extends PrimaryRepository
 
 
     protected string $tableName = self::TABLE_NAME;
+
+    public function __construct(
+        ContextLocator $contextLocator,
+        private Passwords $passwords
+    )
+    {
+        parent::__construct($contextLocator);
+    }
 
     /**
      * @return Selection
@@ -123,5 +133,35 @@ class UserRepository extends PrimaryRepository
             self::COLUMN_ID => $id,
             self::COLUMN_ACTIVE => $onlyActive
         ])->fetch();
+    }
+
+
+    /**
+     * @param ActiveRow $row
+     * @param string $salt
+     * @return string
+     */
+    public function getVerificationToken(ActiveRow $row, string $salt = ""): string {
+        return $this->passwords->hash($row[self::COLUMN_ID] . $row[self::COLUMN_USERNAME] . $row[self::COLUMN_EMAIL] . $row[self::COLUMN_CREATED]->getTimestamp() . $salt);
+    }
+
+
+    /**
+     * @param string $token
+     * @param ActiveRow $row
+     * @param string $salt
+     * @return bool
+     */
+    public function checkVerificationToken(string $token, ActiveRow $row, string $salt = ""): bool {
+        return $this->passwords->verify($row[self::COLUMN_ID] . $row[self::COLUMN_USERNAME] . $row[self::COLUMN_EMAIL] . $row[self::COLUMN_CREATED]->getTimestamp() . $salt, $token);
+    }
+
+
+    /**
+     * @param $password
+     * @return string
+     */
+    public function getPasswordHash($password): string {
+        return $this->passwords->hash($password);
     }
 }

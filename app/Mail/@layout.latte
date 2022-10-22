@@ -3,21 +3,47 @@
 <html>
 <head>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        h1, h2, h3, h4, h5, h6, p, .a3s {
+            font-family: 'Montserrat', sans-serif !important;
+        }
+
         h1 {
-            color: orange;
+            color: #ff9c24;
+            font-size: 28px;
         }
 
         h2 {
-            color: #fdce76;
+            color: #ff9c24;
+        }
+
+        p {
+            font-size: 18px;
+            color: #c8c9d5 !important;
+        }
+
+        a {
+            color: #ff9c24 !important;
+        }
+
+        a:hover {
+            color: #ffcc24 !important;
+        }
+
+        .im {
+            color: #c8c9d5 !important;
         }
 
         .container {
             display: block;
-            width: 100%;
-            background-color: #161a1d;
-            color: darkgray !important;
-            padding: 15px;
+            width: 90%;
+            background-color: #0a0c16;
+            color: #c8c9d5 !important;
+            padding: calc(12px + 0.8vw);
             border-radius: 10px;
+            text-align: center;
         }
 
         hr {
@@ -25,6 +51,32 @@
             color: gray;
             border: none;
             height: 3px;
+        }
+
+        img {
+            width: 150px;
+            margin-bottom: 24px;
+            text-align: start;
+        }
+
+        .small {
+            font-size: 16px;
+            color: #c8c9d5 !important;
+        }
+
+        .extra-small {
+            font-size: 12px;
+            color: #c8c9d5 !important;
+        }
+
+        ul, li {
+            text-align: start !important;
+            font-family: 'Montserrat', sans-serif;
+            color: #c8c9d5 !important;
+        }
+
+        .margin-top {
+            margin-top: 24px;
         }
     </style>
 </head>
@@ -34,7 +86,7 @@
             {* První řádka v Outlooku *}
             <div style="display: none">{$subject}</div>
             <a href="https://www.beastblock.cz" target="_blank">
-                <img src="https://www.beastblock.cz/img/logo.png" alt="logo" height="100px" style="height: 100px;">
+                <img src="https://www.beastblock.cz/img/logo.png" alt="logo">
             </a>
         </div>
         {block content}{/block}
