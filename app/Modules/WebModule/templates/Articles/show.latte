@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="{$basePath}/styles/style.css">
 {/block}
 {block content}
-    <a class="btn btn-outline-light mb-4 px-4 py-2 mt-5" n:href="Articles:">Vrátit se zpět</a>
+    <a class="btn btn-outline-light mb-4 px-4 py-2 mt-5" n:href="Articles:">Zpět na seznam příspěvků</a>
     <h1 class="fw-bold text-white display-4">{$article[App\Repository\Primary\ArticleRepository::COLUMN_TITLE]}</h1>
     <div class="row">
         <div class="col-auto">
@@ -21,7 +21,7 @@
         {if $article[App\Repository\Primary\ArticleRepository::COLUMN_CHANGED]}
             <div class="w-100 mb-3"></div>
             <div class="col-auto">
-                <span class="me-3 fw-bold">Upraveno:</span>
+                <span class="me-3 fw-bold">Poslední změna:</span>
                 <i class="fas fa-user me-2 fs-5 text-warning"></i>
                 {$article->changed_user['username']}
             </div>
