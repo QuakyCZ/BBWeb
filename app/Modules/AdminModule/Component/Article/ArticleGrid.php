@@ -199,6 +199,36 @@ class ArticleGrid extends BaseDataGrid
             ->setClass('btn btn-info');
 
         // UNPIN
+        $this->grid->addActionCallback('unpin', '', function ($id)
+        {
+            try
+            {
+                $row = $this->articleRepository->findRow($id);
+                if ($row === null)
+                {
+                    return;
+                }
+
+                $row->update([
+                    ArticleRepository::COLUMN_IS_PINNED => 0
+                ]);
+
+                $this->grid->presenter->flashMessage('Příspěvek byl odepnut.', EFlashMessageType::SUCCESS);
+            }
+            catch (\PDOException $exception)
+            {
+                Debugger::log($exception);
+                $this->grid->presenter->flashMessage('Při zpracování požadavku nastala chyba.', EFlashMessageType::ERROR);
+            }
+
+        })
+            ->setRenderCondition(function (ActiveRow $row)
+            {
+                return (bool)$row[ArticleRepository::COLUMN_IS_PINNED] === true;
+            })
+            ->setTitle($this->translator->translate('admin.articles.pin'))
+            ->setIcon('thumbtack')
+            ->setClass('btn btn-danger');
 
         // EDIT
         $this->grid->addAction('edit', '', ':Admin:Article:edit', [
