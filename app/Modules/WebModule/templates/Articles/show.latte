@@ -2,33 +2,37 @@
 
 {block styles}
     <link rel="stylesheet" type="text/css" href="{$basePath}/styles/about.css">
+    <link rel="stylesheet" type="text/css" href="{$basePath}/styles/articles.css">
+    <link rel="stylesheet" type="text/css" href="{$basePath}/styles/style.css">
 {/block}
-{block beforeContent}
-    <a n:href="Homepage:">
-        <div class="back-button" onmouseover="this.style.backgroundColor='#ff03c2';this.style.color='white';"
-             onmouseout="this.style.backgroundColor='#16ccca';this.style.color='black';">
-            <b><i class="fa-solid fa-angles-left"></i></b>
-        </div>
-    </a>
-{/block}
-
 {block content}
-    <h1>{$article[App\Repository\Primary\ArticleRepository::COLUMN_TITLE]}</h1>
-    <div>
-        Vytvořeno:
-        <i class="fas fa-user"></i>
-        {$article->created_user['username']}
-        <i class="fas fa-calendar"></i>
-        {$article[App\Repository\Primary\ArticleRepository::COLUMN_CREATED]|date: 'd. m. Y H:i'}
+    <a class="btn btn-outline-light mb-4 px-4 py-2 mt-5" n:href="Articles:">Vrátit se zpět</a>
+    <h1 class="fw-bold text-white display-4">{$article[App\Repository\Primary\ArticleRepository::COLUMN_TITLE]}</h1>
+    <div class="row">
+        <div class="col-auto">
+            <i class="fas fa-user me-2 fs-5 text-warning"></i>
+            {$article->created_user['username']}
+        </div>
+        •
+        <div class="col-auto">
+            <i class="fas fa-calendar me-2 fs-5 text-warning"></i>
+            {$article[App\Repository\Primary\ArticleRepository::COLUMN_CREATED]|date: 'd. m. Y H:i'}
+        </div>
         {if $article[App\Repository\Primary\ArticleRepository::COLUMN_CHANGED]}
-            Upraveno:
-            <i class="fas fa-user"></i>
-            {$article->changed_user['username']}
-            <i class="fas fa-calendar"></i>
-            {$article[App\Repository\Primary\ArticleRepository::COLUMN_CHANGED]|date: 'd. m. Y H:i'}
+            <div class="w-100 mb-3"></div>
+            <div class="col-auto">
+                <span class="me-3 fw-bold">Upraveno:</span>
+                <i class="fas fa-user me-2 fs-5 text-warning"></i>
+                {$article->changed_user['username']}
+            </div>
+            •
+            <div class="col-auto">
+                <i class="fas fa-calendar me-2 fs-5 text-warning"></i>
+                {$article[App\Repository\Primary\ArticleRepository::COLUMN_CHANGED]|date: 'd. m. Y H:i'}
+            </div>
         {/if}
     </div>
-    <div>
+    <div class="mt-4 text-muted">
         {$article[App\Repository\Primary\ArticleRepository::COLUMN_TEXT]}
     </div>
 {/block}
