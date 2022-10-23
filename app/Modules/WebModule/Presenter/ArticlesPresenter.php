@@ -11,6 +11,7 @@ class ArticlesPresenter extends Base\BasePresenter
 {
 
     private const ARTICLES_PER_PAGE = 10;
+    private int $page = 0;
 
     /**
      * @param ArticleRepository $articleRepository
@@ -22,6 +23,10 @@ class ArticlesPresenter extends Base\BasePresenter
     )
     {
         parent::__construct();
+    }
+
+    public function actionDefault(int $page = 0): void {
+        $this->page = $page;
     }
 
 
@@ -43,6 +48,6 @@ class ArticlesPresenter extends Base\BasePresenter
 
     public function createComponentArticlesListing(): ArticlesListing
     {
-        return $this->articlesListingFactory->create();
+        return $this->articlesListingFactory->create($this->page);
     }
 }

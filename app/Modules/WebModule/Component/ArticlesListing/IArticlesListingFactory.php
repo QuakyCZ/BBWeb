@@ -11,5 +11,5 @@ interface IArticlesListingFactory
      * @param int $maxPerPage
      * @return ArticlesListing
      */
-    public function create(int $page = 1, int $maxPerPage = self::DEFAULT_MAX_PER_PAGE): ArticlesListing;
+    public function create(int $page = 0, int $maxPerPage = self::DEFAULT_MAX_PER_PAGE): ArticlesListing;
 }

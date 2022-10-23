@@ -19,7 +19,7 @@ class ArticlesListing extends \App\Component\BaseComponent
     {
         $pageCount = 0;
         $this->template->articles = $this->articleRepository
-            ->page($this->page, $this->maxPerPage, $pageCount)
+            ->page($this->page + 1, $this->maxPerPage, $pageCount)
             ->order(ArticleRepository::COLUMN_IS_PINNED . ' DESC, '. ArticleRepository::COLUMN_CREATED . ' DESC');
         $this->template->page = $this->page;
         $this->template->pages = $pageCount;
@@ -31,16 +31,23 @@ class ArticlesListing extends \App\Component\BaseComponent
      */
     public function handlePage(int $page): void
     {
+        bdump($page);
         if ($page < 0)
         {
             throw new BadRequestException();
         }
 
         $this->page = $page;
+        $pageCount = 0;
+        $this->template->articles = $this->articleRepository
+            ->page($this->page + 1, $this->maxPerPage, $pageCount)
+            ->order(ArticleRepository::COLUMN_IS_PINNED . ' DESC, '. ArticleRepository::COLUMN_CREATED . ' DESC');
+        $this->template->page = $this->page;
+        $this->template->pages = $pageCount;
 
         if ($this->presenter->isAjax())
         {
-            $this->presenter->redrawControl('articles');
+            $this->redrawControl();
             $this->presenter->redrawControl();
         }
         else
