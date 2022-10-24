@@ -14,6 +14,10 @@ menu:
                 action: 'Admin:Users:default'
                 data:
                     icon: 'fas fa-users'
+            'admin.articles.title':
+                action: 'Admin:Article:default'
+                data:
+                    icon: 'fas fa-newspaper'
             'admin.dungeonEscape.title':
                 link: '#'
                 data:
