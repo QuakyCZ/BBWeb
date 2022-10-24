@@ -1,5 +1,10 @@
 {varType Nette\Database\Table\ActiveRow $article}
-
+{block og_title}
+    {$article[App\Repository\Primary\ArticleRepository::COLUMN_TITLE]}
+{/block}
+{block og_description}
+    {$article[App\Repository\Primary\ArticleRepository::COLUMN_TEXT]|truncate:100}
+{/block}
 {block styles}
     <link rel="stylesheet" type="text/css" href="{$basePath}/styles/about.css">
     <link rel="stylesheet" type="text/css" href="{$basePath}/styles/articles.css">
