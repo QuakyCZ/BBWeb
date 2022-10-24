@@ -38,6 +38,6 @@
         {/if}
     </div>
     <div class="mt-4 text-muted">
-        {$article[App\Repository\Primary\ArticleRepository::COLUMN_TEXT]}
+        {$article[App\Repository\Primary\ArticleRepository::COLUMN_TEXT]|noescape}
     </div>
 {/block}
