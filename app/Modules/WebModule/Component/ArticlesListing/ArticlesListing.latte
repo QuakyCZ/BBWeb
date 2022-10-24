@@ -5,8 +5,45 @@
 {block styles}
     <link rel="stylesheet" type="text/css" href="{$basePath}/styles/about.css">
     <link rel="stylesheet" type="text/css" href="{$basePath}/styles/style.css">
-{/block}
+    <style>
+        .active > .page-link {
+            background-color: #ffc107 !important;
+            border: 1px solid #ffc107 !important;
+            color: black !important;
+        }
 
+        .page-link {
+            text-decoration: none;
+            color: #ffc107;
+            font-weight: bolder;
+            background: none;
+            border: 1px solid #ffc107;
+        }
+
+        .page-link:hover {
+            background-color: #ffc107;
+            color: black;
+            border: 1px solid #ffc107;
+        }
+    </style>
+{/block}
+<nav class="mx-auto" style="width: min-content;">
+    <ul class="pagination">
+        {if $page > 0}
+            <li class="page-item btn-outline-warning"><a class="page-link" href="{plink this $page-1}"><i class="fas fa-angles-left"></i></a></li>
+        {/if}
+            {for $i = 0; $i < $pages; $i++}
+            {if $i === $page}
+                <li class="page-item active btn-warning"><a class="page-link" href="#">{$i + 1}</a></li>
+            {else}
+                <li class="page-item btn-outline-warning"><a class="page-link" href="{plink this $i}">{$i + 1}</a></li>
+            {/if}
+        {/for}
+            {if $page < $pages - 1}
+            <li class="page-item"><a class="page-link" href="{plink this $page+1}"><i class="fas fa-angles-right"></i></a></li>
+        {/if}
+    </ul>
+</nav>
 {snippet articles}
     {foreach $articles as $article}
         <div class="link-container p-5 mb-5">
@@ -14,7 +51,7 @@
                 {if ((bool) $article[App\Repository\Primary\ArticleRepository::COLUMN_IS_PINNED]) === true}
                     <i class="fas fa-thumbtack text-danger"></i>
                 {/if}
-                <h3><a class="link-title fw-bold display-4" href="{plink Articles:show 'id' => $article[App\Repository\Primary\ArticleRepository::COLUMN_ID]}">{$article[App\Repository\Primary\ArticleRepository::COLUMN_TITLE]}</a></h3>
+                <h1 ><a class="link-title fw-bold" href="{plink Articles:show 'id' => $article[App\Repository\Primary\ArticleRepository::COLUMN_ID]}">{$article[App\Repository\Primary\ArticleRepository::COLUMN_TITLE]}</a></h1>
             </div>
             <div class="row">
                 <div class="col-auto">
@@ -33,16 +70,16 @@
         </div>
     {/foreach}
     {* TODO: Upravit styl stránkování *}
-    <nav>
+    <nav class="mx-auto" style="width: min-content;">
         <ul class="pagination">
             {if $page > 0}
-                <li class="page-item"><a class="page-link" href="{plink this $page-1}"><i class="fas fa-angles-left"></i></a></li>
+                <li class="page-item btn-outline-warning"><a class="page-link" href="{plink this $page-1}"><i class="fas fa-angles-left"></i></a></li>
             {/if}
             {for $i = 0; $i < $pages; $i++}
                 {if $i === $page}
-                    <li class="page-item active"><a class="page-link" href="#">{$i + 1}</a></li>
+                    <li class="page-item active btn-warning"><a class="page-link" href="#">{$i + 1}</a></li>
                 {else}
-                    <li class="page-item"><a class="page-link" href="{plink this $i}">{$i + 1}</a></li>
+                    <li class="page-item btn-outline-warning"><a class="page-link" href="{plink this $i}">{$i + 1}</a></li>
                 {/if}
             {/for}
             {if $page < $pages - 1}
