@@ -7,6 +7,7 @@ use App\Facade\MailFacade;
 use App\Repository\Primary\FeedbackRepository;
 use App\Repository\Primary\ServerRepository;
 use Nette\Application\AbortException;
+use Nette\Application\ForbiddenRequestException;
 use Nette\Application\UI\Form;
 use Nette\Database\Explorer;
 use Nette\Utils\ArrayHash;
@@ -60,9 +61,18 @@ class FeedbackForm extends BaseComponent
      * @param ArrayHash $values
      * @return void
      * @throws AbortException
+     * @throws ForbiddenRequestException
      */
     public function saveForm(Form $form, ArrayHash $values): void
     {
+
+        $xUrl = $form->getHttpData($form::DATA_TEXT, 'x_url');
+
+        if (empty($xUrl) || $xUrl !== "nospam")
+        {
+            throw new ForbiddenRequestException();
+        }
+        
         $server = $this->serverRepository->findBy(['id' => $values['server_id']])->fetch();
         if ($server === null)
         {
