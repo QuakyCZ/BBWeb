@@ -31,6 +31,8 @@ module.exports = (env, argv) => {
                 APP_DIR + '/www/js/web/web.js',
             ],
             stylesAdmin: [
+                APP_DIR + '/node_modules/easymde/dist/easymde.min.css',
+                APP_DIR + '/www/styles/admin/EasyMDE.css',
                 APP_DIR + '/www/styles/appwork.css',
                 APP_DIR + '/www/styles/imports.scss',
                 APP_DIR + '/www/styles/admin/admin.css'

@@ -72,3 +72,7 @@ body {
     color: red;
 }
 
+.card {
+    background-color: #191a1f;    
+    border-width: 0;
+}

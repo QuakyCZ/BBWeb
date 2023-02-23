@@ -7,6 +7,9 @@ up-daemon d:
 bash b:
 	docker exec -it web /bin/bash
 
+w:
+	cd docker && docker-compose run npm npm run watch:dev
+
 wd:
 	cd docker && docker-compose run npm npm run build:dev
 
