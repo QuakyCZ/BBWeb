@@ -65,7 +65,7 @@ menu:
         linkGenerator: @App\Model\LinkGenerator
         authorizator: @App\Security\MenuAuthorizator
         templates:
-           menu: %appDir%/Modules/ClientModule/templates/menu.latte
+           menu: %appDir%/Modules/AdminModule/templates/menu.latte
         items:
             'client.dashboard.title':
                 action: 'Client:Dashboard:default'

@@ -1,4 +1,6 @@
 {varType Nette\Database\Table\ActiveRow $article}
+{varType string $textFromMarkdown}
+
 {block og_title}
     {$article[App\Repository\Primary\ArticleRepository::COLUMN_TITLE]}
 {/block}
@@ -38,6 +40,15 @@
         {/if}
     </div>
     <div class="mt-4 text-muted">
-        {$article[App\Repository\Primary\ArticleRepository::COLUMN_TEXT]|noescape}
+        {$textFromMarkdown|noescape}
     </div>
+
 {/block}
+{block scripts}
+    <script>
+        $(document).ready(() => {
+            $('table').addClass('table');
+        });
+    </script>
+{/block}
+
