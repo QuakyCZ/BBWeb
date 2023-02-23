@@ -1,0 +1,11 @@
+.datagrid {
+    background-color: #191a1f;
+}
+
+.datagrid table thead tr.row-group-actions th {
+    background-color: #191a1f;
+}
+
+.datagrid .row-grid-bottom {
+    background-color: #191a1f;
+}
