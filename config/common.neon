@@ -51,7 +51,10 @@ translation:
 	    - Contributte\Translation\LocalesResolvers\Router
 
 tracy: 
-    email: info@beastblock.cz
-    fromEmail: web-tracy@beastblock.cz
+    email: 
+        - info@beastblock.cz
+        - quaky@beastblock.cz
+    fromEmail: webtracy@beastblock.cz
     netteMailer: true
     logSeverity: [E_WARNING, E_NOTICE, E_ERROR]
+    errorTemplate: 'app/Presenter/templates/Error/500.phtml'
