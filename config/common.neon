@@ -49,3 +49,9 @@ translation:
 	returnOriginalMessage: true # to not translate undefined messages, default is false
 	localeResolvers:
 	    - Contributte\Translation\LocalesResolvers\Router
+
+tracy: 
+    email: info@beastblock.cz
+    fromEmail: web-tracy@beastblock.cz
+    netteMailer: true
+    logSeverity: [E_WARNING, E_NOTICE, E_ERROR]
