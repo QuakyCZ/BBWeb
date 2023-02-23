@@ -9,7 +9,6 @@ use Nette\Application\BadRequestException;
 
 class ArticlesPresenter extends Base\BasePresenter
 {
-
     private const ARTICLES_PER_PAGE = 10;
     private int $page = 0;
 
@@ -20,12 +19,12 @@ class ArticlesPresenter extends Base\BasePresenter
     public function __construct(
         private ArticleRepository $articleRepository,
         private IArticlesListingFactory $articlesListingFactory,
-    )
-    {
+    ) {
         parent::__construct();
     }
 
-    public function actionDefault(int $page = 0): void {
+    public function actionDefault(int $page = 0): void
+    {
         $this->page = $page;
     }
 
@@ -38,8 +37,7 @@ class ArticlesPresenter extends Base\BasePresenter
     public function actionShow(int $id): void
     {
         $article = $this->articleRepository->findRow($id);
-        if ($article === null)
-        {
+        if ($article === null) {
             throw new BadRequestException();
         }
 

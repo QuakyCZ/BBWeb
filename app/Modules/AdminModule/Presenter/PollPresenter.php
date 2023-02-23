@@ -13,15 +13,13 @@ use Ublaboo\DataGrid\DataGrid;
 
 class PollPresenter extends BasePresenter
 {
-
     private ?int $id = null;
 
     public function __construct(
         private IPollFormFactory $votingFormFactory,
         private IPollGridFactory $pollGridFactory,
         private IPollResultAdminFactory $pollResultFactory,
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -35,15 +33,18 @@ class PollPresenter extends BasePresenter
         $this->id = $id;
     }
 
-    public function createComponentPollForm(): PollForm {
+    public function createComponentPollForm(): PollForm
+    {
         return $this->votingFormFactory->create($this->id);
     }
 
-    public function createComponentPollGrid(): DataGrid {
+    public function createComponentPollGrid(): DataGrid
+    {
         return $this->pollGridFactory->create($this)->create();
     }
 
-    public function createComponentPollResult(): PollResult {
+    public function createComponentPollResult(): PollResult
+    {
         return $this->pollResultFactory->create($this->id);
     }
 }

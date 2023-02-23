@@ -25,12 +25,10 @@ class UserDisconnectHandler extends AbstractHandler
      * @param UserConnectFacadeFactory $userConnectFacadeFactory
      * @param ScopeFactoryInterface|null $scopeFactory
      */
-    public function __construct
-    (
+    public function __construct(
         private UserConnectFacadeFactory $userConnectFacadeFactory,
         ScopeFactoryInterface $scopeFactory = null
-    )
-    {
+    ) {
         parent::__construct($scopeFactory);
     }
 
@@ -59,8 +57,7 @@ class UserDisconnectHandler extends AbstractHandler
     protected function verifyParams(array $params): bool|ResponseInterface
     {
         $userId = $params[self::PARAM_DATA][self::PARAM_USER_ID];
-        if (!is_int($userId))
-        {
+        if (!is_int($userId)) {
             return new JsonApiResponse(400, [
                 'status' => 'error',
                 'scope' => EErrorScopeType::API_ERROR,
@@ -70,8 +67,7 @@ class UserDisconnectHandler extends AbstractHandler
 
         $type = $params[self::PARAM_DATA][self::PARAM_TYPE];
 
-        if (!EConnectTokenType::hasValue($type))
-        {
+        if (!EConnectTokenType::hasValue($type)) {
             return new JsonApiResponse(400, [
                 'status' => 'error',
                 'scope' => EErrorScopeType::API_ERROR,
@@ -88,8 +84,7 @@ class UserDisconnectHandler extends AbstractHandler
 
         $connector = $this->userConnectFacadeFactory->getInstanceOf($type);
 
-        if ($connector === null)
-        {
+        if ($connector === null) {
             return new JsonApiResponse(400, [
                 'status' => 'error',
                 'scope' => EErrorScopeType::API_ERROR,
@@ -99,8 +94,7 @@ class UserDisconnectHandler extends AbstractHandler
 
         $userId = $params[self::PARAM_DATA][self::PARAM_USER_ID];
 
-        if (!$connector->isConnected($userId))
-        {
+        if (!$connector->isConnected($userId)) {
             return new JsonApiResponse(400, [
                 'status' => 'error',
                 'scope' => EErrorScopeType::LOGICAL_ERROR,
@@ -108,18 +102,14 @@ class UserDisconnectHandler extends AbstractHandler
             ]);
         }
 
-        try
-        {
-            if ($connector->disconnect($userId))
-            {
+        try {
+            if ($connector->disconnect($userId)) {
                 return new JsonApiResponse(200, [
                     'status' => 'ok',
                     'message' => 'Účet byl odpojen.'
                 ]);
             }
-        }
-        catch (\Exception $exception)
-        {
+        } catch (\Exception $exception) {
             Debugger::log($exception, ILogger::EXCEPTION);
 
             return new JsonApiResponse(500, [

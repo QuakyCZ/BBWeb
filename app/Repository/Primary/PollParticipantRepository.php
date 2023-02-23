@@ -19,7 +19,8 @@ class PollParticipantRepository extends PrimaryRepository
      * @param int $pollId
      * @return int
      */
-    public function deleteParticipants(int $pollId): int {
+    public function deleteParticipants(int $pollId): int
+    {
         return $this->findBy([
             self::COLUMN_POLL_ID => $pollId
         ])->delete();

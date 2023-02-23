@@ -9,12 +9,10 @@ use Ublaboo\DataGrid\Exception\DataGridException;
 
 class SettingsGrid extends DataGrid
 {
-    public function __construct
-    (
+    public function __construct(
         private SettingsRepository $settingRepository,
         Translator                 $translator,
-    )
-    {
+    ) {
         parent::__construct(null, 'settings');
         $this->translator = $translator;
     }

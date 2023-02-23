@@ -18,7 +18,6 @@ use Tracy\Debugger;
 
 abstract class ClientPresenter extends Presenter
 {
-
     private IMenuComponentFactory $menuComponentFactory;
     private UserRepository $userRepository;
     private UserMinecraftAccountRepository $userMinecraftAccountRepository;
@@ -33,13 +32,12 @@ abstract class ClientPresenter extends Presenter
      * @param SettingsRepository $settingsRepository
      * @return void
      */
-    public function injectBasePresenter (
+    public function injectBasePresenter(
         IMenuComponentFactory $menuComponentFactory,
         UserRepository $userRepository,
         UserMinecraftAccountRepository $userMinecraftAccountRepository,
         SettingsRepository $settingsRepository
-    ): void
-    {
+    ): void {
         $this->menuComponentFactory = $menuComponentFactory;
         $this->userRepository = $userRepository;
         $this->userMinecraftAccountRepository = $userMinecraftAccountRepository;
@@ -53,7 +51,6 @@ abstract class ClientPresenter extends Presenter
      */
     protected function startup()
     {
-
         $storage = $this->getUser()->getStorage();
         $storage->setNamespace('Client');
 
@@ -69,21 +66,15 @@ abstract class ClientPresenter extends Presenter
             }
         );
 
-        if(!in_array($this->name, $this->presenterNamesWithPublicAccess))
-        {
+        if (!in_array($this->name, $this->presenterNamesWithPublicAccess)) {
             $user = $this->getUser();
             $key = $this->storeRequest();
-            if (!$user->isLoggedIn())
-            {
+            if (!$user->isLoggedIn()) {
                 $this->redirect(':Client:Sign:in', ['returnKey' => $key]);
-            }
-            else if (!$this->userRepository->isUserActive($user->getId()))
-            {
+            } elseif (!$this->userRepository->isUserActive($user->getId())) {
                 $this->getUser()->logout(true);
                 $this->redirect(':Client:Sign:in', ['returnKey' => $key]);
-            }
-            else if (!$user->isAllowed($this->getName(), $this->getAction()))
-            {
+            } elseif (!$user->isAllowed($this->getName(), $this->getAction())) {
                 throw new BadRequestException("Nemáte dostatečná oprávnění " . $this->getName() . ":".$this->getAction(), 403);
             }
         }
@@ -93,12 +84,10 @@ abstract class ClientPresenter extends Presenter
 
     protected function beforeRender()
     {
-
         $alertEnabled = $this->settingsRepository->getByName('alert-enabled')['content'];
         $this->template->alertEnabled = $alertEnabled;
 
-        if ($alertEnabled)
-        {
+        if ($alertEnabled) {
             $alert = new \stdClass();
             $alert->icon = $this->settingsRepository->getByName('alert-icon')['content'];
             $alert->message = $this->settingsRepository->getByName('alert-message')['content'];
@@ -108,8 +97,7 @@ abstract class ClientPresenter extends Presenter
             $this->template->alert = $alert;
         }
 
-        if ($this->getUser()->isLoggedIn())
-        {
+        if ($this->getUser()->isLoggedIn()) {
             $minecraft = $this->userMinecraftAccountRepository->getAccountByUserId($this->getUser()->getId());
             $this->template->minecraftNick = $minecraft !== null ? $minecraft[UserMinecraftAccountRepository::COLUMN_NICK] : $this->getUser()->getIdentity()->getData()['name'];
         }

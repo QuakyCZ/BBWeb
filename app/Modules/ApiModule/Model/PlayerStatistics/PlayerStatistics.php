@@ -4,8 +4,7 @@ namespace App\Modules\ApiModule\Model\PlayerStatistics;
 
 class PlayerStatistics
 {
-    public function __construct
-    (
+    public function __construct(
         private int $id,
         private int $normalGamesPlayed,
         private int $coopGamesPlayed,
@@ -20,9 +19,7 @@ class PlayerStatistics
         private float $highestScore,
         private float $totalDealtDamage,
         private float $totalTakenDamage,
-
-    )
-    {
+    ) {
     }
 
     /**
@@ -141,22 +138,23 @@ class PlayerStatistics
     /**
      * @return array
      */
-    public function toArray(): array {
-            return [
-               'id' => $this->id,
-               'normalGamesPlayed' => $this->normalGamesPlayed,
-               'coopGamesPlayed' => $this->coopGamesPlayed,
-               'battleRoyaleGamesPlayed' => $this->battleRoyaleGamesPlayed,
-               'singleWins' => $this->singleWins,
-               'coopWins' => $this->coopWins,
-               'battleRoyaleWins' => $this->battleRoyaleWins,
-               'deaths' => $this->deaths,
-               'mobKills' => $this->mobKills,
-               'bossKills' => $this->bossKills,
-               'playerKills' => $this->playerKills,
-               'highestScore' => $this->highestScore,
-               'totalDealtDamage' => $this->totalDealtDamage,
-               'totalTakenDamage' => $this->totalTakenDamage,
-            ];
+    public function toArray(): array
+    {
+        return [
+           'id' => $this->id,
+           'normalGamesPlayed' => $this->normalGamesPlayed,
+           'coopGamesPlayed' => $this->coopGamesPlayed,
+           'battleRoyaleGamesPlayed' => $this->battleRoyaleGamesPlayed,
+           'singleWins' => $this->singleWins,
+           'coopWins' => $this->coopWins,
+           'battleRoyaleWins' => $this->battleRoyaleWins,
+           'deaths' => $this->deaths,
+           'mobKills' => $this->mobKills,
+           'bossKills' => $this->bossKills,
+           'playerKills' => $this->playerKills,
+           'highestScore' => $this->highestScore,
+           'totalDealtDamage' => $this->totalDealtDamage,
+           'totalTakenDamage' => $this->totalTakenDamage,
+        ];
     }
 }

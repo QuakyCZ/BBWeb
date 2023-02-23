@@ -11,7 +11,6 @@ use Nette\Security\SimpleIdentity;
 
 class Authenticator implements \Nette\Security\Authenticator
 {
-
     private Nette\Security\Passwords $passwords;
     private UserRepository $userRepository;
     private UserRoleRepository $userRoleRepository;
@@ -23,8 +22,7 @@ class Authenticator implements \Nette\Security\Authenticator
         UserRepository $userRepository,
         UserRoleRepository $userRoleRepository,
         UserDetailsRepository $userDetailsRepository
-    )
-    {
+    ) {
         $this->passwords = $passwords;
         $this->userRepository = $userRepository;
         $this->userRoleRepository = $userRoleRepository;
@@ -35,18 +33,15 @@ class Authenticator implements \Nette\Security\Authenticator
     {
         $user = $this->userRepository->findByEmail($email);
 
-        if (!$user)
-        {
+        if (!$user) {
             throw new AuthenticationException('Uživatel nebyl nalezen.');
         }
 
-        if (!$user[UserRepository::COLUMN_ACTIVE])
-        {
+        if (!$user[UserRepository::COLUMN_ACTIVE]) {
             throw new Nette\Security\AuthenticationException('Účet není aktivní');
         }
 
-        if (!$this->passwords->verify($password, $user->password))
-        {
+        if (!$this->passwords->verify($password, $user->password)) {
             throw new AuthenticationException('Invalid password.');
         }
 

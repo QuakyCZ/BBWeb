@@ -7,7 +7,6 @@ use Tomaj\NetteApi\Misc\TokenRepositoryInterface;
 
 class UserTokenRepository extends PrimaryRepository implements TokenRepositoryInterface
 {
-
     public const TABLE_NAME = 'user_token';
     public const COLUMN_ID = 'id';
     public const COLUMN_USER_ID = 'user_id';
@@ -33,8 +32,7 @@ class UserTokenRepository extends PrimaryRepository implements TokenRepositoryIn
     public function ipRestrictions(string $token): ?string
     {
         $row = $this->getValidToken($token);
-        if ($row === null)
-        {
+        if ($row === null) {
             return null;
         }
 

@@ -5,14 +5,15 @@ namespace App\Modules\AdminModule\Presenter;
 use App\Modules\AdminModule\Component\ServerListing\IServerListingFactory;
 use App\Modules\AdminModule\Component\ServerListing\ServerListing;
 
-class ServersPresenter extends Base\BasePresenter {
-
+class ServersPresenter extends Base\BasePresenter
+{
     private IServerListingFactory $serverListingFactory;
 
     /**
      * @param IServerListingFactory $serverListingFactory
      */
-    public function __construct(IServerListingFactory $serverListingFactory) {
+    public function __construct(IServerListingFactory $serverListingFactory)
+    {
         parent::__construct();
         $this->serverListingFactory = $serverListingFactory;
     }
@@ -20,7 +21,8 @@ class ServersPresenter extends Base\BasePresenter {
     /**
      * @return ServerListing
      */
-    public function createComponentServerListing(): ServerListing {
+    public function createComponentServerListing(): ServerListing
+    {
         return $this->serverListingFactory->create();
     }
 }

@@ -9,7 +9,6 @@ use Ublaboo\DataGrid\DataGrid;
 
 class ArticlePresenter extends Base\BasePresenter
 {
-
     private ?int $id = null;
 
     /**
@@ -19,8 +18,7 @@ class ArticlePresenter extends Base\BasePresenter
     public function __construct(
         private IArticleGridFactory $articleGridFactory,
         private IArticleFormFactory $articleFormFactory
-    )
-    {
+    ) {
         parent::__construct();
     }
 

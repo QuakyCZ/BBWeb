@@ -36,7 +36,8 @@ class PollResultAdmin extends PollResult
     }
 }
 
-interface IPollResultAdminFactory {
+interface IPollResultAdminFactory
+{
     /**
      * @param int|null $id
      * @return PollResultAdmin

@@ -2,7 +2,6 @@
 
 namespace App\Modules\AdminModule\Presenter;
 
-
 use App\Enum\EFlashMessageType;
 use App\Modules\AdminModule\Component\ForgottenPasswordForm\ForgottenPasswordForm;
 use App\Modules\AdminModule\Component\ForgottenPasswordForm\IForgottenPasswordFormFactory;
@@ -22,7 +21,6 @@ use Tracy\Debugger;
 
 class SignPresenter extends BasePresenter
 {
-
     public function __construct(
         private UserFacade $userFacade,
         private UserRepository $userRepository,
@@ -30,8 +28,7 @@ class SignPresenter extends BasePresenter
         private ISignUpFormFactory $signUpFormFactory,
         private IForgottenPasswordFormFactory $forgottenPasswordFormFactory,
         private IResetPasswordFormFactory $resetPasswordFormFactory,
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -41,11 +38,9 @@ class SignPresenter extends BasePresenter
      */
     public function actionIn(): void
     {
-        if ($this->getUser()->isLoggedIn())
-        {
+        if ($this->getUser()->isLoggedIn()) {
             $returnKey = $this->getParameter('returnKey');
-            if ($returnKey !== null)
-            {
+            if ($returnKey !== null) {
                 $this->restoreRequest($returnKey);
             }
             $this->redirect('Dashboard:');
@@ -64,8 +59,7 @@ class SignPresenter extends BasePresenter
      */
     public function actionOut(): void
     {
-        if(!$this->getUser()->isLoggedIn())
-        {
+        if (!$this->getUser()->isLoggedIn()) {
             $this->redirect('Default:');
         }
 
@@ -80,8 +74,7 @@ class SignPresenter extends BasePresenter
     {
         try {
             $verifiedUser = $this->userFacade->verifyUserToken($userId, $token);
-            if ($verifiedUser === null)
-            {
+            if ($verifiedUser === null) {
                 $this->flashMessage('Neplatný token.', 'warning');
             }
             $this->flashMessage('Ověření proběhlo úspěšně', 'success');
@@ -105,7 +98,8 @@ class SignPresenter extends BasePresenter
      * @throws AbortException
      * @throws BadRequestException
      */
-    public function actionResetPassword(int $id, string $email, string $token, int $t): void {
+    public function actionResetPassword(int $id, string $email, string $token, int $t): void
+    {
         if (time() - $t > 5*60) {
             $this->flashMessage('Platnost tokenu vypršela.', EFlashMessageType::ERROR);
             $this->redirect('Sign:forgottenPassword');
@@ -141,26 +135,30 @@ class SignPresenter extends BasePresenter
     /**
      * @return SignInForm
      */
-    public function createComponentSignInForm(): SignInForm {
+    public function createComponentSignInForm(): SignInForm
+    {
         return $this->signInFormFactory->create('Default:', $this->getParameter('returnKey'));
     }
 
     /**
      * @return SignUpForm
      */
-    public function createComponentSignUpForm(): SignUpForm {
+    public function createComponentSignUpForm(): SignUpForm
+    {
         return $this->signUpFormFactory->create();
     }
 
 
-    public function createComponentForgottenPasswordForm(): ForgottenPasswordForm {
+    public function createComponentForgottenPasswordForm(): ForgottenPasswordForm
+    {
         return $this->forgottenPasswordFormFactory->create();
     }
 
     /**
      * @return ResetPasswordForm
      */
-    public function createComponentResetPasswordForm(): ResetPasswordForm {
+    public function createComponentResetPasswordForm(): ResetPasswordForm
+    {
         return $this->resetPasswordFormFactory->create();
     }
 }

@@ -2,14 +2,12 @@
 
 namespace App\Modules\WebModule\Presenter;
 
-
 use App\Modules\WebModule\Component\Team\ITeamFactory;
 use App\Modules\WebModule\Component\Team\Team;
 use App\Modules\WebModule\Presenter\Base\BasePresenter;
 
 class AboutPresenter extends BasePresenter
 {
-
     private ITeamFactory $teamFactory;
 
     public function __construct(
@@ -24,7 +22,8 @@ class AboutPresenter extends BasePresenter
     /**
      * @return Team
      */
-    public function createComponentTeam(): Team {
+    public function createComponentTeam(): Team
+    {
         return $this->teamFactory->create();
     }
 }

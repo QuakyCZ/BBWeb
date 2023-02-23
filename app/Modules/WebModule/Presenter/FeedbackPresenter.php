@@ -10,11 +10,9 @@ class FeedbackPresenter extends Base\BasePresenter
     /**
      * @param FeedbackFormFactory $feedbackFormFactory
      */
-    public function __construct
-    (
+    public function __construct(
         private FeedbackFormFactory $feedbackFormFactory,
-    )
-    {
+    ) {
         parent::__construct();
     }
 

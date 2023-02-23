@@ -16,15 +16,14 @@ use Tracy\Debugger;
 
 class ResetPasswordForm extends BaseComponent
 {
-
     public function __construct(
         private UserRepository $userRepository,
         private Passwords $passwords,
-    )
-    {
+    ) {
     }
 
-    public function createComponentForm(): Form {
+    public function createComponentForm(): Form
+    {
         $form = new Form();
         $password = $form->addPassword('password', 'Heslo')
             ->setHtmlAttribute('placeholder', 'Heslo')
@@ -66,12 +65,11 @@ class ResetPasswordForm extends BaseComponent
      * @throws AbortException
      * @throws ForbiddenRequestException
      */
-    public function saveForm(Form $form, ArrayHash $values): void {
-
+    public function saveForm(Form $form, ArrayHash $values): void
+    {
         $xUrl = $form->getHttpData($form::DATA_TEXT, 'x_url');
 
-        if (empty($xUrl) || $xUrl !== "nospam")
-        {
+        if (empty($xUrl) || $xUrl !== "nospam") {
             throw new ForbiddenRequestException();
         }
 
@@ -105,4 +103,3 @@ class ResetPasswordForm extends BaseComponent
         }
     }
 }
-

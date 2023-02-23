@@ -12,13 +12,10 @@ use Nette\Application\Responses\JsonResponse;
 
 class DungeonEscapePresenter extends \App\Modules\WebModule\Presenter\Base\BasePresenter
 {
-
-    public function __construct
-    (
+    public function __construct(
         private PlayerFacade $playerFacade,
         private PlayerStatisticsFacade $playerStatisticsFacade,
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -33,21 +30,15 @@ class DungeonEscapePresenter extends \App\Modules\WebModule\Presenter\Base\BaseP
     public function actionPlayer(?string $uuid, ?string $name): void
     {
         $player = null;
-        if ($uuid !== null)
-        {
+        if ($uuid !== null) {
             $player = $this->playerFacade->getByUuid(hex2bin($uuid));
-        }
-        else if ($name !== null)
-        {
+        } elseif ($name !== null) {
             $player = $this->playerFacade->getByName($name);
-        }
-        else
-        {
+        } else {
             $this->sendJson(['error' => 'Name or UUID must be specified.']);
         }
 
-        if ($player === null)
-        {
+        if ($player === null) {
             $this->sendJson(['error' => 'Player was not found.']);
         }
 
@@ -59,14 +50,12 @@ class DungeonEscapePresenter extends \App\Modules\WebModule\Presenter\Base\BaseP
      */
     public function actionStatistics(?int $id): void
     {
-        if ($id === null)
-        {
+        if ($id === null) {
             $this->sendJson(['error' => 'ID must be specified.']);
         }
 
         $stats = $this->playerStatisticsFacade->getPlayerStatistics($id);
-        if ($stats === null)
-        {
+        if ($stats === null) {
             $this->sendJson(['error' => 'Statistics were not found.']);
         }
 

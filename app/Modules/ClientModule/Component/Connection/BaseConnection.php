@@ -14,15 +14,12 @@ use Tracy\ILogger;
 
 abstract class BaseConnection extends BaseComponent
 {
-
     protected ?ActiveRow $account = null;
 
-    public function __construct
-    (
+    public function __construct(
         protected ?int $userId,
         protected BaseUserConnectFacade $userConnectFacade
-    )
-    {
+    ) {
     }
 
     public function render(): void
@@ -36,8 +33,7 @@ abstract class BaseConnection extends BaseComponent
      */
     protected function getAccount(): ?ActiveRow
     {
-        if ($this->account === null)
-        {
+        if ($this->account === null) {
             $this->account = $this->userConnectFacade->getAccount($this->userId);
         }
 
@@ -51,24 +47,18 @@ abstract class BaseConnection extends BaseComponent
      */
     public function handleDisconnect(): void
     {
-        try
-        {
+        try {
             $message = new \stdClass();
-            if ($this->userConnectFacade->disconnect($this->userId))
-            {
+            if ($this->userConnectFacade->disconnect($this->userId)) {
                 $message->type = EFlashMessageType::MODAL_WARNING;
                 $message->title = 'Chyba';
                 $message->message = 'Tento účet nemáte propojen.';
-            }
-            else
-            {
+            } else {
                 $message->type = EFlashMessageType::INFO;
                 $message->message = 'Účet byl odpojen.';
             }
             $this->flashMessage($message);
-        }
-        catch (\Exception $exception)
-        {
+        } catch (\Exception $exception) {
             Debugger::log($exception, ILogger::EXCEPTION);
             $message = new \stdClass();
             $message->type = EFlashMessageType::MODAL_WARNING;
@@ -77,13 +67,10 @@ abstract class BaseConnection extends BaseComponent
             $this->flashMessage($message);
         }
 
-        if ($this->presenter->isAjax())
-        {
+        if ($this->presenter->isAjax()) {
             $this->presenter->redrawControl('flashes');
             $this->redrawControl('connection');
-        }
-        else
-        {
+        } else {
             $this->presenter->redirect('default');
         }
     }

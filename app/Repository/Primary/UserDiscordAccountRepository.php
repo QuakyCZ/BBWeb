@@ -6,7 +6,6 @@ use Nette\Database\Table\ActiveRow;
 
 class UserDiscordAccountRepository extends PrimaryRepository
 {
-
     public const TABLE_NAME = 'user_discord_account';
     public const COLUMN_ID = 'id';
     public const COLUMN_USER_ID = 'user_id';
@@ -61,8 +60,7 @@ class UserDiscordAccountRepository extends PrimaryRepository
     {
         $row = $this->getAccountByUserId($userId);
 
-        if ($row === null)
-        {
+        if ($row === null) {
             return false;
         }
 
@@ -72,5 +70,4 @@ class UserDiscordAccountRepository extends PrimaryRepository
 
         return true;
     }
-
 }

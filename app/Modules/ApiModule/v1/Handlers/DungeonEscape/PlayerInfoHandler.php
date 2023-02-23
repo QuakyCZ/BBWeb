@@ -13,12 +13,10 @@ use Tomaj\NetteApi\Response\ResponseInterface;
 
 class PlayerInfoHandler extends BaseHandler
 {
-    public function __construct
-    (
+    public function __construct(
         ScopeFactoryInterface $scopeFactory = null,
         private PlayerFacade $playerFacade,
-    )
-    {
+    ) {
         parent::__construct($scopeFactory);
     }
 
@@ -38,19 +36,15 @@ class PlayerInfoHandler extends BaseHandler
         $player = null;
         $uuid = $params['uuid'] ?? null;
         $name = $params['name'] ?? null;
-        if ($uuid === null && $name === null)
-        {
+        if ($uuid === null && $name === null) {
             return new JsonApiResponse(400, [
                 'status' => 'error',
                 'message' => 'UUID or Name must be specified.',
             ]);
         }
-        if ($uuid !== null)
-        {
+        if ($uuid !== null) {
             $player = $this->playerFacade->getByUuid($uuid);
-        }
-        else
-        {
+        } else {
             $player = $this->playerFacade->getByName($name);
         }
 

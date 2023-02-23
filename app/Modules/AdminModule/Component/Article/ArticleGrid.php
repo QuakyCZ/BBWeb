@@ -17,7 +17,6 @@ use Ublaboo\DataGrid\Exception\DataGridException;
 
 class ArticleGrid extends BaseDataGrid
 {
-
     private ArticleRepository $articleRepository;
 
     public function __construct(
@@ -25,8 +24,7 @@ class ArticleGrid extends BaseDataGrid
         ITranslator $translator,
         ArticleRepository $articleRepository,
         private UserRepository $userRepository
-    )
-    {
+    ) {
         parent::__construct($parent, 'articleGrid', $translator);
 
         $this->articleRepository = $articleRepository;
@@ -61,11 +59,9 @@ class ArticleGrid extends BaseDataGrid
             ->setFilterText();
 
         $this->grid->addColumnText(ArticleRepository::COLUMN_CREATED_USER_ID, $this->translator->translate('admin.articles.field.author'))
-            ->setRenderer(function (ActiveRow $article)
-            {
+            ->setRenderer(function (ActiveRow $article) {
                 $userRow = $article->ref(UserRepository::TABLE_NAME);
-                if ($userRow === null)
-                {
+                if ($userRow === null) {
                     return '';
                 }
 
@@ -108,72 +104,57 @@ class ArticleGrid extends BaseDataGrid
     private function addActions(): void
     {
         // PUBLISH
-        $this->grid->addActionCallback('publish', '',function ($id)
-        {
-            try
-            {
+        $this->grid->addActionCallback('publish', '', function ($id) {
+            try {
                 $row = $this->articleRepository->findRow($id);
-                if ($row === null)
-                {
+                if ($row === null) {
                     throw new BadRequestException();
                 }
                 $row->update([
                     ArticleRepository::COLUMN_IS_PUBLISHED => 1
                 ]);
                 $this->grid->presenter->flashMessage('Článek byl publikován.', EFlashMessageType::SUCCESS);
-            }
-            catch (\PDOException $exception)
-            {
+            } catch (\PDOException $exception) {
                 Debugger::log($exception, ILogger::EXCEPTION);
                 $this->grid->presenter->flashMessage('Při zpracování požadavku nastala chyba.', EFlashMessageType::ERROR);
             }
         })
-            ->setRenderCondition(function (ActiveRow $row)
-        {
-            return !$row[ArticleRepository::COLUMN_IS_PUBLISHED];
-        })
+            ->setRenderCondition(function (ActiveRow $row) {
+                return !$row[ArticleRepository::COLUMN_IS_PUBLISHED];
+            })
             ->setIcon('eye')
             ->setTitle($this->translator->translate('admin.articles.publish'))
             ->setClass('btn btn-info');
 
 
         // UNPUBLISH
-        $this->grid->addActionCallback('unpublish', '', function ($id)
-        {
-            try
-            {
+        $this->grid->addActionCallback('unpublish', '', function ($id) {
+            try {
                 $row = $this->articleRepository->findRow($id);
-                if ($row === null)
-                {
+                if ($row === null) {
                     throw new BadRequestException();
                 }
                 $row->update([
                     ArticleRepository::COLUMN_IS_PUBLISHED => 0
                 ]);
                 $this->grid->presenter->flashMessage('Publikování článeku bylo zrušeno.', EFlashMessageType::SUCCESS);
-            }
-            catch (\PDOException $exception)
-            {
+            } catch (\PDOException $exception) {
                 Debugger::log($exception, ILogger::EXCEPTION);
                 $this->grid->presenter->flashMessage('Při zpracování požadavku nastala chyba.', EFlashMessageType::ERROR);
             }
         })
             ->setIcon('eye-slash')
             ->setTitle($this->translator->translate('admin.articles.unpublish'))
-            ->setRenderCondition(function (ActiveRow $row)
-            {
+            ->setRenderCondition(function (ActiveRow $row) {
                 return ((bool) $row[ArticleRepository::COLUMN_IS_PUBLISHED]);
             })
             ->setClass('btn btn-danger');
 
         // PIN
-        $this->grid->addActionCallback('pin', '', function ($id)
-        {
-            try
-            {
+        $this->grid->addActionCallback('pin', '', function ($id) {
+            try {
                 $row = $this->articleRepository->findRow($id);
-                if ($row === null)
-                {
+                if ($row === null) {
                     return;
                 }
 
@@ -182,16 +163,12 @@ class ArticleGrid extends BaseDataGrid
                 ]);
 
                 $this->grid->presenter->flashMessage('Příspěvek byl připnut.', EFlashMessageType::SUCCESS);
-            }
-            catch (\PDOException $exception)
-            {
+            } catch (\PDOException $exception) {
                 Debugger::log($exception);
                 $this->grid->presenter->flashMessage('Při zpracování požadavku nastala chyba.', EFlashMessageType::ERROR);
             }
-
         })
-            ->setRenderCondition(function (ActiveRow $row)
-            {
+            ->setRenderCondition(function (ActiveRow $row) {
                 return !$row[ArticleRepository::COLUMN_IS_PINNED];
             })
             ->setTitle($this->translator->translate('admin.articles.pin'))
@@ -199,13 +176,10 @@ class ArticleGrid extends BaseDataGrid
             ->setClass('btn btn-info');
 
         // UNPIN
-        $this->grid->addActionCallback('unpin', '', function ($id)
-        {
-            try
-            {
+        $this->grid->addActionCallback('unpin', '', function ($id) {
+            try {
                 $row = $this->articleRepository->findRow($id);
-                if ($row === null)
-                {
+                if ($row === null) {
                     return;
                 }
 
@@ -214,16 +188,12 @@ class ArticleGrid extends BaseDataGrid
                 ]);
 
                 $this->grid->presenter->flashMessage('Příspěvek byl odepnut.', EFlashMessageType::SUCCESS);
-            }
-            catch (\PDOException $exception)
-            {
+            } catch (\PDOException $exception) {
                 Debugger::log($exception);
                 $this->grid->presenter->flashMessage('Při zpracování požadavku nastala chyba.', EFlashMessageType::ERROR);
             }
-
         })
-            ->setRenderCondition(function (ActiveRow $row)
-            {
+            ->setRenderCondition(function (ActiveRow $row) {
                 return (bool)$row[ArticleRepository::COLUMN_IS_PINNED] === true;
             })
             ->setTitle($this->translator->translate('admin.articles.pin'))
@@ -239,15 +209,11 @@ class ArticleGrid extends BaseDataGrid
             ->setClass('btn btn-warning');
 
         // DELETE
-        $this->grid->addActionCallback('delete', '', function ($id)
-        {
-            try
-            {
+        $this->grid->addActionCallback('delete', '', function ($id) {
+            try {
                 $this->articleRepository->setNotDeletedNull($id);
                 $this->grid->presenter->flashMessage('Příspěvek byl smazán.', EFlashMessageType::SUCCESS);
-            }
-            catch (\PDOException $exception)
-            {
+            } catch (\PDOException $exception) {
                 Debugger::log($exception, ILogger::EXCEPTION);
                 $this->grid->presenter->flashMessage('Při zpracování požadavku nastala chyba.', EFlashMessageType::ERROR);
             }

@@ -11,8 +11,7 @@ class ArticlesListing extends \App\Component\BaseComponent
         private int $page,
         private int $maxPerPage,
         private ArticleRepository $articleRepository
-    )
-    {
+    ) {
     }
 
     public function render(): void
@@ -32,8 +31,7 @@ class ArticlesListing extends \App\Component\BaseComponent
     public function handlePage(int $page): void
     {
         bdump($page);
-        if ($page < 0)
-        {
+        if ($page < 0) {
             throw new BadRequestException();
         }
 
@@ -45,13 +43,10 @@ class ArticlesListing extends \App\Component\BaseComponent
         $this->template->page = $this->page;
         $this->template->pages = $pageCount;
 
-        if ($this->presenter->isAjax())
-        {
+        if ($this->presenter->isAjax()) {
             $this->redrawControl();
             $this->presenter->redrawControl();
-        }
-        else
-        {
+        } else {
             $this->presenter->redirect('Articles:default', [
                 'page' => $page
             ]);

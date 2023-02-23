@@ -24,7 +24,8 @@ class PollRepository extends PrimaryRepository
     public const COLUMN_CHANGED_USER_ID = 'changed_user_id';
     public const COLUMN_NOT_DELETED = 'not_deleted';
 
-    public function isActive(int $pollId): bool {
+    public function isActive(int $pollId): bool
+    {
         $poll = $this->getRow($pollId);
 
         if ($poll === null) {
@@ -36,14 +37,16 @@ class PollRepository extends PrimaryRepository
         return $poll[self::COLUMN_IS_ACTIVE] && $poll[self::COLUMN_FROM] <=$now && $poll[self::COLUMN_TO] >= $now;
     }
 
-    public function getActivePolls(): Selection {
+    public function getActivePolls(): Selection
+    {
         $now = new DateTime();
         return $this->findBy([self::COLUMN_IS_ACTIVE => 1])
             ->where(self::COLUMN_FROM . ' <= ? AND ' . self::COLUMN_TO . ' > ?', $now, $now)
             ->order(self::COLUMN_CREATED.' ASC');
     }
 
-    public function getFinishedPolls(): Selection {
+    public function getFinishedPolls(): Selection
+    {
         return $this->findBy([self::COLUMN_IS_ACTIVE => 1])
             ->where(self::COLUMN_TO . ' < ?', new DateTime())
             ->order(self::COLUMN_TO.' DESC');

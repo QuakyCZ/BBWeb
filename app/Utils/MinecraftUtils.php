@@ -29,8 +29,7 @@ class MinecraftUtils
     public static function bin2uuid(string $bin): false|string
     {
         $hex = @bin2hex($bin);
-        if (!$hex)
-        {
+        if (!$hex) {
             return false;
         }
         return self::hex2uuid($hex);

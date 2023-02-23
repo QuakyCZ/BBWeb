@@ -13,11 +13,9 @@ use Tracy\Debugger;
 
 class SignUpForm extends \App\Component\BaseComponent
 {
-    public function __construct
-    (
+    public function __construct(
         private UserFacade $userFacade
-    )
-    {
+    ) {
     }
 
     public function createComponentForm(): Form
@@ -53,7 +51,7 @@ class SignUpForm extends \App\Component\BaseComponent
             ->endCondition();
 
         $form->addCheckbox('agree_with_terms', 'Souhlas s podmínkami')
-            ->addRule(Form::EQUAL, 'Musíte udělit souhlas s podmínkami.', TRUE)
+            ->addRule(Form::EQUAL, 'Musíte udělit souhlas s podmínkami.', true)
             ->setRequired('Musíte udělit souhlas s podmínkami.');
 
         $form->addReCaptcha('recaptcha', '', true, 'Potvrďte, že nejste robot.')->setRequired('Potvrďte, že nejste robot.');
@@ -73,40 +71,33 @@ class SignUpForm extends \App\Component\BaseComponent
      */
     public function validateForm(Form $form, ArrayHash $values): void
     {
-        if (!$form->isValid())
-        {
+        if (!$form->isValid()) {
             return;
         }
 
         $xUrl = $form->getHttpData($form::DATA_TEXT, 'x_url');
 
-        if (empty($xUrl) || $xUrl !== "nospam")
-        {
+        if (empty($xUrl) || $xUrl !== "nospam") {
             throw new ForbiddenRequestException();
         }
 
-        if (!isset($values['agree_with_terms']) || $values['agree_with_terms'] === false)
-        {
+        if (!isset($values['agree_with_terms']) || $values['agree_with_terms'] === false) {
             $form->addError('Musíte souhlasit s podmínkami.');
         }
 
-        if (empty($values['email']) || empty($values['username']) || empty($values['password']) || empty($values['passwordCheck']))
-        {
+        if (empty($values['email']) || empty($values['username']) || empty($values['password']) || empty($values['passwordCheck'])) {
             $form->addError('Nebyly vyplněny všechny hodnoty.');
         }
 
-        if($this->userFacade->getByEmail($values['email']) !== null)
-        {
+        if ($this->userFacade->getByEmail($values['email']) !== null) {
             $form->addError('Uživatel s tímto emailem již existuje.');
         }
 
-        if($this->userFacade->getByUsername($values['username']) !== null)
-        {
+        if ($this->userFacade->getByUsername($values['username']) !== null) {
             $form->addError('Uživatel s tímto jménem již existuje.');
         }
 
-        if($form->values['password'] !== $values['passwordCheck'])
-        {
+        if ($form->values['password'] !== $values['passwordCheck']) {
             $form->addError('Hesla se neshodují.');
         }
     }
@@ -121,8 +112,7 @@ class SignUpForm extends \App\Component\BaseComponent
             $this->presenter->redirect('Sign:upVerify');
         } catch (AbortException $exception) {
             throw $exception;
-        } catch (\Exception|\Throwable $exception)
-        {
+        } catch (\Exception|\Throwable $exception) {
             Debugger::log($exception, 'exception');
             $form->addError('Něco se nepovedlo.');
         }

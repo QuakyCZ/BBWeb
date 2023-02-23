@@ -2,7 +2,6 @@
 
 namespace App\Modules\AdminModule\Presenter\Base;
 
-
 use Contributte\MenuControl\UI\IMenuComponentFactory;
 use Contributte\MenuControl\UI\MenuComponent;
 use Latte\MacroNode;
@@ -13,7 +12,6 @@ use Nette\Security\AuthenticationException;
 
 abstract class BasePresenter extends Presenter
 {
-
     private IMenuComponentFactory $menuComponentFactory;
 
     protected $presenterNamesWithPublicAccess = ['Sign', 'Error', 'Error4xx', 'Admin:Sign', 'Admin:Error', 'Admin:Error4xx'];
@@ -29,7 +27,6 @@ abstract class BasePresenter extends Presenter
      */
     protected function startup()
     {
-
         $storage = $this->getUser()->getStorage();
         $storage->setNamespace('Admin');
 
@@ -45,15 +42,11 @@ abstract class BasePresenter extends Presenter
             }
         );
 
-        if(!in_array($this->name, $this->presenterNamesWithPublicAccess))
-        {
-            if (!$this->user->isLoggedIn())
-            {
+        if (!in_array($this->name, $this->presenterNamesWithPublicAccess)) {
+            if (!$this->user->isLoggedIn()) {
                 $key = $this->storeRequest();
                 $this->redirect(':Admin:Sign:in', ['returnKey' => $key]);
-            }
-            else if (!$this->user->isAllowed($this->getName(), $this->action))
-            {
+            } elseif (!$this->user->isAllowed($this->getName(), $this->action)) {
                 throw new AuthenticationException("Nemáte dostatečná oprávnění " . $this->getName() . ":".$this->action);
             }
         }

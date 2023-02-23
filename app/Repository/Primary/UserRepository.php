@@ -29,15 +29,15 @@ class UserRepository extends PrimaryRepository
     public function __construct(
         ContextLocator $contextLocator,
         private Passwords $passwords
-    )
-    {
+    ) {
         parent::__construct($contextLocator);
     }
 
     /**
      * @return Selection
      */
-    public function getForListing(): Selection {
+    public function getForListing(): Selection
+    {
         return $this->findAll()
             ->select(implode(', ', [
                 self::COLUMN_ID, self::COLUMN_USERNAME, self::COLUMN_EMAIL, self::COLUMN_CREATED
@@ -48,7 +48,8 @@ class UserRepository extends PrimaryRepository
      * @param string $email
      * @return ActiveRow|null
      */
-    public function findByEmail(string $email): ?ActiveRow {
+    public function findByEmail(string $email): ?ActiveRow
+    {
         return $this->findBy([
             self::COLUMN_EMAIL => $email
         ])->fetch();
@@ -58,7 +59,8 @@ class UserRepository extends PrimaryRepository
      * @param string $username
      * @return ActiveRow|null
      */
-    public function findByUsername(string $username): ?ActiveRow {
+    public function findByUsername(string $username): ?ActiveRow
+    {
         return $this->findBy([
             self::COLUMN_USERNAME => $username,
             self::COLUMN_ACTIVE => 1
@@ -69,7 +71,8 @@ class UserRepository extends PrimaryRepository
      * @param string $login
      * @return ActiveRow|null
      */
-    public function findByUsernameOrEmail(string $login): ?ActiveRow {
+    public function findByUsernameOrEmail(string $login): ?ActiveRow
+    {
         return $this->findAll()
             ->where('(username=? OR email=?) AND active=1', $login, $login)
             ->fetch();
@@ -80,7 +83,8 @@ class UserRepository extends PrimaryRepository
      * @param bool $value
      * @return int
      */
-    public function setActive(int $id, bool $value): int {
+    public function setActive(int $id, bool $value): int
+    {
         return $this->findBy(['id' => $id], true)->update(['active' => $value]);
     }
 
@@ -97,8 +101,7 @@ class UserRepository extends PrimaryRepository
             self::COLUMN_VERIFICATION_TOKEN => $token,
         ])->fetch();
 
-        if ($user === null || $user[self::COLUMN_ACTIVE] === true)
-        {
+        if ($user === null || $user[self::COLUMN_ACTIVE] === true) {
             return null;
         }
 
@@ -140,7 +143,8 @@ class UserRepository extends PrimaryRepository
      * @param bool $onlyAdmins
      * @return array
      */
-    public function fetchForChoiceControl(bool $onlyAdmins = false): array {
+    public function fetchForChoiceControl(bool $onlyAdmins = false): array
+    {
         $result = $this->findAll();
         if ($onlyAdmins) {
             $result->where(':' . UserRoleRepository::TABLE_NAME . '.' . UserRoleRepository::COLUMN_ROLE_ID . '.' . RoleRepository::COLUMN_NAME, 'ADMIN');
@@ -154,7 +158,8 @@ class UserRepository extends PrimaryRepository
      * @param string $salt
      * @return string
      */
-    public function getVerificationToken(ActiveRow $row, string $salt = ""): string {
+    public function getVerificationToken(ActiveRow $row, string $salt = ""): string
+    {
         return $this->passwords->hash($row[self::COLUMN_ID] . $row[self::COLUMN_USERNAME] . $row[self::COLUMN_EMAIL] . $row[self::COLUMN_CREATED]->getTimestamp() . $salt);
     }
 
@@ -165,7 +170,8 @@ class UserRepository extends PrimaryRepository
      * @param string $salt
      * @return bool
      */
-    public function checkVerificationToken(string $token, ActiveRow $row, string $salt = ""): bool {
+    public function checkVerificationToken(string $token, ActiveRow $row, string $salt = ""): bool
+    {
         return $this->passwords->verify($row[self::COLUMN_ID] . $row[self::COLUMN_USERNAME] . $row[self::COLUMN_EMAIL] . $row[self::COLUMN_CREATED]->getTimestamp() . $salt, $token);
     }
 
@@ -174,7 +180,8 @@ class UserRepository extends PrimaryRepository
      * @param $password
      * @return string
      */
-    public function getPasswordHash($password): string {
+    public function getPasswordHash($password): string
+    {
         return $this->passwords->hash($password);
     }
 }

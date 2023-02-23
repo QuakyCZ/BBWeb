@@ -19,7 +19,6 @@ use Tracy\Debugger;
 
 class UserConnectHandler extends \Tomaj\NetteApi\Handlers\BaseHandler
 {
-
     public const PARAM_TYPE = 'type';
     public const PARAM_TOKEN = 'token';
     public const PARAM_DATA = 'data';
@@ -29,13 +28,11 @@ class UserConnectHandler extends \Tomaj\NetteApi\Handlers\BaseHandler
      * @param UserConnectFacadeFactory $userConnectFacadeFactory
      * @param ScopeFactoryInterface|null $scopeFactory
      */
-    public function __construct
-    (
+    public function __construct(
         private UserFacade $userFacade,
         private UserConnectFacadeFactory $userConnectFacadeFactory,
         ScopeFactoryInterface $scopeFactory = null,
-    )
-    {
+    ) {
         parent::__construct($scopeFactory);
     }
 
@@ -72,8 +69,7 @@ class UserConnectHandler extends \Tomaj\NetteApi\Handlers\BaseHandler
         $data = $params[self::PARAM_DATA][self::PARAM_DATA];
 
         $connector = $this->userConnectFacadeFactory->getInstanceOf($type);
-        if ($connector === null)
-        {
+        if ($connector === null) {
             return new JsonApiResponse(400, [
                 'status' => 'error',
                 'message' => 'Neznámý typ propojení'
@@ -82,8 +78,7 @@ class UserConnectHandler extends \Tomaj\NetteApi\Handlers\BaseHandler
 
         $token = $connector->validateToken($token);
 
-        if ($token === null)
-        {
+        if ($token === null) {
             return new JsonApiResponse(400, [
                 'status' => 'error',
                 'message' => 'Neplatný token'

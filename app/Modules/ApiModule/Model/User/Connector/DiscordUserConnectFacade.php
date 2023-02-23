@@ -14,17 +14,14 @@ use Tracy\ILogger;
 
 class DiscordUserConnectFacade extends BaseUserConnectFacade
 {
-
     /**
      * @param UserConnectTokenFacade $userConnectTokenFacade
      * @param UserDiscordAccountRepository $userDiscordAccountRepository
      */
-    public function __construct
-    (
+    public function __construct(
         UserConnectTokenFacade $userConnectTokenFacade,
         private UserDiscordAccountRepository $userDiscordAccountRepository,
-    )
-    {
+    ) {
         parent::__construct(EConnectTokenType::DISCORD, $userConnectTokenFacade);
     }
 
@@ -37,33 +34,28 @@ class DiscordUserConnectFacade extends BaseUserConnectFacade
     {
         $discordId = $data['discord_id'] ?? null;
 
-        if ($discordId === null)
-        {
+        if ($discordId === null) {
             return new JsonApiResponse(400, [
                 'status' => 'error',
                 'message' => 'Nebyl zadán parametr discord_id'
             ]);
         }
 
-        if ($this->isConnected($userId))
-        {
+        if ($this->isConnected($userId)) {
             return new JsonApiResponse(400, [
                 'status' => 'error',
                 'message' => 'Účet je již propojen'
             ]);
         }
 
-        try
-        {
-            $this->userDiscordAccountRepository->connect($userId,$discordId);
+        try {
+            $this->userDiscordAccountRepository->connect($userId, $discordId);
 
             return new JsonApiResponse(200, [
                 'status' => 'ok',
                 'user_id' => $userId
             ]);
-        }
-        catch (Exception $exception)
-        {
+        } catch (Exception $exception) {
             Debugger::log($exception, ILogger::EXCEPTION);
             return new JsonApiResponse(500, [
                 'status' => 'error',

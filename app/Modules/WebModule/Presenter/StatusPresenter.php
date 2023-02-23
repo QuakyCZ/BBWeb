@@ -2,6 +2,6 @@
 
 namespace App\Modules\WebModule\Presenter;
 
-class StatusPresenter extends Base\BasePresenter {
-
+class StatusPresenter extends Base\BasePresenter
+{
 }

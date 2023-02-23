@@ -10,12 +10,10 @@ final class UserConnectFacadeFactory
      * @param MinecraftUserConnectFacade $minecraftUserConnectFacade
      * @param DiscordUserConnectFacade $discordUserConnectFacade
      */
-    public function __construct
-    (
+    public function __construct(
         private MinecraftUserConnectFacade $minecraftUserConnectFacade,
         private DiscordUserConnectFacade $discordUserConnectFacade
-    )
-    {
+    ) {
     }
 
     /**
@@ -24,8 +22,7 @@ final class UserConnectFacadeFactory
      */
     public function getInstanceOf(string $type): ?BaseUserConnectFacade
     {
-        switch ($type)
-        {
+        switch ($type) {
             default:
                 return null;
             case EConnectTokenType::MINECRAFT:

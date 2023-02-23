@@ -8,7 +8,6 @@ use Nette\Database\Table\ActiveRow;
 
 class PlayerRepository extends DungeonEscapeRepository
 {
-
     public const TABLE_NAME = 'player';
     public const COLUMN_ID = 'id';
     public const COLUMN_NAME = 'name';

@@ -9,13 +9,10 @@ use App\Modules\ClientModule\Component\Connection\Minecraft\MinecraftConnection;
 
 class ConnectionsPresenter extends ClientPresenter
 {
-
-    public function __construct
-    (
+    public function __construct(
         private IMinecraftConnectionFactory    $minecraftConnectionFactory,
         private IDiscordConnectionFactory      $discordConnectionFactory,
-    )
-    {
+    ) {
         parent::__construct();
     }
 

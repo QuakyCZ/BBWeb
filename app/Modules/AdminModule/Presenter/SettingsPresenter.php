@@ -9,15 +9,12 @@ use App\Modules\AdminModule\Component\Settings\SettingsGrid;
 
 class SettingsPresenter extends Base\BasePresenter
 {
-
     private ?int $id = null;
 
-    public function __construct
-    (
+    public function __construct(
         private ISettingsFormFactory $settingsFormFactory,
         private ISettingsGridFactory $settingsGridFactory,
-    )
-    {
+    ) {
         parent::__construct();
     }
 

@@ -8,11 +8,9 @@ use Nette\Utils\Random;
 
 class UserConnectTokenFacade
 {
-    public function __construct
-    (
+    public function __construct(
         private UserConnectTokenRepository $userConnectTokenRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -20,7 +18,7 @@ class UserConnectTokenFacade
      */
     public function generateToken(): string
     {
-        return implode('-', str_split(Random::generate(16,'0-9A-Z'),4));
+        return implode('-', str_split(Random::generate(16, '0-9A-Z'), 4));
     }
 
     /**
@@ -31,11 +29,9 @@ class UserConnectTokenFacade
      */
     public function saveToken(string $type, int $userId, ?string $token = null): ActiveRow
     {
-
         $this->userConnectTokenRepository->deletePreviousTokens($userId, $type);
 
-        if ($token === null)
-        {
+        if ($token === null) {
             $token = $this->generateToken();
         }
 
@@ -65,8 +61,7 @@ class UserConnectTokenFacade
     public function validateToken(string $token, string $type): ?ActiveRow
     {
         $row = $this->getToken($token, $type);
-        if ($row === null)
-        {
+        if ($row === null) {
             return null;
         }
         $row->update([

@@ -6,8 +6,8 @@ use Nette\Database\ResultSet;
 use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
 
-class UserRoleRepository extends PrimaryRepository {
-
+class UserRoleRepository extends PrimaryRepository
+{
     public const TABLE_NAME = "user_role";
 
     public const COLUMN_ID = 'id';
@@ -21,7 +21,8 @@ class UserRoleRepository extends PrimaryRepository {
      * @param int $userId
      * @return Selection
      */
-    public function getUsersRoles(int $userId): Selection {
+    public function getUsersRoles(int $userId): Selection
+    {
         return $this->database->table(self::TABLE_NAME)
             ->where('user_id', $userId);
     }
@@ -30,7 +31,8 @@ class UserRoleRepository extends PrimaryRepository {
      * @param int $userId
      * @return array
      */
-    public function getUsersRoleNames(int $userId): array {
+    public function getUsersRoleNames(int $userId): array
+    {
         $roles = $this->getUsersRoles($userId)->fetchAll();
         $result = [];
         foreach ($roles as $role) {
@@ -39,10 +41,11 @@ class UserRoleRepository extends PrimaryRepository {
         return $result;
     }
 
-    public function getAllActive() {
+    public function getAllActive()
+    {
         return $this->database->table(self::TABLE_NAME)
             ->select('*')
-            ->joinWhere('role','role.id=user_role.role_id AND role.active=1 AND role.not_deleted=1')
+            ->joinWhere('role', 'role.id=user_role.role_id AND role.active=1 AND role.not_deleted=1')
             ->group('role.name')
             ->fetchAll();
     }
@@ -69,7 +72,8 @@ class UserRoleRepository extends PrimaryRepository {
      * @param int $roleId
      * @return ActiveRow[]
      */
-    public function getUsersByRole(int $roleId): array {
+    public function getUsersByRole(int $roleId): array
+    {
         $rows = $this->findAll()
             ->where(self::COLUMN_ROLE_ID, $roleId)
             ->where('user.not_deleted = 1')
@@ -78,8 +82,7 @@ class UserRoleRepository extends PrimaryRepository {
 
         $result = [];
 
-        foreach ($rows as $row)
-        {
+        foreach ($rows as $row) {
             $result[] = $row->ref(self::COLUMN_USER_ID);
         }
 

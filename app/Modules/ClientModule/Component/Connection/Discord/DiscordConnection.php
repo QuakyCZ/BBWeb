@@ -12,13 +12,10 @@ use Tracy\ILogger;
 
 class DiscordConnection extends BaseConnection
 {
-
-    public function __construct
-    (
+    public function __construct(
         ?int $userId,
         DiscordUserConnectFacade $userConnectFacade
-    )
-    {
+    ) {
         parent::__construct($userId, $userConnectFacade);
     }
 
@@ -28,15 +25,11 @@ class DiscordConnection extends BaseConnection
      */
     public function handleGenerateToken(): void
     {
-        if ($this->userConnectFacade->isConnected($this->userId))
-        {
-            if ($this->presenter->isAjax())
-            {
+        if ($this->userConnectFacade->isConnected($this->userId)) {
+            if ($this->presenter->isAjax()) {
                 $this->presenter->redrawControl('flashes');
                 $this->redrawControl('connection');
-            }
-            else
-            {
+            } else {
                 $this->presenter->redirect('default');
             }
             return;
@@ -44,30 +37,24 @@ class DiscordConnection extends BaseConnection
 
         $message = new \stdClass();
 
-        try
-        {
+        try {
             $token = $this->userConnectFacade->generateToken($this->userId);
             $message->type = EFlashMessageType::MODAL_INFO;
             $message->title = 'Propojení s Discord serverem';
             $message->message = 'Pro propojení na serveru použijte následující příkaz: <br><br> <code>/link token:' . $token[UserConnectTokenRepository::COLUMN_TOKEN] . '</code>';
-        }
-        catch (\Exception $exception)
-        {
+        } catch (\Exception $exception) {
             Debugger::log($exception, ILogger::EXCEPTION);
             $message->type = EFlashMessageType::MODAL_WARNING;
             $message->title = 'Chyba';
             $message->message = 'Při zpracování požadavku nastal chyba';
         }
-        
+
         $this->presenter->flashMessage($message);
-        
-        if ($this->presenter->isAjax())
-        {
+
+        if ($this->presenter->isAjax()) {
             $this->presenter->redrawControl('flashes');
             $this->redrawControl('connection');
-        }
-        else
-        {
+        } else {
             $this->presenter->redirect('default');
         }
     }

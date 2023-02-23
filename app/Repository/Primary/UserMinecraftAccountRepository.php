@@ -58,8 +58,7 @@ class UserMinecraftAccountRepository extends PrimaryRepository
     public function deleteAccount(int $userId): bool
     {
         $row = $this->getAccountByUserId($userId);
-        if ($row === null)
-        {
+        if ($row === null) {
             return false;
         }
 

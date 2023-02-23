@@ -29,7 +29,8 @@
 		"gladcodes/keygen": "^1.1",
 		"tomaj/nette-api": "^2.7",
 		"marc-mabe/php-enum": "^4.7",
-      	"ext-pdo": "*"
+      	"ext-pdo": "*",
+		"friendsofphp/php-cs-fixer": "^3.13"
     },
 	"require-dev": {
 		"nette/tester": "^2.3",

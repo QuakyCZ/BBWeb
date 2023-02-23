@@ -2,7 +2,6 @@
 
 namespace App\Modules\AdminModule\Component\Poll;
 
-
 use App\Component\BaseComponent;
 use App\Enum\EFlashMessageType;
 use App\Facade\PollFacade;
@@ -24,7 +23,6 @@ use Tracy\ILogger;
 
 class PollForm extends BaseComponent
 {
-
     /**
      * @param int|null $id
      * @param PollFacade $pollFacade
@@ -41,8 +39,7 @@ class PollForm extends BaseComponent
         protected PollRoleRepository $pollRoleRepository,
         protected UserRepository $userRepository,
         protected RoleRepository $roleRepository,
-    )
-    {
+    ) {
     }
 
     /**
@@ -69,7 +66,7 @@ class PollForm extends BaseComponent
                 $defaults['options'][$option[PollOptionRepository::COLUMN_ID]]['text'] = $option[PollOptionRepository::COLUMN_TEXT];
             }
 
-            $defaults['active'] = str_replace('-','/', $poll[PollRepository::COLUMN_FROM]) . ' - ' . str_replace('-','/', $poll[PollRepository::COLUMN_TO]);
+            $defaults['active'] = str_replace('-', '/', $poll[PollRepository::COLUMN_FROM]) . ' - ' . str_replace('-', '/', $poll[PollRepository::COLUMN_TO]);
 
             if ($poll[PollRepository::COLUMN_IS_PRIVATE]) {
                 $defaults['user_ids'] = $this->pollParticipantRepository->findBy([
@@ -100,7 +97,7 @@ class PollForm extends BaseComponent
             ->setRequired();
 
         /** @var Multiplier $multiplier */
-        $multiplier = $form->addMultiplier('options', function(Container $container) {
+        $multiplier = $form->addMultiplier('options', function (Container $container) {
             $container->addText(PollOptionRepository::COLUMN_TEXT, 'Možnost')
                 ->setRequired('Toto pole je povinné');
         }, 2);
@@ -152,7 +149,8 @@ class PollForm extends BaseComponent
      * @param Form $form
      * @return void
      */
-    public function anchorForm(Form $form): void {
+    public function anchorForm(Form $form): void
+    {
         if ($this->presenter->isAjax()) {
             $this->redrawControl();
         }
@@ -165,18 +163,15 @@ class PollForm extends BaseComponent
      * @return void
      * @throws AbortException
      */
-    public function saveForm(Form $form, ArrayHash $values): void {
-        try
-        {
+    public function saveForm(Form $form, ArrayHash $values): void
+    {
+        try {
             $this->pollFacade->savePoll($values, $this->presenter->user->id, $this->id);
             $this->presenter->flashMessage('Hlasování bylo vytvořeno', EFlashMessageType::SUCCESS);
             $this->presenter->redirect(':Admin:Poll:default');
-        }
-        catch (BadRequestException $exception) {
+        } catch (BadRequestException $exception) {
             $form->addError($exception->getMessage());
-        }
-        catch (\PDOException $exception)
-        {
+        } catch (\PDOException $exception) {
             Debugger::log($exception, ILogger::EXCEPTION);
             $form->addError('Při zpracování požadavku nastala neznámá chyba.');
         }

@@ -8,12 +8,9 @@ use Contributte\MenuControl\LinkGenerator\NetteLinkGenerator;
 
 class LinkGenerator implements ILinkGenerator
 {
-
-    public function __construct
-    (
+    public function __construct(
         private \Nette\Application\LinkGenerator $linkGenerator
-    )
-    {
+    ) {
     }
 
     public function link(IMenuItem $item): string

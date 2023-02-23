@@ -8,7 +8,6 @@ use App\Modules\WebModule\Presenter\Base\BasePresenter;
 
 class HomepagePresenter extends BasePresenter
 {
-
     /**
      * @return void
      */

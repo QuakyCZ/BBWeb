@@ -2,17 +2,16 @@
 
 namespace App\Repository;
 
-
 use Nette\Database\Context;
 use Nette\Database\Explorer;
 use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
 use Traversable;
+
 use function _PHPStan_76800bfb5\React\Promise\reduce;
 
 abstract class BaseRepository
 {
-
     public Explorer $database;
 
     protected string $tableName;
@@ -31,13 +30,11 @@ abstract class BaseRepository
      */
     public function save(array $data): array|bool|ActiveRow|int|Selection
     {
-        if (isset($data['id']))
-        {
+        if (isset($data['id'])) {
             $id = $data['id'];
             unset($data['id']);
             $row = $this->findBy(['id' => $id])->fetch();
-            if ($row === null)
-            {
+            if ($row === null) {
                 return false;
             }
             $row->update($data);
@@ -56,15 +53,15 @@ abstract class BaseRepository
         $selection = $this->database->table($this->tableName)
             ->wherePrimary($primary);
 
-        if (!$withDeleted)
-        {
+        if (!$withDeleted) {
             $selection->where('not_deleted', 1);
         }
 
         return $selection->fetch();
     }
 
-    public function findBy(array $conditions, bool $withDeleted = false): Selection {
+    public function findBy(array $conditions, bool $withDeleted = false): Selection
+    {
         if ($withDeleted === false) {
             $conditions[$this->tableName . '.not_deleted'] = 1;
         }
@@ -77,14 +74,17 @@ abstract class BaseRepository
         return $selection;
     }
 
-    public function findAll(bool $withDeleted = false): Selection {
-        if ($withDeleted)
+    public function findAll(bool $withDeleted = false): Selection
+    {
+        if ($withDeleted) {
             return $this->database->table($this->tableName);
+        }
 
         return $this->database->table($this->tableName)->where($this->tableName.'.not_deleted = 1');
     }
 
-    public function getRow(int $id): ?ActiveRow {
+    public function getRow(int $id): ?ActiveRow
+    {
         return $this->findBy([
             'id' => $id
         ])->fetch();
@@ -94,7 +94,8 @@ abstract class BaseRepository
      * @param int $id
      * @return int
      */
-    public function setNotDeletedNull(int $id): int {
+    public function setNotDeletedNull(int $id): int
+    {
         return $this->findBy(['id' => $id])->update(['not_deleted' => null]);
     }
 

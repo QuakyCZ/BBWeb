@@ -1,0 +1,14 @@
+includes:
+  - phpstan-baseline.neon
+  #- vendor/marc-mabe/php-enum-phpstan/extension.neon # nefunguje dobře, místo toho: @method static EXyz ABC()
+
+parameters:
+  level: 8
+  paths:
+    - app/
+  reportUnmatchedIgnoredErrors: true
+  checkMissingIterableValueType: true
+  #excludePaths:
+    #- 
+  parallel:
+    maximumNumberOfProcesses: 1

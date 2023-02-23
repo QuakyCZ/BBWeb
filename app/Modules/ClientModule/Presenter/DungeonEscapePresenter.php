@@ -13,12 +13,10 @@ class DungeonEscapePresenter extends ClientPresenter
      * @param PlayerFacade $playerFacade
      * @param PlayerStatisticsFacade $playerStatisticsFacade
      */
-    public function __construct
-    (
+    public function __construct(
         private PlayerFacade $playerFacade,
         private PlayerStatisticsFacade $playerStatisticsFacade
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -31,11 +29,9 @@ class DungeonEscapePresenter extends ClientPresenter
 
         $this->template->isMinecraftConnected = $minecraftConnected;
 
-        if ($minecraftConnected)
-        {
+        if ($minecraftConnected) {
             $statistics = $this->playerStatisticsFacade->getPlayerStatistics($player->getStatisticsId());
-            if ($statistics === null)
-            {
+            if ($statistics === null) {
                 throw new InvalidStateException();
             }
             $this->template->statistics = $statistics;

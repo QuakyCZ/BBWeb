@@ -10,31 +10,37 @@ class BaseComponent extends Control
     private ?string $templatePath = null;
     private ?string $componentPath = null;
 
-    public function getComponentName(): string {
-        if($this->componentName)
+    public function getComponentName(): string
+    {
+        if ($this->componentName) {
             $this->componentName = $this->getReflection()->getShortName();
+        }
 
         return $this->componentName;
     }
 
-    public function getPathToComponent(): string {
-        if($this->componentPath === NULL) {
+    public function getPathToComponent(): string
+    {
+        if ($this->componentPath === null) {
             $file = $this->getReflection()->getFileName();
-            if(!empty($file)) {
-                $this->componentPath = str_replace('.php','',$file);
+            if (!empty($file)) {
+                $this->componentPath = str_replace('.php', '', $file);
             }
         }
         return $this->componentPath;
     }
 
-    public function getLatteFile(): string {
-        if($this->templatePath === NULL)
+    public function getLatteFile(): string
+    {
+        if ($this->templatePath === null) {
             $this->templatePath = $this->getPathToComponent().'.latte';
+        }
 
         return $this->templatePath;
     }
 
-    public function render(): void {
+    public function render(): void
+    {
         $this->getTemplate()->setFile($this->getLatteFile());
         $this->getTemplate()->render();
     }

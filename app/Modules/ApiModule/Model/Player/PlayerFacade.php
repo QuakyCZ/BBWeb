@@ -7,14 +7,11 @@ use App\Repository\Primary\UserMinecraftAccountRepository;
 
 class PlayerFacade
 {
-
-    public function __construct
-    (
+    public function __construct(
         private PlayerRepository $playerRepository,
         private PlayerMapper $playerMapper,
         private UserMinecraftAccountRepository $minecraftAccountRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -24,8 +21,7 @@ class PlayerFacade
     public function getByUserId(int $userId): ?Player
     {
         $minecraftAccount = $this->minecraftAccountRepository->getAccountByUserId($userId);
-        if ($minecraftAccount === null)
-        {
+        if ($minecraftAccount === null) {
             return null;
         }
         return $this->getByUuid($minecraftAccount[UserMinecraftAccountRepository::COLUMN_UUID]);
@@ -34,8 +30,7 @@ class PlayerFacade
     public function getByName(string $name): ?Player
     {
         $row = $this->playerRepository->findBy(['name' => $name], true)->fetch();
-        if ($row === null)
-        {
+        if ($row === null) {
             return null;
         }
 
@@ -46,8 +41,7 @@ class PlayerFacade
     {
         $row = $this->playerRepository->getByUuid($uuid);
 
-        if ($row === null)
-        {
+        if ($row === null) {
             return null;
         }
 

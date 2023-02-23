@@ -28,8 +28,7 @@ class UserGrid extends BaseDataGrid
         UserRoleRepository $userRoleRepository,
         RoleRepository $roleRepository,
         Translator $translator
-    )
-    {
+    ) {
         $this->userRepository = $userRepository;
         $this->userRoleRepository = $userRoleRepository;
         $this->roleRepository = $roleRepository;
@@ -121,6 +120,4 @@ class UserGrid extends BaseDataGrid
             ->setIcon('plus')
             ->setClass('btn btn-success');
     }
-
 }
-

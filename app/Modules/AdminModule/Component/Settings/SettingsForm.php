@@ -15,18 +15,15 @@ use Tracy\ILogger;
 
 class SettingsForm extends BaseComponent
 {
-
     private ?int $id;
 
     private SettingsRepository $settingRepository;
 
-    public function __construct
-    (
+    public function __construct(
         ?int               $id,
         SettingsRepository $settingRepository,
         private Translator $translator,
-    )
-    {
+    ) {
         $this->id = $id;
         $this->settingRepository = $settingRepository;
     }
@@ -36,14 +33,10 @@ class SettingsForm extends BaseComponent
      */
     public function render(): void
     {
-
-        if ($this->id !== null)
-        {
-
+        if ($this->id !== null) {
             $row = $this->settingRepository->get($this->id);
 
-            if ($row === null)
-            {
+            if ($row === null) {
                 throw new BadRequestException('admin.settings.error.not_exists');
             }
 
@@ -90,15 +83,13 @@ class SettingsForm extends BaseComponent
         /** @var bool $nullable */
         $nullable = $values[SettingsRepository::COLUMN_NULLABLE] ?? false;
 
-        if (!$nullable && empty($values[SettingsRepository::COLUMN_CONTENT]))
-        {
+        if (!$nullable && empty($values[SettingsRepository::COLUMN_CONTENT])) {
             $form->addError($this->translator->translate('admin.settings.field.error.content_required'));
         }
 
         $existing = $this->settingRepository->getByName($values[SettingsRepository::COLUMN_NAME]);
 
-        if ($existing !== null && $this->id !== $existing[SettingsRepository::COLUMN_ID])
-        {
+        if ($existing !== null && $this->id !== $existing[SettingsRepository::COLUMN_ID]) {
             $form->addError($this->translator->translate('admin.settings.field.error.name_used'));
         }
     }
@@ -111,22 +102,16 @@ class SettingsForm extends BaseComponent
      */
     public function saveForm(Form $form, ArrayHash $values): void
     {
-        try
-        {
+        try {
             $data = (array)$values;
-            if ($this->id !== null)
-            {
+            if ($this->id !== null) {
                 $data[SettingsRepository::COLUMN_ID] = $this->id;
             }
             $this->settingRepository->save($data);
             $this->presenter->redirect("Settings:");
-        }
-        catch (AbortException $exception)
-        {
+        } catch (AbortException $exception) {
             throw $exception;
-        }
-        catch (Exception $exception)
-        {
+        } catch (Exception $exception) {
             Debugger::log($exception, ILogger::EXCEPTION);
             $form->addError($this->translator->translate('common.form.save_error'));
         }

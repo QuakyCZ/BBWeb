@@ -18,14 +18,11 @@ use Tracy\ILogger;
 
 class MinecraftUserConnectFacade extends BaseUserConnectFacade
 {
-
-    public function __construct
-    (
+    public function __construct(
         UserConnectTokenFacade $userConnectTokenFacade,
         private UserFacade $userFacade,
         private UserMinecraftAccountRepository $userMinecraftAccountRepository
-    )
-    {
+    ) {
         parent::__construct(EConnectTokenType::MINECRAFT, $userConnectTokenFacade);
     }
 
@@ -41,16 +38,14 @@ class MinecraftUserConnectFacade extends BaseUserConnectFacade
         $uuid = $data['uuid'] ?? null;
         $nick = $data['nick'] ?? null;
 
-        if ($uuid === null || $nick === null)
-        {
+        if ($uuid === null || $nick === null) {
             return new JsonApiResponse(400, [
                 'status' => 'error',
                 'message' => 'Nebylo specifikováno uuid nebo nick.'
             ]);
         }
 
-        if ($this->isConnected($userId))
-        {
+        if ($this->isConnected($userId)) {
             return new JsonApiResponse(400, [
                 'status' => 'error',
                 'message' => 'Tento účet je již spárován.'
@@ -59,24 +54,20 @@ class MinecraftUserConnectFacade extends BaseUserConnectFacade
 
         $uuidBin = MinecraftUtils::uuid2bin($uuid);
 
-        if ($uuidBin === false)
-        {
+        if ($uuidBin === false) {
             return new JsonApiResponse(400, [
                 'status' => 'error',
                 'message' => 'Neplatný formát UUID'
             ]);
         }
 
-        try
-        {
+        try {
             $this->userMinecraftAccountRepository->saveAccount($userId, $uuidBin, $nick);
             return new JsonApiResponse(200, [
                 'status' => 'ok',
                 'user_id' => $userId
             ]);
-        }
-        catch (\Exception $exception)
-        {
+        } catch (\Exception $exception) {
             Debugger::log($exception, ILogger::EXCEPTION);
             return new JsonApiResponse(500, [
                 'status' => 'error',

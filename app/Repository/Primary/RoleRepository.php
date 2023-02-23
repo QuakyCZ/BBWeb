@@ -2,8 +2,8 @@
 
 namespace App\Repository\Primary;
 
-class RoleRepository extends PrimaryRepository {
-
+class RoleRepository extends PrimaryRepository
+{
     public const TABLE_NAME = 'role';
 
     public const COLUMN_ID = 'id';
@@ -14,9 +14,10 @@ class RoleRepository extends PrimaryRepository {
 
     protected string $tableName = self::TABLE_NAME;
 
-    public function getDataForSelect(): array {
+    public function getDataForSelect(): array
+    {
         return $this->database->table(self::TABLE_NAME)
             ->where('not_deleted=1')
-            ->fetchPairs('id','name');
+            ->fetchPairs('id', 'name');
     }
 }

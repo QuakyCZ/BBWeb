@@ -11,13 +11,10 @@ use Tracy\Debugger;
 
 class SignInForm extends BaseComponent
 {
-
-    public function __construct
-    (
+    public function __construct(
         private ?string $defaultRoute = 'Default:',
         private ?string $returnKey = null,
-    )
-    {
+    ) {
     }
 
     public function createComponentForm(): Form
@@ -35,7 +32,6 @@ class SignInForm extends BaseComponent
         $form->addProtection();
         $form->onSuccess[] = [$this, 'onFormSuccess'];
         return $form;
-
     }
 
     /**
@@ -43,13 +39,11 @@ class SignInForm extends BaseComponent
      */
     public function onFormSuccess(Form $form, $values): void
     {
-        try
-        {
+        try {
             $this->presenter->user->login($values['email'], $values['password']);
             $this->presenter->flashMessage('Přihlášení proběhlo úspěšně');
             $returnKey = $values['returnKey'] ?? null;
-            if ($returnKey !== null)
-            {
+            if ($returnKey !== null) {
                 $this->presenter->restoreRequest($returnKey);
             }
 
@@ -64,4 +58,3 @@ class SignInForm extends BaseComponent
         }
     }
 }
-

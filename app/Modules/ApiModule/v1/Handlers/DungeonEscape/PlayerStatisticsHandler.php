@@ -10,15 +10,12 @@ use Tomaj\NetteApi\Response\ResponseInterface;
 
 class PlayerStatisticsHandler extends \Tomaj\NetteApi\Handlers\BaseHandler
 {
-
     public const PARAM_ID = 'id';
 
-    public function __construct
-    (
+    public function __construct(
         private PlayerStatisticsFacade $playerStatisticsFacade,
         ScopeFactoryInterface $scopeFactory = null
-    )
-    {
+    ) {
         parent::__construct($scopeFactory);
     }
 
@@ -37,8 +34,7 @@ class PlayerStatisticsHandler extends \Tomaj\NetteApi\Handlers\BaseHandler
         $id = $params[self::PARAM_ID];
 
         $stats = $this->playerStatisticsFacade->getPlayerStatistics($id);
-        if ($stats === null)
-        {
+        if ($stats === null) {
             return new JsonApiResponse(404, [
                 'status' => 'error',
                 'message' => 'Statistiky s požadovaným ID nebyly nalezeny.'

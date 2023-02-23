@@ -10,15 +10,13 @@ class MenuAuthorizator implements IAuthorizator
 {
     public function __construct(
         private User $user
-    )
-    {
+    ) {
     }
 
     public function isMenuItemAllowed(IMenuItem $item): bool
     {
         $action = $item->getAction();
-        if ($action === null)
-        {
+        if ($action === null) {
             return true;
         }
 

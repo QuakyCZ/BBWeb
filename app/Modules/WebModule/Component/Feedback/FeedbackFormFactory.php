@@ -13,13 +13,11 @@ class FeedbackFormFactory
      * @param FeedbackRepository $feedbackRepository
      * @param MailFacade $mailFacade
      */
-    public function __construct
-    (
+    public function __construct(
         private ServerRepository $serverRepository,
         private FeedbackRepository $feedbackRepository,
         private MailFacade $mailFacade
-    )
-    {
+    ) {
     }
 
     /**

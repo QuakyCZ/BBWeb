@@ -7,7 +7,6 @@ use Nette\Database\Table\ActiveRow;
 
 class PlayerStatisticsRepository extends DungeonEscapeRepository
 {
-
     public const TABLE_NAME = 'player_statistics';
     public const COLUMN_ID = 'id';
 

@@ -6,8 +6,7 @@ use Nette\Utils\DateTime;
 
 class UserConnectToken
 {
-    public function __construct
-    (
+    public function __construct(
         private int $id,
         private ?int $userId,
         private string $type,
@@ -15,8 +14,7 @@ class UserConnectToken
         private array|\stdClass $data,
         private bool $used,
         private DateTime $validTo
-    )
-    {
+    ) {
     }
 
     /**

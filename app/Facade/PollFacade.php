@@ -24,8 +24,7 @@ class PollFacade
         private PollParticipantRepository $pollParticipantRepository,
         private UserRoleRepository $userRoleRepository,
         private UserRepository $userRepository,
-    )
-    {
+    ) {
     }
 
 
@@ -35,7 +34,8 @@ class PollFacade
      * @param int $userId Id uživatele
      * @return bool
      */
-    public function isAllowed(int $pollId, int $userId): bool {
+    public function isAllowed(int $pollId, int $userId): bool
+    {
         $poll = $this->pollRepository->getRow($pollId);
         if ($poll === null) {
             return false;
@@ -58,14 +58,13 @@ class PollFacade
     /**
      * @throws BadRequestException
      */
-    public function savePoll(ArrayHash $formValues, int $userId, ?int $pollId = NULL): void {
-
+    public function savePoll(ArrayHash $formValues, int $userId, ?int $pollId = null): void
+    {
         if ($pollId !== null && $this->pollRepository->isActive($pollId)) {
             throw new BadRequestException('Nelze upravit aktivní hlasování.');
         }
 
         $this->pollRepository->runInTransaction(function () use ($formValues, $userId, $pollId) {
-
             $dates = explode(' - ', $formValues['active']);
 
 
@@ -110,8 +109,8 @@ class PollFacade
      * @param int $userId
      * @return void
      */
-    private function createOptions(int $pollId, ArrayHash $options, int $userId): void {
-
+    private function createOptions(int $pollId, ArrayHash $options, int $userId): void
+    {
         $this->pollOptionRepository->findBy([
             PollOptionRepository::COLUMN_POLL_ID => $pollId
         ])->delete();
@@ -130,7 +129,8 @@ class PollFacade
      * @param int[] $roleIds
      * @return void
      */
-    private function allowRoles(int $pollId, array $roleIds): void {
+    private function allowRoles(int $pollId, array $roleIds): void
+    {
         // Odstranit stávající role
         $this->pollRoleRepository->findBy([PollRoleRepository::COLUMN_POLL_ID => $pollId])->delete();
 
@@ -148,11 +148,12 @@ class PollFacade
      * @param int[] $userIds
      * @return void
      */
-    private function allowUsers(int $pollId, array $userIds): void {
+    private function allowUsers(int $pollId, array $userIds): void
+    {
         foreach ($userIds as $userId) {
             $this->pollParticipantRepository->save([
                 PollParticipantRepository::COLUMN_POLL_ID => $pollId,
-                PollParticipantRepository::COLUMN_POLL_OPTION_ID => NULL,
+                PollParticipantRepository::COLUMN_POLL_OPTION_ID => null,
                 PollParticipantRepository::COLUMN_USER_ID => $userId,
                 PollParticipantRepository::COLUMN_IS_EXTRA => true
             ]);
@@ -165,7 +166,6 @@ class PollFacade
      */
     public function getPollsForUser(int $userId): array
     {
-
         $roles = $this->userRoleRepository->getUsersRoles($userId)->fetchPairs(UserRoleRepository::COLUMN_ROLE_ID, UserRoleRepository::COLUMN_ROLE_ID);
 
 
@@ -194,7 +194,8 @@ class PollFacade
     /**
      * @throws BadRequestException
      */
-    public function vote(int $userId, int $optionId): void {
+    public function vote(int $userId, int $optionId): void
+    {
         $optionRow = $this->pollOptionRepository->getRow($optionId);
         if ($optionRow === null) {
             throw new BadRequestException();
@@ -230,7 +231,8 @@ class PollFacade
         ]);
     }
 
-    public function hasVoted(int $pollId, int $userId): bool {
+    public function hasVoted(int $pollId, int $userId): bool
+    {
         return $this->pollParticipantRepository->findBy([
             PollParticipantRepository::COLUMN_POLL_ID => $pollId,
             PollParticipantRepository::COLUMN_USER_ID => $userId
@@ -282,11 +284,13 @@ class PollFacade
     }
 
 
-    public function getNumberOfAllParticipants(int $pollId): int {
+    public function getNumberOfAllParticipants(int $pollId): int
+    {
         if (!$this->getPoll($pollId)[PollRepository::COLUMN_IS_PRIVATE]) {
             return $this->userRepository->findAll()->select('COUNT(*) AS c')->fetch()['c'] ?? 0;
         }
-        return $this->pollRepository->database->query("
+        return $this->pollRepository->database->query(
+            "
             SELECT COUNT(*) as participants FROM " . UserRepository::TABLE_NAME . " WHERE ". UserRepository::COLUMN_ID ." IN (
                 (SELECT pp.user_id FROM poll_participant pp WHERE pp.poll_id = ?)
                 UNION 
@@ -297,5 +301,4 @@ class PollFacade
             $pollId
         )->fetch()['participants'];
     }
-
 }

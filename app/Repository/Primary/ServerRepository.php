@@ -4,7 +4,8 @@ namespace App\Repository\Primary;
 
 use App\Repository\BaseRepository;
 
-class ServerRepository extends PrimaryRepository {
+class ServerRepository extends PrimaryRepository
+{
     public const TABLE_NAME = "server";
     public const COLUMN_ID = 'id';
     public const COLUMN_NAME = 'name';

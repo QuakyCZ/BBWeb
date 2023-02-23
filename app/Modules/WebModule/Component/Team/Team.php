@@ -8,7 +8,8 @@ use App\Repository\Primary\UserDetailsRepository;
 use App\Repository\Primary\UserRoleRepository;
 use Nette\Localization\Translator;
 
-class Team extends BaseComponent {
+class Team extends BaseComponent
+{
     private RoleRepository $roleRepository;
     private UserRoleRepository $userRoleRepository;
     private UserDetailsRepository $userDetailsRepository;
@@ -27,14 +28,13 @@ class Team extends BaseComponent {
         $this->translator = $translator;
     }
 
-    public function render(): void {
-
+    public function render(): void
+    {
         $data = $this->userRoleRepository->getForAboutTeamListing(['ADMIN', 'USER'])->fetchAll();
 
         $result = [];
 
-        foreach ($data as $row)
-        {
+        foreach ($data as $row) {
             $result[$row['id']]['role'] = $this->translator->translate('front.about.roles.'.$row['name']);
             $result[$row['id']]['members'][] = [
                 'minecraft_nick' => $row['nick'] ?? $row['username'],
@@ -48,6 +48,7 @@ class Team extends BaseComponent {
     }
 }
 
-interface ITeamFactory {
+interface ITeamFactory
+{
     public function create(): Team;
 }

@@ -20,7 +20,8 @@ class PollOptionRepository extends PrimaryRepository
      * @param int $pollId
      * @return int
      */
-    public function deleteOptionsForPoll(int $pollId): int {
+    public function deleteOptionsForPoll(int $pollId): int
+    {
         return $this->findBy([self::COLUMN_POLL_ID => $pollId])->delete();
     }
 }

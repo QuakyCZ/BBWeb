@@ -24,7 +24,7 @@ class SettingsRepository extends PrimaryRepository
      */
     public function getSettingValue(string $name): ?string
     {
-        return $this->getByName($name)[self::COLUMN_CONTENT] ?? NULL;
+        return $this->getByName($name)[self::COLUMN_CONTENT] ?? null;
     }
 
     /**

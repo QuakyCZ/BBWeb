@@ -6,15 +6,13 @@ use JetBrains\PhpStorm\ArrayShape;
 
 class Player
 {
-    public function __construct
-    (
+    public function __construct(
         private ?int $id,
         private string $name,
         private string $uuid,
         private ?int $statisticsId,
         private bool $deleted = false
-    )
-    {
+    ) {
     }
 
     /**

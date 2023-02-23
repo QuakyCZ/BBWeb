@@ -2,7 +2,6 @@
 
 namespace App\Modules\AdminModule\Component\ForgottenPasswordForm;
 
-
 use App\Facade\MailFacade;
 use App\Repository\Primary\UserRepository;
 use Nette\Application\BadRequestException;
@@ -12,15 +11,14 @@ use Nette\Utils\ArrayHash;
 
 class ForgottenPasswordForm extends \App\Component\BaseComponent
 {
-
     public function __construct(
         private UserRepository $userRepository,
         private MailFacade $mailFacade,
-    )
-    {
+    ) {
     }
 
-    public function createComponentForm(): Form {
+    public function createComponentForm(): Form
+    {
         $form = new Form();
         $form->addEmail('email', 'Email')
             ->setHtmlAttribute('placeholder', 'Email')
@@ -42,12 +40,11 @@ class ForgottenPasswordForm extends \App\Component\BaseComponent
      * @throws \Nette\Application\AbortException
      * @throws \Nette\Application\UI\InvalidLinkException
      */
-    public function submitForm(Form $form, ArrayHash $values): void {
-
+    public function submitForm(Form $form, ArrayHash $values): void
+    {
         $xUrl = $form->getHttpData($form::DATA_TEXT, 'x_url');
 
-        if (empty($xUrl) || $xUrl !== "nospam")
-        {
+        if (empty($xUrl) || $xUrl !== "nospam") {
             throw new ForbiddenRequestException();
         }
 
@@ -73,4 +70,3 @@ class ForgottenPasswordForm extends \App\Component\BaseComponent
         $this->presenter->redirect('Sign:forgottenPasswordSent');
     }
 }
-

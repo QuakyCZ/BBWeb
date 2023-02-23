@@ -20,16 +20,14 @@ use Tracy\Debugger;
 
 class SignPresenter extends ClientPresenter
 {
-    public function __construct
-    (
+    public function __construct(
         private UserFacade $userFacade,
         private UserRepository $userRepository,
         private ISignInFormFactory $signInFormFactory,
         private ISignUpFormFactory $signUpFormFactory,
         private IForgottenPasswordFormFactory $forgottenPasswordFormFactory,
         private IResetPasswordFormFactory $resetPasswordFormFactory,
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -39,11 +37,9 @@ class SignPresenter extends ClientPresenter
      */
     public function actionIn(): void
     {
-        if ($this->getUser()->isLoggedIn())
-        {
+        if ($this->getUser()->isLoggedIn()) {
             $returnKey = $this->getParameter('returnKey');
-            if ($returnKey !== null)
-            {
+            if ($returnKey !== null) {
                 $this->restoreRequest($returnKey);
             }
             $this->redirect('Dashboard:');
@@ -65,8 +61,7 @@ class SignPresenter extends ClientPresenter
      */
     public function actionOut(): void
     {
-        if ($this->getUser()->isLoggedIn())
-        {
+        if ($this->getUser()->isLoggedIn()) {
             $this->getUser()->logout(true);
         }
         $this->presenter->redirect('Sign:in');
@@ -79,16 +74,14 @@ class SignPresenter extends ClientPresenter
     {
         try {
             $verifiedUser = $this->userFacade->verifyUserToken($userId, $token);
-            if ($verifiedUser === null)
-            {
+            if ($verifiedUser === null) {
                 $this->flashMessage('Neplatný token.', 'warning');
             }
             $this->flashMessage('Email byl ověřen.', 'success');
             $this->redirect('Sign:in');
         } catch (AbortException $exception) {
             throw $exception;
-        }
-        catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             Debugger::log($exception, 'exception');
             $this->flashMessage('Nastala chyba.', 'warning');
             $this->redirect('Sign:in');
@@ -106,7 +99,8 @@ class SignPresenter extends ClientPresenter
      * @throws AbortException
      * @throws BadRequestException
      */
-    public function actionResetPassword(int $id, string $email, string $token, int $t): void {
+    public function actionResetPassword(int $id, string $email, string $token, int $t): void
+    {
         if (time() - $t > 5*60) {
             $this->flashMessage('Platnost tokenu vypršela.', EFlashMessageType::ERROR);
             $this->redirect('Sign:forgottenPassword');
@@ -158,14 +152,16 @@ class SignPresenter extends ClientPresenter
 
 
 
-    public function createComponentForgottenPasswordForm(): ForgottenPasswordForm {
+    public function createComponentForgottenPasswordForm(): ForgottenPasswordForm
+    {
         return $this->forgottenPasswordFormFactory->create();
     }
 
     /**
      * @return ResetPasswordForm
      */
-    public function createComponentResetPasswordForm(): ResetPasswordForm {
+    public function createComponentResetPasswordForm(): ResetPasswordForm
+    {
         return $this->resetPasswordFormFactory->create();
     }
 }

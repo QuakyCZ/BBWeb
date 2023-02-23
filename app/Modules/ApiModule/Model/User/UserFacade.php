@@ -22,8 +22,7 @@ use Throwable;
 
 class UserFacade
 {
-    public function __construct
-    (
+    public function __construct(
         private UserRepository $userRepository,
         private UserRoleRepository $userRoleRepository,
         private UserMinecraftAccountRepository $minecraftAccountRepository,
@@ -32,8 +31,7 @@ class UserFacade
         private MailFacade $mailFacade,
         private Passwords $passwords,
         private LinkGenerator $linkGenerator
-    )
-    {
+    ) {
     }
 
     /**
@@ -41,22 +39,18 @@ class UserFacade
      */
     public function connectMinecraft(int $userId, string $token): void
     {
-
         $tokenRow = $this->connectTokenRepository->getToken($token, EConnectTokenType::MINECRAFT);
-        if ($tokenRow === null)
-        {
+        if ($tokenRow === null) {
             throw new BadRequestException('Neexistující token.');
         }
 
 
         $tokenObject = $this->userConnectTokenMapper->mapToken($tokenRow);
-        if ($tokenObject->isUsed())
-        {
+        if ($tokenObject->isUsed()) {
             throw new BadRequestException('Neplatný token.');
         }
 
-        if ($tokenObject->hasExpired())
-        {
+        if ($tokenObject->hasExpired()) {
             throw new BadRequestException('Platnost tokenu vypršela. Vygenerujte ho, prosím, znovu.');
         }
 
@@ -64,7 +58,6 @@ class UserFacade
         $uuid = $tokenObject->getData()['uuid'];
         $nick = $tokenObject->getData()['nick'];
         $this->minecraftAccountRepository->runInTransaction(function () use ($userId, $tokenRow, $tokenObject, $uuid, $nick) {
-
             $tokenRow->update([
                 UserConnectTokenRepository::COLUMN_USER_ID => $userId
             ]);
@@ -86,12 +79,10 @@ class UserFacade
      */
     public function createToken(int $userId, string $type): string
     {
-        return $this->connectTokenRepository->runInTransaction(function () use ($userId, $type)
-        {
+        return $this->connectTokenRepository->runInTransaction(function () use ($userId, $type) {
             $this->connectTokenRepository->deletePreviousTokens($userId);
 
-            $token = Keygen::alphanum(16)->generate(function ($key)
-            {
+            $token = Keygen::alphanum(16)->generate(function ($key) {
                 return implode('-', str_split(mb_strtoupper($key), 4));
             });
 
@@ -115,8 +106,7 @@ class UserFacade
      */
     public function disconnect(int $userId, string $type)
     {
-        switch ($type)
-        {
+        switch ($type) {
             default:
                 throw new BadRequestException('Připojení tohoto typu neexistuje.');
             case EConnectTokenType::MINECRAFT:
@@ -137,7 +127,6 @@ class UserFacade
         $verificationToken = Keygen::alphanum(30)->generate();
 
         return $this->userRepository->runInTransaction(function () use ($values, $verificationToken) {
-
             $row = $this->userRepository->save([
                 UserRepository::COLUMN_USERNAME => $values[UserRepository::COLUMN_USERNAME],
                 UserRepository::COLUMN_EMAIL => $values[UserRepository::COLUMN_EMAIL],

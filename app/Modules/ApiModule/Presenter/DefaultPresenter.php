@@ -7,7 +7,6 @@ use Nette\Application\AbortException;
 
 class DefaultPresenter extends BasePresenter
 {
-
     /**
      * @return void
      * @throws AbortException

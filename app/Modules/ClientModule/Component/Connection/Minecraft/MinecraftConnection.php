@@ -13,12 +13,10 @@ use Tracy\ILogger;
 
 class MinecraftConnection extends BaseConnection
 {
-    public function __construct
-    (
+    public function __construct(
         ?int $userId,
         MinecraftUserConnectFacade $userConnectFacade
-    )
-    {
+    ) {
         parent::__construct($userId, $userConnectFacade);
     }
 
@@ -28,15 +26,12 @@ class MinecraftConnection extends BaseConnection
     public function handleGenerateToken(): void
     {
         $message = new \stdClass();
-        try
-        {
+        try {
             $token = $this->userConnectFacade->generateToken($this->userId);
             $message->type = EFlashMessageType::MODAL_INFO;
             $message->title = 'Propojení s Minecraft serverem';
             $message->message = 'Pro propojení na serveru použijte následující příkaz: <br><br> <code>/connectweb ' . $token[UserConnectTokenRepository::COLUMN_TOKEN] . '</code>';
-        }
-        catch (\Exception $exception)
-        {
+        } catch (\Exception $exception) {
             Debugger::log($exception, ILogger::EXCEPTION);
             $message->type = EFlashMessageType::MODAL_WARNING;
             $message->title = 'Chyba';
@@ -45,13 +40,10 @@ class MinecraftConnection extends BaseConnection
 
         $this->presenter->flashMessage($message);
 
-        if ($this->presenter->isAjax())
-        {
+        if ($this->presenter->isAjax()) {
             $this->presenter->redrawControl('flashes');
             $this->redrawControl('connection');
-        }
-        else
-        {
+        } else {
             $this->presenter->redirect('default');
         }
     }

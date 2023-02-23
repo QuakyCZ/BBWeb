@@ -21,7 +21,5 @@ class ArticleRepository extends PrimaryRepository
 
     public function setPublished(int $articleId, bool $published = true)
     {
-
     }
-
 }

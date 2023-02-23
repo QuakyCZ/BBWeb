@@ -16,8 +16,8 @@ use Nette\Utils\ArrayHash;
 use Tracy\Debugger;
 use Tracy\ILogger;
 
-class UserForm extends BaseComponent {
-
+class UserForm extends BaseComponent
+{
     private ?int $id;
     private RoleRepository $roleRepository;
     private UserFacade $userFacade;
@@ -50,12 +50,9 @@ class UserForm extends BaseComponent {
      */
     public function render(): void
     {
-
-        if ($this->id !== null)
-        {
+        if ($this->id !== null) {
             $user = $this->userFacade->getById($this->id);
-            if ($user === null)
-            {
+            if ($user === null) {
                 throw new BadRequestException('Uživatel nebyl nalezen.', 400);
             }
 
@@ -70,10 +67,8 @@ class UserForm extends BaseComponent {
 
             $details = $this->userDetailsRepository->getDetails($this->id)->fetch();
 
-            if ($details !== null)
-            {
-                foreach ($details->toArray() as $key => $value)
-                {
+            if ($details !== null) {
+                foreach ($details->toArray() as $key => $value) {
                     $defaults[$key] = $value;
                 }
             }
@@ -89,7 +84,8 @@ class UserForm extends BaseComponent {
     /**
      * @return Form
      */
-    public function createComponentForm(): Form {
+    public function createComponentForm(): Form
+    {
         $form = new Form();
         $form->addProtection();
 
@@ -106,8 +102,7 @@ class UserForm extends BaseComponent {
         $form->addText('lastname', 'Příjmení');
 
 
-        if ($this->presenter->user->isInRole('ADMIN') || $this->presenter->user->getId() === $this->id)
-        {
+        if ($this->presenter->user->isInRole('ADMIN') || $this->presenter->user->getId() === $this->id) {
             $password = $form->addPassword('password', 'Heslo');
             $password->addCondition(Form::FILLED)
                 ->addRule(Form::MIN_LENGTH, 'Minimální délka hesla je 8 znaků.', 8)
@@ -120,13 +115,10 @@ class UserForm extends BaseComponent {
         }
 
 
-        if ($this->presenter->user->isInRole('ADMIN'))
-        {
+        if ($this->presenter->user->isInRole('ADMIN')) {
             $roles = $this->roleRepository->getDataForSelect();
             $form->addMultiSelect('role_ids', 'Role', $roles);
-        }
-        else
-        {
+        } else {
             $form->addHidden('role_ids');
         }
 
@@ -143,25 +135,23 @@ class UserForm extends BaseComponent {
     /**
      * @param Form $form
      */
-    public function validateForm(Form $form): void {
+    public function validateForm(Form $form): void
+    {
         $user = $this->userRepository->findByEmail($form->values['email']);
-        if($user !== null && ($this->id === null xor $user[UserRepository::COLUMN_ID] !== $this->id))
-        {
+        if ($user !== null && ($this->id === null xor $user[UserRepository::COLUMN_ID] !== $this->id)) {
             $form->addError('Uživatel s tímto emailem již existuje.');
         }
 
         $user = $this->userRepository->findByUsername($form->values['username']);
-        if($user !== null && ($this->id === null xor $user[UserRepository::COLUMN_ID] !== $this->id))
-        {
+        if ($user !== null && ($this->id === null xor $user[UserRepository::COLUMN_ID] !== $this->id)) {
             $form->addError('Uživatel s tímto jménem již existuje.');
         }
 
-        if($form->values['password'] !== $form->values['passwordCheck'])
-        {
+        if ($form->values['password'] !== $form->values['passwordCheck']) {
             $form->addError('Hesla se neshodují.');
         }
 
-        if(!empty($form->values['role_ids']) &&
+        if (!empty($form->values['role_ids']) &&
             (!$this->presenter->user->isLoggedIn() || !$this->presenter->user->isInRole('ADMIN'))
         ) {
             $form->addError('Nemáš oprávnění na nastavování rolí.');
@@ -174,8 +164,8 @@ class UserForm extends BaseComponent {
      * @throws AbortException
      * @throws BadRequestException
      */
-    public function completeForm(Form $form, ArrayHash $data): void {
-
+    public function completeForm(Form $form, ArrayHash $data): void
+    {
         $sessionUser = $this->getPresenter()?->getUser();
 
         $user = [
@@ -183,8 +173,7 @@ class UserForm extends BaseComponent {
             'email'=>$data['email'],
         ];
 
-        if (!empty($data['password']))
-        {
+        if (!empty($data['password'])) {
             $user['password'] = $this->passwords->hash($data['password']);
         }
 
@@ -194,11 +183,9 @@ class UserForm extends BaseComponent {
             'position' => $data['position']
         ];
 
-        if ($this->id !== null)
-        {
+        if ($this->id !== null) {
             $existingUser = $this->userFacade->getById($this->id);
-            if ($existingUser === null)
-            {
+            if ($existingUser === null) {
                 throw new BadRequestException('Uživatel nebyl nalezen.');
             }
 
@@ -207,21 +194,14 @@ class UserForm extends BaseComponent {
             $user['changed'] = new \DateTime();
 
             $details = $this->userDetailsRepository->getDetails($this->id)->fetch();
-            if ($details !== null)
-            {
+            if ($details !== null) {
                 $userDetails['id'] = $details['id'];
                 $userDetails['changed_user_id'] = $sessionUser->getId();
                 $userDetails['changed'] = new \DateTime();
-            }
-            else
-            {
+            } else {
                 $userDetails['created_user_id'] = $sessionUser->getId();
             }
-
-
-        }
-        else
-        {
+        } else {
             $user['created_user_id'] = $this->presenter->user->id;
         }
 
@@ -245,8 +225,7 @@ class UserForm extends BaseComponent {
             }
 
             $this->userRepository->database->commit();
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             Debugger::log($e, ILogger::EXCEPTION);
             $this->userRepository->database->rollBack();
             $form->addError('Něco se nepovedlo.');

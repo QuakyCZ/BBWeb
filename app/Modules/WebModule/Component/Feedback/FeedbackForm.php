@@ -25,8 +25,7 @@ class FeedbackForm extends BaseComponent
         private ServerRepository $serverRepository,
         private FeedbackRepository $feedbackRepository,
         private MailFacade $mailFacade,
-    )
-    {
+    ) {
     }
 
     /**
@@ -48,7 +47,7 @@ class FeedbackForm extends BaseComponent
         $form->addTextArea('description', 'Popis')
             ->setRequired('%label je povinný údaj.');
 
-        $form->addReCaptcha('recaptcha', 'reCaptcha',)
+        $form->addReCaptcha('recaptcha', 'reCaptcha', )
             ->setRequired('Potvrďte, prosím, že nejste robot.');
 
         $form->addSubmit('save', 'Odeslat');
@@ -65,27 +64,23 @@ class FeedbackForm extends BaseComponent
      */
     public function saveForm(Form $form, ArrayHash $values): void
     {
-
         $xUrl = $form->getHttpData($form::DATA_TEXT, 'x_url');
 
-        if (empty($xUrl) || $xUrl !== "nospam")
-        {
+        if (empty($xUrl) || $xUrl !== "nospam") {
             throw new ForbiddenRequestException();
         }
-        
+
         $server = $this->serverRepository->findBy(['id' => $values['server_id']])->fetch();
-        if ($server === null)
-        {
+        if ($server === null) {
             $form->addError('Neplatný server.');
             return;
         }
 
         $repo = $this->feedbackRepository;
 
-        try
-        {
+        try {
             $repo->runInTransaction(
-                function() use ($values, $server, $repo) {
+                function () use ($values, $server, $repo) {
                     $data = (array)$values;
                     $row = $repo->save($data);
 
@@ -107,15 +102,12 @@ class FeedbackForm extends BaseComponent
                         __DIR__.'/../../../../Mail/FeedbackMailRecipient.latte',
                         $data
                     );
-                });
+                }
+            );
             $this->presenter->redirect('Feedback:', ['sent' => true]);
-        }
-        catch (AbortException $exception)
-        {
+        } catch (AbortException $exception) {
             throw $exception;
-        }
-        catch (\Exception $exception)
-        {
+        } catch (\Exception $exception) {
             Debugger::log($exception, 'feedback_form');
             $form->addError('Nastala chyba při ukládání. Opakujte akci později.');
         }

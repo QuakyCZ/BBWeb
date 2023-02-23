@@ -22,8 +22,7 @@ class PollGrid extends BaseDataGrid
         IContainer $parent,
         ITranslator $translator,
         private PollRepository $pollRepository
-    )
-    {
+    ) {
         parent::__construct($parent, 'polls', $translator);
     }
 
@@ -112,7 +111,6 @@ class PollGrid extends BaseDataGrid
                 Debugger::log($exception);
                 $this->grid->presenter->flashMessage('Při zpracování požadavku nastala neznámá chyba.', EFlashMessageType::ERROR);
             }
-
         })->setRenderCondition(function (ActiveRow $row) {
             return $this->pollRepository->isActive($row[PollRepository::COLUMN_ID]);
         })->setIcon('thumbs-down')

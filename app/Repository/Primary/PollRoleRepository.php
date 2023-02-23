@@ -17,7 +17,8 @@ class PollRoleRepository extends PrimaryRepository
      * @param int $pollId
      * @return ActiveRow[]
      */
-    public function getAllowedRolesForPoll(int $pollId): array {
+    public function getAllowedRolesForPoll(int $pollId): array
+    {
         return array_map(
             function (ActiveRow $row) {
                 return $row->ref(RoleRepository::TABLE_NAME);
@@ -27,5 +28,4 @@ class PollRoleRepository extends PrimaryRepository
             ])->fetchAll()
         );
     }
-
 }

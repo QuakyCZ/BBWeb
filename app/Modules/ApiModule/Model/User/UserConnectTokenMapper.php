@@ -19,7 +19,7 @@ class UserConnectTokenMapper
             $row[UserConnectTokenRepository::COLUMN_USER_ID],
             $row[UserConnectTokenRepository::COLUMN_TYPE],
             $row[UserConnectTokenRepository::COLUMN_TOKEN],
-                Json::decode($row[UserConnectTokenRepository::COLUMN_DATA], Json::FORCE_ARRAY),
+            Json::decode($row[UserConnectTokenRepository::COLUMN_DATA], Json::FORCE_ARRAY),
             $row[UserConnectTokenRepository::COLUMN_USED],
             $row[UserConnectTokenRepository::COLUMN_VALID_TO]
         );

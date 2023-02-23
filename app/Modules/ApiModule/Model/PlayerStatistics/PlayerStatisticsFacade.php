@@ -8,12 +8,10 @@ class PlayerStatisticsFacade
      * @param PlayerStatisticsMapper $playerStatisticsMapper
      * @param PlayerStatisticsRepository $playerStatisticsRepository
      */
-    public function __construct
-    (
+    public function __construct(
         private PlayerStatisticsMapper $playerStatisticsMapper,
         private PlayerStatisticsRepository $playerStatisticsRepository,
-    )
-    {
+    ) {
     }
 
     /**
@@ -23,8 +21,7 @@ class PlayerStatisticsFacade
     public function getPlayerStatistics(int $statisticsId): ?PlayerStatistics
     {
         $row = $this->playerStatisticsRepository->getById($statisticsId);
-        if ($row === null)
-        {
+        if ($row === null) {
             return null;
         }
         return $this->playerStatisticsMapper->mapPlayerStatistics($row);

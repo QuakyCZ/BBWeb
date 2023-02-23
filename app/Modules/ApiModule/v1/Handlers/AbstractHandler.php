@@ -7,15 +7,13 @@ use Tomaj\NetteApi\Response\ResponseInterface;
 
 abstract class AbstractHandler extends BaseHandler
 {
-
     /**
      * @inheritDoc
      */
     public function handle(array $params): ResponseInterface
     {
         $verifyResult = $this->verifyParams($params);
-        if ($verifyResult !== true)
-        {
+        if ($verifyResult !== true) {
             return $verifyResult;
         }
 

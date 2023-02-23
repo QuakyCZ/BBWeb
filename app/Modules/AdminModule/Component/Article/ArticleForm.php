@@ -15,7 +15,6 @@ use Tracy\ILogger;
 
 class ArticleForm extends BaseComponent
 {
-
     /**
      * @param int|null $id
      * @param ArticleRepository $articleRepository
@@ -23,8 +22,7 @@ class ArticleForm extends BaseComponent
     public function __construct(
         private ?int $id,
         private ArticleRepository $articleRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -32,12 +30,10 @@ class ArticleForm extends BaseComponent
      */
     public function render(): void
     {
-        if ($this->id !== null)
-        {
+        if ($this->id !== null) {
             $article = $this->articleRepository->findRow($this->id);
 
-            if ($article === null)
-            {
+            if ($article === null) {
                 throw new BadRequestException();
             }
 
@@ -59,8 +55,7 @@ class ArticleForm extends BaseComponent
         $form->addText(ArticleRepository::COLUMN_TITLE, 'Název');
         $form->addTextArea(ArticleRepository::COLUMN_TEXT, 'Text', null, 8);
 
-        if ($this->presenter->user->isInRole('ADMIN'))
-        {
+        if ($this->presenter->user->isInRole('ADMIN')) {
             $form->addCheckbox(ArticleRepository::COLUMN_IS_PUBLISHED, 'Publikovat');
             $form->addCheckbox(ArticleRepository::COLUMN_IS_PINNED, 'Připnout');
         }
@@ -81,41 +76,30 @@ class ArticleForm extends BaseComponent
      */
     public function saveForm(Form $form, ArrayHash $values): void
     {
-        if (empty($values[ArticleRepository::COLUMN_IS_PUBLISHED]))
-        {
+        if (empty($values[ArticleRepository::COLUMN_IS_PUBLISHED])) {
             $values[ArticleRepository::COLUMN_IS_PUBLISHED] = false;
         }
 
-        if (empty($values[ArticleRepository::COLUMN_IS_PINNED]))
-        {
+        if (empty($values[ArticleRepository::COLUMN_IS_PINNED])) {
             $values[ArticleRepository::COLUMN_IS_PINNED] = false;
         }
 
-        if ($this->id === null)
-        {
+        if ($this->id === null) {
             $values[ArticleRepository::COLUMN_CREATED_USER_ID] = $this->presenter->user->id;
-        }
-        else
-        {
+        } else {
             $values[ArticleRepository::COLUMN_CHANGED_USER_ID] = $this->presenter->user->id;
             $values[ArticleRepository::COLUMN_CHANGED] = new DateTime();
         }
 
-        try
-        {
-            if ($this->id)
-            {
+        try {
+            if ($this->id) {
                 $this->articleRepository->findRow($this->id)->update($values);
-            }
-            else
-            {
+            } else {
                 $this->articleRepository->save((array) $values);
             }
 
             $this->presenter->redirect('Article:');
-        }
-        catch (PDOException $exception)
-        {
+        } catch (PDOException $exception) {
             Debugger::log($exception, ILogger::EXCEPTION);
             $form->addError('Při ukládání nastala chyba.');
         }

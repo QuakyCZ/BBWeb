@@ -18,13 +18,11 @@ abstract class BaseDataGrid
     protected string $name;
 
 
-    public function __construct
-    (
+    public function __construct(
         IContainer  $parent,
         string      $name,
         ITranslator $translator
-    )
-    {
+    ) {
         $this->parent = $parent;
         $this->translator = $translator;
         $this->name = $name;

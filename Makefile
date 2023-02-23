@@ -17,3 +17,10 @@ npm-install:
 
 nb:
 	cd docker && docker-compose run npm sh
+
+phpstan ps:
+	docker exec -it web vendor/bin/phpstan analyze -c phpstan.neon
+
+phpcsfix csf:
+	docker exec -it web vendor/bin/php-cs-fixer fix app
+	

@@ -11,17 +11,14 @@ use Tomaj\NetteApi\Response\ResponseInterface;
 
 abstract class BaseUserConnectFacade
 {
-
     /**
      * @param string $type
      * @param UserConnectTokenFacade $userConnectTokenFacade
      */
-    public function __construct
-    (
+    public function __construct(
         protected string $type,
         protected UserConnectTokenFacade $userConnectTokenFacade,
-    )
-    {
+    ) {
     }
 
     /**

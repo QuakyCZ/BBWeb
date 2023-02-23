@@ -19,8 +19,8 @@ use Ublaboo\DataGrid\Column\Action\Confirmation\StringConfirmation;
 use Ublaboo\DataGrid\DataGrid;
 use Ublaboo\DataGrid\Exception\DataGridException;
 
-class UsersPresenter extends Base\BasePresenter {
-
+class UsersPresenter extends Base\BasePresenter
+{
     private ?int $id = null;
 
     private UserRepository $userRepository;
@@ -46,7 +46,8 @@ class UsersPresenter extends Base\BasePresenter {
         $this->translator = $translator;
     }
 
-    public function actionDefault() {
+    public function actionDefault()
+    {
         $users = $this->userRepository->getForListing()->fetchAll();
         $result = [];
         foreach ($users as $user) {
@@ -59,21 +60,24 @@ class UsersPresenter extends Base\BasePresenter {
         $this->template->users = $result;
     }
 
-    public function actionEdit(int $id): void {
+    public function actionEdit(int $id): void
+    {
         $this->id = $id;
     }
 
     /**
      * @return UserForm
      */
-    public function createComponentUserForm(): UserForm {
+    public function createComponentUserForm(): UserForm
+    {
         return $this->userFormFactory->create($this->id);
     }
 
     /**
      * @return DataGrid
      */
-    public function createComponentUserGrid(): DataGrid {
+    public function createComponentUserGrid(): DataGrid
+    {
         return $this->userGridFactory->create($this)->create();
     }
 
@@ -82,7 +86,8 @@ class UsersPresenter extends Base\BasePresenter {
      * @return void
      * @throws AbortException
      */
-    public function handleDelete(int $id): void {
+    public function handleDelete(int $id): void
+    {
         $this->userRepository->setNotDeletedNull($id);
         $this->flashMessage("Uživatel byl smazán.");
         if ($this->presenter->isAjax()) {
@@ -98,14 +103,12 @@ class UsersPresenter extends Base\BasePresenter {
      * @return void
      * @throws AbortException
      */
-    public function handleActivate($id): void {
-        try
-        {
-            $this->userRepository->setActive($id,true);
+    public function handleActivate($id): void
+    {
+        try {
+            $this->userRepository->setActive($id, true);
             $this->flashMessage('Uživatel byl aktivován.');
-        }
-        catch (\Exception $exception)
-        {
+        } catch (\Exception $exception) {
             Debugger::log($exception);
             $this->flashMessage($this->translator->translate('common.error'), EFlashMessageType::ERROR);
         }
@@ -122,14 +125,12 @@ class UsersPresenter extends Base\BasePresenter {
      * @return void
      * @throws AbortException
      */
-    public function handleDeactivate($id): void {
-        try
-        {
-            $this->userRepository->setActive($id,false);
+    public function handleDeactivate($id): void
+    {
+        try {
+            $this->userRepository->setActive($id, false);
             $this->flashMessage('Uživatel byl deaktivován.');
-        }
-        catch (\Exception $exception)
-        {
+        } catch (\Exception $exception) {
             Debugger::log($exception, ILogger::EXCEPTION);
             $this->flashMessage($this->translator->translate('common.error'), EFlashMessageType::ERROR);
         }
@@ -140,6 +141,4 @@ class UsersPresenter extends Base\BasePresenter {
             $this->redirect('this');
         }
     }
-
-
 }

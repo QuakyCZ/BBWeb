@@ -8,37 +8,35 @@ use Nette\Bootstrap\Configurator;
 use Tracy\Debugger;
 use Tracy\NativeSession;
 
-
 class Bootstrap
 {
-	public static function boot(): Configurator
-	{
-		$configurator = new Configurator;
-		$appDir = dirname(__DIR__);
+    public static function boot(): Configurator
+    {
+        $configurator = new Configurator();
+        $appDir = dirname(__DIR__);
 
-		//$configurator->setDebugMode('secret@23.75.345.200'); // enable for your remote IP
+        //$configurator->setDebugMode('secret@23.75.345.200'); // enable for your remote IP
 
         $debug = (bool)(getenv('DEBUG') ?? false);
 
-        if ($debug === true)
-        {
-            $configurator->setDebugMode(TRUE);
-	    	$configurator->enableTracy($appDir . '/log');
+        if ($debug === true) {
+            $configurator->setDebugMode(true);
+            $configurator->enableTracy($appDir . '/log');
         }
 
         $configurator->enableDebugger($appDir.'/log');
 
 
-		$configurator->setTimeZone('Europe/Prague');
-		$configurator->setTempDirectory($appDir . '/temp');
+        $configurator->setTimeZone('Europe/Prague');
+        $configurator->setTempDirectory($appDir . '/temp');
 
-		$configurator->createRobotLoader()
-			->addDirectory(__DIR__)
-			->register();
+        $configurator->createRobotLoader()
+            ->addDirectory(__DIR__)
+            ->register();
 
-		$configurator->addConfig($appDir . '/config/common.neon');
-		$configurator->addConfig($appDir . '/config/local.neon');
+        $configurator->addConfig($appDir . '/config/common.neon');
+        $configurator->addConfig($appDir . '/config/local.neon');
 
-		return $configurator;
-	}
+        return $configurator;
+    }
 }
