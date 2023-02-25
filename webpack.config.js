@@ -25,6 +25,7 @@ module.exports = (env, argv) => {
             stylesWeb: [
                 APP_DIR + '/www/styles/appwork.css',
                 APP_DIR + '/www/styles/imports.scss',
+                APP_DIR + '/www/libs/phosphor-icons/icon-font/CSS/icons.css',
                 APP_DIR + '/www/styles/web/main.css'
             ],
             scriptsWeb: [

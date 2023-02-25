@@ -17,7 +17,6 @@ const scriptsGroups = (APP_DIR) => {
                 APP_DIR + "/node_modules/naja/dist/Naja.min.js",
                 APP_DIR + "/node_modules/live-form-validation/live-form-validation.js",
                 APP_DIR + "/node_modules/nette.ajax.js/extensions/spinner.ajax.js",
-                APP_DIR + "/node_modules/@phosphor-icons/core/dist/index.mjs",
                 APP_DIR + '/www/js/swal.js'
                 // scripty definované zde by se měly objevit i ve webpack.config.js v sekci "externals"
             ]

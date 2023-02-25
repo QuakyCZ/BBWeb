@@ -1,5 +1,4 @@
 @import url(font.css);
-@import url(../../libs/phosphor-icons/icon-font/CSS/icons.css);
 
 body {
     font-family: 'Raleway', sans-serif;
@@ -356,4 +355,9 @@ a:hover {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--primary-hover-color);
+}
+
+.phosphor {
+    font-family: 'Phosphor', sans-serif !important;
+    font-style: normal !important;
 }
