@@ -42,7 +42,7 @@ class ArticlesPresenter extends Base\BasePresenter
         if ($article === null) {
             throw new BadRequestException();
         }
-        
+
         $this->template->article = $article;
         $this->template->textFromMarkdown = MarkdownExtra::defaultTransform($article[ArticleRepository::COLUMN_TEXT]);
     }

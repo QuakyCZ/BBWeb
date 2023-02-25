@@ -62,7 +62,7 @@ class ArticleForm extends BaseComponent
         }
 
         $form->addSubmit('save', 'Uložit');
-        
+
         $form->addButton('close', 'Zavřít')
             ->setHtmlAttribute('onclick', 'window.location="' . $this->presenter->link('Article:').'"');
 
