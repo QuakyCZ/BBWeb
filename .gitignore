@@ -3,3 +3,4 @@ config/local.neon
 vendor/
 node_modules/
 docker/volumes
+.php-cs-fixer.cache
