@@ -1,251 +1,257 @@
-{varType string $serverIp}
-{varType string $serverVersion}
-{varType string $facebookUrl}
-{varType string $instagramUrl}
-{varType string $discordUrl}
-
-{block styles}
-	<link rel="stylesheet" type="text/css" href="{$basePath}/styles/style.css">
-{/block}
-
-{block navbar}
-    <nav class="navbar navbar-expand-xl navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" n:href="Homepage:">
-                <img src="./img/logo.svg" alt="" width="150px">
-              </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mt-3 mt-xl-0 mb-lg-0">
-              <li class="nav-item">
-                <a type="button" data-bs-toggle="modal" data-bs-target="#storeModal" class="nav-link">OBCHOD</a>
-              </li>
-              <hr class="nav-divider"></hr>
-              <li class="nav-item">
-                <a n:href="About:default#team" target="_self" class="nav-link">TÝM</a>
-              </li>
-              <hr class="nav-divider"></hr>
-              <li class="nav-item">
-                <a n:href="Articles:" target="_self" class="nav-link text-nowrap">O NÁS</a>
-              </li>
-              <hr class="nav-divider"></hr>
-              <li class="nav-item">
-                <a href="https://wiki.beastblock.cz" target="_blank" class="nav-link">WIKI</a>
-              </li>
-              <hr class="nav-divider"></hr>
-              <li class="nav-item">
-                <a href="https://status.beastblock.cz/" target="_blank" class="nav-link">STATUS</a>
-              </li>
-              <hr class="nav-divider"></hr>
-              <li class="nav-item">
-                <a n:href="About:default#contact" class="nav-link">KONTAKT</a>
-              </li>
-              <hr class="nav-divider"></hr>
-              <li class="nav-item">
-                <a n:href=":Client:Dashboard:default" class="nav-link">PROFIL</a>
-              </li>
-			  <hr class="nav-divider"></hr>
-              <li class="nav-item last">
-                <a n:href="Feedback:" style="margin-right: 0; font-size: 18px;" class="nav-link"><i class="fa-solid fa-bug"></i></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-    </nav>
-{/block}
-
 {block content}
-<!-- <nav class="nav">
-	<div class="controls">
-		<a onclick="showPopUp('popup_shop')" target="_self">OBCHOD</a>
-		<a n:href="About:default#team" target="_self">TÝM</a>
-		<a n:href="About:" target="_self">O PROJEKTU</a>
-		<a href="https://wiki.beastblock.cz" target="_blank">WIKI</a>
-		<a href="status" target="_self">STATUS</a>
-		<a n:href="About:default#contact">KONTAKT</a>
-		<a n:href=":Client:Dashboard:default">PROFIL</a>
-		<a n:href="Feedback:" style="margin-right: 0;"><i class="las la-bug"></i></a>
-	</div>
-</nav> -->
-<div class="popup" id="popup">
-	<div class="popup-box box">
-		<div class="popup-content">
-			<div class="popup-header">
-				<div>
-					<h1><span class="yellow-text">CO NA SERVERU</span> <b>BEASTBLOCK NAJDEŠ</b></h1>
-				</div>
-				<div style="margin: auto 2em; cursor: pointer;" onclick="closePopUp('popup');">
-					<i class="las la-times "></i>
-				</div>
-			</div>
-			<hr>
-			<h2>NAKASHIHO SUB SERVER</h2>
-			<p>Komunitní vanilla+ server pro hráče, kteří podporují Nakashiho prostřednictvím Twitch subscribes.</p>
-			<h2>SPARTAN SURVIVAL</h2>
-			<p>Pokud nemáš zaplacené předplatné, vůbec nevadí! Chystáme speciální typ survivalu, který bude rozdělen
-				na různá období. Každé období bude hru určitým způsobem ztěžovat.</p>
-			<h2>CITIES</h2>
-			<p>Máš rád ekonomiku, města, nakupování a práci? Pak je tento server přímo pro tebe! Můžeš se těšit na
-				vydělávání herní měny pomocí různých aktivit (těžba, farmaření, obchodování…).</p>
-			<hr>
-			<p>Dále se můžeš těšit na občasné eventy se zajímavou odměnou.</p>
+	
+	<div class="blur-layer"></div>
+    <div class="background-1"></div>
 
-		</div>
-	</div>
-
-</div>
-<div class="popup" id="popup_shop">
-	<div class="popup-box box">
-		<div class="popup-content" id="shop-content">
-			<div class="popup-header">
-				<div>
-					<h1><span class="yellow-text">VYBER SI MOŽNOST PLATBY</span></h1>
-				</div>
-				<div style="margin: auto 2em; cursor: pointer;" onclick="closePopUp('popup_shop');">
-					<i class="las la-times "></i>
-				</div>
-			</div>
-			<hr>
-			<div class="shop_wrapper">
-				<div class="shop_item" id="sms-click"
-					 onclick="window.location.href = '#';">
-					<div class="shop_item_header">
-						<img src="img/sms-icon.png" alt="SMS"><p>SMS PLATBA</p>
-					</div>
-					<article class="shop_item_text">Zatím nedostupné.</article>
-					<a href=#" style="visibility: hidden"></a>
-				</div>
-
-				<div class="shop_item" id="paypal-click">
-					<div class="shop_item_header" onclick="window.open('https://store.beastblock.cz/', '_blank');">
-						<img src="img/paypal-icon.png" alt="PayPal"><p>PAYPAL PLATBA</p>
-					</div>
-					<article class="shop_item_text">PayPal je internetový platební systém, který umožňuje platby
-						za nákupy na internetu a převody peněz mezi jednotlivými PayPal účty.</article>
-				</div>
-			</div>
-		</div>
-	</div>
-
-</div>
-
-<div class="wrapper">
-
-	<div class="info-box box d-flex flex-column align-items-center">
-		<!--<img src="img/pripravujeme.png" alt="pripravujeme" style="position: relative;">-->
-			<h1 class="fw-bold">Co připravujeme?</h1>
-			<a class="btn btn-primary w-100 btn-informations px-5 py-3" type="button" data-bs-toggle="modal" data-bs-target="#infoModal">Klikni zde</a>
-	</div>
-
-	<div class="time-box box d-flex flex-column align-items-center">
-			<h1 class="fw-bold mb-2">IP Adresa:</h1>
-			<div class="time-box-time d-flex flex-column">
-				<button class="btn btn-primary px-3 py-3" onclick="copyIP();" onmouseover="showTooltip();">
-					<span class="middle">{$serverIp} | {$serverVersion}</span>
-				</button>
-				<span class="tooltiptext text-white" id="copyTooltip">Klikni pro zkopírování IP</span>
-			</div>
-	</div>
-
-	<div class="main-box">
-		<a n:href="About:">
-			<img src="img/main_combo.png" class="box" style="width: 100%;"
-				 alt="mainbox">
-		</a>
-	</div>
-
-	<div class="social-box">
-		<div onmouseout="document.getElementById('fb').src='img/soc.sitě/facebook_banner_noaktive.png';"
-			 onmouseover="document.getElementById('fb').src='img/soc.sitě/facebook_banner_aktive.png';">
-			<a href="{$facebookUrl}" target="_blank">
-				<img src="img/soc.sitě/facebook_banner_noaktive.png"
-					 alt="fb"
-					 id="fb"
-					 class="box">
-			</a>
-		</div>
-		<div onmouseout="document.getElementById('ig').src='img/soc.sitě/instagram_banner_noaktive.png';"
-			 onmouseover="document.getElementById('ig').src='img/soc.sitě/instagram_banner_aktive.png';">
-			<a href="{$instagramUrl}" target="_blank">
-				<img src="img/soc.sitě/instagram_banner_noaktive.png"
-					 alt="ig-inactive"
-					 id="ig"
-					 class="box">
-			</a>
-		</div>
-		<div onmouseout="document.getElementById('dc').src='img/soc.sitě/discord_banner_noaktive.png';"
-			 onmouseover="document.getElementById('dc').src='img/soc.sitě/discord_banner_aktive.png';">
-			<a href="{$discordUrl}" target="_blank">
-				<img src="img/soc.sitě/discord_banner_noaktive.png"
-					 alt="dc-inactive"
-					 id="dc"
-					 class="box">
-			</a>
-		</div>
-	</div>
-	<div class="s-box">
-		<a href="{$hostingUrl}" target="_blank" title="{$hosting}">
-			<img src="img/sponsor_banner.png" class="box" alt="sbox">
-		</a>
-	</div>
-</div>
-
-<footer>
-	<div>
-		<span class="text-muted">©️ BeastBlock.cz 2022 | Všechna práva vyhrazena. Design by <a href="https://www.facebook.com/scrapyno" target="_blank">sCrapo</a>. Code by <a href="https://www.facebook.com/QuakySoft/" target="_blank">Quaky</a> and <a href="https://www.instagram.com/caidorn" target="_blank">Caidorn</a>. Rebuilt by <a href="https://klema.tech/" target="_blank">Kléma</a>. 
-		<br>NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG.</span>
-	</div>
-	<div>
-		<a href="https://czech-craft.eu/server/beastblock-cz/">
-			<img alt="CzechCraft Votes" src="https://czech-craft.eu/api/server/beastblock-cz/badges/votes.svg"/></a>
-		<a href="https://czech-craft.eu/server/beastblock-cz/">
-			<img alt="CzechCraft Position"
-				 src="https://czech-craft.eu/api/server/beastblock-cz/badges/position.svg"/></a>
-	</div>
-</footer>
-
-<!-- MODALS -->
-<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title fw-bold" id="infoModalLabel">Co na našem serveru najdeš?</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-		<h4 class="card-title fw-bold">Nakashiho Subserver</h4>
-		<p class="card-text">Komunitní vanilla+ server pro hráče, kteří podporují Nakashiho prostřednictvím Twitch subscribes.</p>
-		<hr>
-		<h4 class="card-title fw-bold mt-3">Dungeon Escape</h4>
-		<p class="card-text">Naše originální minihra na serveru. Postavte se proti monstrům a zdolejte obrovské množství místností až do konečné síně slávy! Zahrajte si sólo, s kamarádem nebo proti dalším 7 lidem v rámci módu Battle Royale.</p>
-		<hr>
-		<p class="card-text">Dále se můžeš těšit na občasné eventy se zajímavou odměnou.</p>
+    <div class="container h-65 d-flex flex-column align-items-center justify-content-end text-center">
+      <h1 class="display-max header mb-0">BeastBlock</h1>
+      <p class="text-2 fw-medium">Přijď si zahrát na jednom z nejkreativnějších projektů!</p>
+      <div class="row gy-2 g-3 col-12 col-lg-6">
+        <div class="col-md px-0 px-lg-2">
+          <a href="" class="btn btn-primary w-100 fs-4 py-3">Zkopírovat adresu</a>
+        </div>
+        <div class="col-md px-0 px-lg-2">
+          <a href="" class="btn btn-outline-light w-100 fs-4 py-3">Co zde najdeš</a>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+    <div class="container h-50 mt-5 pt-5">
+      <div class="row w-100 g-3 m-0">
+        <div class="col-md px-0 px-lg-2">
+          <a href="" class="content-box discord-box row">
+            <div class="col-auto">
+              <div class="icon-box discord-icon">
+                <i class="phosphor ph-discord-logo-fill"></i>
+              </div>
+            </div>
+            <div class="col cb-text discord-text">
+              <h2>Discord - 1500+ lidí</h2>
+              <p>Poznej ostatní hráče!</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-md px-0 px-lg-2">
+        <div class="content-box row">
+          <div class="col-auto">
+            <div class="icon-box">
+              <i class="phosphor ph-hard-drives-fill"></i>
+            </div>
+          </div>
+          <div class="col cb-text">
+            <h2>Hráčů na serveru</h2>
+            <p>Nyní hraje 99 hráčů</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md px-0 px-lg-2">
+        <div class="content-box row">
+          <div class="col-auto">
+            <div class="icon-box">
+              <i class="phosphor ph-cube-fill"></i>
+            </div>
+          </div>
+          <div class="col cb-text">
+            <h2>IP adresa BeastBlocku</h2>
+            <p>play.beastblock.cz</p>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h5 class="montserrat">Dozvi se toho více!</h5>
+      <h1 class="display-3 fw-bold">Nejnovější příspěvky a články</h1>
+      <div class="row gx-3">
+        <div class="col-12">
+          <div class="card mb-3">
+            <div class="card-img-top" style="background-image: url('{$basePath}/img/2022-12-26_11.45.42.png');"></div>
+            <div class="card-body row d-flex align-items-center flex-column flex-lg-row">
+              <div class="col-12 col-lg-auto">
+                <div class="time-box d-flex flex-lg-column justify-content-center align-items-center mb-3 mb-lg-0">
+                  <h3 class="me-2 me-lg-0">27.</h3>
+                  <p>Zář</p>
+                </div>
+              </div>
+              <div class="col">
+                <a href="" class="card-title fs-2 text-white text-decoration-none">Bla bla bla bla</a>
+                <div class="d-flex align-items-center">
+                  <img src="https://s.namemc.com/2d/skin/face.png?id=ee52797486062c68&scale=4" alt="" class="rounded-1" width="36px" loading="lazy">
+                  <h4 class="fw-bold ms-3 mb-0">Klema_LP</h5>
+                  <p class="text-white-50 fs-4 mb-0 mx-3">•</p>
+                  <p class="mb-0 text-secondary">Tento čtvrtek ve 12:45</p>
+                </div>
+                <p class="card-text text-white-50 mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur dolorum porro culpa ullam iusto provident, repudiandae sapiente nemo nam facere voluptatibus odio sequi repellendus libero tenetur ducimus, quia cumque nobis.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Header Card End -->
+        <div class="col-md">
+          <div class="card mb-3">
+            <div class="card-img-top" style="background-image: url('{$basePath}/img/2022-12-26_11.45.42.png');"></div>
+            <div class="card-body row d-flex align-items-center flex-column flex-lg-row">
+              <div class="col-12 col-lg-auto">
+                <div class="time-box d-flex flex-lg-column justify-content-center align-items-center mb-3 mb-lg-0">
+                  <h3 class="me-2 me-lg-0">27.</h3>
+                  <p>Zář</p>
+                </div>
+              </div>
+              <div class="col">
+                <a href="" class="card-title fs-2 text-white text-decoration-none">Bla bla bla bla</a>
+                <div class="d-flex align-items-center">
+                  <img src="https://s.namemc.com/2d/skin/face.png?id=ee52797486062c68&scale=4" alt="" class="rounded-1" width="36px" loading="lazy">
+                  <h4 class="fw-bold ms-3 mb-0">Klema_LP</h5>
+                  <p class="text-white-50 fs-4 mb-0 mx-3">•</p>
+                  <p class="mb-0 text-secondary">Tento čtvrtek ve 12:45</p>
+                </div>
+                <p class="card-text text-white-50 mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur dolorum porro culpa ullam iusto provident, repudiandae sapiente nemo nam facere voluptatibus odio sequi repellendus libero tenetur ducimus, quia cumque nobis.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="card mb-3">
+            <div class="card-img-top" style="background-image: url('{$basePath}/img/2022-12-26_11.45.42.png');"></div>
+            <div class="card-body row d-flex align-items-center flex-column flex-lg-row">
+              <div class="col-12 col-lg-auto">
+                <div class="time-box d-flex flex-lg-column justify-content-center align-items-center mb-3 mb-lg-0">
+                  <h3 class="me-2 me-lg-0">27.</h3>
+                  <p>Zář</p>
+                </div>
+              </div>
+              <div class="col">
+                <a href="" class="card-title fs-2 text-white text-decoration-none">Bla bla bla bla</a>
+                <div class="d-flex align-items-center">
+                  <img src="https://s.namemc.com/2d/skin/face.png?id=ee52797486062c68&scale=4" alt="" class="rounded-1" width="36px" loading="lazy">
+                  <h4 class="fw-bold ms-3 mb-0">Klema_LP</h5>
+                  <p class="text-white-50 fs-4 mb-0 mx-3">•</p>
+                  <p class="mb-0 text-secondary">Tento čtvrtek ve 12:45</p>
+                </div>
+                <p class="card-text text-white-50 mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur dolorum porro culpa ullam iusto provident, repudiandae sapiente nemo nam facere voluptatibus odio sequi repellendus libero tenetur ducimus, quia cumque nobis.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-5 pt-lg-5">
+      <h5 class="montserrat">Vyber si, kde budeš hrát!</h5>
+      <h1 class="display-3 fw-bold mb-5">Servery a minihry na BeastBlocku</h1>
+      <div class="row mx-0 w-100 px-0">
+        <div class="col-12 row mx-0 w-100 px-0 mb-5">
+          <div class="col-md d-none d-lg-block">
+            <img src="{$basePath}/img/BeastBlock_Skin13.png" alt="" width="100%" loading="lazy">
+          </div>
+          <div class="col-md text-lg-end px-0">
+            <h1 class="display-5 fw-bold">Dungeon Escape</h1>
+            <div class="d-flex mb-3 w-10 justify-content-lg-end">
+              <div class="badge me-2 bg-primary fs-6 rounded-pill">1.18 - 1.20</div>
+              <div class="badge bg-warning text-dark fs-6 rounded-pill">Různé módy hraní</div>
+            </div>
+            <p class="text-secondary fs-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur dolorum porro culpa ullam iusto provident, repudiandae sapiente nemo nam facere voluptatibus odio sequi repellendus libero tenetur ducimus, quia cumque nobis.</p>
+            <div class="row g-2">
+              <div class="col-md">
+                <a href="" class="btn btn-primary w-100 py-2">Chci vědět více</a>
+              </div>
+              <div class="col-md">
+                <a href="" class="btn btn-outline-light py-2 w-100">Jak hrát Dungeon Escape?</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 row flex-row-reverse mx-0 w-100 px-0">
+          <div class="col-md d-none d-lg-block">
+            <img src="{$basePath}/img/BeastBlock_Skin9.png" alt="" width="100%">
+          </div>
+          <div class="col-md px-0">
+            <h1 class="display-5 fw-bold">Nakashiho Subserver</h1>
+            <div class="d-flex mb-3 w-10">
+              <div class="badge me-2 bg-primary fs-6 rounded-pill">1.20</div>
+              <div class="badge bg-warning text-dark fs-6 rounded-pill">Ekonomika</div>
+            </div>
+            <p class="text-secondary fs-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur dolorum porro culpa ullam iusto provident, repudiandae sapiente nemo nam facere voluptatibus odio sequi repellendus libero tenetur ducimus, quia cumque nobis.</p>
+            <div class="row g-2">
+              <div class="col-md">
+                <a href="" class="btn btn-primary w-100 py-2">Chci vědět více</a>
+              </div>
+              <div class="col-md">
+                <a href="" class="btn btn-outline-light py-2 w-100">Jak se sem dostat?</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-5 pt-lg-5 text-center d-flex flex-column align-items-center">
+      <img src="{$basePath}/img/BeastBlock_Elis198198.png" alt="" width="70%" loading="lazy">
+      <h1 class="display-3 fw-bold">Chceme znát tvůj názor!</h1>
+      <p class="fs-5 text-white-50 fw-normal col-lg-7">Každý názor se dnes hodí. Pokud ti něco vadí, chtěl bys něco změnit nebo prostě vyjádřit zkušenost se serverem, navštiv naší stránku se zpětnou vazbou. Děkujeme!</p>
+      <a href="" class="btn btn-primary mt-3 px-5 py-3 col-12 col-lg-4 fs-5">Přispět svým názorem</a>
+    </div>
+
+    <div class="container mt-5 pt-lg-5">
+      <h5 class="montserrat">Nemůžeš nás podpořit finančně? Podpoř nás hlasem!</h5>
+      <h1 class="display-3 fw-bold mb-2">Hlasuj pro nás na hlasovacích stránkách!</h1>
+      <div class="row w-100 g-3 m-0">
+        <div class="col-md px-0 px-lg-2">
+          <div class="content-box row">
+            <div class="col-auto">
+              <div class="icon-box bg-dark">
+                <img src="{$basePath}/img/CzechCraftLogo.png" alt="" width="60%" loading="lazy">
+              </div>
+            </div>
+            <div class="col cb-text">
+              <h2>czech-craft.eu - <span id="czech-craft-votes"></span></h2>
+              <a href="https://czech-craft.eu/server/beastblock-cz/" target="_blank">Hlasuj na CZCraftu</a>
+            </div>
+          </div>
+        </div>
+      <div class="col-md px-0 px-lg-2">
+        <div class="content-box row">
+          <div class="col-auto">
+            <div class="icon-box bg-warning">
+              <img src="{$basePath}/img/CraftListLogo.png" alt="" width="60%" loading="lazy">
+            </div>
+          </div>
+          <div class="col cb-text">
+            <h2>craftlist.org - <span id="craftlist-votes"></span></h2>
+            <a href="https://craftlist.org/beastblock" target="_blank">Hlasuj na Craftlistu</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md px-0 px-lg-2">
+        <div class="content-box row">
+          <div class="col-auto">
+            <div class="icon-box bg-dark">
+              <img src="{$basePath}/img/MinecraftServeryLogo.png" alt="" width="60%" loading="lazy">
+            </div>
+          </div>
+          <div class="col cb-text">
+            <h2>minecraftservery.eu - <span id="minecraftservery-votes"></span></h2>
+            <a href="https://minecraftservery.eu/server/beastblockcz" target="_blank">Hlasuj na MCservery</a>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="container mt-5 pt-lg-5">
+      <div class="row mx-0 w-100 px-0 mb-5 d-flex align-items-center flex-column-reverse flex-lg-row">
+        <div class="col-md px-0">
+          <h5 class="montserrat">Ve dvou jde všechno lépe</h5>
+          <h1 class="display-3 fw-bold mb-2">Pohání nás výkon od GamerHost.pro</h1>
+          <p class="text-white-50 fs-5">GamerHost provozuje širokou nabídku plánů pro Minecraft servery, takže si každý může vybrat dle svého! Pokud ale Minecraft není nic pro vás, zvažte koupení VPS pro tu největší svobodu v hostování!</p>
+          <a href="https://gamerhost.pro/" target="_blank" class="btn btn-outline-light mt-3 px-5 py-3 w-100 col-lg-4 fs-5">Podívat se na GamerHost</a>
+        </div>
+        <div class="col-md d-flex justify-content-center justify-content-lg-end align-items-center mb-4 mb-lg-0 px-0">
+          <img src="{$basePath}/img/GamerHostLogo.png" alt="" width="40%" loading="lazy">
+        </div>
+      </div>
+    </div>
 {/block}
 
 {block scripts}
-	<script>
-		function copyIP()
-		{
-			var text = {$serverIp};
-			navigator.clipboard.writeText(text).then(function ()
-			{
-				console.log('Async: Copying to clipboard was successful!');
-			}, function (err)
-			{
-				console.error('Async: Could not copy text: ', err);
-			});
-			document.getElementById("copyTooltip").textContent = "Zkopírováno";
-		}
-
-		function showTooltip()
-		{
-			document.getElementById("copyTooltip").textContent = "Klikni pro zkopírování IP";
-		}
-	</script>
 {/block}
