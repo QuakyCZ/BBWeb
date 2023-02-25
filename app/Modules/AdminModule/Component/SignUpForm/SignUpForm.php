@@ -66,14 +66,15 @@ class SignUpForm extends \App\Component\BaseComponent
 
     /**
      * @param Form $form
-     * @param ArrayHash $values
      * @throws BadRequestException
      */
-    public function validateForm(Form $form, ArrayHash $values): void
+    public function validateForm(Form $form): void
     {
         if (!$form->isValid()) {
             return;
         }
+
+        $values = $form->getValues();
 
         $xUrl = $form->getHttpData($form::DATA_TEXT, 'x_url');
 
