@@ -19,6 +19,7 @@ Require all granted
 	RewriteRule /\.|^\.(?!well-known/) - [F]
 
     RewriteRule webpack/fontawesome/(.*) libs/fontawesome/$1 [L,NC]
+	RewriteRule webpack/phosphor-icons/(.*) libs/phosphor-icons/$1 [L,NC]
 
 	# front controller
 	RewriteCond %{REQUEST_FILENAME} !-f
