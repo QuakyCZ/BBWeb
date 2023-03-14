@@ -18,6 +18,7 @@ parameters:
             - Admin:Users
             - Admin:Article
             - Admin:Poll
+            - Admin:Rewards
         OWNER:
             - Admin:Default
         LEADER:
@@ -28,6 +29,7 @@ parameters:
             - Admin:Default
         SERVER_ADMIN:
             - Admin:Default
+            - Admin:Rewards
         DEVELOPER:
             - Admin:Default
         TESTER: []

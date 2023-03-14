@@ -19,3 +19,11 @@ services:
     - App\Repository\Primary\PollOptionRepository
     - App\Repository\Primary\PollParticipantRepository
     - App\Repository\Primary\PollRoleRepository
+
+    - App\Repository\Rewards\RewardRepository
+    - App\Repository\Rewards\ServerRepository
+    - App\Repository\Rewards\PlayerRepository
+    - App\Repository\Rewards\RewardServerRepository
+    - App\Repository\Rewards\RewardPlayerRepository
+    - App\Repository\Rewards\RewardCommandRepository
+    - App\Repository\Rewards\RewardPermissionRepository

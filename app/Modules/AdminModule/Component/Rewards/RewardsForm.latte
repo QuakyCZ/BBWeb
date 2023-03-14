@@ -1,0 +1,166 @@
+<style>
+    .input-icon {
+        position: absolute;
+        left: 24px;
+        top: 10px;
+        font-size: 1rem;
+        color: orange;
+    }
+
+    .input-with-icon {
+        position: relative;
+    }
+
+    .input-with-icon input {
+        padding-left: 3rem !important;
+        color: var(--secondary);
+        margin: auto 0;
+    }
+
+    .input-with-icon:focus-within > .input-icon {
+        color: var(--warning);
+    }
+</style>
+
+{snippetArea rewardsForm}
+    {form form class=>"form-horizontal form-normal", role=>"form"}
+        <div class="errors" n:if="$form->hasErrors()">
+            <div n:foreach="$form->errors as $error" class="alert alert-danger error" role="alert">
+                <div class="flash-message-body">{$error}</div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-2 form-label-column col-form-label">
+                {label App\Repository\Rewards\RewardRepository::COLUMN_NAME class => "form-label required" /}
+            </div>
+            <div class="col-sm-10 form-control-column">
+                {input App\Repository\Rewards\RewardRepository::COLUMN_NAME class => "form-control"}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-2 form-label-column col-form-label">
+                {label App\Repository\Rewards\RewardRepository::COLUMN_COOLDOWN class => "form-label required" /}
+            </div>
+            <div class="col-sm-10 form-control-column">
+                {input App\Repository\Rewards\RewardRepository::COLUMN_COOLDOWN class => "form-control"}
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <div class="col-sm-2 form-label-column col-form-label">
+                {label server_ids class => "form-label required" /}
+            </div>
+            <div class="col-sm-10 form-control-column">
+                {input server_ids class => "form-select form-select-sm multiselect", multiple, aria-label=>"Výběr serverů"}
+            </div>
+        </div>
+
+        <h3>{_admin.rewards.commands}</h3>
+        <p>Napiš všechny příkazy, které se provedou po udělení odměny. Podporované placeholery:</p>
+        <ul>
+            <li>%player% - jméno hráče</li>
+            <li>%reward% - název odměny</li>
+            <li>%reward_cooldown% - Cooldown v milisekundách</li>
+        </ul>
+
+        {snippet commands}
+            {var $i = 1}
+            <div n:multiplier="commands" class="form-group row">
+                <div class="col-sm-2 form-label-column col-form-label required">
+                    {label App\Repository\Rewards\RewardCommandRepository::COLUMN_COMMAND, class => 'form-label' /} {$i}
+                </div>
+
+                <div class="col-sm-10 form-control-column">
+                    <div class="form-group row">
+                        <div class="col-sm-2 form-label-column col-form-label">
+                            {label App\Repository\Rewards\RewardCommandRepository::COLUMN_COMMAND, class => 'form-label' /}
+                        </div>
+                        <div class="col-sm-10 form-control-column">
+                            {input App\Repository\Rewards\RewardCommandRepository::COLUMN_COMMAND, class => 'form-control'}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-2 form-label-column col-form-label">
+                            {label App\Repository\Rewards\RewardCommandRepository::COLUMN_ORDER, class => 'form-label' /}
+                        </div>
+                        <div class="col-sm-4 form-control-column">
+                            {input App\Repository\Rewards\RewardCommandRepository::COLUMN_ORDER, class => 'form-control'}
+                        </div>
+                        <div class="col-sm-6 form-control-column">
+                            {btnRemove 'class' => 'btn btn-danger ajax'}
+                        </div>
+                    </div>
+                </div>
+                {var $i = $i + 1}
+            </div>
+
+            {btnCreate commands class => 'btn btn-outline-secondary btn-block px-4 mt-3 mb-5 ajax'}
+        {/snippet}
+
+        <h3>{_admin.rewards.permissions}</h3>
+        <p>Napiš všechny permisse, které hráč musí mít, aby mohl odměnu dostat.</p>
+
+        {snippet permissions}
+            {var $i = 1}
+            <div n:multiplier="permissions" class="form-group row">
+                <div class="col-sm-2 form-label-column col-form-label required">
+                    {label App\Repository\Rewards\RewardPermissionRepository::COLUMN_PERMISSION, class => 'form-label' /} {$i}
+                </div>
+                <div class="col-sm-10 row form-control-column">
+                    <div class="col-10 px-0">
+                        {input App\Repository\Rewards\RewardPermissionRepository::COLUMN_PERMISSION, class => 'form-control'}
+                    </div>
+                    <div class="col-2">
+                        {btnRemove 'class' => 'btn btn-danger ajax'}
+                    </div>
+                </div>
+                {var $i = $i + 1}
+            </div>
+
+            {btnCreate permissions class => 'btn btn-outline-secondary btn-block px-4 mt-3 mb-5 ajax'}
+        {/snippet}
+
+        {input save, class => 'btn btn-success w-100 mt-4 py-3'}
+    {/form}
+{/snippetArea}
+
+<script src="{$basePath}/js/msfmultiselect.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+
+
+        $('.multiselect').each((i, el) => {
+            new MSFmultiSelect(
+                el,
+                {
+                    selectAll: false,
+                    searchBox: true,
+                    placeholder: 'Vybrat',
+                    className: 'form-select',
+                    width: '100%'
+                }
+            );
+        })
+
+
+        console.log($('input[name="active"]').val());
+        $('input[name="active"]').daterangepicker({
+            timePicker: true,
+            locale: {
+                format: 'DD. MM. YYYY HH:mm'
+            },
+            timePicker24Hour: true
+        });
+
+        $('#icon-preview').html('<i class="' + $('input[name="icon"]').val() + '"></i>');
+
+        $('input[name="icon"]')
+            .change(function() {
+                $('#icon-preview').html('<i class="' + $(this).val() + '"></i>');
+            });
+    });
+</script>

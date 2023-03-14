@@ -24,3 +24,6 @@ services:
     - App\Modules\ClientModule\Component\Poll\IPollVoteFormFactory
     - App\Modules\ClientModule\Component\Poll\IPollResultFactory
     - App\Modules\AdminModule\Component\Poll\IPollResultAdminFactory
+
+    - App\Modules\AdminModule\Component\Rewards\IRewardsFormFactory
+    - App\Modules\AdminModule\Component\Rewards\IRewardsGridFactory

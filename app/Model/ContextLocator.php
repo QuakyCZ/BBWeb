@@ -9,4 +9,6 @@ interface ContextLocator
     public function getPrimary(): Explorer;
 
     public function getDungeonEscape(): Explorer;
+
+    public function getRewards(): Explorer;
 }
