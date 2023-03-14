@@ -8,3 +8,5 @@ services:
     - App\Modules\ApiModule\Model\User\UserConnectTokenFacade
     - App\Modules\ApiModule\Model\User\Connector\MinecraftUserConnectFacade
     - App\Modules\ApiModule\Model\User\Connector\DiscordUserConnectFacade
+
+    - App\Facade\RewardsFacade

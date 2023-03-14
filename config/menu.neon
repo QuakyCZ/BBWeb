@@ -32,6 +32,10 @@ menu:
                         link: '#'
                         data:
                             icon: 'fas fa-circle-question'
+            'admin.rewards.title':
+                action: 'Admin:Rewards:default'
+                data:
+                    icon: 'fas fa-award'
             'admin.poll.title':
                 link: '#'
                 data:

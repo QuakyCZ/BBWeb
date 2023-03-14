@@ -1,3 +1,7 @@
+save: 'Uložit'
+remove: 'Odebrat'
+delete: 'Smazat'
+
 users:
     title: 'Uživatelé'
     roles:
@@ -51,3 +55,22 @@ articles:
         author: 'Autor'
         changed: 'Datum poslední úpravy'
         editor: 'Editor'
+
+rewards:
+    title: 'Odměny'
+    add: 'Přidat odměnu'
+    edit: 'Upravit odměnu'
+    delete: 'Smazat odměnu'
+    permissions: 'Permisse'
+    commands: 'Příkazy'
+    field:
+        id: 'ID'
+        name: 'Název'
+        cooldown: 'Cooldown'
+        servers: 'Servery'
+        command: 'Příkaz'
+        order: 'Pořadí'
+        permission: 'Permisse'
+        addPermission: 'Přidat permissi'
+        addCommand: 'Přidat příkaz'
+
