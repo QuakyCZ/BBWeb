@@ -90,7 +90,11 @@ class RewardsFacade
         if ($reward === null)
             return null;
 
-        $serversIds = $reward->related(RewardServerRepository::TABLE_NAME)->fetchPairs('id', 'id');
+        $serversIds = $reward->related(RewardServerRepository::TABLE_NAME)
+            ->fetchPairs(
+                RewardServerRepository::COLUMN_SERVER_ID,
+                RewardServerRepository::COLUMN_SERVER_ID
+            );
 
         $rewardValues = new RewardsFormValues();
         $rewardValues->name = $reward[RewardRepository::COLUMN_NAME];
