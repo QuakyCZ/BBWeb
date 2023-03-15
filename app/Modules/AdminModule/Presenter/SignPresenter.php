@@ -43,7 +43,7 @@ class SignPresenter extends BasePresenter
             if ($returnKey !== null) {
                 $this->restoreRequest($returnKey);
             }
-            $this->redirect('Dashboard:');
+            $this->redirect('Default:');
         }
     }
     /**
