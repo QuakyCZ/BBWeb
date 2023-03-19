@@ -1,100 +1,22 @@
 {varType bool $sent}
 
-{block styles}
-    <link rel="stylesheet" href="{$basePath}/webpack/stylesWeb.bundle.css">
-    <link rel="stylesheet" type="text/css" href="{$basePath}/styles/about.css">
-    <style>
-
-        html {
-            height: 100%;
-        }
-
-        body {
-            padding-top: 0;
-            height: 100%;
-        }
-
-        .container {
-            padding-top: 0;
-        }
-
-        #feedback-card .form-control {
-            background-color: #212127;
-            border: none;
-            border-bottom: 2px solid #292e32;
-            color: #fff !important;
-            border-radius: 5px 5px 3px 3px;
-        }
-
-        #feedback-card .form-control:focus {
-            border: none;
-            border-bottom: 2px solid orange;
-            box-shadow: none;
-            color: #fff !important;
-        }
-
-        #feedback-card .form-control:focus::placeholder {
-            color: #fff !important;
-        }
-
-        #feedback-card textarea {
-            border-bottom: 2px solid #292e32 !important;
-            color: #fff !important;
-        }
-
-        #feedback-card textarea:focus {
-            border-bottom: 2px solid orange !important;
-            color: #fff !important;
-        }
-
-        #feedback-card {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: calc(24px + 0.7vw);
-            background-color: #0b0b1642;
-            border: 1px solid #0b0b0e;
-            backdrop-filter: blur(25px);
-
-            border-radius: 10px;
-        }
-
-        #feedback-card option {
-            background: white !important;
-            color: black;
-        }
-    </style>
-{/block}
-
-{block beforeContent}
-    <a n:href="Homepage:">
-        <div class="back-button" onmouseover="this.style.backgroundColor='#ff03c2';this.style.color='white';"
-             onmouseout="this.style.backgroundColor='#16ccca';this.style.color='black';">
-            <b><i class="fa-solid fa-chevrons-left"></i></b>
-        </div>
-    </a>
-{/block}
-
 {block content}
-<div class="my-auto">
-    <img src="{$basePath}/img/Nakashi.png" alt="nakashi" class="mx-auto d-block" height="200px">
-    <div id="feedback-card" class="card p-5">
+    <div class="container h-75 d-flex flex-column align-items-center justify-content-end text-center">
+        <h1 class="display-max header mb-0">Zpětná vazba</h1>
+        <p class="text-2 fw-medium">Máš něco, co by nám mohlo pomoci se zlepšit? Připiš tvé názory do formuláře a pošli nám je!</p>
+        <img src="{$basePath}/img/BB_Elf_Render_Feedback.png" alt="nakashi" width="300px">
+    </div>
 
+    <div class="container d-flex flex-column align-items-center justify-content-end text-center mb-5">
+    <div class="card col-12 p-5">
         {if $sent}
             <div class="text-center">
                 <h1 class="text-white fw-bold">Děkujeme za tvou zpětnou vazbu!</h1>
                 <p class="text-muted">Doplňující informace jsme ti poslali na email, který jsi připsal do formuláře.</p>
             </div>
         {else}
-            <div class="text-center mb-3">
-                <h1 class="text-white fw-bold">Zpětná vazba</h1>
-                <p class="text-secondary">
-                    Našel jsi nějakou chybu nebo máš nápad?
-                    <br>
-                    Potom budeme rádi, když nám to sdělíš pomocí následujícího formuláře.
-                </p>
-            </div>
             {control feedbackForm}
         {/if}
     </div>
-</div>
+    </div>
 {/block}

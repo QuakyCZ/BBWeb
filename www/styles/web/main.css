@@ -11,16 +11,27 @@ body {
     --dark-box: #282831;
     --light-box: #EAECF3;
     --header: #ffffff;
-    --text: #d3cac3;
+    --text: #d0c3d3;
     --text2: #FDFFFC;
     --darker-text: #6D6F80;
-    --primary-color: #ffc039;
-    --primary-hover-color: #dba020;
+    --primary-color: #a32bff;
+    --primary-hover-color: #cb5cff;
     --discord-color: #6469FF;
 }
 
 .background-1 {
     background-image: url('../../img/Background-wallpaper.jpg');
+    height: 100vh;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: -2;
+}
+
+.background-2 {
+    background-image: url('../../img/Background-wallpaper2.png');
     height: 100vh;
     width: 100%;
     background-position: center;
@@ -46,6 +57,10 @@ body {
 
 .h-65 {
     height: 65%;
+}
+
+.h-55 {
+    height: 55%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -97,6 +112,31 @@ p, li {
     color: var(--primary-color);
 }
 
+.navbar-toggler {
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    aspect-ratio: 1/1;
+    border-radius: 10px;
+}
+
+.dropdown-menu {
+    background-color: var(--dark-box);
+    border: 1px solid var(--darker-text);
+    border-radius: 10px;
+    padding: 8px;
+}
+
+.dropdown-item {
+    color: var(--text);
+    border-radius: 7px;
+    transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.dropdown-item:hover, .dropdown-item:focus, .dropdown-item:active {
+    background-color: var(--primary-color);
+    color: var(--header);
+}
+
 .active {
     color: var(--primary-color) !important;
 }
@@ -114,7 +154,6 @@ p, li {
 .btn-primary {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
-    color: #000;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
@@ -134,6 +173,49 @@ p, li {
     transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.at-box {
+    padding: 8px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: var(--dark-box);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--darker-text);
+}
+
+.at-box:hover {
+    box-shadow: 0px 0px 10px 0px #00000056;
+    transform: translateY(-3px);
+}
+
+.at-text > h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--text2);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-bottom: 0;
+    line-height: 1.5;
+    letter-spacing: 1.5px;
+}
+
+.at-text > p {
+    margin-bottom: 0;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--header);
+    line-height: 1.1;
+}
+
+.discord-text > * {
+    color: var(--header) !important;
+    font-weight: 600 !important;
+}
+
 .content-box:hover {
     box-shadow: 0px 0px 10px 0px #00000056;
     transform: translateY(-3px);
@@ -151,7 +233,7 @@ p, li {
 
 .discord-icon {
     background-color: var(--header) !important;
-    color: var(--dark-text);;
+    color: var(--dark-text);
 }
 
 .icon-box {
@@ -165,8 +247,34 @@ p, li {
     font-size: 48px;
 }
 
+.icon-box:not(.discord-icon) i {
+    color: var(--header);
+}
+
 .icon-box:hover > i {
     animation: icon 10s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.nabor-box {
+    padding: 16px 32px;
+    aspect-ratio: 2/1;
+    width: 100%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), border 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--darker-text);
+    background-image: url('../../img/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.nabor-box:hover {
+    border: 1px solid var(--primary-hover-color);
+    transform: translateY(-3px);
 }
 
 @keyframes icon {
@@ -266,7 +374,9 @@ p, li {
 
 .card {
     background-color: var(--dark-box);
+    border: 1px solid var(--darker-text);
     border-radius: 10px;
+    overflow: hidden;
 }
 
 .card-title {
@@ -302,17 +412,17 @@ p, li {
     letter-spacing: 1px;
 }
 
-.bg-dark-yellow {
-    background-color: #684e151c;
+.bg-dark-purple {
+    background-color: #5115681c;
 }
 
-a {
+a:not(.dropdown-item, .btn, .nav-link, .dropdown-toggler, .cb-text a) {
     color: var(--primary-color);
     text-decoration: none;
     transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-a:hover:not(.btn) {
+a:hover:not(.btn, .dropdown-item) {
     color: var(--primary-hover-color) !important;
 }
 
@@ -360,4 +470,22 @@ a:hover:not(.btn) {
 .phosphor {
     font-family: 'Phosphor', sans-serif !important;
     font-style: normal !important;
+}
+
+.form-control {
+    background-color: var(--dark-text);
+    border: 1px solid var(--darker-text);
+    color: var(--text);
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.form-control:focus {
+    background-color: var(--dark-text);
+    border: 1px solid var(--primary-color);
+    color: var(--text);
+    box-shadow: 0px 0px 0px 3px var(--primary-color);
 }

@@ -1,52 +1,110 @@
-{block styles}
-    <link rel="stylesheet" type="text/css" href="{$basePath}/styles/about.css">
-{/block}
-
-{block beforeContent}
-    <a n:href="Homepage:">
-        <div class="back-button" onmouseover="this.style.backgroundColor='#ff03c2';this.style.color='white';"
-             onmouseout="this.style.backgroundColor='#16ccca';this.style.color='black';">
-            <b><i class="fa-solid fa-angles-left"></i></b>
-        </div>
-    </a>
-{/block}
-
 {block content}
-<div>
-    <img src="{$basePath}/img/main_img.png" alt="banner" class="banner">
-</div>
-<div class="about-block">
-    <h1>O PROJEKTU <span style="color: white"><b>BEASTBLOCK</b></span></h1>
-    <p>V projektu <strong>BEASTBLOCK</strong> připravujeme spoustu <strong>atraktivních</strong> témat, která
-        zaujmou nemalou skupinu
-        příznivců kostiček. Především klademe důraz na ty, kteří si chtějí užít hru v
-        <strong>originálním pojetí</strong>, bez zbytečných modifikací, pluginů a módů. Proto plánujeme téměř čistý
-        survival, kde budou pouze nejnutnější pluginy na ochranu majetku. Pokud by tě však tento styl moc nenadchl,
-        <strong>NEBOJ</strong>, nebude to jediná cesta zábavy na našich serverech. Těšit se můžeš na servery
-        založené na <strong><i>ekonomice, kreativitě a speciálních tématech.</i></strong></p>
+	
+	<div class="blur-layer"></div>
+    <div class="background-2"></div>
 
-    <p>Tento projekt je realizován díky spolupráci se službou
-        <a target="_blank" href="{$hostingUrl}">{$hosting}</a>, který nám zajišťuje <strong>stabilní
-            systémy,
-            kvalitní a bezpečné síťové připojení, bezproblémový chod serveru a kvalitní podporu.</strong></p>
+    <div class="container h-55 d-flex flex-column align-items-center justify-content-end text-center">
+      <h1 class="display-max header mb-0">A-Tým Serveru</h1>
+      <p class="text-2 fw-medium">Poznej více náš tým a kdo všechno stojí za BeastBlockem!</p>
+    </div>
+    <div class="container h-auto mb-5">
+        <div class="row w-100 g-3 m-0">
+            <h1 class="display-4 fw-bold mt-5">Majitelé</h1>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="at-box row">
+                    <div class="col-auto">
+                        <img src="https://mc-heads.net/head/Nakashi/81">
+                    </div>
+                    <div class="col at-text">
+                        <h2>Majitel</h2>
+                        <p>Nakashi</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="at-box row">
+                    <div class="col-auto">
+                        <img src="https://mc-heads.net/head/BarmyCZ/81">
+                    </div>
+                    <div class="col at-text">
+                        <h2>Majitel</h2>
+                        <p>BarmyCZ</p>
+                    </div>
+                </div>
+            </div>
 
-    <p>Dále nemůžeme zapomenout na našeho ambasadora <a target="_blank" href="https://nakashinator.weebly.com/">Nakashiho</a>,
-        kterého znáte z portálů <strong>YouTube</strong> či&nbsp;<strong>Twitch</strong>. Jeho nejúspěšnější série jsou právě ze hry
-        <strong>Minecraft</strong>,
-        ale na kvalitě nestrádají ani série z her Subnautica, Scrap Mechanic a dalších nezávislých titulů.</p>
-</div>
+            <h1 class="display-4 fw-bold mt-5">Vedení</h1>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="at-box row">
+                    <div class="col-auto">
+                        <img src="https://mc-heads.net/head/Nakashi/81">
+                    </div>
+                    <div class="col at-text">
+                        <h2>Majitel</h2>
+                        <p>Nakashi</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="at-box row">
+                    <div class="col-auto">
+                        <img src="https://mc-heads.net/head/BarmyCZ/81">
+                    </div>
+                    <div class="col at-text">
+                        <h2>Majitel</h2>
+                        <p>BarmyCZ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container my-5">
+        <h1 class="display-4 fw-bold">Přidej se k nám!</h1>
+        <p class="fs-5">Na této stránce se můžeš umístit taky! Podívej se, koho zrovna nabíráme! Pokud to vidíš jako svou příležitost, dej nám vědět.</p>
 
-{control team}
+        <div class="row g-3 w-100 m-0">
+            <div class="col-12 col-md-6 col-lg-4">
+                <a class="nabor-box" href="#">
+                    <div class="d-flex justify-content-between w-100 align-items-center">
+                        <div>
+                            <h2 class="fw-bold">Web Developer</h2>
+                            <p>PHP 8.1, Nette, MariaDB</p>
+                        </div>
+                        <div>
+                            <i class="phosphor ph-arrow-right fs-3 text-white"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <a class="nabor-box" href="#">
+                    <div class="d-flex justify-content-between w-100 align-items-center">
+                        <div>
+                            <h2 class="fw-bold">Java Developer</h2>
+                            <p>JDK17, Spigot API, Propojení s webem</p>
+                        </div>
+                        <div>
+                            <i class="phosphor ph-arrow-right fs-3 text-white"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <a class="nabor-box" href="#">
+                    <div class="d-flex justify-content-between w-100 align-items-center">
+                        <div>
+                            <h2 class="fw-bold">Minecraft Helper</h2>
+                            <p>Práce s tickety, moderace serveru</p>
+                        </div>
+                        <div>
+                            <i class="phosphor ph-arrow-right fs-3 text-white"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+{/block}
 
-<div class="contact" id="contact">
-    <h1>KONTAKT</h1>
-    <p><span style="color: #707986; font-weight: bold;">Email:</span> <a href="mailto:info@beastblock.cz">info@beastblock.cz</a></p>
-</div>
-<footer>
-    <a target="_blank" href="index.php"><span style="color: white">Beast</span><span style="color: red">Block</span><span style="color: white">.CZ</span></a>
-    ©2021 Všechna práva vyhrazena. Design by <a href="https://www.facebook.com/scrapyno" target="_blank">sCrapo</a>.
-    Code by <a href="https://www.facebook.com/QuakySoft/" target="_blank">Quaky</a> and
-    <a href="https://www.instagram.com/caidorn" target="_blank">Caidorn</a>
-    . NOT AN OFFICIAL MINECRAFT
-    PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG.
-</footer>
+{block scripts}
+{/block}
