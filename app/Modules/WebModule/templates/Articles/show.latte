@@ -7,24 +7,36 @@
 {block og_description}
     {$article[App\Repository\Primary\ArticleRepository::COLUMN_TEXT]|truncate:100}
 {/block}
-{block styles}
-    <link rel="stylesheet" type="text/css" href="{$basePath}/styles/about.css">
-    <link rel="stylesheet" type="text/css" href="{$basePath}/styles/articles.css">
-    <link rel="stylesheet" type="text/css" href="{$basePath}/styles/style.css">
-{/block}
 {block content}
-    <a class="btn btn-outline-light mb-4 px-4 py-2 mt-5" n:href="Articles:">Zpět na seznam příspěvků</a>
-    <h1 class="fw-bold text-white display-4">{$article[App\Repository\Primary\ArticleRepository::COLUMN_TITLE]}</h1>
-    <div class="row">
-        <div class="col-auto">
-            <i class="fas fa-user me-2 fs-5 text-warning"></i>
-            {$article->created_user['username']}
+    <div class="container col-12 col-lg-7 col-xl-6 mt-5 pt-5 h-100">
+        <a class="btn btn-outline-light px-4 py-2 mt-5 d-flex justify-content-center align-items-center" n:href="Articles:">Zpět na seznam příspěvků <i class="phosphor ph-arrow-right ms-3"></i></a>
+        <h1 class="display-4 fw-bold mt-5">{$article[App\Repository\Primary\ArticleRepository::COLUMN_TITLE]}</h1>
+        <p class="fs-6 mt-3 d-flex align-items-center text-white-50"><i class="phosphor ph-clock me-2"></i>Zveřejněno {$article[App\Repository\Primary\ArticleRepository::COLUMN_CREATED]|date: 'd. m. Y H:i'}</p>
+        <div class="row d-flex align-items-center flex-column flex-lg-row mb-4">
+            <div class="col">
+                <div class="d-flex align-items-center">
+                    <img src="https://s.namemc.com/2d/skin/face.png?id=ee52797486062c68&scale=4" alt="" class="rounded-1" width="36px">
+                    <h4 class="fw-bold ms-3 mb-0">{$article->created_user['username']}</h5>
+                </div>
+            </div>
         </div>
-        •
-        <div class="col-auto">
-            <i class="fas fa-calendar me-2 fs-5 text-warning"></i>
-            {$article[App\Repository\Primary\ArticleRepository::COLUMN_CREATED]|date: 'd. m. Y H:i'}
+        <!-- Pokud je nahrána fotka, změň d-none na d-block. Pokud není, ponech d-none. -->
+        <div class="d-none">
+            <img src="{*$article[App\Repository\Primary\ArticleRepository::COLUMN_IMAGE]*}" alt="Úvodní fotka" class="img-fluid rounded-1 mb-4">
         </div>
+        <p class="fs-5">
+            {$textFromMarkdown|noescape}
+        </p>
+<!--        <div class="row w-100 m-0">
+            <div class="col-auto d-fle">
+                <i class="fas fa-user me-2 fs-5 text-warning"></i>
+                {$article->created_user['username']}
+            </div>
+            •
+            <div class="col-auto">
+                <i class="fas fa-calendar me-2 fs-5 text-warning"></i>
+                {$article[App\Repository\Primary\ArticleRepository::COLUMN_CREATED]|date: 'd. m. Y H:i'}
+            </div>
         {if $article[App\Repository\Primary\ArticleRepository::COLUMN_CHANGED]}
             <div class="w-100 mb-3"></div>
             <div class="col-auto">
@@ -38,9 +50,7 @@
                 {$article[App\Repository\Primary\ArticleRepository::COLUMN_CHANGED]|date: 'd. m. Y H:i'}
             </div>
         {/if}
-    </div>
-    <div class="mt-4 text-muted">
-        {$textFromMarkdown|noescape}
+        </div>-->
     </div>
 
 {/block}
