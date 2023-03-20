@@ -7,6 +7,13 @@
 {block og_description}
     {$article[App\Repository\Primary\ArticleRepository::COLUMN_TEXT]|truncate:100}
 {/block}
+{block og_image}
+    {if $article[App\Repository\Primary\ArticleRepository::COLUMN_IMAGE]}
+        {*$article[App\Repository\Primary\ArticleRepository::COLUMN_IMAGE]*}
+    {else}
+    {* Return nothing *}
+    {/if}
+{/block}
 {block content}
     <div class="container col-12 col-lg-7 col-xl-6 mt-5 pt-5 h-100">
         <a class="btn btn-outline-light px-4 py-2 mt-5 d-flex justify-content-center align-items-center" n:href="Articles:">Zpět na seznam příspěvků <i class="phosphor ph-arrow-right ms-3"></i></a>

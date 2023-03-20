@@ -10,6 +10,20 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{$basePath}/img/BB_Favicon.svg">
     <link rel="mask-icon" href="{$basePath}/img/BB_Favicon.svg" color="#9a16ff">
     <link rel="shortcut icon" href="{$basePath}/img/BB_Favicon.svg">
+    <!-- Meta tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta content="BeastBlock.cz" property="og:title" />
+    <meta content="Vítej na BeastBlocku! Jsme server, který ti nabídne zábavu po dlouhé hodiny. Navštiv nás!" property="og:description" />
+    <meta content="https://beastblock.cz" property="og:url" />
+    <meta content="https://beastblock.cz/img/skins/logo.svg" property="og:image" />
+    <meta content="#a32bff" data-react-helmet="true" name="theme-color" />
+
+    <meta name="description" content="Vítej na BeastBlocku! Jsme server, který ti nabídne zábavu po dlouhé hodiny. Navštiv nás!">
+    <meta name="keywords" content="BeastBlock, Mojang, Minecraft">
+    <meta name="author" content="BeastBlock.cz">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+
     <title>BeastBlock.cz</title>
 </head>
 <body>
@@ -30,15 +44,15 @@
           </div>
         </div>
         <div class="d-flex flex-column text-lg-end">
-          <a href="#" class="text-white-50 fs-5">Domů</a>
+          <a n:href="Homepage:" class="text-white-50 fs-5">Domů</a>
           <a href="#" class="text-white-50 fs-5">Servery</a>
-          <a href="#" class="text-white-50 fs-5">Články</a>
-          <a href="#" class="text-white-50 fs-5">Tým</a>
-          <a href="#" class="text-white-50 fs-5">Obchod</a>
-          <a href="#" class="text-white-50 fs-5">Status</a>
-          <a href="#" class="text-white-50 fs-5">Zpětná vazba</a>
+          <a n:href="Articles:" class="text-white-50 fs-5">Články</a>
+          <a n:href="About:" class="text-white-50 fs-5">Tým</a>
+          <a href="https://obchod.beastblock.cz" class="text-white-50 fs-5">Obchod</a>
+          <a href="https://status.beastblock.cz" class="text-white-50 fs-5">Status</a>
+          <a n:href="Feedback:" class="text-white-50 fs-5">Zpětná vazba</a>
           <a href="#" class="text-white-50 fs-5">Kontaktovat</a>
-          <a href="#" class="text-white-50 fs-5">Profil</a>
+          <a n:href=":Client:Dashboard:" class="text-white-50 fs-5">Profil</a>
         </div>
       </footer>
     </div>
