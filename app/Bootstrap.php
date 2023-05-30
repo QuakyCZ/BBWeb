@@ -24,6 +24,9 @@ class Bootstrap
             $configurator->enableTracy($appDir . '/log');
         }
 
+        Debugger::$strictMode = true;
+        Debugger::$logSeverity = E_ALL;
+
         $configurator->enableDebugger($appDir.'/log');
 
 
