@@ -5,9 +5,12 @@ namespace App\Modules\AdminModule\Component\Server;
 use App\Component\BaseDataGrid;
 use App\Enum\EFlashMessageType;
 use App\Repository\Primary\ServerRepository;
+use App\Repository\Primary\ServerTagRepository;
+use App\Repository\Primary\TagRepository;
 use Nette\ComponentModel\IContainer;
 use Nette\Database\Table\Selection;
 use Nette\Localization\ITranslator;
+use Nette\Utils\Html;
 use Tracy\Debugger;
 use Ublaboo\DataGrid\Column\Action\Confirmation\StringConfirmation;
 
@@ -30,7 +33,27 @@ class ServerGrid extends BaseDataGrid
 
     protected function createGrid(): void
     {
-        $this->grid->addColumnText(ServerRepository::COLUMN_NAME, "Název");
+        $this->grid->addColumnText(ServerRepository::COLUMN_NAME, "Název")
+            ->setSortable()
+            ->setFilterText();
+
+        $this->grid->addColumnText(ServerRepository::COLUMN_DESCRIPTION_SHORT, "Krátký popis");
+        $this->grid->addColumnText("tags", "Tagy")
+            ->setRenderer(function ($row) {
+                $tags = "";
+                foreach ($row->related(ServerTagRepository::TABLE_NAME) as $serverTag) {
+                    $tag = $serverTag->tag;
+                    $tags .= Html::el('span')
+                        ->class('badge mx-1')
+                        ->style('color', htmlspecialchars($tag[TagRepository::COLUMN_FONT_COLOR]))
+                        ->style('background-color', htmlspecialchars($tag[TagRepository::COLUMN_BACKGROUND_COLOR]))
+                        ->setText(htmlspecialchars($tag[TagRepository::COLUMN_NAME]))
+                        ->toHtml();
+                }
+                return $tags;
+            })
+            ->setTemplateEscaping(false);
+
         $this->grid->setItemsDetail(function ($row) {
             return $row[ServerRepository::COLUMN_DESCRIPTION_SHORT] . '<hr>' . $row[ServerRepository::COLUMN_DESCRIPTION_FULL];
         })

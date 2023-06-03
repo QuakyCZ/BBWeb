@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Markdown;
 
 use Nette;
 use Nette\Forms\Controls\TextArea;

@@ -45,7 +45,7 @@
         <div class="form-group row">
             <div class="col">
                 {label role_ids class => "form-label " /}
-                {input role_ids class => "form-select form-select-sm multiselect", multiple, aria-label=>"multiple select example"}
+                {input role_ids}
             </div>
             <div class="col">
                 {label position class => "form-label " /}
@@ -62,17 +62,3 @@
         </div>
     </div>
 {/form}
-
-<script src="{$basePath}/js/msfmultiselect.min.js"></script>
-<script>
-    new MSFmultiSelect(
-        document.querySelector('.multiselect'),
-        {
-            selectAll: true,
-            searchBox: true,
-            placeholder: 'Vybrat',
-            className: 'form-select',
-            width: '100%'
-        }
-    )
-</script>

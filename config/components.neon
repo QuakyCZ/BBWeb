@@ -30,3 +30,6 @@ services:
 
     - App\Modules\AdminModule\Component\Server\IServerGridFactory
     - App\Modules\AdminModule\Component\Server\IServerFormFactory
+
+    - App\Modules\AdminModule\Component\Tag\ITagFormFactory
+    - App\Modules\AdminModule\Component\Tag\ITagGridFactory

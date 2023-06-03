@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Markdown;
+
+use App\Form\Markdown\Markdown;
 
 trait MarkdownTrait
 {

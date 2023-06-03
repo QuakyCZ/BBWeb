@@ -16,17 +16,20 @@ class ServerTagRepository extends PrimaryRepository
 
     protected string $tableName = self::TABLE_NAME;
 
-    public function saveTagsForServer(int $serverId, array $tagIds): void
+    public function saveTagsForServer(int $serverId, array $tagIds, int $userId): void
     {
 
         $this->findBy([
             self::COLUMN_SERVER_ID => $serverId,
         ])->delete();
 
+        bdump($this->findAll()->fetchAll());
+
         foreach ($tagIds as $tagId) {
             $this->save([
                 self::COLUMN_SERVER_ID => $serverId,
                 self::COLUMN_TAG_ID => $tagId,
+                self::COLUMN_CREATED_USER_ID => $userId,
             ]);
         }
     }

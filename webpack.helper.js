@@ -43,10 +43,12 @@ const scriptsGroups = (APP_DIR) => {
                 APP_DIR + "/node_modules/moment/moment.js",
                 APP_DIR + "/node_modules/daterangepicker/daterangepicker.js",
                 APP_DIR + "/node_modules/easymde/dist/easymde.min.js",
+                APP_DIR + '/www/js/msfmultiselect.min.js',
                 APP_DIR + "/www/js/admin/admin.js",
                 APP_DIR + "/www/js/admin/tabs.js",
                 APP_DIR + "/www/js/admin/markdown-editor.js",
-                APP_DIR + '/www/js/swal.js'
+                APP_DIR + "/www/js/admin/multiselect2.js",
+                APP_DIR + '/www/js/swal.js',
             ]
         }
     ];
