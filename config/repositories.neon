@@ -27,3 +27,6 @@ services:
     - App\Repository\Rewards\RewardPlayerRepository
     - App\Repository\Rewards\RewardCommandRepository
     - App\Repository\Rewards\RewardPermissionRepository
+
+    - App\Repository\Primary\TagRepository
+    - App\Repository\Primary\ServerTagRepository

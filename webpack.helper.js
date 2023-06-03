@@ -45,6 +45,7 @@ const scriptsGroups = (APP_DIR) => {
                 APP_DIR + "/node_modules/easymde/dist/easymde.min.js",
                 APP_DIR + "/www/js/admin/admin.js",
                 APP_DIR + "/www/js/admin/tabs.js",
+                APP_DIR + "/www/js/admin/markdown-editor.js",
                 APP_DIR + '/www/js/swal.js'
             ]
         }

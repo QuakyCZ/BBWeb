@@ -2,7 +2,6 @@ services:
     - App\Modules\WebModule\Component\Team\ITeamFactory
     - App\Modules\AdminModule\Component\User\IUserFormFactory
     - App\Modules\AdminModule\Component\User\IUserGridFactory
-    - App\Modules\AdminModule\Component\ServerListing\IServerListingFactory
 
     - App\Modules\AdminModule\Component\SignInForm\ISignInFormFactory
     - App\Modules\AdminModule\Component\SignUpForm\ISignUpFormFactory
@@ -28,3 +27,6 @@ services:
 
     - App\Modules\AdminModule\Component\Rewards\IRewardsFormFactory
     - App\Modules\AdminModule\Component\Rewards\IRewardsGridFactory
+
+    - App\Modules\AdminModule\Component\Server\IServerGridFactory
+    - App\Modules\AdminModule\Component\Server\IServerFormFactory

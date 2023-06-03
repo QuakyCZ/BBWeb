@@ -16,10 +16,10 @@ class HomepagePresenter extends BasePresenter
 
     /**
      * Class constructor
-     * @param IRecentArticlesListingFactory $recentArticlesListingFactory
+     * @param IRecentArticlesListingFactory $recentArticlesGridFactory
      */
     public function __construct(
-        private IRecentArticlesListingFactory $recentArticlesListingFactory
+        private IRecentArticlesListingFactory $recentArticlesGridFactory
     )
     {
         parent::__construct();
@@ -71,6 +71,6 @@ class HomepagePresenter extends BasePresenter
      */
     public function createComponentRecentArticlesListing(): RecentArticlesListing
     {
-        return $this->recentArticlesListingFactory->create();
+        return $this->recentArticlesGridFactory->create();
     }
 }

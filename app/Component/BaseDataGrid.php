@@ -5,27 +5,18 @@ namespace App\Component;
 use Nette\ComponentModel\IContainer;
 use Nette\Database\Table\Selection;
 use Nette\Localization\ITranslator;
-use Nette\Localization\Translator;
 use Ublaboo\DataGrid\DataGrid;
-use Ublaboo\DataGrid\Exception\DataGridException;
 
 abstract class BaseDataGrid
 {
-    protected IContainer $parent;
-
     protected DataGrid $grid;
-
-    protected string $name;
 
 
     public function __construct(
-        IContainer  $parent,
-        string      $name,
-        ITranslator $translator
+        protected IContainer $parent,
+        protected string $name,
+        protected ITranslator $translator
     ) {
-        $this->parent = $parent;
-        $this->translator = $translator;
-        $this->name = $name;
     }
 
     abstract protected function getSelection(): Selection;

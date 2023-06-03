@@ -11828,7 +11828,7 @@ naja.initialize();
 
 $(document).ready(() => {
     $('.datagrid').find('table').addClass('table-dark');
-})
+});
 $(document).ready(function () {
     $('a[role="tab"]').on('click', function () {
         window.location.hash = $(this).attr('data-bs-target');
@@ -11838,6 +11838,33 @@ $(document).ready(function () {
     if (hash !== '') {
         $('a[data-bs-target="' + hash + '"]').tab('show');
     }
+});
+$(document).ready(function() {
+    $('.markdown-editor').each((id, input) =>
+    {
+        console.log(input);
+        let mde = new EasyMDE({
+            element: input,
+            spellChecker: false,
+            autosave: {
+                enabled: true,
+                uniqueId: input.id,
+            },
+            uploadImage: true,
+            toolbar: [
+                "bold", "italic", "heading", "|",
+                "quote", "unordered-list", "ordered-list", "|",
+                "link", "image", "upload-image", "|",
+                "preview", "side-by-side", "fullscreen", "guide", "|",
+                "undo", "redo"
+            ]
+        });
+
+        mde.codemirror.on('change', () =>
+        {
+            input.val(mde.value());
+        });
+    });
 });
 $(document).ready(function() {
 
