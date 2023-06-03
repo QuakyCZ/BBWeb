@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap');
+@import url(web/font.css);
 
 :root {
-    --cyan-color: #16ccca;
+/*    --cyan-color: #16ccca;
     --cyan-color-dark: #159997;
     --pink-color: #E100A9;
     --pink-color-dark: #9c1079;
@@ -11,6 +11,19 @@
     --border-black-color: #34363f;
     --nav-accent: #c69c3a;
     --nav-accent-2: #e4b13a;
+    --shop-text: #5b727f;
+    --muted-text: #adaec4;*/
+
+    --cyan-color: #16ccca;
+    --cyan-color-dark: #159997;
+    --pink-color: #E100A9;
+    --pink-color-dark: #9c1079;
+    --yellow-color: #b448ff;
+    --white-color: #fff;
+    --black-color: #242529;
+    --border-black-color: #34363f;
+    --nav-accent: #b448ff;
+    --nav-accent-2: #c26cff;
     --shop-text: #5b727f;
     --muted-text: #adaec4;
 }
@@ -26,7 +39,7 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    font-family: 'Ubuntu', sans-serif !important;
+    font-family: 'Raleway', sans-serif !important;
     font-weight: normal;
     padding: 0;
     margin: 0;
@@ -452,7 +465,7 @@ h1 {
     align-content: center;
     justify-content: center;
     background-color: black;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Raleway', sans-serif;
     color: white;
 }
 .ccontainer
@@ -540,7 +553,7 @@ i.fa-stream:hover, i.fa-stream:active {
 }
 
 .nav-link:hover, .nav-link:active, .active {
-    color: #D1B258 !important;
+    color: var(--nav-accent) !important;
     background-color: transparent;
 }
 
@@ -762,7 +775,7 @@ input[type="radio" i], input[type="checkbox" i] {
 }
 
 .daterangepicker {
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Raleway', sans-serif;
 }
 
 .daterangepicker td.active, .daterangepicker td.active:hover {
@@ -911,7 +924,7 @@ textarea.logger {
     .small-tip {
         display: block;
         color: white;
-        font-family: 'Ubuntu', sans-serif;
+        font-family: 'Raleway', sans-serif;
         margin-top: 0.8rem;
     }
 
