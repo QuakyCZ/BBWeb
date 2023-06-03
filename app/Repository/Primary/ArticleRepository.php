@@ -2,6 +2,8 @@
 
 namespace App\Repository\Primary;
 
+use Nette\Database\Table\Selection;
+
 class ArticleRepository extends PrimaryRepository
 {
     public const TABLE_NAME = 'article';
@@ -19,7 +21,16 @@ class ArticleRepository extends PrimaryRepository
 
     protected string $tableName = self::TABLE_NAME;
 
-    public function setPublished(int $articleId, bool $published = true)
+    /**
+     * Get selection of most recent articles
+     * @param int $limit the limit of articles to get
+     * @return Selection selection of articles
+     */
+    public function getMostRecentArticles(int $limit = 3): Selection
     {
+        return $this->findAll()
+            ->where(self::COLUMN_IS_PUBLISHED, true)
+            ->limit($limit)
+            ->order(self::COLUMN_IS_PINNED . ' DESC, ' . self::COLUMN_CREATED . ' DESC, ' . self::COLUMN_ID . ' DESC');
     }
 }

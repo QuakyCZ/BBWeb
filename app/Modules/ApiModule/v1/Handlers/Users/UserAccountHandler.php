@@ -3,7 +3,7 @@
 namespace App\Modules\ApiModule\v1\Handlers\Users;
 
 use App\Modules\ApiModule\Model\User\Connector\UserConnectFacadeFactory;
-use App\Utils\MinecraftUtils;
+use App\Utils\Minecraft\MinecraftUtils;
 use League\Fractal\ScopeFactoryInterface;
 use Tomaj\NetteApi\Handlers\BaseHandler;
 use Tomaj\NetteApi\Params\GetInputParam;

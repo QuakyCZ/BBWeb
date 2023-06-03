@@ -1,3 +1,9 @@
+{varType ?int $players}
+{varType string $serverIp}
+{varType string $serverVersion}
+{varType string $facebookUrl}
+{varType string $instagramUrl}
+{varType string $discordUrl}
 {block content}
 	
 	<div class="blur-layer"></div>
@@ -18,7 +24,7 @@
     <div class="container h-50 mt-5 pt-5">
       <div class="row w-100 g-3 m-0">
         <div class="col-12 col-md-6 col-lg-4">
-          <a href="" class="content-box discord-box row">
+          <a href="{$discordUrl}" class="content-box discord-box row">
             <div class="col-auto">
               <div class="icon-box discord-icon">
                 <i class="phosphor ph-discord-logo-fill"></i>
@@ -39,7 +45,7 @@
           </div>
           <div class="col cb-text">
             <h2>Hráčů na serveru</h2>
-            <p>Nyní hraje 99 hráčů</p>
+            <p>Nyní hraje {$players ?? '-'} hráč{if $players === 1}{elseif $players >=2 && $players <= 4}i{else}ů{/if}</p>
           </div>
         </div>
       </div>
@@ -52,7 +58,7 @@
           </div>
           <div class="col cb-text">
             <h2>IP adresa BeastBlocku</h2>
-            <p>play.beastblock.cz</p>
+            <p>{$serverIp}</p>
           </div>
         </div>
       </div>
@@ -61,79 +67,7 @@
 
     <div class="container">
       <h5 class="montserrat">Dozvi se toho více!</h5>
-      <h1 class="display-3 fw-bold">Nejnovější příspěvky a články</h1>
-      <div class="row gx-3">
-        <div class="col-12">
-          <div class="card mb-3">
-            <div class="card-img-top" style="background-image: url('{$basePath}/img/2022-12-26_11.45.42.png');"></div>
-            <div class="card-body row d-flex align-items-center flex-column flex-lg-row">
-              <div class="col-12 col-lg-auto">
-                <div class="time-box d-flex flex-lg-column justify-content-center align-items-center mb-3 mb-lg-0">
-                  <h3 class="me-2 me-lg-0">27.</h3>
-                  <p>Zář</p>
-                </div>
-              </div>
-              <div class="col">
-                <a href="" class="card-title fs-2 text-white text-decoration-none">Bla bla bla bla</a>
-                <div class="d-flex align-items-center">
-                  <img src="https://s.namemc.com/2d/skin/face.png?id=ee52797486062c68&scale=4" alt="" class="rounded-1" width="36px" loading="lazy">
-                  <h4 class="fw-bold ms-3 mb-0">Klema_LP</h5>
-                  <p class="text-white-50 fs-4 mb-0 mx-3">•</p>
-                  <p class="mb-0 text-secondary">Tento čtvrtek ve 12:45</p>
-                </div>
-                <p class="card-text text-white-50 mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur dolorum porro culpa ullam iusto provident, repudiandae sapiente nemo nam facere voluptatibus odio sequi repellendus libero tenetur ducimus, quia cumque nobis.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Header Card End -->
-        <div class="col-md">
-          <div class="card mb-3">
-            <div class="card-img-top" style="background-image: url('{$basePath}/img/2022-12-26_11.45.42.png');"></div>
-            <div class="card-body row d-flex align-items-center flex-column flex-lg-row">
-              <div class="col-12 col-lg-auto">
-                <div class="time-box d-flex flex-lg-column justify-content-center align-items-center mb-3 mb-lg-0">
-                  <h3 class="me-2 me-lg-0">27.</h3>
-                  <p>Zář</p>
-                </div>
-              </div>
-              <div class="col">
-                <a href="" class="card-title fs-2 text-white text-decoration-none">Bla bla bla bla</a>
-                <div class="d-flex align-items-center">
-                  <img src="https://s.namemc.com/2d/skin/face.png?id=ee52797486062c68&scale=4" alt="" class="rounded-1" width="36px" loading="lazy">
-                  <h4 class="fw-bold ms-3 mb-0">Klema_LP</h5>
-                  <p class="text-white-50 fs-4 mb-0 mx-3">•</p>
-                  <p class="mb-0 text-secondary">Tento čtvrtek ve 12:45</p>
-                </div>
-                <p class="card-text text-white-50 mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur dolorum porro culpa ullam iusto provident, repudiandae sapiente nemo nam facere voluptatibus odio sequi repellendus libero tenetur ducimus, quia cumque nobis.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md">
-          <div class="card mb-3">
-            <div class="card-img-top" style="background-image: url('{$basePath}/img/2022-12-26_11.45.42.png');"></div>
-            <div class="card-body row d-flex align-items-center flex-column flex-lg-row">
-              <div class="col-12 col-lg-auto">
-                <div class="time-box d-flex flex-lg-column justify-content-center align-items-center mb-3 mb-lg-0">
-                  <h3 class="me-2 me-lg-0">27.</h3>
-                  <p>Zář</p>
-                </div>
-              </div>
-              <div class="col">
-                <a href="" class="card-title fs-2 text-white text-decoration-none">Bla bla bla bla</a>
-                <div class="d-flex align-items-center">
-                  <img src="https://s.namemc.com/2d/skin/face.png?id=ee52797486062c68&scale=4" alt="" class="rounded-1" width="36px" loading="lazy">
-                  <h4 class="fw-bold ms-3 mb-0">Klema_LP</h5>
-                  <p class="text-white-50 fs-4 mb-0 mx-3">•</p>
-                  <p class="mb-0 text-secondary">Tento čtvrtek ve 12:45</p>
-                </div>
-                <p class="card-text text-white-50 mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur dolorum porro culpa ullam iusto provident, repudiandae sapiente nemo nam facere voluptatibus odio sequi repellendus libero tenetur ducimus, quia cumque nobis.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {control recentArticlesListing}
     </div>
 
     <div class="container mt-5 pt-lg-5">
@@ -189,7 +123,7 @@
       <img src="{$basePath}/img/BeastBlock_Elis198198.png" alt="" width="70%" loading="lazy">
       <h1 class="display-3 fw-bold">Chceme znát tvůj názor!</h1>
       <p class="fs-5 text-white-50 fw-normal col-lg-7">Každý názor se dnes hodí. Pokud ti něco vadí, chtěl bys něco změnit nebo prostě vyjádřit zkušenost se serverem, navštiv naší stránku se zpětnou vazbou. Děkujeme!</p>
-      <a href="" class="btn btn-primary mt-3 px-5 py-3 col-12 col-lg-4 fs-5">Přispět svým názorem</a>
+      <a n:href="Feedback:" class="btn btn-primary mt-3 px-5 py-3 col-12 col-lg-4 fs-5">Přispět svým názorem</a>
     </div>
 
     <div class="container mt-5 pt-lg-5">

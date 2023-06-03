@@ -15,6 +15,7 @@ services:
     - App\Modules\AdminModule\Component\Article\IArticleFormFactory
     - App\Modules\AdminModule\Component\Article\IArticleGridFactory
     - App\Modules\WebModule\Component\ArticlesListing\IArticlesListingFactory
+    - App\Modules\WebModule\Component\RecentArticlesListing\IRecentArticlesListingFactory
 
     - App\Modules\ClientModule\Component\Connection\Minecraft\IMinecraftConnectionFactory
     - App\Modules\ClientModule\Component\Connection\Discord\IDiscordConnectionFactory

@@ -6,7 +6,7 @@ use App\Enum\EConnectTokenType;
 use App\Modules\ApiModule\Model\User\UserConnectTokenFacade;
 use App\Modules\ApiModule\Model\User\UserFacade;
 use App\Repository\Primary\UserMinecraftAccountRepository;
-use App\Utils\MinecraftUtils;
+use App\Utils\Minecraft\MinecraftUtils;
 use Nette\Application\BadRequestException;
 use Nette\Database\Table\ActiveRow;
 use Nette\Utils\JsonException;
