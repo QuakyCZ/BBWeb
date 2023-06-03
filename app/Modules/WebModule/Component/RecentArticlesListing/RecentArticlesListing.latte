@@ -3,7 +3,7 @@
 {if count($articles) > 0}
 <div class="row gx-3">
     {var $i = 0}
-    {foreach $articles as $key => $article}
+    {foreach $articles as $article}
     <div class="col-{if $i === 0}12{else}md{/if}">
         <div class="card mb-3">
             <div class="card-img-top" style="background-image: url('{$basePath}/img/2022-12-26_11.45.42.png');"></div>
@@ -11,7 +11,7 @@
                 <div class="col-12 col-lg-auto">
                     <div class="time-box d-flex flex-lg-column justify-content-center align-items-center mb-3 mb-lg-0">
                         <h3 class="me-2 me-lg-0">{$article[App\Repository\Primary\ArticleRepository::COLUMN_CREATED]|date: 'd.'}</h3>
-                        <p>{$article[App\Repository\Primary\ArticleRepository::COLUMN_CREATED]|date: 'M.'}</p>
+                        <p>{$article[App\Repository\Primary\ArticleRepository::COLUMN_CREATED]|date: '%h.'}</p>
                     </div>
                 </div>
                 <div class="col">
@@ -21,8 +21,12 @@
                         {var $userDetails = $user?->related(App\Repository\Primary\UserDetailsRepository::TABLE_NAME)->fetch()}
                         <img src="https://minotar.net/avatar/{$userDetails['minecraft_nick'] ?? $user['username']}/250" alt="" class="rounded-1" width="36px" loading="lazy">
                         <h4 class="fw-bold ms-3 mb-0">{$article->ref(App\Repository\Primary\UserRepository::TABLE_NAME, App\Repository\Primary\ArticleRepository::COLUMN_CREATED_USER_ID)[App\Repository\Primary\UserRepository::COLUMN_USERNAME]}</h4>
+                        {if $article[App\Repository\Primary\ArticleRepository::COLUMN_IS_PINNED]}
                         <p class="text-white-50 fs-4 mb-0 mx-3">•</p>
-                        <p class="mb-0 text-secondary">Tento čtvrtek ve {$article[App\Repository\Primary\ArticleRepository::COLUMN_CREATED]|date: 'H:i'}</p>
+                        <p class="mb-0 text-secondary">Připnuto</p>
+                        {/if}
+                        <p class="text-white-50 fs-4 mb-0 mx-3">•</p>
+                        <p class="mb-0 text-secondary">{$article[App\Repository\Primary\ArticleRepository::COLUMN_CREATED]|date: 'd.m.Y \v\e H:i'}</p>
                     </div>
                     <p class="card-text text-white-50 mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur dolorum porro culpa ullam iusto provident, repudiandae sapiente nemo nam facere voluptatibus odio sequi repellendus libero tenetur ducimus, quia cumque nobis.</p>
                 </div>
