@@ -3,29 +3,7 @@
 {varType int $pages}
 
 {block styles}
-    <link rel="stylesheet" type="text/css" href="{$basePath}/styles/about.css">
-    <link rel="stylesheet" type="text/css" href="{$basePath}/styles/style.css">
-    <style>
-        .active > .page-link {
-            background-color: #ffc107 !important;
-            border: 1px solid #ffc107 !important;
-            color: black !important;
-        }
-
-        .page-link {
-            text-decoration: none;
-            color: #ffc107;
-            font-weight: bolder;
-            background: none;
-            border: 1px solid #ffc107;
-        }
-
-        .page-link:hover {
-            background-color: #ffc107;
-            color: black;
-            border: 1px solid #ffc107;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{$basePath}/styles/web/style.css">
 {/block}
 <nav class="mx-auto" style="width: min-content;">
     <ul class="pagination">
@@ -45,32 +23,42 @@
     </ul>
 </nav>
 {snippet articles}
+    <div class="row g-3 m-0 w-100">
     {foreach $articles as $article}
-        <div class="link-container p-5 mb-5">
-            <div>
-                {if ((bool) $article[App\Repository\Primary\ArticleRepository::COLUMN_IS_PINNED]) === true}
-                    <i class="fas fa-thumbtack text-danger"></i>
-                {/if}
-                <h1 ><a class="link-title fw-bold" href="{plink Articles:show 'id' => $article[App\Repository\Primary\ArticleRepository::COLUMN_ID]}">{$article[App\Repository\Primary\ArticleRepository::COLUMN_TITLE]}</a></h1>
-            </div>
-            <div class="row">
-                <div class="col-auto">
-                    <i class="fas fa-user me-2 fs-5 text-warning"></i>
-                    {$article->created_user['username']}
+    <div class="col-md-6 col-12 px-0 px-md-2">
+        <div class="card mb-5 h-100">
+            <!-- Přidej za card-img-top d-none, pokud není nahraný žádný obrázek -->
+            <div class="card-img-top" style="background-image: url('{$basePath}/img/2022-12-26_11.45.42.png');"></div>
+            <div class="card-body row d-flex align-items-center flex-column flex-lg-row">
+                <div class="col-12 col-lg-auto">
+                    <div class="time-box d-flex flex-lg-column justify-content-center align-items-center mb-3 mb-lg-0">
+                        <h3 class="me-2 me-lg-0">{$article[App\Repository\Primary\ArticleRepository::COLUMN_CREATED]|date: 'd.'}</h3>
+                        <p>{$article[App\Repository\Primary\ArticleRepository::COLUMN_CREATED]|date: '%h.'}</p>
+                    </div>
                 </div>
-                •
-                <div class="col-auto">
-                    <i class="fas fa-calendar me-2 fs-5 text-warning"></i>
-                    {$article[App\Repository\Primary\ArticleRepository::COLUMN_CREATED]|date: 'd. m. Y H:i'}
+                <div class="col">
+                    <a href="{plink Articles:show $article[App\Repository\Primary\ArticleRepository::COLUMN_ID]}" class="card-title fs-2 text-white text-decoration-none">{$article[App\Repository\Primary\ArticleRepository::COLUMN_TITLE]}</a>
+                    <div class="d-flex align-items-center">
+                        {var $user = $article->ref(App\Repository\Primary\UserRepository::TABLE_NAME, App\Repository\Primary\ArticleRepository::COLUMN_CREATED_USER_ID)}
+                        {var $userDetails = $user?->related(App\Repository\Primary\UserDetailsRepository::TABLE_NAME)->fetch()}
+                        <img src="https://minotar.net/avatar/{$userDetails['minecraft_nick'] ?? $user['username']}/250" alt="" class="rounded-1" width="36px" loading="lazy">
+                        <h4 class="fw-bold ms-3 mb-0">{$article->ref(App\Repository\Primary\UserRepository::TABLE_NAME, App\Repository\Primary\ArticleRepository::COLUMN_CREATED_USER_ID)[App\Repository\Primary\UserRepository::COLUMN_USERNAME]}</h4>
+                        {if $article[App\Repository\Primary\ArticleRepository::COLUMN_IS_PINNED]}
+                        <p class="text-white-50 fs-4 mb-0 mx-3">•</p>
+                        <p class="mb-0 text-secondary"><i class="phosphor ph-push-pin fs-4"></i></p>
+                        {/if}
+                        <p class="text-white-50 fs-4 mb-0 mx-3">•</p>
+                        <p class="mb-0 text-secondary">{$article[App\Repository\Primary\ArticleRepository::COLUMN_CREATED]|date: 'd.m.Y \v\e H:i'}</p>
+                    </div>
+                    <p class="card-text article-text text-white-50 mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur dolorum porro culpa ullam iusto provident, repudiandae sapiente nemo nam facere voluptatibus odio sequi repellendus libero tenetur ducimus, quia cumque nobis.</p>
                 </div>
-            </div>
-            <div class="mt-4">
-                {$article[App\Repository\Primary\ArticleRepository::COLUMN_TEXT]|truncate:100|noescape}
             </div>
         </div>
+    </div>
     {/foreach}
+    </div>
     {* TODO: Upravit styl stránkování *}
-    <nav class="mx-auto" style="width: min-content;">
+    <nav class="w-100 mt-5 d-flex justify-content-center">
         <ul class="pagination">
             {if $page > 0}
                 <li class="page-item btn-outline-warning"><a class="page-link" href="{plink this $page-1}"><i class="fas fa-angles-left"></i></a></li>

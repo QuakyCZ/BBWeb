@@ -1,11 +1,15 @@
 {varType Nette\Database\Table\ActiveRow[] $articles}
 <h1 class="display-3 fw-bold">Nejnovější příspěvky a články</h1>
+<a class="text-light d-flex align-items-center mb-3 fs-5" href="Articles:">
+    Přejít na všechny články
+    <i class="phosphor ph-arrow-right ms-2"></i>
+</a>
 {if count($articles) > 0}
-<div class="row gx-3">
+<div class="row g-3">
     {var $i = 0}
     {foreach $articles as $article}
     <div class="col-{if $i === 0}12{else}md{/if}">
-        <div class="card mb-3">
+        <div class="card mb-3 h-100">
             <div class="card-img-top" style="background-image: url('{$basePath}/img/2022-12-26_11.45.42.png');"></div>
             <div class="card-body row d-flex align-items-center flex-column flex-lg-row">
                 <div class="col-12 col-lg-auto">
@@ -23,12 +27,12 @@
                         <h4 class="fw-bold ms-3 mb-0">{$article->ref(App\Repository\Primary\UserRepository::TABLE_NAME, App\Repository\Primary\ArticleRepository::COLUMN_CREATED_USER_ID)[App\Repository\Primary\UserRepository::COLUMN_USERNAME]}</h4>
                         {if $article[App\Repository\Primary\ArticleRepository::COLUMN_IS_PINNED]}
                         <p class="text-white-50 fs-4 mb-0 mx-3">•</p>
-                        <p class="mb-0 text-secondary">Připnuto</p>
+                        <p class="mb-0 text-secondary"><i class="phosphor ph-push-pin fs-4"></i></p>
                         {/if}
                         <p class="text-white-50 fs-4 mb-0 mx-3">•</p>
                         <p class="mb-0 text-secondary">{$article[App\Repository\Primary\ArticleRepository::COLUMN_CREATED]|date: 'd.m.Y \v\e H:i'}</p>
                     </div>
-                    <p class="card-text text-white-50 mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur dolorum porro culpa ullam iusto provident, repudiandae sapiente nemo nam facere voluptatibus odio sequi repellendus libero tenetur ducimus, quia cumque nobis.</p>
+                    <p class="card-text article-text text-white-50 mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur dolorum porro culpa ullam iusto provident, repudiandae sapiente nemo nam facere voluptatibus odio sequi repellendus libero tenetur ducimus, quia cumque nobis.</p>
                 </div>
             </div>
         </div>

@@ -41,6 +41,17 @@ body {
     z-index: -2;
 }
 
+.background-3 {
+    background-image: url('../../img/Background-wallpaper3.png');
+    height: 100vh;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: -2;
+}
+
 .blur-layer {
     z-index: -1;
     position: absolute;
@@ -65,6 +76,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     color: var(--header);
+    font-weight: 700;
 }
 
 .montserrat {
@@ -383,6 +395,14 @@ p, li {
     font-weight: 700;
 }
 
+.article-text {
+    /* Max lines 3 */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
 .time-box {
     background-color: var(--light-box);
     padding: 8px 14px;
@@ -416,14 +436,70 @@ p, li {
     background-color: #5115681c;
 }
 
-a:not(.dropdown-item, .btn, .nav-link, .dropdown-toggler, .cb-text a) {
+a:not(.dropdown-item, .btn, .nav-link, .dropdown-toggler, .cb-text a, .link-title, .link-light, .content-box, .nabor-box) {
     color: var(--primary-color);
     text-decoration: none;
     transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-a:hover:not(.btn, .dropdown-item) {
+a:hover:not(.btn, .dropdown-item, .page-link) {
     color: var(--primary-hover-color) !important;
+}
+
+/* Pagination */
+
+.pagination > li:first-of-type {
+    border-radius: 7px;
+}
+
+.pagination > li:last-of-type {
+    border-radius: 7px;
+}
+
+.page-item > .page-link {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.active > .page-link {
+    background-color: var(--primary-color) !important;
+    border: 1px solid var(--primary-color) !important;
+}
+
+.page-link {
+    text-decoration: none;
+    color: var(--header) !important;
+    border: 1px solid var(--dark-box);
+    background-color: var(--dark-box);
+    transition: background-color 0.1s cubic-bezier(0.4, 0, 0.2, 1), border 0.1s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.page-link:hover {
+    background-color: var(--primary-color);
+    color: var(--header) !important;
+    border: 1px solid var(--primary-color);
+}
+
+.link-container {
+    background-color: var(--dark-box);
+    border: 1px solid var(--darker-text);
+    border-radius: 10px;
+}
+
+.link-title {
+    color: var(--header);
+    text-decoration: none;
+    transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.link-title:hover {
+    color: var(--primary-hover-color) !important;
+}
+
+.ph-push-pin {
+    color: var(--primary-color) !important;
 }
 
 @media screen and (max-width: 991px) {
