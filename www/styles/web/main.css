@@ -503,6 +503,89 @@ a:hover:not(.btn, .dropdown-item, .page-link) {
     color: var(--primary-color) !important;
 }
 
+/* Cookies banner */
+
+.termsfeed-com---palette-dark.termsfeed-com---nb {
+    background-color: var(--dark-box) !important;
+    border: 1px solid var(--darker-text) !important;
+    border-radius: 10px;
+    position: fixed !important;
+    bottom: 0 !important;
+    margin: 24px auto;
+    width: calc(100% - 24px);
+    font-family: 'Raleway', sans-serif !important;
+}
+
+.termsfeed-com---nb .cc-nb-main-container {
+    padding: 1rem 2rem !important;
+}
+
+.termsfeed-com---palette-dark .cc-nb-okagree, .termsfeed-com---palette-dark .cc-cp-foot-save {
+    background-color: var(--primary-color) !important;
+    border: 1px solid var(--primary-color) !important;
+    color: var(--header) !important;
+    border-radius: 10px !important;
+}
+
+.termsfeed-com---palette-dark .cc-nb-okagree:hover, .termsfeed-com---palette-dark .cc-cp-foot-save:hover {
+    background-color: var(--primary-hover-color) !important;
+    border: 1px solid var(--primary-hover-color) !important;
+}
+
+.termsfeed-com---palette-dark .cc-nb-reject {
+    background-color: #ff4355 !important;
+    border: 1px solid #ff4355 !important;
+    color: var(--header) !important;
+    border-radius: 10px !important;
+}
+
+.termsfeed-com---palette-dark .cc-nb-reject:hover {
+    background-color: #ff3246 !important;
+    border: 1px solid #ff3246 !important;
+}
+
+.termsfeed-com---palette-dark .cc-nb-changep {
+    background-color: transparent !important;
+    border: 1px solid var(--header) !important;
+    color: var(--header) !important;
+    border-radius: 10px !important;
+}
+
+.termsfeed-com---palette-dark .cc-nb-changep:hover {
+    background-color: var(--header) !important;
+    border: 1px solid var(--header) !important;
+    color: var(--background) !important;
+}
+
+.termsfeed-com---palette-dark .cc-pc-container {
+    border-radius: 10px !important;
+    background-color: var(--dark-box) !important;
+    border: 1px solid var(--darker-text) !important;
+    overflow: hidden !important;
+}
+
+a#open_preferences_center {
+    color: var(--primary-color) !important;
+    text-decoration: none !important;
+    background-color: var(--header) !important;
+    border: 1px solid var(--header) !important;
+    border-radius: 10px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.1s cubic-bezier(0.4, 0, 0.2, 1), border 0.1s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    z-index: 999;
+    font-size: 2rem;
+    margin: 12px;
+    width: 56px;
+    aspect-ratio: 1/1;
+}
+
+/* */
+
 @media screen and (max-width: 991px) {
     .nav-link {
         margin: 2px 0;
