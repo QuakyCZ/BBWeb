@@ -1,8 +1,7 @@
 {varType Nette\Database\Table\ActiveRow[] $servers}
 {var $i = 0}
 {foreach $servers as $server}
-    <div class="row {if $i % 2 == 1}flex-column-reverse{/if} mx-0 w-100 px-0">
-        <div class="col-12 row mx-0 w-100 px-0 mb-5">
+        <div class="col-12 {if $i % 2 == 1}flex-column-reverse{/if} row mx-0 w-100 px-0 mb-5">
             <div class="col-md d-none d-lg-block">
                 <img src="{$basePath}{$server[App\Repository\Primary\ServerRepository::COLUMN_CHARACTER]}" alt="Skin" width="100%" loading="lazy">
             </div>
@@ -25,6 +24,5 @@
                 <a href='{plink "Servers:default#server-$serverId"}' class="btn btn-outline-light w-auto py-2">Chci hrát {$server[App\Repository\Primary\ServerRepository::COLUMN_NAME]}</a>
             </div>
         </div>
-    </div>
     {var $i = $i + 1}
 {/foreach}
