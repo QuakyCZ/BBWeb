@@ -8,6 +8,7 @@ use App\Repository\Primary\ServerRepository;
 use App\Repository\Primary\ServerTagRepository;
 use App\Repository\Primary\TagRepository;
 use Nette\ComponentModel\IContainer;
+use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
 use Nette\Localization\ITranslator;
 use Nette\Utils\Html;
@@ -36,6 +37,9 @@ class ServerGrid extends BaseDataGrid
         $this->grid->addColumnText(ServerRepository::COLUMN_NAME, "Název")
             ->setSortable()
             ->setFilterText();
+
+        $this->grid->addColumnImage(ServerRepository::COLUMN_BANNER, "Banner");
+        $this->grid->addColumnImage(ServerRepository::COLUMN_CHARACTER, "Postavička");
 
         $this->grid->addColumnText(ServerRepository::COLUMN_DESCRIPTION_SHORT, "Krátký popis");
         $this->grid->addColumnText("tags", "Tagy")

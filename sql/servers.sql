@@ -46,3 +46,8 @@ CREATE TABLE server_tag (
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8
 COLLATE=utf8_general_ci;
+
+ALTER TABLE `server` ADD banner text NULL;
+ALTER TABLE `server` CHANGE banner banner text NULL AFTER description_full;
+ALTER TABLE `server` ADD `character` text NULL;
+ALTER TABLE `server` CHANGE `character` `character` text NULL AFTER banner;

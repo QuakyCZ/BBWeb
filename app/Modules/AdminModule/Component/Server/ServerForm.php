@@ -7,9 +7,12 @@ use App\Enum\EFlashMessageType;
 use App\Repository\Primary\ServerRepository;
 use App\Repository\Primary\ServerTagRepository;
 use App\Repository\Primary\TagRepository;
+use App\Utils\FileSystem\FileSystemException;
+use App\Utils\FileSystem\LocalFileSystem;
 use Nette\Application\AbortException;
 use Nette\Application\BadRequestException;
 use Nette\Forms\Form;
+use Nette\Http\FileUpload;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\DateTime;
 use Tracy\Debugger;
@@ -21,7 +24,8 @@ class ServerForm extends BaseComponent
         private ?int $id,
         private ServerRepository $serverRepository,
         private ServerTagRepository $serverTagRepository,
-        private TagRepository $tagRepository
+        private TagRepository $tagRepository,
+        private LocalFileSystem $localFileSystem,
     )
     {
     }
@@ -59,6 +63,14 @@ class ServerForm extends BaseComponent
         $form->addMarkdown(ServerRepository::COLUMN_DESCRIPTION_FULL, 'Celý popis');
         $form->addMultiSelect2("tag_ids", "Tagy", $this->tagRepository->fetchItemsForChoiceControl());
 
+        $form->addUpload(ServerRepository::COLUMN_BANNER, 'Banner')
+            ->addRule(Form::IMAGE, 'Banner musí být obrázek.')
+            ->addRule(Form::MAX_FILE_SIZE, 'Maximální velikost obrázku je 4 MB.', 4000000);
+
+        $form->addUpload(ServerRepository::COLUMN_CHARACTER, 'Postavička')
+            ->addRule(Form::IMAGE, 'Postavička musí být obrázek.')
+            ->addRule(Form::MAX_FILE_SIZE, 'Maximální velikost obrázku je 4 MB.', 4000000);
+
         $form->addSubmit('submit', 'Uložit');
         $form->onSuccess[] = [$this, 'saveForm'];
         return $form;
@@ -73,36 +85,59 @@ class ServerForm extends BaseComponent
     public function saveForm(Form $form, ArrayHash $values): void
     {
         $userId = $this->presenter->user->id;
-        try {
-            $this->serverRepository->runInTransaction(function () use ($values, $userId) {
-                $data = [
-                    ServerRepository::COLUMN_NAME => $values[ServerRepository::COLUMN_NAME],
-                    ServerRepository::COLUMN_DESCRIPTION_SHORT => $values[ServerRepository::COLUMN_DESCRIPTION_SHORT],
-                    ServerRepository::COLUMN_DESCRIPTION_FULL => $values[ServerRepository::COLUMN_DESCRIPTION_FULL],
-                ];
 
-                if ($this->id !== null) {
-                    $server = $this->serverRepository->findRow($this->id);
-                    if ($server === null) {
-                        throw new BadRequestException();
-                    }
-                    $data[ServerRepository::COLUMN_CHANGED] = new DateTime();
-                    $data[ServerRepository::COLUMN_CHANGED_USER_ID] = $userId;
-                    $server->update($data);
-                } else {
-                    $data[ServerRepository::COLUMN_CRETED_USER_ID] = $userId;
-                    $server = $this->serverRepository->save($data);
+        /** @var FileUpload|null $banner */
+        $banner = $values[ServerRepository::COLUMN_BANNER];
+
+        /** @var ?FileUpload $character */
+        $character = $values[ServerRepository::COLUMN_CHARACTER];
+
+        $dir = '/files/images/servers/';
+
+        try {
+
+            $serverData = [
+                ServerRepository::COLUMN_NAME => $values[ServerRepository::COLUMN_NAME],
+                ServerRepository::COLUMN_DESCRIPTION_SHORT => $values[ServerRepository::COLUMN_DESCRIPTION_SHORT],
+                ServerRepository::COLUMN_DESCRIPTION_FULL => $values[ServerRepository::COLUMN_DESCRIPTION_FULL],
+            ];
+
+            if ($banner !== null) {
+                $bannerFileName = $this->localFileSystem->saveFileUpload($banner, $dir);
+                $serverData[ServerRepository::COLUMN_BANNER] = $dir . $bannerFileName;
+            }
+
+            if ($character !== null) {
+                $characterFileName = $this->localFileSystem->saveFileUpload($character, $dir);
+                $serverData[ServerRepository::COLUMN_CHARACTER] = $dir . $characterFileName;
+            }
+
+            if ($this->id !== null) {
+                $serverData[ServerRepository::COLUMN_ID] = $this->id;
+                $serverData[ServerRepository::COLUMN_CHANGED] = new DateTime();
+                $serverData[ServerRepository::COLUMN_CHANGED_USER_ID] = $userId;
+            } else {
+                $serverData[ServerRepository::COLUMN_CRETED_USER_ID] = $userId;
+            }
+
+            $tagIds = $values['tag_ids'];
+
+            $this->serverRepository->runInTransaction(function () use ($serverData, $tagIds, $userId) {
+                $server = $this->serverRepository->save($serverData);
+
+                if (!$server) {
+                    throw new BadRequestException();
                 }
 
                 $this->serverTagRepository->saveTagsForServer(
                     $server[ServerRepository::COLUMN_ID],
-                    $values['tag_ids'],
+                    $tagIds,
                     $userId,
                 );
             });
             $this->presenter->flashMessage('Server byl úspěšně uložen.', EFlashMessageType::SUCCESS);
             $this->presenter->redirect('Servers:');
-        } catch (\PDOException $exception) {
+        } catch (\PDOException|FileSystemException $exception) {
             Debugger::log($exception);
             $form->addError('Chyba při ukládání.');
         }

@@ -33,3 +33,5 @@ services:
 
     - App\Modules\AdminModule\Component\Tag\ITagFormFactory
     - App\Modules\AdminModule\Component\Tag\ITagGridFactory
+
+    - App\Modules\WebModule\Component\ServerListing\IServerListingFactory

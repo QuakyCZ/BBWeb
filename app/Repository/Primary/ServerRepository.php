@@ -11,6 +11,9 @@ class ServerRepository extends PrimaryRepository
     public const COLUMN_NAME = 'name';
     public const COLUMN_DESCRIPTION_SHORT = 'description_short';
     public const COLUMN_DESCRIPTION_FULL = 'description_full';
+
+    public const COLUMN_BANNER = 'banner';
+    public const COLUMN_CHARACTER = 'character';
     public const COLUMN_API_URL = 'api_url';
 
     public const COLUMN_CREATED = 'created';

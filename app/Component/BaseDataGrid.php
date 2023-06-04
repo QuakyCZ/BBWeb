@@ -9,7 +9,7 @@ use Ublaboo\DataGrid\DataGrid;
 
 abstract class BaseDataGrid
 {
-    protected DataGrid $grid;
+    protected CustomDataGrid $grid;
 
 
     public function __construct(
@@ -28,7 +28,7 @@ abstract class BaseDataGrid
      */
     final public function create(): DataGrid
     {
-        $this->grid = new DataGrid(null, $this->name);
+        $this->grid = new CustomDataGrid(null, $this->name);
         $this->grid->setDataSource($this->getSelection());
         $this->grid->setTranslator($this->translator);
         $this->createGrid();

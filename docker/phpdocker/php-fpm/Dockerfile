@@ -3,6 +3,7 @@ WORKDIR "/application"
 
 RUN apt-get update; \
     apt-get -y --no-install-recommends install \
+        php8.0-intl \
         php8.0-mysql \
         npm; \
     apt-get clean; \
