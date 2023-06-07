@@ -23,6 +23,7 @@ class ServerRepository extends PrimaryRepository
     public const COLUMN_CHANGED_USER_ID = 'changed_user_id';
 
     public const COLUMN_NOT_DELETED = 'not_deleted';
+    public const COLUMN_SHOW = 'show';
 
     protected string $tableName = self::TABLE_NAME;
 

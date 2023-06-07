@@ -18,7 +18,9 @@ class ServerListing extends BaseComponent
      */
     public function render(): void
     {
-        $this->template->servers = $this->serverRepository->findAll();
+        $this->template->servers = $this->serverRepository->findBy([
+            ServerRepository::COLUMN_SHOW => true
+        ]);
         parent::render();
     }
 }

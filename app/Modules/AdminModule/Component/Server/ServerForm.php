@@ -71,6 +71,8 @@ class ServerForm extends BaseComponent
             ->addRule(Form::IMAGE, 'Postavička musí být obrázek.')
             ->addRule(Form::MAX_FILE_SIZE, 'Maximální velikost obrázku je 4 MB.', 4000000);
 
+        $form->addCheckbox(ServerRepository::COLUMN_SHOW, "Zobrazit na webu.");
+
         $form->addSubmit('submit', 'Uložit');
         $form->onSuccess[] = [$this, 'saveForm'];
         return $form;
@@ -100,6 +102,7 @@ class ServerForm extends BaseComponent
                 ServerRepository::COLUMN_NAME => $values[ServerRepository::COLUMN_NAME],
                 ServerRepository::COLUMN_DESCRIPTION_SHORT => $values[ServerRepository::COLUMN_DESCRIPTION_SHORT],
                 ServerRepository::COLUMN_DESCRIPTION_FULL => $values[ServerRepository::COLUMN_DESCRIPTION_FULL],
+                ServerRepository::COLUMN_SHOW => $values[ServerRepository::COLUMN_SHOW],
             ];
 
             if ($banner !== null) {

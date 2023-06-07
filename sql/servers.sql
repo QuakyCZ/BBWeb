@@ -51,3 +51,5 @@ ALTER TABLE `server` ADD banner text NULL;
 ALTER TABLE `server` CHANGE banner banner text NULL AFTER description_full;
 ALTER TABLE `server` ADD `character` text NULL;
 ALTER TABLE `server` CHANGE `character` `character` text NULL AFTER banner;
+ALTER TABLE `server` ADD `show` bit(1) DEFAULT 0 NOT NULL;
+ALTER TABLE `server` CHANGE `show` `show` bit(1) DEFAULT 0 NOT NULL AFTER `character`;

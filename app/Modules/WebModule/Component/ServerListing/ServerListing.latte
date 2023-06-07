@@ -1,7 +1,7 @@
 {varType Nette\Database\Table\ActiveRow[] $servers}
 {var $i = 0}
 {foreach $servers as $server}
-        <div class="col-12 {if $i % 2 == 1}flex-column-reverse{/if} row mx-0 w-100 px-0 mb-5">
+        <div class="col-12 {if $i % 2 == 1}flex-row-reverse{/if} row mx-0 w-100 px-0 mb-5">
             <div class="col-md d-none d-lg-block">
                 <img src="{$basePath}{$server[App\Repository\Primary\ServerRepository::COLUMN_CHARACTER]}" alt="Skin" width="100%" loading="lazy">
             </div>
@@ -13,8 +13,8 @@
                         {var $tag = $serverTag->tag}
                         <div
                                 class="badge me-2 bg-primary fs-6 rounded-pill"
-                                style="color: {$tag[App\Repository\Primary\TagRepository::COLUMN_FONT_COLOR]};
-                                        background-color: {$tag[App\Repository\Primary\TagRepository::COLUMN_BACKGROUND_COLOR]}">
+                                style="color: {$tag[App\Repository\Primary\TagRepository::COLUMN_FONT_COLOR]|noescape} !important;
+                                        background-color: {$tag[App\Repository\Primary\TagRepository::COLUMN_BACKGROUND_COLOR]|noescape} !important;">
                             {$tag[App\Repository\Primary\TagRepository::COLUMN_NAME]}
                         </div>
                     {/foreach}
