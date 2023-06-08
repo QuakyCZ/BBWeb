@@ -10679,3 +10679,10 @@ body {
     border-width: 0;
 }
 
+.table {
+    color: #fff;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+    color: #fff;
+}

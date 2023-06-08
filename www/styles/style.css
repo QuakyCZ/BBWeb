@@ -683,6 +683,15 @@ p {
     align-items: center;
 }
 
+.alert-icon-box {
+    padding: 8px !important;
+    border-radius: 7px !important;
+}
+
+.alert-icon-box i {
+    font-size: 2rem !important;
+}
+
 .announce p {
     color: unset;
 }

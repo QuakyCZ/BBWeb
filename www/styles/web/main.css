@@ -119,6 +119,38 @@ p, li {
     margin: 0 16px;
     font-weight: 500;
     font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+}
+
+.nav-link i {
+    margin-right: 9px;
+}
+
+.profil {
+    background: linear-gradient(
+        to right,
+        var(--header) 20%,
+        #e3a6ff 45%,
+        var(--primary-color) 55%,
+        #e3a6ff 70%,
+        var(--header) 80%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+    background-size: 500% auto;
+    animation: textShine 4s linear infinite;
+}
+
+@keyframes textShine {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
 }
 
 .nav-link:hover, .nav-link:focus, .nav-link:active {
@@ -139,10 +171,23 @@ p, li {
     padding: 8px;
 }
 
+.dropdown-toggle::after {
+    display: none;
+}
+
+.dropdown-menu li .dropdown-item {
+    display: flex;
+    align-items: center !important;
+}
+
 .dropdown-item {
-    color: var(--text);
+    color: var(--text2);
     border-radius: 7px;
     transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.dropdown-item i {
+    margin-right: 9px;
 }
 
 .dropdown-item:hover, .dropdown-item:focus, .dropdown-item:active {
@@ -648,4 +693,30 @@ a#open_preferences_center {
     border: 1px solid var(--primary-color);
     color: var(--text);
     box-shadow: 0px 0px 0px 3px var(--primary-color);
+}
+
+.announce {
+    position: fixed;
+    z-index: 1000;
+    top: 97px;
+    left: 0;
+    right: 0;
+    margin: 12px auto;
+    width: calc(100% - 24px);
+    padding: 8px;
+    border-radius: 7px;
+}
+
+.alert-icon-box {
+    padding: 8px !important;
+    border-radius: 7px !important;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.alert-icon-box i {
+    font-size: 1.3rem !important;
 }

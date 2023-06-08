@@ -1,14 +1,14 @@
 {block alert}
     {varType bool $alertEnabled}
     {varType \stdClass $alert}
-    <div n:if="$alertEnabled" class="announce" style="background-color: {$alert->backgroundColor|noescape}; color: {$alert->fontColor|noescape} !important;">
+    <div n:if="$alertEnabled" class="announce alert-dismissible fade show" role="alert" style="background-color: {$alert->backgroundColor|noescape}; color: {$alert->fontColor|noescape} !important;">
         <div class="row d-flex">
             <div class="col-auto d-flex justify-content-center align-items-center">
-                <div class="icon-box" style="background-color: {$alert->iconBackgroundColor|noescape}">
+                <div class="alert-icon-box" style="background-color: {$alert->iconBackgroundColor|noescape}">
                     <i class="{$alert->icon}"></i>
                 </div>
             </div>
-            <div class="col d-flex align-items-center">
+            <div class="col-auto d-flex align-items-center">
                 <p class="m-0 fw-bold fs-6" style="color: {$alert->fontColor|noescape} !important;">
                     {$alert->message}
                 </p>
@@ -28,50 +28,51 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" n:href="Homepage:">Domů</a>
-              </li>
-              <li class="nav-items">
-                <div class=" vr h-100 d-none d-lg-block"></div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" n:href="Servers:">Servery</a>
-              </li>
-              <li class="nav-items">
-                <div class=" vr h-100 d-none d-lg-block"></div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" n:href="Articles:">Články</a>
-              </li>
-              <li class="nav-items">
-                <div class=" vr h-100 d-none d-lg-block"></div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" n:href="About:">Tým</a>
+                <a class="nav-link" aria-current="page" n:href="Homepage:"><i class="phosphor ph-house"></i> Domů</a>
               </li>
               <li class="nav-items">
                 <div class="vr h-100 d-none d-lg-block"></div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="https://obchod.beastblock.cz">Obchod</a>
+                <a class="nav-link" n:href="Servers:"><i class="phosphor ph-sword"></i> Servery</a>
               </li>
               <li class="nav-items">
-                <div class=" vr h-100 d-none d-lg-block"></div>
+                <div class="vr h-100 d-none d-lg-block"></div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="https://status.beastblock.cz">Status</a>
+                <a class="nav-link" n:href="Articles:"><i class="phosphor ph-article-medium"></i> Články</a>
               </li>
               <li class="nav-items">
-                <div class=" vr h-100 d-none d-lg-block"></div>
+                <div class="vr h-100 d-none d-lg-block"></div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" n:href="About:"><i class="phosphor ph-users-three"></i> Tým</a>
+              </li>
+              <li class="nav-items">
+                <div class="vr h-100 d-none d-lg-block"></div>
+              </li>
+              <li class="nav-item d-none d-xl-block">
+                <a class="nav-link" href="https://obchod.beastblock.cz"><i class="phosphor ph-barcode"></i> Obchod</a>
+              </li>
+              <li class="nav-items d-none d-xl-block">
+                <div class="vr h-100 d-none d-lg-block"></div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link profil" n:href=":Client:Dashboard:"><i class="phosphor ph-user"></i> Profil</a>
+              </li>
+              <li class="nav-items">
+                <div class="vr h-100 d-none d-lg-block"></div>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Další
+                  <i class="phosphor ph-caret-down"></i> Další
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" n:href="Feedback:">Zpětná vazba</a></li>
-                  <li><a class="dropdown-item" href="#" {*Zde bude Contact:*}>Kontaktovat</a></li>
+                  <li><a class="dropdown-item" n:href="Feedback:"><i class="phosphor ph-chat-circle-dots"></i> Zpětná vazba</a></li>
+                  <li><a class="dropdown-item" href="#" {*Zde bude Contact:*}><i class="phosphor ph-headset"></i> Kontaktovat</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" n:href=":Client:Dashboard:">Profil</a></li>
+                  <li><a class="dropdown-item" href="https://status.beastblock.cz"><i class="phosphor ph-trend-up"></i> Status</a></li>
+                  <li><a class="dropdown-item d-xl-none" href="https://obchod.beastblock.cz"><i class="phosphor ph-barcode"></i> Obchod</a></li>
                 </ul>
               </li>
             </ul>

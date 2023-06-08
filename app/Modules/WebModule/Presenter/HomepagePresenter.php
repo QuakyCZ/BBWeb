@@ -51,7 +51,7 @@ class HomepagePresenter extends BasePresenter
         {
             $query = new MinecraftPing($serverIp, 25565, 200000, true);
             $result = $query->Query();
-            return $result['players']['online'] ?: null;
+            return $result['players']['online'] ?? null;
         }
         catch (MinecraftPingException $exception)
         {
