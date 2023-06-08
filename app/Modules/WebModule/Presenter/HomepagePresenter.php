@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Modules\WebModule\Presenter;
 
-use App\Model\MinecraftAPI\MinecraftPing;
-use App\Model\MinecraftAPI\MinecraftPingException;
 use App\Modules\WebModule\Component\RecentArticlesListing\IRecentArticlesListingFactory;
 use App\Modules\WebModule\Component\RecentArticlesListing\RecentArticlesListing;
 use App\Modules\WebModule\Component\ServerListing\IServerListingFactory;
 use App\Modules\WebModule\Component\ServerListing\ServerListing;
 use App\Modules\WebModule\Presenter\Base\BasePresenter;
 use Tracy\Debugger;
+use xPaw\MinecraftPing;
+use xPaw\MinecraftPingException;
 
 class HomepagePresenter extends BasePresenter
 {
@@ -53,6 +53,7 @@ class HomepagePresenter extends BasePresenter
         $query = null;
         try
         {
+            bdump($serverIp);
             $query = new MinecraftPing($serverIp, 25565, 200000, true);
             $result = $query->Query();
             return $result['players']['online'] ?? null;
