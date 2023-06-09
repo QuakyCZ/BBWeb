@@ -64,6 +64,10 @@ menu:
                         action: 'Admin:Settings:default'
                         data:
                             icon: 'fas fa-ellipsis'
+                    'Tagy':
+                        action: 'Admin:Tags:default'
+                        data:
+                            icon: 'fas fa-tags'
     client:
         translator: true
         linkGenerator: @App\Model\LinkGenerator

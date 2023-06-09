@@ -51,10 +51,10 @@ class ArticleForm extends BaseComponent
 
     public function createComponentForm(): Form
     {
-        $form = new Form();
+        $form = new \App\Form\Form();
 
         $form->addText(ArticleRepository::COLUMN_TITLE, 'Název');
-        $form->addTextArea(ArticleRepository::COLUMN_TEXT, 'Text');
+        $form->addMarkdown(ArticleRepository::COLUMN_TEXT, 'Text');
 
         if ($this->presenter->user->isInRole('ADMIN')) {
             $form->addCheckbox(ArticleRepository::COLUMN_IS_PUBLISHED, 'Publikovat');

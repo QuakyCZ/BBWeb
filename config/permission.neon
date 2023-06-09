@@ -19,6 +19,7 @@ parameters:
             - Admin:Article
             - Admin:Poll
             - Admin:Rewards
+            - Admin:Tags
         OWNER:
             - Admin:Default
         LEADER:
