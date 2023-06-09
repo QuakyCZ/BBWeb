@@ -142,6 +142,7 @@ p, li {
     text-fill-color: transparent;
     background-size: 500% auto;
     animation: textShine 4s linear infinite;
+    font-weight: 700;
 }
 
 @keyframes textShine {
@@ -309,10 +310,6 @@ p, li {
     color: var(--header);
 }
 
-.icon-box:hover > i {
-    animation: icon 10s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-}
-
 .nabor-box {
     padding: 16px 32px;
     aspect-ratio: 2/1;
@@ -333,51 +330,6 @@ p, li {
 .nabor-box:hover {
     border: 1px solid var(--primary-hover-color);
     transform: translateY(-3px);
-}
-
-@keyframes icon {
-    0% {
-        transform: translateY(0);
-    }
-    10% {
-        transform: translateY(-4px) translateX(2px);
-        rotate: 4deg;
-    }
-    20% {
-        transform: translateY(2px) translateX(-2px);
-        rotate: -5deg;
-    }
-    30% {
-        transform: translateY(-2px) translateX(1px);
-        rotate: 4deg;
-    }
-    40% {
-        transform: translateY(-4px) translateX(-1px);
-        rotate: -4deg;
-    }
-    50% {
-        transform: translateY(3px) translateX(2px);
-        rotate: 2deg;
-    }
-    60% {
-        transform: translateY(-1px) translateX(-2px);
-        rotate: -6deg;
-    }
-    70% {
-        transform: translateY(2px) translateX(1px);
-        rotate: 4deg;
-    }
-    80% {
-        transform: translateY(-3px) translateX(-1px);
-        rotate: -3deg;
-    }
-    90% {
-        transform: translateY(1px) translateX(2px);
-        rotate: 2deg;
-    }
-    100% {
-        transform: translateY(0);
-    }
 }
 
 .cb-text {
