@@ -40,6 +40,11 @@ class BasePresenter extends Presenter
 
     protected function beforeRender()
     {
+        $this->template->serverIp = $this->settingsRepository->getSettingValue('server-ip');
+        $this->template->serverVersion = $this->settingsRepository->getSettingValue('server-version');
+        $this->template->facebookUrl = $this->settingsRepository->getSettingValue('facebook_url');
+        $this->template->instagramUrl = $this->settingsRepository->getSettingValue('instagram_url');
+        $this->template->discordUrl = $this->settingsRepository->getSettingValue('discord_url');
         $this->template->hosting = $this->settingsRepository->getSettingValue('hosting');
         $this->template->hostingUrl = $this->settingsRepository->getSettingValue('hosting-url');
 

@@ -9,9 +9,6 @@ use App\Modules\WebModule\Component\RecentArticlesListing\RecentArticlesListing;
 use App\Modules\WebModule\Component\ServerListing\IServerListingFactory;
 use App\Modules\WebModule\Component\ServerListing\ServerListing;
 use App\Modules\WebModule\Presenter\Base\BasePresenter;
-use Tracy\Debugger;
-use xPaw\MinecraftPing;
-use xPaw\MinecraftPingException;
 
 class HomepagePresenter extends BasePresenter
 {
@@ -34,37 +31,7 @@ class HomepagePresenter extends BasePresenter
      */
     public function actionDefault(): void
     {
-        $serverIp = $this->settingsRepository->getSettingValue('server-ip');
-        $this->template->serverIp = $serverIp;
-        $this->template->players = $this->fetchMinecraftPlayers($serverIp);
-        $this->template->serverVersion = $this->settingsRepository->getSettingValue('server-version');
-        $this->template->facebookUrl = $this->settingsRepository->getSettingValue('facebook_url');
-        $this->template->instagramUrl = $this->settingsRepository->getSettingValue('instagram_url');
-        $this->template->discordUrl = $this->settingsRepository->getSettingValue('discord_url');
-    }
 
-    /**
-     * Get the number of players on the server
-     * @param string $serverIp
-     * @return int|null
-     */
-    private function fetchMinecraftPlayers(string $serverIp): ?int
-    {
-        try
-        {
-            $query = new MinecraftPing($serverIp, '25565');
-            $players = $query->Query();
-             if (!$players) {
-                return null;
-            }
-            return $players['players']['online'];
-        }
-        catch (MinecraftPingException $exception)
-        {
-            Debugger::log($exception, 'minecraft');
-        }
-
-        return null;
     }
 
     /**

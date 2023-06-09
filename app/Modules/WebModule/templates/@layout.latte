@@ -1,3 +1,8 @@
+{varType string $serverIp}
+{varType string $serverVersion}
+{varType string $facebookUrl}
+{varType string $instagramUrl}
+{varType string $discordUrl}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -76,6 +81,9 @@ cookieconsent.run({"notice_banner_type":"headline","consent_type":"express","pal
         </div>
       </footer>
     </div>
+    <script>
+        const MINECRAFT_SERVER_IP = {$serverIp};
+    </script>
     <script src="{$basePath}/webpack/scriptsWebVendor.bundle.js"></script>
     <script src="{$basePath}/webpack/scriptsWeb.bundle.js"></script>
     {block scripts}{/block}

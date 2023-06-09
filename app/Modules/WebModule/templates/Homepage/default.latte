@@ -1,4 +1,3 @@
-{varType ?int $players}
 {varType string $serverIp}
 {varType string $serverVersion}
 {varType string $facebookUrl}
@@ -45,7 +44,7 @@
           </div>
           <div class="col cb-text">
             <h2>Hráčů na serveru</h2>
-            <p>Nyní hraje {$players ?? '-'} hráč{if $players === 1}{elseif $players >=2 && $players <= 4}i{else}ů{/if}</p>
+            <p class="minecraft-player-count"></p>
           </div>
         </div>
       </div>
