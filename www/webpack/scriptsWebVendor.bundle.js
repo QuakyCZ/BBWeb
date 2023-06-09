@@ -3552,6 +3552,25 @@ $(document).ready(function() {
 
 });
 
+
+function copyFunction() {
+    const copyText = document.getElementById("copyButton");
+    console.log("Copying Discord tag to clipboard")
+    // Add class to button
+    copyText.classList.add("btn-success");
+    copyText.classList.remove("btn-primary");
+    copyText.innerHTML = "Zkopírováno!";
+    // Send message into the console
+    console.log("Successfully copied Discord tag to clipboard");
+    // Write text from bracket to clipboard
+    navigator.clipboard.writeText("mc.beastblock.cz");
+    // Wait one seconds, then remove class from button
+    setTimeout(function() {
+        copyText.classList.remove("btn-success");
+        copyText.classList.add("btn-primary");
+        copyText.innerHTML = "Zkopírovat adresu";
+    }, 1000);
+}
 $(document).ready(function() {
 
     $('[data-toggle="sweetalert"]').click(function() {

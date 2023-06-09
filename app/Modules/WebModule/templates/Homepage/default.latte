@@ -14,7 +14,7 @@
       <p class="text-2 fw-medium">Přijď si zahrát na jednom z nejkreativnějších projektů!</p>
       <div class="row gy-2 g-3 col-12 col-lg-6">
         <div class="col-12 col-md-6 col-lg">
-          <a href="" class="btn btn-primary w-100 fs-4 py-3">Zkopírovat adresu</a>
+          <button class="btn btn-primary w-100 fs-4 py-3" id="copyButton" onclick="copyFunction()">Zkopírovat adresu</button>
         </div>
         <div class="col-12 col-md-6 col-lg">
           <a href="#minihry" class="btn btn-outline-light w-100 fs-4 py-3">Co zde najdeš</a>
@@ -67,7 +67,12 @@
 
     <div class="container">
       <h5 class="montserrat">Dozvi se toho více!</h5>
-      <div class="row mx-0 w-100 px-0">
+      <h1 class="display-3 fw-bold">Nejnovější příspěvky a články</h1>
+      <a class="text-light d-flex align-items-center mb-3 fs-5" href="{plink Articles:}">
+        Přejít na všechny články
+        <i class="phosphor ph-arrow-right ms-2"></i>
+      </a>
+      <div class="row m-0 w-100 px-0">
         {control recentArticlesListing}
       </div>
     </div>

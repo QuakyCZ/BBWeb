@@ -1,15 +1,10 @@
 {varType Nette\Database\Table\ActiveRow[] $articles}
-<h1 class="display-3 fw-bold">Nejnovější příspěvky a články</h1>
-<a class="text-light d-flex align-items-center mb-3 fs-5" href="{plink Articles:}">
-    Přejít na všechny články
-    <i class="phosphor ph-arrow-right ms-2"></i>
-</a>
 {if count($articles) > 0}
-<div class="row g-3">
+<div class="row gy-3 gx-0 gx-md-3 w-100 m-0 px-0 h-auto">
     {var $i = 0}
     {foreach $articles as $article}
     <div class="col-{if $i === 0}12{else}md{/if}">
-        <div class="card mb-3 h-100">
+        <div class="card">
             <div class="card-img-top" style="background-image: url('{$basePath}/img/2022-12-26_11.45.42.png');"></div>
             <div class="card-body row d-flex align-items-center flex-column flex-lg-row">
                 <div class="col-12 col-lg-auto">
@@ -19,7 +14,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <a href="{plink Articles:show $article[App\Repository\Primary\ArticleRepository::COLUMN_ID]}" class="card-title fs-2 text-white text-decoration-none">{$article[App\Repository\Primary\ArticleRepository::COLUMN_TITLE]}</a>
+                    <a href="{plink Articles:show $article[App\Repository\Primary\ArticleRepository::COLUMN_ID]}" class="card-title fs-2 text-white text-decoration-none max-lines">{$article[App\Repository\Primary\ArticleRepository::COLUMN_TITLE]}</a>
                     <div class="d-flex align-items-center">
                         {var $user = $article->ref(App\Repository\Primary\UserRepository::TABLE_NAME, App\Repository\Primary\ArticleRepository::COLUMN_CREATED_USER_ID)}
                         {var $userDetails = $user?->related(App\Repository\Primary\UserDetailsRepository::TABLE_NAME)->fetch()}

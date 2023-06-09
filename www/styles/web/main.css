@@ -17,6 +17,7 @@ body {
     --primary-color: #a32bff;
     --primary-hover-color: #cb5cff;
     --discord-color: #6469FF;
+    --success-color: #00d68f;
 }
 
 .background-1 {
@@ -215,6 +216,16 @@ p, li {
     border-color: var(--primary-color);
 }
 
+.btn-success:hover {
+    background-color: var(--success-color) !important;
+    border-color: var(--success-color) !important;
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+}
+
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
     background-color: var(--primary-hover-color);
     border-color: var(--primary-hover-color);
@@ -400,6 +411,15 @@ p, li {
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+.max-lines {
+    /* Max lines 1 */
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
 
 .time-box {
     background-color: var(--light-box);
