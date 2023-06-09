@@ -50,21 +50,18 @@ class HomepagePresenter extends BasePresenter
      */
     private function fetchMinecraftPlayers(string $serverIp): ?int
     {
-        $query = null;
         try
         {
-            bdump($serverIp);
-            $query = new MinecraftPing($serverIp, 25565, 200000, true);
-            $result = $query->Query();
-            return $result['players']['online'] ?? null;
+            $query = new MinecraftPing($serverIp, '25565');
+            $players = $query->Query();
+             if (!$players) {
+                return null;
+            }
+            return $players['players']['online'];
         }
         catch (MinecraftPingException $exception)
         {
             Debugger::log($exception, 'minecraft');
-        }
-        finally
-        {
-            $query?->Close();
         }
 
         return null;

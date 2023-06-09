@@ -8,9 +8,9 @@ use App\Repository\Primary\ServerRepository;
 use App\Repository\Primary\ServerTagRepository;
 use App\Repository\Primary\TagRepository;
 use Nette\ComponentModel\IContainer;
-use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
 use Nette\Localization\ITranslator;
+use Nette\Utils\ArrayHash;
 use Nette\Utils\Html;
 use Tracy\Debugger;
 use Ublaboo\DataGrid\Column\Action\Confirmation\StringConfirmation;
@@ -21,7 +21,8 @@ class ServerGrid extends BaseDataGrid
     public function __construct(
         IContainer $parent,
         ITranslator $translator,
-        private ServerRepository $serverRepository
+        private ServerRepository $serverRepository,
+        private TagRepository $tagRepository,
     )
     {
         parent::__construct($parent, "servers", $translator);
@@ -41,7 +42,19 @@ class ServerGrid extends BaseDataGrid
         $this->grid->addColumnImage(ServerRepository::COLUMN_BANNER, "Banner");
         $this->grid->addColumnImage(ServerRepository::COLUMN_CHARACTER, "Postavička");
 
-        $this->grid->addColumnText(ServerRepository::COLUMN_DESCRIPTION_SHORT, "Krátký popis");
+        $this->grid->addColumnStatus(ServerRepository::COLUMN_SHOW, "Zobrazit na webu")
+            ->setSortable()
+            ->addOption(0, 'Ne')
+            ->setClass('bg-danger')
+            ->endOption()
+            ->addOption(1, 'Ano')
+            ->endOption()
+            ->setFilterSelect([
+                0 => 'Ne',
+                1 => 'Ano',
+                null => '-'
+            ]);
+
         $this->grid->addColumnText("tags", "Tagy")
             ->setRenderer(function ($row) {
                 $tags = "";
@@ -56,7 +69,16 @@ class ServerGrid extends BaseDataGrid
                 }
                 return $tags;
             })
-            ->setTemplateEscaping(false);
+            ->setTemplateEscaping(false)
+            ->setFilterMultiSelect($this->tagRepository->fetchItemsForChoiceControl())
+            ->setAttribute('class', 'form-control input-sm selectpicker form-control-sm multiselect2')
+            ->setCondition(function (Selection $selection, ArrayHash $value) {
+                bdump($value);
+                $selection->where(
+                    ':' . ServerTagRepository::TABLE_NAME . '.' . ServerTagRepository::COLUMN_TAG_ID . ' IN (?)',
+                    (array)$value,
+                );
+            });
 
         $this->grid->setItemsDetail(function ($row) {
             return $row[ServerRepository::COLUMN_DESCRIPTION_SHORT] . '<hr>' . $row[ServerRepository::COLUMN_DESCRIPTION_FULL];
@@ -87,13 +109,4 @@ class ServerGrid extends BaseDataGrid
             ->setIcon("plus")
             ->setClass('btn btn-success');
     }
-}
-
-interface IServerGridFactory
-{
-    /**
-     * @param IContainer $parent
-     * @return ServerGrid
-     */
-    public function create(IContainer $parent): ServerGrid;
 }
