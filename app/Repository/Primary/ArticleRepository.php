@@ -18,6 +18,7 @@ class ArticleRepository extends PrimaryRepository
     public const COLUMN_IS_PUBLISHED = 'is_published';
     public const COLUMN_IS_PINNED = 'is_pinned';
     public const COLUMN_NOT_DELETED = 'not_deleted';
+    const COLUMN_BANNER = 'banner';
 
     protected string $tableName = self::TABLE_NAME;
 

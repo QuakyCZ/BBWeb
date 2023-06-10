@@ -5,7 +5,9 @@
     {foreach $articles as $article}
     <div class="col-{if $i === 0}12{else}md{/if}">
         <div class="card">
-            <div class="card-img-top" style="background-image: url('{$basePath}/img/2022-12-26_11.45.42.png');"></div>
+            {if !empty($article[App\Repository\Primary\ArticleRepository::COLUMN_BANNER])}
+                <div class="card-img-top" style="background-image: url('{$basePath.$article[App\Repository\Primary\ArticleRepository::COLUMN_BANNER]}');"></div>
+            {/if}
             <div class="card-body row d-flex align-items-center flex-column flex-lg-row">
                 <div class="col-12 col-lg-auto">
                     <div class="time-box d-flex flex-lg-column justify-content-center align-items-center mb-3 mb-lg-0">

@@ -11967,10 +11967,16 @@ async function fetchMinecraftPlayers() {
         text = 'Server je offline.';
     } else {
         let playerCount = players?.online;
-        text = `Nyní hraje ${playerCount !== undefined ? playerCount : '-'} hráč${playerCount === 1 ? '' : playerCount >=2 && playerCount <= 4 ? 'i' : 'ů'}`
+        text = `Nyní hraj${playerCount >=2 && playerCount <= 4 ? 'í' : 'e'} ${playerCount !== undefined ? playerCount : '-'} hráč${playerCount === 1 ? '' : playerCount >=2 && playerCount <= 4 ? 'i' : 'ů'}`
     }
 
-    pCounts.forEach(pCount => pCount.textContent = text);
+    pCounts.forEach(pCount => {
+        pCount.textContent = text;
+        if (!online)
+            pCount.classList.add('text-danger');
+        else
+            pCount.classList.remove('text-danger');
+    });
 
     const timeout = debug.cacheexpire * 1000 - new Date().getTime();
 

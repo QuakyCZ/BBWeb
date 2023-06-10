@@ -27,13 +27,14 @@
     {foreach $articles as $article}
     <div class="col-md-6 col-12 px-0 px-md-2">
         <div class="card mb-5 h-100">
-            <!-- Přidej za card-img-top d-none, pokud není nahraný žádný obrázek -->
-            <div class="card-img-top" style="background-image: url('{$basePath}/img/2022-12-26_11.45.42.png');"></div>
+            {if !empty($article[App\Repository\Primary\ArticleRepository::COLUMN_BANNER])}
+                <div class="card-img-top " style="background-image: url('{$basePath.$article[App\Repository\Primary\ArticleRepository::COLUMN_BANNER]}');"></div>
+            {/if}
             <div class="card-body row d-flex align-items-center flex-column flex-lg-row">
                 <div class="col-12 col-lg-auto">
                     <div class="time-box d-flex flex-lg-column justify-content-center align-items-center mb-3 mb-lg-0">
                         <h3 class="me-2 me-lg-0">{$article[App\Repository\Primary\ArticleRepository::COLUMN_CREATED]|date: 'd.'}</h3>
-                        <p>{$article[App\Repository\Primary\ArticleRepository::COLUMN_CREATED]|date: '%h.'}</p>
+                        <p>{$article[App\Repository\Primary\ArticleRepository::COLUMN_CREATED]|date: 'M.'}</p>
                     </div>
                 </div>
                 <div class="col">

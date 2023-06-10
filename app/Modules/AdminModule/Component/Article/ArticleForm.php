@@ -5,10 +5,13 @@ namespace App\Modules\AdminModule\Component\Article;
 use App\Component\BaseComponent;
 use App\Enum\EFlashMessageType;
 use App\Repository\Primary\ArticleRepository;
+use App\Utils\FileSystem\FileSystemException;
+use App\Utils\FileSystem\LocalFileSystem;
 use DateTime;
 use Nette\Application\AbortException;
 use Nette\Application\BadRequestException;
 use Nette\Application\UI\Form;
+use Nette\Http\FileUpload;
 use Nette\Utils\ArrayHash;
 use PDOException;
 use Tracy\Debugger;
@@ -19,10 +22,12 @@ class ArticleForm extends BaseComponent
     /**
      * @param int|null $id
      * @param ArticleRepository $articleRepository
+     * @param LocalFileSystem $fileSystem
      */
     public function __construct(
         private ?int $id,
-        private ArticleRepository $articleRepository
+        private ArticleRepository $articleRepository,
+        private LocalFileSystem $fileSystem,
     ) {
     }
 
@@ -55,6 +60,9 @@ class ArticleForm extends BaseComponent
 
         $form->addText(ArticleRepository::COLUMN_TITLE, 'Název');
         $form->addMarkdown(ArticleRepository::COLUMN_TEXT, 'Text');
+        $form->addUpload(ArticleRepository::COLUMN_BANNER, 'Banner')
+            ->setHtmlAttribute('accept', 'image/*')
+            ->setRequired(false);
 
         if ($this->presenter->user->isInRole('ADMIN')) {
             $form->addCheckbox(ArticleRepository::COLUMN_IS_PUBLISHED, 'Publikovat');
@@ -98,17 +106,24 @@ class ArticleForm extends BaseComponent
             $array[ArticleRepository::COLUMN_CHANGED_USER_ID] = $this->presenter->user->id;
             $array[ArticleRepository::COLUMN_CHANGED] = new DateTime();
         }
+        /** @var ?FileUpload $banner */
+        $banner = $values[ArticleRepository::COLUMN_BANNER] ?? null;
 
         try {
+
+            if ($banner !== null) {
+                $array[ArticleRepository::COLUMN_BANNER] = $this->fileSystem->saveFileUpload($banner, '/files/articles/');
+            }
+
             if ($this->id) {
-                $this->articleRepository->findRow($this->id)->update($array);
+                $this->articleRepository->findRow($this->id)?->update($array);
             } else {
                 $this->articleRepository->save($array);
             }
             $this->presenter->flashMessage('Článek byl uložen.', EFlashMessageType::SUCCESS);
 
             $this->presenter->redirect('this');
-        } catch (PDOException $exception) {
+        } catch (PDOException|FileSystemException $exception) {
             Debugger::log($exception, ILogger::EXCEPTION);
             $form->addError('Při ukládání nastala chyba.');
         }
