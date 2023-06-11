@@ -20,6 +20,7 @@ parameters:
             - Admin:Poll
             - Admin:Rewards
             - Admin:Tags
+            - Admin:Positions
         OWNER:
             - Admin:Default
         LEADER:

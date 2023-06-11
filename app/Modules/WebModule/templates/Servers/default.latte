@@ -11,10 +11,8 @@ a různých kooperačních serverech!</p>
     </div>
     <div class="container">
         {foreach $servers as $server}
-            <section class="mb-5">
+            <section class="mb-5 text-justify">
                 <h1 class="display-4 fw-bold mt-5" id="server-{$server[App\Repository\Primary\ServerRepository::COLUMN_ID]}">{$server[App\Repository\Primary\ServerRepository::COLUMN_NAME]}</h1>
-                <img src="{$basePath}{$server[App\Repository\Primary\ServerRepository::COLUMN_BANNER]}" alt="banner">
-                <p>{$server[App\Repository\Primary\ServerRepository::COLUMN_DESCRIPTION_SHORT]|noescape}</p>
                 <p>{$server[App\Repository\Primary\ServerRepository::COLUMN_DESCRIPTION_FULL]|noescape}</p>
             </section>
         {/foreach}

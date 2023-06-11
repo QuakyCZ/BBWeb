@@ -1,0 +1,18 @@
+{varType Nette\Database\Table\Selection $positions}
+<div class="row g-3 w-100 m-0">
+    {foreach $positions as $position}
+        <div class="col-12 col-md-6 col-lg-4">
+            <a class="nabor-box text-decoration-none" href="{$position[App\Repository\Primary\PositionRepository::COLUMN_URL]}">
+                <div class="d-flex justify-content-between w-100 align-items-center">
+                    <div>
+                        <h2 class="fw-bold">{$position[App\Repository\Primary\PositionRepository::COLUMN_NAME]}</h2>
+                        <p>{$position[App\Repository\Primary\PositionRepository::COLUMN_TEXT]}</p>
+                    </div>
+                    <div>
+                        <i class="phosphor ph-arrow-right fs-3 text-white"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+    {/foreach}
+</div>

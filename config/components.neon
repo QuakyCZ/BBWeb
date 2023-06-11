@@ -30,8 +30,12 @@ services:
 
     - App\Modules\AdminModule\Component\Server\IServerGridFactory
     - App\Modules\AdminModule\Component\Server\IServerFormFactory
+    - App\Modules\WebModule\Component\ServerListing\IServerListingFactory
 
     - App\Modules\AdminModule\Component\Tag\ITagFormFactory
     - App\Modules\AdminModule\Component\Tag\ITagGridFactory
 
-    - App\Modules\WebModule\Component\ServerListing\IServerListingFactory
+
+    - App\Modules\WebModule\Component\Positions\IPositionsListingFactory
+    - App\Modules\AdminModule\Component\Position\IPositionFormFactory
+    - App\Modules\AdminModule\Component\Position\IPositionGridFactory

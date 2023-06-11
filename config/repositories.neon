@@ -30,3 +30,4 @@ services:
 
     - App\Repository\Primary\TagRepository
     - App\Repository\Primary\ServerTagRepository
+    - App\Repository\Primary\PositionRepository
