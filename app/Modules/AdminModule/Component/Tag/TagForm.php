@@ -34,6 +34,7 @@ class TagForm extends BaseComponent
             $form = $this['form'];
             $form->setDefaults($row->toArray());
         }
+        parent::render();
     }
 
     public function createComponentForm(): Form {

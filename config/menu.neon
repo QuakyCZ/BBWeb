@@ -18,6 +18,10 @@ menu:
                 action: 'Admin:Article:default'
                 data:
                     icon: 'fas fa-newspaper'
+            'Servery':
+                action: 'Admin:Servers:default'
+                data:
+                    icon: 'fas fa-server'
             'admin.dungeonEscape.title':
                 link: '#'
                 data:
@@ -56,10 +60,6 @@ menu:
                     icon: 'fas fa-gears'
                     sublistId: 'settings'
                 items:
-                    'Servery':
-                        action: 'Admin:Servers:default'
-                        data:
-                            icon: 'fas fa-server'
                     'Proměnné':
                         action: 'Admin:Settings:default'
                         data:

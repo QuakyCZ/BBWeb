@@ -88,10 +88,10 @@ class ServerForm extends BaseComponent
     {
         $userId = $this->presenter->user->id;
 
-        /** @var FileUpload|null $banner */
+        /** @var FileUpload $banner */
         $banner = $values[ServerRepository::COLUMN_BANNER];
 
-        /** @var ?FileUpload $character */
+        /** @var FileUpload $character */
         $character = $values[ServerRepository::COLUMN_CHARACTER];
 
         $dir = '/files/images/servers/';
@@ -105,12 +105,12 @@ class ServerForm extends BaseComponent
                 ServerRepository::COLUMN_SHOW => $values[ServerRepository::COLUMN_SHOW],
             ];
 
-            if ($banner !== null) {
+            if ($banner->hasFile()) {
                 $bannerFileName = $this->localFileSystem->saveFileUpload($banner, $dir);
                 $serverData[ServerRepository::COLUMN_BANNER] = $dir . $bannerFileName;
             }
 
-            if ($character !== null) {
+            if ($character->hasFile()) {
                 $characterFileName = $this->localFileSystem->saveFileUpload($character, $dir);
                 $serverData[ServerRepository::COLUMN_CHARACTER] = $dir . $characterFileName;
             }

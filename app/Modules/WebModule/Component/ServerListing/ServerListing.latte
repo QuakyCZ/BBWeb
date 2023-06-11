@@ -19,7 +19,7 @@
                         </div>
                     {/foreach}
                 </div>
-                <p class="text-secondary fs-5">{$server[App\Repository\Primary\ServerRepository::COLUMN_DESCRIPTION_SHORT]|noescape}</p>
+                <p class="text-secondary fs-5" style="text-align: justify;">{$server[App\Repository\Primary\ServerRepository::COLUMN_DESCRIPTION_SHORT]|noescape}</p>
                 {var $serverId = $server[App\Repository\Primary\ServerRepository::COLUMN_ID]}
                 <a href='{plink "Servers:default#server-$serverId"}' class="btn btn-outline-light w-auto py-2">Chci hrát {$server[App\Repository\Primary\ServerRepository::COLUMN_NAME]}</a>
             </div>
