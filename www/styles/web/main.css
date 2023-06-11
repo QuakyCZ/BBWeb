@@ -601,6 +601,10 @@ a#open_preferences_center {
     aspect-ratio: 1/1;
 }
 
+.small-desc {
+    text-align: justify;
+}
+
 /* */
 
 @media screen and (max-width: 991px) {

@@ -5,7 +5,7 @@
             <div class="col-md d-none d-lg-block">
                 <img src="{$basePath}{$server[App\Repository\Primary\ServerRepository::COLUMN_CHARACTER]}" alt="Skin" width="100%" loading="lazy">
             </div>
-            <div class="col-md text-lg-end px-0">
+            <div class="col-md {if $i % 2 == 0}text-lg-end{/if} px-0">
                 <h1 class="display-5 fw-bold">{$server[App\Repository\Primary\ServerRepository::COLUMN_NAME]}</h1>
                 <div class="d-flex mb-3 w-10 justify-content-lg-end">
                     {var $tags = $server->related(App\Repository\Primary\ServerTagRepository::TABLE_NAME)}
@@ -19,7 +19,7 @@
                         </div>
                     {/foreach}
                 </div>
-                <p class="text-secondary fs-5" style="text-align: justify;">{$server[App\Repository\Primary\ServerRepository::COLUMN_DESCRIPTION_SHORT]|noescape}</p>
+                <p class="text-secondary fs-5 small-desc">{$server[App\Repository\Primary\ServerRepository::COLUMN_DESCRIPTION_SHORT]|noescape}</p>
                 {var $serverId = $server[App\Repository\Primary\ServerRepository::COLUMN_ID]}
                 <a href='{plink "Servers:default#server-$serverId"}' class="btn btn-outline-light w-auto py-2">Chci hrát {$server[App\Repository\Primary\ServerRepository::COLUMN_NAME]}</a>
             </div>
