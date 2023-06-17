@@ -65,11 +65,11 @@ class ServerForm extends BaseComponent
 
         $form->addUpload(ServerRepository::COLUMN_BANNER, 'Banner')
             ->addRule(Form::IMAGE, 'Banner musí být obrázek.')
-            ->addRule(Form::MAX_FILE_SIZE, 'Maximální velikost obrázku je 4 MB.', 4000000);
+            ->addRule(Form::MAX_FILE_SIZE, 'Maximální velikost obrázku je 20 MB.', 20000000);
 
         $form->addUpload(ServerRepository::COLUMN_CHARACTER, 'Postavička')
             ->addRule(Form::IMAGE, 'Postavička musí být obrázek.')
-            ->addRule(Form::MAX_FILE_SIZE, 'Maximální velikost obrázku je 4 MB.', 4000000);
+            ->addRule(Form::MAX_FILE_SIZE, 'Maximální velikost obrázku je 20 MB.', 20000000);
 
         $form->addCheckbox(ServerRepository::COLUMN_SHOW, "Zobrazit na webu.");
 
