@@ -45,6 +45,9 @@ class BasePresenter extends Presenter
         $this->template->facebookUrl = $this->settingsRepository->getSettingValue('facebook_url');
         $this->template->instagramUrl = $this->settingsRepository->getSettingValue('instagram_url');
         $this->template->discordUrl = $this->settingsRepository->getSettingValue('discord_url');
+        $this->template->youtubeUrl = $this->settingsRepository->getSettingValue('youtube_url');
+        $this->template->statusUrl = $this->settingsRepository->getSettingValue('status_url');
+        $this->template->storeUrl = $this->settingsRepository->getSettingValue('store_url');
         $this->template->hosting = $this->settingsRepository->getSettingValue('hosting');
         $this->template->hostingUrl = $this->settingsRepository->getSettingValue('hosting-url');
 
