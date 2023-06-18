@@ -90,7 +90,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .display-max {
-    font-size: calc(2.5rem + 8vw);
+    font-size: calc(2.2rem + 8vw);
     word-break: break-all;
     line-height: 0.9;
 }
