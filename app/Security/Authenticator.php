@@ -3,6 +3,7 @@
 namespace App\Security;
 
 use App\Repository\Primary\UserDetailsRepository;
+use App\Repository\Primary\UserMinecraftAccountRepository;
 use App\Repository\Primary\UserRepository;
 use App\Repository\Primary\UserRoleRepository;
 use Nette;
@@ -47,8 +48,7 @@ class Authenticator implements \Nette\Security\Authenticator
 
         $roles = $this->userRoleRepository->getUsersRoleNames($user->id);
 
-        $detailsRow = $this->userDetailsRepository->getDetails($user->id);
-
+        $minecraft = $user->related(UserMinecraftAccountRepository::TABLE_NAME)->fetch();
         return new SimpleIdentity(
             $user->id,
             $roles, // nebo pole více rolí
@@ -56,7 +56,7 @@ class Authenticator implements \Nette\Security\Authenticator
                 'name' => $user->username,
                 'email' => $user->email,
                 'registrationDate' => $user->created,
-                'details' => $detailsRow->fetch()?->toArray()
+                'minecraft_nick' => $minecraft[UserMinecraftAccountRepository::COLUMN_NICK] ?? $user->username,
                 ]
         );
     }

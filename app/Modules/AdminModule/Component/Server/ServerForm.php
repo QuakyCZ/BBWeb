@@ -59,8 +59,8 @@ class ServerForm extends BaseComponent
     {
         $form = new \App\Form\Form();
         $form->addText(ServerRepository::COLUMN_NAME, 'Název');
-        $form->addMarkdown(ServerRepository::COLUMN_DESCRIPTION_SHORT, 'Krátký popis');
-        $form->addMarkdown(ServerRepository::COLUMN_DESCRIPTION_FULL, 'Celý popis');
+        $form->addMarkdown(ServerRepository::COLUMN_DESCRIPTION_SHORT, 'Krátký popis', $this->id);
+        $form->addMarkdown(ServerRepository::COLUMN_DESCRIPTION_FULL, 'Celý popis', $this->id);
         $form->addMultiSelect2("tag_ids", "Tagy", $this->tagRepository->fetchItemsForChoiceControl());
 
         $form->addUpload(ServerRepository::COLUMN_BANNER, 'Banner')

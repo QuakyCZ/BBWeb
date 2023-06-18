@@ -1,4 +1,5 @@
 {varType string $minecraftNick}
+{varType Nette\Security\User $user}
 {block body}
     <!--   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
@@ -62,7 +63,7 @@
                         <li class="nav-item">
                             <a n:href="Sign:out" class="nav-link me-2 text-nowrap"><i class="fas fa-sign-out"></i> Odhlásit se</a>
                         </li>
-                        <img alt="{$minecraftNick ?? 'user'}" src="https://minotar.net/avatar/{$minecraftNick ?? 'user'}/250" class="skin last ms-3 ms-xl-0" style="width: 50px; border-radius: 7px;">
+                        <img alt="{$user->identity->minecraft_nick}" src="https://minotar.net/avatar/{$user->identity->minecraft_nick}/250" class="skin last ms-3 ms-xl-0" style="width: 50px; border-radius: 7px;">
                     </ul>
                 </div>
             </div>

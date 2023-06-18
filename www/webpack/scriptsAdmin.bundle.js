@@ -11844,14 +11844,13 @@ $(document).ready(function () {
 $(document).ready(function() {
     $('.markdown-editor').each((id, input) =>
     {
-        console.log(input);
         let mde = new EasyMDE({
             element: input,
             spellChecker: false,
-            autosave: {
-                enabled: true,
-                uniqueId: input.id,
-            },
+            // autosave: {
+            //     enabled: true,
+            //     uniqueId: input.id + (input.dataset.entityId ?? ''),
+            // },
             uploadImage: true,
             toolbar: [
                 "bold", "italic", "heading", "|",
