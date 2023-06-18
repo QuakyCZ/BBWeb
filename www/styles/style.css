@@ -28,21 +28,9 @@
     --muted-text: #adaec4;
 }
 
-html {
-    margin: 0;
-    padding: 0;
-}
-
 body {
-    background: #171b1e url(../img/bg.jpg) no-repeat fixed center center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
     font-family: 'Raleway', sans-serif !important;
     font-weight: normal;
-    padding: 0;
-    margin: 0;
 }
 
 h1 {
@@ -880,7 +868,7 @@ textarea.logger {
         row-gap: 2em;
     }
 
-    img {
+    img:not(.mb-4) {
         width: 100%;
         max-width: 100%;
         height: auto;
@@ -1023,4 +1011,15 @@ textarea.logger {
 
 .msf_multiselect input {
     margin-right: 5px;
+}
+
+/* NEW DESIGN HERE */
+
+
+.background-sign {
+    background-image: url("../../img/Background-wallpaper3.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 7px;
 }

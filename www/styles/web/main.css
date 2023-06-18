@@ -53,6 +53,14 @@ body {
     z-index: -2;
 }
 
+.background-error {
+    background-image: url('../../img/Background-wallpaper4.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 7px;
+}
+
 .blur-layer {
     z-index: -1;
     position: absolute;

@@ -1,3 +1,5 @@
+@import url(../web/font.css);
+
 :root {
     --background: #0b0d1a;
     --dark-text: #0b0d1a;
@@ -7,34 +9,34 @@
     --text: #d0c3d3;
     --text2: #FDFFFC;
     --darker-text: #6D6F80;
-    --primary-color: #a32bff;
+    --primary-color: #b04aff;
     --primary-hover-color: #cb5cff;
     --discord-color: #6469FF;
     --success-color: #00d68f;
+
+    --transition: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.container {
-    background-color: unset;
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -40%);
+h1, h2, h3, h4, h5, h6 {
+    color: var(--header);
+    font-family: 'Raleway-ExtraBold', sans-serif;
+    font-weight: 800;
 }
 
-.card {
-    max-width: 600px;
-    margin: 10em auto auto;
-    padding: calc(24px + 0.7vw);
-    background-color: #0b0b1642;
-    border: 1px solid #0b0b0e;
-    backdrop-filter: blur(25px);
+p, li {
+    color: var(--text);
+    font-family: 'Raleway-Regular', sans-serif;
+    font-weight: 400;
+}
 
-    border-radius: 10px;
-    /*box-shadow: 0px 0px 14px 5px rgba(0,0,0,0.73);*/
+a:not(.btn) {
+    color: var(--primary-color);
 }
 
 .btn {
     border-radius: 10px;
+    padding: 12px !important;
+    transition: color 0.2s var(--transition), background-color 0.2s var(--transition), border-color 0.2s var(--transition), transform 0.2s var(--transition);
 }
 
 .btn-primary {
@@ -45,4 +47,46 @@
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
     background-color: var(--primary-hover-color) !important;
     border-color: var(--primary-hover-color) !important;
+    transform: translateY(-4px);
+}
+
+/* Input */
+
+.change-pass {
+    color: var(--primary-color) !important;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+}
+
+.change-pass:hover {
+    color: var(--primary-hover-color) !important;
+}
+
+.form-control {
+    background-color: var(--dark-box);
+    border: 1px solid var(--darker-text);
+    color: #fff !important;
+    border-radius: 7px;
+    padding: 12px 16px;
+}
+
+label {
+    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+}
+
+label i {
+    margin-right: 8px;
+}
+
+/*#frm-signInForm-form-email_message {
+}*/
+
+.form-control:focus {
+    background-color: var(--dark-box);
+    border: 1px solid var(--primary-color);
+    color: #fff !important;
 }
