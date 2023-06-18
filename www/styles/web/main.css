@@ -108,7 +108,8 @@ p, li {
 
 .text-2 {
     color: var(--text2);
-    font-size: calc(0.9rem + 0.7vw) !important;
+    font-size: calc(1.2rem + 0.7vw) !important;
+    font-family: 'Raleway-SemiBold', sans-serif;
 }
 
 .fw-medium {
