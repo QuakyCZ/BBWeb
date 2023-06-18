@@ -86,7 +86,6 @@ abstract class ClientPresenter extends Presenter
     {
         $alertEnabled = $this->settingsRepository->getByName('alert-enabled')['content'];
         $this->template->alertEnabled = $alertEnabled;
-        $this->template->registrationTermsUrl = $this->settingsRepository->getSettingValue('registration_terms_url');
 
         if ($alertEnabled) {
             $alert = new \stdClass();
