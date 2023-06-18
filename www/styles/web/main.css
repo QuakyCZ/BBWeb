@@ -77,7 +77,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     color: var(--header);
-    font-weight: 700;
+    font-family: 'Raleway-Bold', sans-serif;
 }
 
 .montserrat {
@@ -90,7 +90,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .display-max {
-    font-size: calc(2.5rem + 8vw);
+    font-size: calc(2.2rem + 8vw);
     word-break: break-all;
     line-height: 0.9;
 }
@@ -108,7 +108,8 @@ p, li {
 
 .text-2 {
     color: var(--text2);
-    font-size: calc(0.9rem + 0.7vw) !important;
+    font-size: calc(1.2rem + 0.7vw) !important;
+    font-family: 'Raleway-SemiBold', sans-serif;
 }
 
 .fw-medium {
@@ -276,7 +277,7 @@ p, li {
 .at-text > p {
     margin-bottom: 0;
     font-size: 24px;
-    font-weight: 800;
+    font-family: 'Raleway-Bold', sans-serif;
     color: var(--header);
     line-height: 1.1;
 }
@@ -365,7 +366,7 @@ p, li {
 .cb-text > p {
     margin-bottom: 0;
     font-size: 27px;
-    font-weight: 800;
+    font-family: 'Raleway-ExtraBold';
     color: var(--dark-text);
     letter-spacing: -0.4px;
     line-height: 1.1;
@@ -401,7 +402,7 @@ p, li {
 }
 
 .card-title {
-    font-weight: 700;
+    font-family: 'Raleway-Bold', sans-serif;
 }
 
 .article-text {
