@@ -3512,6 +3512,65 @@ $.nette.ext('spinner', {
 
 })(jQuery);
 
+// Make a GET reuqest to the server to get the votes
+$(document).ready(function() {
+    $.ajax({
+        url: "https://czech-craft.eu/api/server/beastblock-cz/",
+        type: "GET",
+        headers: { //SET ACCEPT HEADER
+            Accept : "application/json; charset=utf-8",
+        },  
+        dataType: "json",
+        success: function(data) {
+            $("#czech-craft-votes").html(data.votes);
+        }
+    });
+
+    $.ajax({
+        url: "https://api.minecraftservery.eu/info?id=359",
+        type: "GET",
+        headers: { //SET ACCEPT HEADER
+            Accept : "application/json; charset=utf-8",
+        },  
+        dataType: "json",
+        success: function(data) {
+            $("#minecraftservery-votes").html(data.votes);
+        }
+    });
+
+    $.ajax({
+        url: "https://api.craftlist.org/v1/76ekjr73ptasowmrfs3e/info",
+        type: "GET",
+        headers: { //SET ACCEPT HEADER
+            Accept : "application/json; charset=utf-8",
+        },  
+        dataType: "json",
+        success: function(data) {
+            $("#craftlist-votes").html(data.votes);
+        }
+    });
+
+});
+
+
+function copyFunction() {
+    const copyText = document.getElementById("copyButton");
+    console.log("Copying Discord tag to clipboard")
+    // Add class to button
+    copyText.classList.add("btn-success");
+    copyText.classList.remove("btn-primary");
+    copyText.innerHTML = "Zkopírováno!";
+    // Send message into the console
+    console.log("Successfully copied Discord tag to clipboard");
+    // Write text from bracket to clipboard
+    navigator.clipboard.writeText("mc.beastblock.cz");
+    // Wait one seconds, then remove class from button
+    setTimeout(function() {
+        copyText.classList.remove("btn-success");
+        copyText.classList.add("btn-primary");
+        copyText.innerHTML = "Zkopírovat adresu";
+    }, 1000);
+}
 $(document).ready(function() {
 
     $('[data-toggle="sweetalert"]').click(function() {
@@ -3573,4 +3632,46 @@ $(document).ready(function() {
         }
     });
 
+});
+const pCounts = document.querySelectorAll('.minecraft-player-count');
+
+async function fetchMinecraftServerData(ip) {
+    try {
+        const response = await fetch('https://api.mcsrvstat.us/2/' + MINECRAFT_SERVER_IP);
+        return await response.json();
+    } catch(error) {
+        console.log(error);
+        return undefined;
+    }
+}
+
+async function fetchMinecraftPlayers() {
+    const data = await fetchMinecraftServerData(MINECRAFT_SERVER_IP);
+    if(!data) return;
+    const { debug, online, players } = data;
+
+    let text = '';
+
+    if (!online) {
+        text = 'Server je offline.';
+    } else {
+        let playerCount = players?.online;
+        text = `Nyní hraj${playerCount >=2 && playerCount <= 4 ? 'í' : 'e'} ${playerCount !== undefined ? playerCount : '-'} hráč${playerCount === 1 ? '' : playerCount >=2 && playerCount <= 4 ? 'i' : 'ů'}`
+    }
+
+    pCounts.forEach(pCount => {
+        pCount.textContent = text;
+        if (!online)
+            pCount.classList.add('text-danger');
+        else
+            pCount.classList.remove('text-danger');
+    });
+
+    const timeout = debug.cacheexpire * 1000 - new Date().getTime();
+
+    setTimeout(fetchMinecraftPlayers, timeout > 0 ? timeout : 60_000);
+}
+$(document).ready(function()
+{
+    fetchMinecraftPlayers();
 });

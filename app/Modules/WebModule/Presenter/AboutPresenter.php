@@ -2,16 +2,17 @@
 
 namespace App\Modules\WebModule\Presenter;
 
+use App\Modules\WebModule\Component\Positions\IPositionsListingFactory;
+use App\Modules\WebModule\Component\Positions\PositionsListing;
 use App\Modules\WebModule\Component\Team\ITeamFactory;
 use App\Modules\WebModule\Component\Team\Team;
 use App\Modules\WebModule\Presenter\Base\BasePresenter;
 
 class AboutPresenter extends BasePresenter
 {
-    private ITeamFactory $teamFactory;
-
     public function __construct(
-        ITeamFactory $teamFactory
+        private ITeamFactory $teamFactory,
+        private IPositionsListingFactory $positionsListingFactory,
     ) {
         parent::__construct();
         $this->teamFactory = $teamFactory;
@@ -25,5 +26,13 @@ class AboutPresenter extends BasePresenter
     public function createComponentTeam(): Team
     {
         return $this->teamFactory->create();
+    }
+
+    /**
+     * @return PositionsListing
+     */
+    public function createComponentPositionsListing(): PositionsListing
+    {
+        return $this->positionsListingFactory->create();
     }
 }

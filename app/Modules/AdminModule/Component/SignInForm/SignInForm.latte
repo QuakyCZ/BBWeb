@@ -1,21 +1,36 @@
 {block styles}
     <style>
 
+:root {
+    --background: #0b0d1a;
+    --dark-text: #0b0d1a;
+    --dark-box: #282831;
+    --light-box: #EAECF3;
+    --header: #ffffff;
+    --text: #d0c3d3;
+    --text2: #FDFFFC;
+    --darker-text: #6D6F80;
+    --primary-color: #a32bff;
+    --primary-hover-color: #cb5cff;
+    --discord-color: #6469FF;
+    --success-color: #00d68f;
+}
+
         .form-group {
             margin-bottom: 30px;
         }
 
         #frm-signInForm-form .form-control {
-            background-color: #212127;
+            background-color: var(--dark-box);
             border: none;
-            border-bottom: 2px solid #292e32;
+            border-bottom: 2px solid var(--light-box);
             color: #fff !important;
             border-radius: 5px 5px 3px 3px;
         }
 
         #frm-signInForm-form .form-control:focus {
             border: none;
-            border-bottom: 2px solid orange;
+            border-bottom: 2px solid var(--primary-color);
             box-shadow: none;
             color: #fff !important;
         }
@@ -30,7 +45,7 @@
         }
 
         #frm-signInForm-form textarea:focus {
-            border-top: 2px solid orange !important;
+            border-top: 2px solid var(--primary-color) !important;
             color: #fff !important;
         }
 
@@ -39,7 +54,7 @@
             left: 24px;
             top: 10px;
             font-size: 1rem;
-            color: orange;
+            color: var(--primary-color);
         }
 
         .input-with-icon {
@@ -49,14 +64,27 @@
 
         .input-with-icon input {
             padding-left: 3rem !important;
-            color: var(--secondary);
+            color: var(--text2);
             margin: auto 0;
         }
 
         .input-with-icon:focus-within > .input-icon {
-            color: var(--warning);
+            color: var(--primary-hover-color);
         }
 
+        .btn {
+            border-radius: 10px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+        }
+
+        .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+            background-color: var(--primary-hover-color) !important;
+            border-color: var(--primary-hover-color) !important;
+        }
     </style>
 {/block}
 {form form class => "form-horizontal form-normal", role => "form"}
@@ -80,8 +108,8 @@
         </div>
     </div>
     <div class="form-group row mb-0">
-        {input submit class => "btn btn-outline-warning py-2"}
-        <a href="{plink Sign:forgottenPassword}" class="text-white ml-3 my-auto mt-3" style="text-decoration: underline;">Zapomněl/a jste heslo? Resetujte ho.</a>
-        <a href="{plink Sign:up}" class="text-white ml-3 my-auto mt-3" style="text-decoration: underline;">Ještě nemáte účet? Zaregistrujte se.</a>
+        {input submit class => "btn btn-primary py-2"}
+        <a href="{plink Sign:forgottenPassword}" class="text-white ml-3 my-auto mt-3" style="text-decoration: underline;">Zapomenuté heslo? Resetuj si ho zde.</a>
+        <a href="{plink Sign:up}" class="text-white ml-3 my-auto mt-3" style="text-decoration: underline;">Ještě nemáš založený účet? Vytvoř si jeden.</a>
     </div>
 {/form}

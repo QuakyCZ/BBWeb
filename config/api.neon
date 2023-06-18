@@ -2,6 +2,8 @@ services:
     - Tomaj\NetteApi\Link\ApiLink
     - Tomaj\NetteApi\Misc\IpDetector
     - App\Modules\ApiModule\Model\Logger\ApiLogger
+    scopeFactory:
+        class: League\Fractal\ScopeFactory
     bearerTokenAuthorization: Tomaj\NetteApi\Authorization\BearerTokenAuthorization(@userTokenRepository)
     apiDecider:
         factory: Tomaj\NetteApi\ApiDecider
@@ -11,6 +13,6 @@ services:
             - addApi(\Tomaj\NetteApi\EndpointIdentifier('POST', 1, 'users', 'connect'), App\Modules\ApiModule\v1\Handlers\Users\UserConnectHandler(), @bearerTokenAuthorization)
             - addApi(\Tomaj\NetteApi\EndpointIdentifier('POST', 1, 'users', 'disconnect'), App\Modules\ApiModule\v1\Handlers\Users\UserDisconnectHandler(), @bearerTokenAuthorization)
           # Dungeon Escpape
-            - addApi(\Tomaj\NetteApi\EndpointIdentifier('GET', 1, 'dungeon-escape', 'player'), App\Modules\ApiModule\v1\Handlers\DungeonEscape\PlayerInfoHandler(), @bearerTokenAuthorization)
+            - addApi(\Tomaj\NetteApi\EndpointIdentifier('GET', 1, 'dungeon-escape', 'player'), App\Modules\ApiModule\v1\Handlers\DungeonEscape\PlayerInfoHandler(scopeFactory), @bearerTokenAuthorization)
 
 

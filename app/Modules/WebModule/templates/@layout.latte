@@ -1,118 +1,91 @@
-<!DOCTYPE html>
-<!-- CC: 3ca2135837d11347 -->
-<html lang="cs" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://opengraphprotocol.org/schema/">
+{varType string $serverIp}
+{varType string $serverVersion}
+{varType string $facebookUrl}
+{varType string $instagramUrl}
+{varType string $discordUrl}
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="{block og_title}BeastBlock.cz{/block}" property="og:title"/>
-    <meta content="{block og_description}Minecraftový server, kde můžeš nalézt různé hry jako Dungeon Escape nebo Subserver!{/block}" property="og:description"/>
-    <meta content="{block og_url}https://beastblock.cz/{/block}" property="og:url"/>
-    <meta content="{block og_image}{$basePath}/img/beastblock_icon_website.png{/block}" property="og:image"/>
-    <meta content="#ff9b05" data-react-helmet="true" name="theme-color"/>
-    <meta name="author" content="Quaky, KlemaLP, Caidorn, sCrapy">
-    <meta name="project" content="BeastBlock.cz">
-
-    <link rel="apple-touch-icon" sizes="180x180" href="{$basePath}/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="{$basePath}/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="{$basePath}/favicon/favicon-16x16.png">
-    <link rel="manifest" href="{$basePath}/favicon/site.webmanifest">
-    <link rel="mask-icon" href="{$basePath}/favicon/safari-pinned-tab.svg" color="#5bbad5">
-
     <link rel="stylesheet" href="{$basePath}/webpack/stylesWeb.bundle.css">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{$basePath}/img/BB_Favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="{$basePath}/img/BB_Favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="{$basePath}/img/BB_Favicon.svg">
+    <link rel="mask-icon" href="{$basePath}/img/BB_Favicon.svg" color="#9a16ff">
+    <link rel="shortcut icon" href="{$basePath}/img/BB_Favicon.svg">
+    <!-- Meta tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta content="BeastBlock.cz" property="og:title" />
+    <meta content="Vítej na BeastBlocku! Jsme server, který ti nabídne zábavu po dlouhé hodiny. Navštiv nás!" property="og:description" />
+    <meta content="https://beastblock.cz" property="og:url" />
+    <meta content="https://beastblock.cz/img/skins/logo.svg" property="og:image" />
+    <meta content="#a32bff" data-react-helmet="true" name="theme-color" />
 
-    {block styles}
-    {/block}
+    <meta name="description" content="Vítej na BeastBlocku! Jsme server, který ti nabídne zábavu po dlouhé hodiny. Navštiv nás!">
+    <meta name="author" content="BeastBlock.cz | Quaky & Kléma">
+    <meta name="keywords" content="BeastBlock, Mojang, Minecraft">
+    <meta name="author" content="BeastBlock.cz">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
 
     <title>BeastBlock.cz</title>
-
-    <script type="text/javascript">
-        function closeCookie()
-        {
-            document.cookie = "expires=Fri, 31 Dec 9999 23:59:59 GMT";
-            document.getElementById('cookieContent').style.visibility = 'hidden';
-        }
-    </script>
-    <!-- Hotjar Tracking Code for https://www.beastblock.cz -->
-    <script type="application/javascript" src="{$basePath}/js/hotjar.js"></script>
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BT2Z2PW0S"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag()
-        {
-            dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-
-        gtag('config', 'G-8BT2Z2PW0S');
-    </script>
 </head>
 <body>
-<a href="https://www.toplist.cz" id="toplist">
-    <script lang="JavaScript" type="text/javascript">
 
-        document.write('<img src="https://toplist.cz/count.asp?id=1801844&logo=s&http=' +
-            escape(document.referrer) + '&t=' + escape(document.title) +
-            '&wi=' + escape(window.screen.width) + '&he=' + escape(window.screen.height) + '&cd=' +
-            escape(window.screen.colorDepth) + '" width="14" height="14" alt="TOPlist" style="visibility: hidden; border: none; " />');
-
-        document.getElementById('toplist').style.visibility = 'hidden';
-        document.getElementById('toplist').style.height = '0';
-        document.getElementById('toplist').style.display = 'none';
-    </script>
-    <noscript><img src="https://toplist.cz/count.asp?id=1801844&logo=s" border="0"
-                   alt="TOPlist" width="14" height="14" style="visibility: hidden;"/></noscript>
-</a>
-{include "navbar.latte"}
-{block beforeContent}{/block}
-<div class="container my-3">
-    {block content}{/block}
-</div>
-<div class="cookie-banner">
-    <div class="ccontainer">
-
-
-
-        <article class="cookie-text">Používáním našeho webu souhlasíte s ukládáním <a>souborů cookies.</a></article>
-        <button class="close-cookies" onclick="closeCookies()">Souhlasím</button>
-    </div>
-</div>
-<script>
-    function showPopUp(id)
-    {
-        document.getElementById(id).style.display = 'block';
-    }
-
-    function closePopUp(id)
-    {
-        document.getElementById(id).style.display = 'none';
-    }
+<!-- Cookie Consent by TermsFeed https://www.TermsFeed.com -->
+<script type="text/javascript" src="https://www.termsfeed.com/public/cookie-consent/4.1.0/cookie-consent.js" charset="UTF-8"></script>
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({"notice_banner_type":"headline","consent_type":"express","palette":"dark","language":"cs","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"page_refresh_confirmation_buttons":false,"website_name":"BeastBlock.cz","website_privacy_policy_url":"https://beastblock.cz/gdpr"});
+});
 </script>
-<script src="{$basePath}/webpack/scriptsWebVendor.bundle.js"></script>
-<script src="{$basePath}/webpack/scriptsWeb.bundle.js"></script>
-{block scripts}{/block}
-<script src="{$basePath}/js/cookies.js"></script>
-{snippet flashes}
+
+<noscript>Free cookie consent management tool by <a href="https://www.termsfeed.com/">TermsFeed</a></noscript>
+<!-- End Cookie Consent by TermsFeed https://www.TermsFeed.com -->
+
+
+
+
+
+<!-- Below is the link that users can use to open Preferences Center to change their preferences. Do not modify the ID parameter. Place it where appropriate, style it as needed. -->
+
+<a href="#" id="open_preferences_center"><i class="phosphor ph-cookie"></i></a>
+    {include navbar.latte}
+
+    {block content}{/block}
+
+    <div class="bg-dark-purple w-100 h-auto">
+      <footer class="flex-column flex-lg-row d-flex justify-content-lg-between align-items-lg-center container py-5 px-3">
+        <div>
+          <img src="{$basePath}/img/logo.svg" alt="" width="156px" loading="lazy">
+          <p class="fs-5 mt-3 text-white-50">©️ BeastBlock.cz 2023 | Všechna práva vyhrazena.<br>Nespolupracujeme a nejsme součástí Mojang AB.</p>
+          <p class="text-white-50">Stránka vytvořena <a href="https://adam-klement.cz/">Klémou</a> a <a href="https://quaky.cz/">Quakym</a>.</p>
+          <div class="d-flex">
+            <a href="https://discord.beastblock.cz" target="_blank" class="text-decoration-none"><i class="phosphor ph-discord-logo-fill fs-3 text-white"></i></a>
+            <a href="https://www.youtube.com/channel/@beastblock.cz" target="_blank" class="text-decoration-none"><i class="phosphor ph-youtube-logo-fill fs-3 text-white ms-3"></i></a>
+            <a href="https://www.instagram.com/beastblock.cz/" target="_blank" class="text-decoration-none"><i class="phosphor ph-instagram-logo-fill fs-3 text-white ms-3"></i></a>
+          </div>
+        </div>
+        <div class="d-flex flex-column text-lg-end">
+          <a n:href="Homepage:" class="text-white-50 fs-5">Domů</a>
+          <a n:href="Servers:" class="text-white-50 fs-5">Servery</a>
+          <a n:href="Articles:" class="text-white-50 fs-5">Články</a>
+          <a n:href="About:" class="text-white-50 fs-5">Tým</a>
+          <a href="https://obchod.beastblock.cz" class="text-white-50 fs-5">Obchod</a>
+          <a href="https://status.beastblock.cz" class="text-white-50 fs-5">Status</a>
+          <a n:href="Feedback:" class="text-white-50 fs-5">Zpětná vazba</a>
+          <a href="#" class="text-white-50 fs-5">Kontaktovat</a>
+          <a n:href=":Client:Dashboard:" class="text-white-50 fs-5">Profil</a>
+        </div>
+      </footer>
+    </div>
     <script>
-        {foreach $flashes as $flash}
-        iziToast.show({
-            title: {_'flash.'.$flash->type},
-            message: {$flash->message|translate},
-            icon: {\App\Enum\EFlashMessageType::TYPE_TO_FA_ICON[$flash->type]},
-            iconColor: {\App\Enum\EFlashMessageType::TYPE_TO_ICON_COLOR[$flash->type]},
-            theme: 'dark',
-            position: 'topRight',
-            class: {$flash->type},
-            timeout: 5000,
-            progressBar: true
-            //balloon: true
-        });
-        {/foreach}
+        const MINECRAFT_SERVER_IP = {$serverIp};
     </script>
-{/snippet}
+    <script src="{$basePath}/webpack/scriptsWebVendor.bundle.js"></script>
+    <script src="{$basePath}/webpack/scriptsWeb.bundle.js"></script>
+    {block scripts}{/block}
 </body>
 </html>

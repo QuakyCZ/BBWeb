@@ -19,11 +19,15 @@ Require all granted
 	RewriteRule /\.|^\.(?!well-known/) - [F]
 
     RewriteRule webpack/fontawesome/(.*) libs/fontawesome/$1 [L,NC]
+	RewriteRule webpack/phosphor-icons/(.*) libs/phosphor-icons/$1 [L,NC]
 
 	# front controller
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteRule !\.(pdf|js|mjs|ico|gif|jpg|jpeg|png|webp|svg|css|rar|zip|7z|tar\.gz|map|eot|ttf|otf|woff|woff2)$ index.php [L]
+
+    php_value upload_max_filesize 20000000
+    php_value post_max_size 20000000
 </IfModule>
 
 # enable gzip compression

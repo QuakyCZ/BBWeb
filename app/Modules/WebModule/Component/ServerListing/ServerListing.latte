@@ -1,0 +1,28 @@
+{varType Nette\Database\Table\ActiveRow[] $servers}
+{var $i = 0}
+{foreach $servers as $server}
+        <div class="col-12 {if $i % 2 == 1}flex-row-reverse{/if} row mx-0 w-100 px-0 mb-5">
+            <div class="col-md d-none d-lg-block">
+                <img src="{$basePath}{$server[App\Repository\Primary\ServerRepository::COLUMN_CHARACTER]}" alt="Skin" width="100%" loading="lazy">
+            </div>
+            <div class="col-md {if $i % 2 == 0}text-lg-end{/if} px-0">
+                <h1 class="display-5 fw-bold">{$server[App\Repository\Primary\ServerRepository::COLUMN_NAME]}</h1>
+                <div class="d-flex mb-3 w-10 justify-content-lg-end">
+                    {var $tags = $server->related(App\Repository\Primary\ServerTagRepository::TABLE_NAME)}
+                    {foreach $tags as $serverTag}
+                        {var $tag = $serverTag->tag}
+                        <div
+                                class="badge me-2 bg-primary fs-6 rounded-pill"
+                                style="color: {$tag[App\Repository\Primary\TagRepository::COLUMN_FONT_COLOR]|noescape} !important;
+                                        background-color: {$tag[App\Repository\Primary\TagRepository::COLUMN_BACKGROUND_COLOR]|noescape} !important;">
+                            {$tag[App\Repository\Primary\TagRepository::COLUMN_NAME]}
+                        </div>
+                    {/foreach}
+                </div>
+                <p class="text-secondary fs-5 text-justify">{$server[App\Repository\Primary\ServerRepository::COLUMN_DESCRIPTION_SHORT]|noescape}</p>
+                {var $serverId = $server[App\Repository\Primary\ServerRepository::COLUMN_ID]}
+                <a href='{plink "Servers:default#server-$serverId"}' class="btn btn-outline-light w-auto py-2">Chci hrát {$server[App\Repository\Primary\ServerRepository::COLUMN_NAME]}</a>
+            </div>
+        </div>
+    {var $i = $i + 1}
+{/foreach}

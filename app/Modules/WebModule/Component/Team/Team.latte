@@ -1,30 +1,18 @@
 {varType array $roles}
-
-<div class="team" id="team">
-    <h1>NÁŠ <span style="color: white">TÝM</span></h1>
-
-    {foreach $roles as $role}
-        <h2>{$role['role']}</h2>
-        <div class="members">
-            {foreach $role['members'] as $member}
-                {varType Nette\Database\Table\ActiveRow $member}
-                <div class="member-box">
-                    <div class="skin-part">
-                        <img
-                                src="https://minotar.net/avatar/{$member['minecraft_nick']}/250"
-                                alt="{$member['minecraft_nick']}"
-                                class="skin"
-                                width="70px"
-                        >
-                    </div>
-                    <div class="desc-part">
-                        <h3>{$member['minecraft_nick']}</h3>
-                        <p class="member-position">{$member['position']}</p>
-                    </div>
-                    <div class="social-part"></div>
+{foreach $roles as $role}
+    <h1 class="display-4 fw-bold mt-5">{$role['role']}</h1>
+    {foreach $role['members'] as $member}
+        {varType Nette\Database\Table\ActiveRow $member}
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="at-box row">
+                <div class="col-auto">
+                    <img src="https://mc-heads.net/head/{$member['minecraft_nick']}/81" alt="{$member['minecraft_nick']}">
                 </div>
-            {/foreach}
+                <div class="col at-text">
+                    <h2>{$member['position']}</h2>
+                    <p>{$member['minecraft_nick']}</p>
+                </div>
+            </div>
         </div>
     {/foreach}
-
-</div>
+{/foreach}

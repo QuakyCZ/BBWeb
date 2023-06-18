@@ -18,6 +18,10 @@ menu:
                 action: 'Admin:Article:default'
                 data:
                     icon: 'fas fa-newspaper'
+            'Servery':
+                action: 'Admin:Servers:default'
+                data:
+                    icon: 'fas fa-server'
             'admin.dungeonEscape.title':
                 link: '#'
                 data:
@@ -50,20 +54,25 @@ menu:
                         action: 'Admin:Poll:add'
                         data:
                             icon: 'fas fa-plus'
+            'Otevřené pozice':
+                action: 'Admin:Positions:'
+                data:
+                    icon: 'fas fa-user-plus'
+
             'Nastavení':
                 link: '#'
                 data:
                     icon: 'fas fa-gears'
                     sublistId: 'settings'
                 items:
-                    'Servery':
-                        action: 'Admin:Servers:default'
-                        data:
-                            icon: 'fas fa-server'
                     'Proměnné':
                         action: 'Admin:Settings:default'
                         data:
                             icon: 'fas fa-ellipsis'
+                    'Tagy':
+                        action: 'Admin:Tags:default'
+                        data:
+                            icon: 'fas fa-tags'
     client:
         translator: true
         linkGenerator: @App\Model\LinkGenerator

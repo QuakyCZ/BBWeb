@@ -2,27 +2,47 @@
 
 namespace App\Modules\AdminModule\Presenter;
 
-use App\Modules\AdminModule\Component\ServerListing\IServerListingFactory;
-use App\Modules\AdminModule\Component\ServerListing\ServerListing;
+use App\Modules\AdminModule\Component\Server\IServerFormFactory;
+use App\Modules\AdminModule\Component\Server\IServerGridFactory;
+use App\Modules\AdminModule\Component\Server\ServerForm;
+use App\Modules\AdminModule\Presenter\Base\BasePresenter;
+use Ublaboo\DataGrid\DataGrid;
 
-class ServersPresenter extends Base\BasePresenter
+class ServersPresenter extends BasePresenter
 {
-    private IServerListingFactory $serverListingFactory;
+
+    private ?int $id = null;
 
     /**
-     * @param IServerListingFactory $serverListingFactory
+     * @param IServerFormFactory $serverFormFactory
+     * @param IServerGridFactory $serverGridFactory
      */
-    public function __construct(IServerListingFactory $serverListingFactory)
+    public function __construct(
+        private IServerFormFactory $serverFormFactory,
+        private IServerGridFactory $serverGridFactory
+    )
     {
         parent::__construct();
-        $this->serverListingFactory = $serverListingFactory;
+    }
+
+    public function actionEdit(int $id): void
+    {
+        $this->id = $id;
     }
 
     /**
-     * @return ServerListing
+     * @return DataGrid
      */
-    public function createComponentServerListing(): ServerListing
+    public function createComponentServerGrid(): DataGrid
     {
-        return $this->serverListingFactory->create();
+        return $this->serverGridFactory->create($this)->create();
+    }
+
+    /**
+     * @return ServerForm
+     */
+    public function createComponentServerForm(): ServerForm
+    {
+        return $this->serverFormFactory->create($this->id);
     }
 }

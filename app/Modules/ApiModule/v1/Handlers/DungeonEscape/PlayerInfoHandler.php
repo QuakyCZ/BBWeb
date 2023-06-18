@@ -14,7 +14,7 @@ use Tomaj\NetteApi\Response\ResponseInterface;
 class PlayerInfoHandler extends BaseHandler
 {
     public function __construct(
-        ScopeFactoryInterface $scopeFactory = null,
+        ScopeFactoryInterface $scopeFactory,
         private PlayerFacade $playerFacade,
     ) {
         parent::__construct($scopeFactory);

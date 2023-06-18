@@ -58,3 +58,6 @@ tracy:
     netteMailer: true
     logSeverity: [E_WARNING, E_NOTICE, E_ERROR]
     errorTemplate: 'app/Presenter/templates/Error/500.phtml'
+
+php:
+	date.timezone: Europe/Prague

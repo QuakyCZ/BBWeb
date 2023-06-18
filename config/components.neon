@@ -2,7 +2,6 @@ services:
     - App\Modules\WebModule\Component\Team\ITeamFactory
     - App\Modules\AdminModule\Component\User\IUserFormFactory
     - App\Modules\AdminModule\Component\User\IUserGridFactory
-    - App\Modules\AdminModule\Component\ServerListing\IServerListingFactory
 
     - App\Modules\AdminModule\Component\SignInForm\ISignInFormFactory
     - App\Modules\AdminModule\Component\SignUpForm\ISignUpFormFactory
@@ -15,6 +14,7 @@ services:
     - App\Modules\AdminModule\Component\Article\IArticleFormFactory
     - App\Modules\AdminModule\Component\Article\IArticleGridFactory
     - App\Modules\WebModule\Component\ArticlesListing\IArticlesListingFactory
+    - App\Modules\WebModule\Component\RecentArticlesListing\IRecentArticlesListingFactory
 
     - App\Modules\ClientModule\Component\Connection\Minecraft\IMinecraftConnectionFactory
     - App\Modules\ClientModule\Component\Connection\Discord\IDiscordConnectionFactory
@@ -27,3 +27,15 @@ services:
 
     - App\Modules\AdminModule\Component\Rewards\IRewardsFormFactory
     - App\Modules\AdminModule\Component\Rewards\IRewardsGridFactory
+
+    - App\Modules\AdminModule\Component\Server\IServerGridFactory
+    - App\Modules\AdminModule\Component\Server\IServerFormFactory
+    - App\Modules\WebModule\Component\ServerListing\IServerListingFactory
+
+    - App\Modules\AdminModule\Component\Tag\ITagFormFactory
+    - App\Modules\AdminModule\Component\Tag\ITagGridFactory
+
+
+    - App\Modules\WebModule\Component\Positions\IPositionsListingFactory
+    - App\Modules\AdminModule\Component\Position\IPositionFormFactory
+    - App\Modules\AdminModule\Component\Position\IPositionGridFactory

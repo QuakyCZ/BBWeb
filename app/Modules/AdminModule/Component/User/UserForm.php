@@ -86,7 +86,7 @@ class UserForm extends BaseComponent
      */
     public function createComponentForm(): Form
     {
-        $form = new Form();
+        $form = new \App\Form\Form();
         $form->addProtection();
 
         $form->addText('username', 'Uživatelské jméno')
@@ -117,7 +117,7 @@ class UserForm extends BaseComponent
 
         if ($this->presenter->user->isInRole('ADMIN')) {
             $roles = $this->roleRepository->getDataForSelect();
-            $form->addMultiSelect('role_ids', 'Role', $roles);
+            $form->addMultiSelect2('role_ids', 'Role', $roles);
         } else {
             $form->addHidden('role_ids');
         }

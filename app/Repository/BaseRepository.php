@@ -119,4 +119,5 @@ abstract class BaseRepository
         return $this->findAll()
             ->page($page, $maxPerPage, $pageCount);
     }
+
 }
