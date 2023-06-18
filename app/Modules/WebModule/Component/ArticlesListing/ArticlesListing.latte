@@ -51,7 +51,7 @@
                         <p class="text-white-50 fs-4 mb-0 mx-3">•</p>
                         <p class="mb-0 text-secondary">{$article[App\Repository\Primary\ArticleRepository::COLUMN_CREATED]|date: 'd.m.Y \v\e H:i'}</p>
                     </div>
-                    <p class="card-text article-text text-white-50 mt-3">{$article[App\Repository\Primary\ArticleRepository::COLUMN_TEXT]|truncate: 200|noescape}</p>
+                    <p class="card-text article-text text-white-50 mt-3">{$article[App\Repository\Primary\ArticleRepository::COLUMN_TEXT]|noescape|truncate: 200}</p>
                 </div>
             </div>
         </div>
