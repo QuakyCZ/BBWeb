@@ -34,7 +34,7 @@ a:not(.btn) {
 }
 
 .btn {
-    border-radius: 10px;
+    border-radius: 7px;
     padding: 12px !important;
     transition: color 0.2s var(--transition), background-color 0.2s var(--transition), border-color 0.2s var(--transition), transform 0.2s var(--transition);
 }
