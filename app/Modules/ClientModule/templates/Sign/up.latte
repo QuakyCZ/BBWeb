@@ -1,7 +1,14 @@
 {block content}
 {addCss "/styles/admin/signIn.css"}
-<img src="/img/logo.svg" alt="logo" class="mx-auto d-block mb-5" style="height: 100px;">
-<div class="card mt-0">
-    <h1 class="text-white mb-4 fw-bold">Registrovat se</h1>
+
+<div class="mb-4">
+    <img class="mb-4" alt="Logo" width="200px" src="{$basePath}/img/logo.svg">
+    <h2>Vytvoření účtu</h2>
+    <p>Už ses k nám přidal? <a href="{plink Sign:in}" class="fw-semibold text-decoration-none">Přihlaš se</a></p>
+</div>
+<div>
+    <div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">
+        {$flash->message}
+    </div>
     {control signUpForm}
 </div>

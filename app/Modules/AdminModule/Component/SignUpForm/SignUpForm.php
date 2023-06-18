@@ -29,7 +29,7 @@ class SignUpForm extends \App\Component\BaseComponent
             ->addRule(Form::MIN_LENGTH, 'Minimální délka jsou %d znaky.', 3);
 
         $form->addEmail('email', 'Email')
-            ->setHtmlAttribute('placeholder', 'Email')
+            ->setHtmlAttribute('placeholder', 'E-Mail')
             ->setRequired('%label je povinný údaj.');
 
         $password = $form->addPassword('password', 'Heslo')
@@ -51,12 +51,12 @@ class SignUpForm extends \App\Component\BaseComponent
             ->endCondition();
 
         $form->addCheckbox('agree_with_terms', 'Souhlas s podmínkami')
-            ->addRule(Form::EQUAL, 'Musíte udělit souhlas s podmínkami.', true)
-            ->setRequired('Musíte udělit souhlas s podmínkami.');
+            ->addRule(Form::EQUAL, 'Musíš nejprve udělit souhlas s podmínkami!', true)
+            ->setRequired('Musíš nejprve udělit souhlas s podmínkami!');
 
-        $form->addReCaptcha('recaptcha', '', true, 'Potvrďte, že nejste robot.')->setRequired('Potvrďte, že nejste robot.');
+        $form->addReCaptcha('recaptcha', '', true, 'Bíp bůp! Potvrď, že nejsi robot.')->setRequired('Bíp bůp! Potvrď, že nejsi robot.');
 
-        $form->addSubmit('submit', 'Registrovat');
+        $form->addSubmit('submit', 'Zaregistrovat se');
 
         $form->onValidate[] = [$this, 'validateForm'];
         $form->onSuccess[] = [$this, 'completeForm'];

@@ -1,11 +1,22 @@
 {block content}
 {addCss "/styles/admin/signIn.css"}
-<img src="/img/logo.svg" alt="logo" class="mx-auto d-block mb-5" style="height: 100px;">
-<div class="card mt-0 text-secondary">
-    <h1 class="text-white fw-bold">Už zbývá jen jeden krok!</h1>
-    <hr>
-    <p>Děkujeme, že ses zaregistroval na našem webu! Registraci dokončíš kliknutím na odkaz v emailu, který jsme ti poslali.</p>
-    <a n:href="Sign:in" class="btn btn-outline-warning btn-lg mt-4 w-50 text-white" style="height: 50px;">
-            Zpět na přihlášení
-    </a>
+
+<div class="mb-4">
+    <img class="mb-4" alt="Logo" width="200px" src="{$basePath}/img/logo.svg">
+    <h2>Děkujeme za registraci!</h2>
+    <p>Veškeré další informace ti byly zaslány na tvůj e-mail. Zkontroluj všechny složky (včetně spamu). Pokud ti e-mail nedošel, napiš na naší podporu!</p>
+</div>
+<div>
+    <div class="row w-100 m-0 g-2">
+        <div class="col-lg">
+            <a n:href="Sign:in" class="btn btn-primary w-100 text-white py-2">
+                Přihlásit se
+            </a>
+        </div>
+        <div class="col-lg">
+            <a href="https://discord.beastblock.cz" target="_blank" class="btn btn-outline-light w-100 text-white py-2">
+                Kontaktovat podporu
+            </a>
+        </div>
+    </div>
 </div>
