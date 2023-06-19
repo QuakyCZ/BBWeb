@@ -193,7 +193,7 @@ p, li {
 
 .dropdown-item {
     color: var(--text2);
-    border-radius: 7px;
+    border-radius: 10px;
     transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
@@ -211,8 +211,8 @@ p, li {
 }
 
 .btn {
-    font-weight: 600;
-    border-radius: 10px;
+    font-family: 'Raleway-Medium', sans-serif;
+    border-radius: 7px;
     transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -382,8 +382,8 @@ p, li {
 
 .cb-text > a {
     margin-bottom: 0;
-    font-size: 28px;
-    font-weight: 800;
+    font-size: 27px;
+    font-family: 'Raleway-ExtraBold';
     color: var(--dark-text);
     letter-spacing: -0.4px;
     line-height: 1.1;

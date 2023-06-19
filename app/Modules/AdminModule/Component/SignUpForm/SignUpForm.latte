@@ -1,117 +1,49 @@
-{block styles}
-    <style>
-
-        .form-group {
-            margin-bottom: 30px;
-        }
-
-        #frm-signUpForm-form .form-control {
-            background-color: #212127;
-            border: none;
-            border-bottom: 2px solid #292e32;
-            color: #fff !important;
-            border-radius: 5px 5px 3px 3px;
-        }
-
-        #frm-signUpForm-form .form-control:focus {
-            border: none;
-            border-bottom: 2px solid orange;
-            box-shadow: none;
-            color: #fff !important;
-        }
-
-        #frm-signUpForm-form .form-control:focus::placeholder {
-            color: #fff !important;
-        }
-
-        #frm-signUpForm-form textarea {
-            border-top: 2px solid #292e32 !important;
-            color: #fff !important;
-        }
-
-        #frm-signUpForm-form textarea:focus {
-            border-top: 2px solid orange !important;
-            color: #fff !important;
-        }
-
-        .input-icon {
-            position: absolute;
-            left: 24px;
-            top: 10px;
-            font-size: 1rem;
-            color: orange;
-        }
-
-        .input-with-icon {
-            position: relative;
-            width: 100%;
-        }
-
-        .input-with-icon input {
-            padding-left: 3rem !important;
-            color: var(--secondary);
-            margin: auto 0;
-        }
-
-        .input-with-icon:focus-within > .input-icon {
-            color: var(--warning);
-        }
-
-    </style>
-{/block}
 {form form class => "form-horizontal form-normal", role => "form"}
-    <div class="form-group row">
-        <div class="input-with-icon">
-            <span class="input-icon">
-                <i class="fas fa-user"></i>
-            </span>
+    <div class="row m-0 w-100 g-2">
+        <div class="col-12">
+            <label for="floatingInput"><i class="phosphor ph-user"></i> Uživatelské jméno</label>
             {input username class => "form-control"}
         </div>
-    </div>
-    <div class="form-group row">
-        <div class="input-with-icon">
-            <span class="input-icon">
-                <i class="fas fa-envelope"></i>
-            </span>
+        <div class="col-12">
+            <label for="floatingInput"><i class="phosphor ph-envelope"></i> E-Mailová adresa</label>
             {input email class => "form-control"}
         </div>
-    </div>
-    <div class="form-group row">
-        <div class="input-with-icon">
-            <span class="input-icon">
-                <i class="fas fa-lock"></i>
-            </span>
+        <div class="col-xl">
+            <label for="floatingInput"><i class="phosphor ph-fingerprint"></i> Heslo</label>
             {input password class => "form-control"}
         </div>
-    </div>
-    <div class="form-group row">
-        <div class="input-with-icon">
-            <span class="input-icon">
-                <i class="fas fa-lock"></i>
-            </span>
+        <div class="col-xl">
+            <label for="floatingInput"><i class="phosphor ph-fingerprint"></i> Heslo znovu</label>
             {input passwordCheck class => "form-control"}
         </div>
-    </div>
-    <div class="form-group row my-0 mx-2">
-        <div class="form-check mx-1">
-            <label class="form-check-label text-secondary ml-3">
-                <input n:name="agree_with_terms" class="form-check-input text-white">
-                <span class="text-white">Souhlasím s </span><a href="{$registrationTermsUrl}" class="text-warning" style="text-decoration: underline;">podmínkami</a>
-            </label>
+        <p class="small mb-3 mx-2 mx-lg-0">Vytvoř si silné heslo, které obsahuje alespoň 8 znaků, velká a malá písmena a číslice.</p>
+        <div class="col-12">
+            <div class="form-check mx-1">
+                <label class="form-check-label text-secondary d-flex align-items-center">
+                    <input n:name="agree_with_terms" class="form-check-input text-white">
+                    <p class="mb-0">Souhlasím s <a href="{$registrationTermsUrl}" style="text-decoration: underline;">podmínkami</a></p>
+                </label>
+            </div>
+        </div>
+        <div class="col-12">
+            {input recaptcha, data-theme => 'dark'}
+            <script src='https://www.google.com/recaptcha/api.js'></script>
+        </div>
+        <div class="col-12">
+            <div class="errors" n:if="$form->hasErrors()">
+                <div n:foreach="$form->errors as $error" class="alert alert-danger error" role="alert">
+                <div class="flash-message-body">{$error}</div>
+            </div>
+        </div>
+        <div class="col-12 row g-2 m-0 mt-4 w-100">
+            <div class="col">
+                {input submit class => "btn btn-primary w-100"}
+            </div>
+            <div class="col-auto">
+                <a href="/" class="btn btn-outline-light w-auto"><i class="phosphor ph-x"></i></a>
+            </div>
         </div>
     </div>
-    <div class="form-group row">
-        {input recaptcha, data-theme => 'dark'}
-        <script src='https://www.google.com/recaptcha/api.js'></script>
-    </div>
-    <div class="errors" n:if="$form->hasErrors()">
-        <div n:foreach="$form->errors as $error" class="alert alert-danger error" role="alert">
-            <div class="flash-message-body">{$error}</div>
-        </div>
-    </div>
-    <div class="form-group row mb-0">
-        {input submit class => "btn btn-outline-warning py-2"}
-        <a href="{plink Sign:in}" class="text-white ml-3 my-auto mt-3" style="text-decoration: underline;">Už máte účet? Přihlaste se.</a>
     </div>
     <script type="text/javascript">
         document.write('<input type="hidden" name="x_url" value="no' + 'spam">');

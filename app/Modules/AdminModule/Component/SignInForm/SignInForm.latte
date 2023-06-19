@@ -6,19 +6,19 @@
         </div>
     </div>
 
-    <div class="w-100">
-        <div class="mb-3 w-100">
+    <div class="row w-100 m-0 g-2">
+        <div class="col-12">
             <label for="floatingInput"><i class="phosphor ph-user"></i> E-Mailová adresa</label>
             {input email class => "form-control"}
         </div>
-        <div class="mb-3 w-100">
+        <div class="col-12">
             <div class="d-flex justify-content-between">
-            <label for="floatingInput"><i class="phosphor ph-fingerprint"></i> Heslo</label>
-            <a href="{plink Sign:forgottenPassword}" class="change-pass">Zapomenuté heslo?</a>
+                <label for="floatingInput"><i class="phosphor ph-fingerprint"></i> Heslo</label>
+                <a href="{plink Sign:forgottenPassword}" class="change-pass">Zapomenuté heslo?</a>
             </div>
             {input password class => "form-control"}
         </div>
-        <div class="form-group row g-2 m-0 mt-4 w-100">
+        <div class="col-12 row g-2 m-0 mt-4 w-100">
             <div class="col">
                 {input submit class => "btn btn-primary w-100"}
             </div>
