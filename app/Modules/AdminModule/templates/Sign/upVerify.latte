@@ -1,9 +1,20 @@
 {block content}
 {addCss "/styles/admin/signIn.css"}
-<img src="/img/logo.png" alt="logo" class="mx-auto d-block mb-5" style="height: 100px;">
-<div class="card mt-0 text-secondary text-center">
-    <h1>Už zbývá jen jeden krok!</h1>
-    <hr>
-    <p>Děkujeme, že jste se registrovali na našem webu. Registraci dokončíte kliknutím na odkaz v emailu, který jsme Vám poslali.</p>
-    <a n:href="Sign:in" class="btn btn-outline-warning w-50 mx-auto mt-3">Zpět na přihlášení</a>
-</div>
+{addCss "/styles/style.css"}
+
+<section class="vh-100 p-2 container-fluid">
+    <div class="row w-100 m-0 g-0 h-100">
+        <div class="col-12 col-lg-6 d-flex flex-column justify-content-center align-items-center">
+            <div class="p-2 col-xl-7 col-lg-8 col-md-10 col-12">
+                <div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">
+                    {$flash->message}
+                </div>
+                    <img class="mb-4" alt="Logo" width="200px" src="{$basePath}/img/logo.svg">
+                    <h2>Už zbývá jen jeden krok!</h1>
+                    <p>Děkujeme, že jste se registrovali na našem webu. Registraci dokončíte kliknutím na odkaz v emailu, který jsme Vám poslali.</p>
+                    <a n:href="Sign:in" class="btn btn-primary w-50 mx-auto mt-3">Zpět na přihlášení</a>
+            </div>
+        </div>
+        <div class="col-12 col-md-4 col-lg-6 col-xl-5 h-100 background-sign d-none d-lg-block"></div>
+    </div>
+</section>

@@ -1,3 +1,10 @@
+<div class="mb-4">
+    <img class="mb-4" alt="Logo" width="200px" src="{$basePath}/img/logo.svg">
+    <h2>Přihlásit se</h2>
+    <p>Ještě nejsi členem? <a href="{plink Sign:up}" class="fw-semibold text-decoration-none">Založ si účet</a></p>
+</div>
+
+<div>
 {form form class => "form-horizontal form-normal", role => "form"}
     {input returnKey}
     <div class="errors" n:if="$form->hasErrors()">
@@ -8,12 +15,12 @@
 
     <div class="row w-100 m-0 g-2">
         <div class="col-12">
-            <label for="floatingInput"><i class="phosphor ph-user"></i> E-Mailová adresa</label>
+            <label for="floatingInput"><i class="fas fa-user"></i> E-Mailová adresa</label>
             {input email class => "form-control"}
         </div>
         <div class="col-12">
             <div class="d-flex justify-content-between">
-                <label for="floatingInput"><i class="phosphor ph-fingerprint"></i> Heslo</label>
+                <label for="floatingInput"><i class="fas fa-fingerprint"></i> Heslo</label>
                 <a href="{plink Sign:forgottenPassword}" class="change-pass">Zapomenuté heslo?</a>
             </div>
             {input password class => "form-control"}
@@ -23,8 +30,9 @@
                 {input submit class => "btn btn-primary w-100"}
             </div>
             <div class="col-auto">
-                <a href="/" class="btn btn-outline-light w-auto"><i class="phosphor ph-x"></i></a>
+                <a href="/" class="btn btn-outline-light w-auto"><i class="fas fa-x"></i></a>
             </div>
         </div>
     </div>
 {/form}
+</div>
