@@ -17,6 +17,13 @@
     --transition: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+body {
+    background-color: var(--background);
+    color: var(--text);
+    font-family: 'Raleway-Regular', sans-serif;
+    font-weight: 400;
+}
+
 h1, h2, h3, h4, h5, h6 {
     color: var(--header);
     font-family: 'Raleway-ExtraBold', sans-serif;
