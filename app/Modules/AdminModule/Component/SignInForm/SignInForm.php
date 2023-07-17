@@ -23,7 +23,7 @@ class SignInForm extends BaseComponent
         $form->addHidden('returnKey')
             ->setDefaultValue($this->returnKey);
         $form->addEmail('email', 'Email')
-            ->setHtmlAttribute('placeholder', '×××××××××××')
+            ->setHtmlAttribute('placeholder', 'priklad@beastblock.cz')
             ->setRequired('%label je povinný údaj');
         $form->addPassword('password', 'Heslo')
             ->setHtmlAttribute('placeholder', '×××××××××××')
