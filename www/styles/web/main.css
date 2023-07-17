@@ -614,6 +614,10 @@ a#open_preferences_center {
     text-align: justify;
 }
 
+.svg-inline--fa {
+    margin-right: 12px;
+}
+
 /* */
 
 @media screen and (max-width: 991px) {
