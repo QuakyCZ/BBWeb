@@ -5,6 +5,7 @@ services:
     - App\Repository\Primary\UserDetailsRepository
     - App\Repository\Primary\UserMinecraftAccountRepository
     - App\Repository\Primary\UserDiscordAccountRepository
+    - App\Repository\Primary\UserTwitchAccountRepository
     - App\Repository\Primary\UserConnectTokenRepository
     - App\Repository\Primary\ArticleRepository
     userTokenRepository: App\Repository\Primary\UserTokenRepository
@@ -31,3 +32,5 @@ services:
     - App\Repository\Primary\TagRepository
     - App\Repository\Primary\ServerTagRepository
     - App\Repository\Primary\PositionRepository
+
+    - App\Repository\LuckPerms\LuckPermsUserPermissionsRepository

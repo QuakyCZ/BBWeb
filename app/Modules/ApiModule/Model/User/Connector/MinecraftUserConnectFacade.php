@@ -5,11 +5,10 @@ namespace App\Modules\ApiModule\Model\User\Connector;
 use App\Enum\EConnectTokenType;
 use App\Modules\ApiModule\Model\User\UserConnectTokenFacade;
 use App\Modules\ApiModule\Model\User\UserFacade;
+use App\Repository\LuckPerms\LuckPermsUserPermissionsRepository;
 use App\Repository\Primary\UserMinecraftAccountRepository;
-use App\Utils\Minecraft\MinecraftUtils;
-use Nette\Application\BadRequestException;
+use App\Utils\MinecraftUtils;
 use Nette\Database\Table\ActiveRow;
-use Nette\Utils\JsonException;
 use Throwable;
 use Tomaj\NetteApi\Response\JsonApiResponse;
 use Tomaj\NetteApi\Response\ResponseInterface;
@@ -20,8 +19,8 @@ class MinecraftUserConnectFacade extends BaseUserConnectFacade
 {
     public function __construct(
         UserConnectTokenFacade $userConnectTokenFacade,
-        private UserFacade $userFacade,
-        private UserMinecraftAccountRepository $userMinecraftAccountRepository
+        private UserMinecraftAccountRepository $userMinecraftAccountRepository,
+        private LuckPermsUserPermissionsRepository $luckPermsUserPermissionsRepository,
     ) {
         parent::__construct(EConnectTokenType::MINECRAFT, $userConnectTokenFacade);
     }
@@ -101,5 +100,25 @@ class MinecraftUserConnectFacade extends BaseUserConnectFacade
     public function disconnect(int $userId): bool
     {
         return $this->userMinecraftAccountRepository->deleteAccount($userId);
+    }
+
+
+    public function setSubserverPermission(int $userId, bool $value): void
+    {
+        $account = $this->userMinecraftAccountRepository->getAccountByUserId($userId);
+
+        bdump($account);
+
+        if ($account === null)
+        {
+            return;
+        }
+
+        $uuid = MinecraftUtils::convertUuidFromBinToString($account[UserMinecraftAccountRepository::COLUMN_UUID]);
+
+        $this->luckPermsUserPermissionsRepository->setSubserverPermission(
+            $uuid,
+            $value,
+        );
     }
 }

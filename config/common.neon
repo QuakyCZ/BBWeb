@@ -32,7 +32,7 @@ di:
 services:
 	- App\Router\RouterFactory::createRouter
 	- App\Security\Authenticator
-	- App\Model\ContextLocator(primary: @database.primary.context, dungeonEscape: @database.dungeonEscape.context, rewards: @database.rewards.context)
+	- App\Model\ContextLocator(primary: @database.primary.context, dungeonEscape: @database.dungeonEscape.context, rewards: @database.rewards.context, luckPerms: @database.luckPerms.context)
 
 extensions:
 	translation: Contributte\Translation\DI\TranslationExtension

@@ -8,5 +8,7 @@ services:
     - App\Modules\ApiModule\Model\User\UserConnectTokenFacade
     - App\Modules\ApiModule\Model\User\Connector\MinecraftUserConnectFacade
     - App\Modules\ApiModule\Model\User\Connector\DiscordUserConnectFacade
+    - App\Modules\ApiModule\Model\User\Connector\TwitchUserConnectFacade(%twitch.redirectUri%)
 
     - App\Facade\RewardsFacade
+    - App\Facade\LuckPermsFacade
