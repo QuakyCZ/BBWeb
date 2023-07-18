@@ -1,4 +1,5 @@
 {varType bool $isConnected}
+{varType bool $minecraftConnected}
 {snippet connection}
     <h2 class="fw-bold"><i class="fa-brands fa-twitch text-danger"></i> Twitch</h2>
     <span>Propojen: {($isConnected ? 'common.yes' : 'common.no')|translate}</span>
@@ -15,7 +16,22 @@
                 data-link="{link disconnect!}"
                 data-cancel-callback="resetButton()"
         >Odpojit</button>
-        <a n:href="verifySubscription!" class="btn btn-outline-info ajax">Ověřit odběr</a>
+        <br>
+        {if $minecraftConnected}
+            <a class="btn btn-outline-info w-40 loading-btn mt-3 ajax" n:href="verifySubscription!">Ověřit odběr</a>
+
+        {else}
+            <a class="btn btn-outline-info w-40 loading-btn mt-3 ajax"
+               href="#"
+               data-toggle="sweetalert"
+               data-type=""
+               data-action="ajax"
+               data-scope="warning"
+               data-text="Nejdříve si musíš propojit Minecraft účet."
+               data-cancel-callback="resetButton()"
+            >Ověřit odběr</a>
+        {/if}
+
     {else}
         <br>
         <div class="row g-1">
