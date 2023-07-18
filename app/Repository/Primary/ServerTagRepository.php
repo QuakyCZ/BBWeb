@@ -23,8 +23,6 @@ class ServerTagRepository extends PrimaryRepository
             self::COLUMN_SERVER_ID => $serverId,
         ])->delete();
 
-        bdump($this->findAll()->fetchAll());
-
         foreach ($tagIds as $tagId) {
             $this->save([
                 self::COLUMN_SERVER_ID => $serverId,

@@ -6,9 +6,8 @@ use App\Enum\EFlashMessageType;
 use App\Modules\ApiModule\Model\User\Connector\MinecraftUserConnectFacade;
 use App\Modules\ApiModule\Model\User\Connector\TwitchUserConnectFacade;
 use App\Modules\ClientModule\Component\Connection\BaseConnection;
-use App\Repository\Primary\UserRepository;
 use GuzzleHttp\Exception\GuzzleException;
-use NewTwitchApi\NewTwitchApi;
+use Nette\Application\AbortException;
 use Throwable;
 use Tracy\Debugger;
 
@@ -40,7 +39,7 @@ class TwitchConnection extends BaseConnection
 
     /**
      * @return void
-     * @throws \Nette\Application\AbortException
+     * @throws AbortException
      */
     public function handleVerifySubscription(): void
     {
@@ -49,8 +48,11 @@ class TwitchConnection extends BaseConnection
             $this->presenter->flashMessage('Nejprve se musíš připojit na Minecraftem!', EFlashMessageType::ERROR);
         } else {
             try {
-                $this->twitchUserConnectFacade->refreshSubscriptionForUser($this->presenter->user->id);
-                $this->presenter->flashMessage('Odběr byl úspěšně ověřen. Můžeš jít hrát na Subserver!', EFlashMessageType::SUCCESS);
+                if ($this->twitchUserConnectFacade->refreshSubscriptionForUser($this->presenter->user->id)) {
+                    $this->presenter->flashMessage('Odběr byl úspěšně ověřen. Můžeš jít hrát na Subserver!', EFlashMessageType::SUCCESS);
+                } else {
+                    $this->presenter->flashMessage('Nepodařilo se ověřit odběr.', EFlashMessageType::ERROR);
+                }
             } catch (GuzzleException $exception) {
                 $this->presenter->flashMessage('Nepodařilo se ověřit odběr.', EFlashMessageType::ERROR);
                 if ($exception->getCode() !== 404) {

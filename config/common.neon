@@ -6,6 +6,7 @@ includes:
     - permission.neon
     - menu.neon
     - api.neon
+    - commands.neon
 
 parameters:
 

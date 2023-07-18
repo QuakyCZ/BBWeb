@@ -13,3 +13,7 @@ services:
         class: NewTwitchApi\NewTwitchApi(@helixGuzzleClient, %twitch.clientId%, %twitch.clientSecret%)
 extensions:
     - Contributte\FormMultiplier\DI\MultiplierExtension
+    console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
+
+console:
+    url: https://beastblock.cz

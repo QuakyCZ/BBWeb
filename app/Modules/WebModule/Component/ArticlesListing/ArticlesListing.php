@@ -30,7 +30,6 @@ class ArticlesListing extends \App\Component\BaseComponent
      */
     public function handlePage(int $page): void
     {
-        bdump($page);
         if ($page < 0) {
             throw new BadRequestException();
         }

@@ -107,8 +107,6 @@ class MinecraftUserConnectFacade extends BaseUserConnectFacade
     {
         $account = $this->userMinecraftAccountRepository->getAccountByUserId($userId);
 
-        bdump($account);
-
         if ($account === null)
         {
             return;

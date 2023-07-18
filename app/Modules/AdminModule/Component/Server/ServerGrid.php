@@ -73,7 +73,6 @@ class ServerGrid extends BaseDataGrid
             ->setFilterMultiSelect($this->tagRepository->fetchItemsForChoiceControl())
             ->setAttribute('class', 'form-control input-sm selectpicker form-control-sm multiselect2')
             ->setCondition(function (Selection $selection, ArrayHash $value) {
-                bdump($value);
                 $selection->where(
                     ':' . ServerTagRepository::TABLE_NAME . '.' . ServerTagRepository::COLUMN_TAG_ID . ' IN (?)',
                     (array)$value,

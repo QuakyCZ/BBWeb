@@ -41,8 +41,6 @@ class TwitchUserConnectFacade extends BaseUserConnectFacade
         /** @var string $code */
         $code = $data['code'];
 
-        bdump($code);
-
         $oauth = $this->twitchApi->getOauthApi();
 
         try {
@@ -121,6 +119,7 @@ class TwitchUserConnectFacade extends BaseUserConnectFacade
 
     /**
      * @return void
+     * @throws GuzzleException
      */
     public function refreshSubscriptions(): void
     {
@@ -130,7 +129,7 @@ class TwitchUserConnectFacade extends BaseUserConnectFacade
 
         foreach ($accounts as $account) {
             $this->refreshSubscription(
-                $account[UserTwitchAccountRepository::COLUMN_USER_ID],
+                $account,
                 $broadcasters,
             );
         }
@@ -139,11 +138,13 @@ class TwitchUserConnectFacade extends BaseUserConnectFacade
     /**
      * @param ActiveRow $account
      * @param ActiveRow[] $broadcasters
-     * @return void
+     * @return bool
      * @throws GuzzleException
      */
-    private function refreshSubscription(ActiveRow $account, array $broadcasters): void
+    private function refreshSubscription(ActiveRow $account, array $broadcasters): bool
     {
+        $hasSub = true;
+
         foreach ($broadcasters as $broadcaster)
         {
             $twitchRow = $broadcaster->related(UserTwitchAccountRepository::TABLE_NAME)->fetch();
@@ -151,7 +152,7 @@ class TwitchUserConnectFacade extends BaseUserConnectFacade
             if ($twitchRow === null)
             {
                 Debugger::log($broadcaster[UserRepository::COLUMN_USERNAME] . ' vyžaduje sub, ale nemá propojený twitch!', 'twitch');
-                continue;
+                return false;
             }
 
             $hasSub = $this->verifySubscription(
@@ -159,32 +160,38 @@ class TwitchUserConnectFacade extends BaseUserConnectFacade
                 $twitchRow[UserTwitchAccountRepository::COLUMN_TWITCH_ID],
             );
 
-            $this->minecraftUserConnectFacade->setSubserverPermission(
-                $account[UserTwitchAccountRepository::COLUMN_USER_ID],
-                $hasSub,
-            );
+            if (!$hasSub) {
+                break;
+            }
         }
+
+        $this->minecraftUserConnectFacade->setSubserverPermission(
+            $account[UserTwitchAccountRepository::COLUMN_USER_ID],
+            $hasSub,
+        );
+
+        return $hasSub;
     }
 
 
     /**
      * @param int $userId
-     * @return void
+     * @return bool
      * @throws GuzzleException
      */
-    public function refreshSubscriptionForUser(int $userId): void
+    public function refreshSubscriptionForUser(int $userId): bool
     {
 
         $account = $this->userTwitchAccountRepository->getAccountByUserId($userId);
 
         if ($account === null)
         {
-            return;
+            return false;
         }
 
         $broadcasters = $this->userRepository->getRequiredBroadcastersForSubscription()->fetchAll();
 
-        $this->refreshSubscription($account, $broadcasters);
+        return $this->refreshSubscription($account, $broadcasters);
     }
 
     /**
@@ -196,12 +203,19 @@ class TwitchUserConnectFacade extends BaseUserConnectFacade
     ): bool
     {
         $subscriptionsApi = $this->twitchApi->getSubscriptionsApi();
+        try {
+            $response = $subscriptionsApi->checkUserSubscription(
+                $userTwitchAccountRow[UserTwitchAccountRepository::COLUMN_ACCESS_TOKEN],
+                $broadcasterId,
+                $userTwitchAccountRow[UserTwitchAccountRepository::COLUMN_TWITCH_ID],
+            );
+        } catch (GuzzleException $exception) {
+            if ($exception->getCode() === 404) {
+                return false;
+            }
 
-        $response = $subscriptionsApi->checkUserSubscription(
-            $userTwitchAccountRow[UserTwitchAccountRepository::COLUMN_ACCESS_TOKEN],
-            $broadcasterId,
-            $userTwitchAccountRow[UserTwitchAccountRepository::COLUMN_TWITCH_ID],
-        );
+            throw $exception;
+        }
 
         if ($response->getStatusCode() === 404) {
             return false;
