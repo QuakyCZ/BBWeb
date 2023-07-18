@@ -124,6 +124,8 @@ class UserForm extends BaseComponent
 
         $form->addText('position', 'Detail pozice');
 
+        $form->addCheckbox('sub_required', 'Povinný sub u tohoto uživatele pro přístup na Subserver');
+
         $form->addSubmit('submit', 'Registrovat');
 
         $form->onValidate[] = [$this, 'validateForm'];
@@ -175,6 +177,10 @@ class UserForm extends BaseComponent
 
         if (!empty($data['password'])) {
             $user['password'] = $this->passwords->hash($data['password']);
+        }
+
+        if (empty($data['sub_required'])) {
+            $data['sub_required'] = false;
         }
 
         $userDetails = [

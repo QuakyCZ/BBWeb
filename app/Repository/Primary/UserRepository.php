@@ -23,6 +23,8 @@ class UserRepository extends PrimaryRepository
     public const COLUMN_REMOVED_AT = 'removed_at';
     public const COLUMN_NOT_DELETED = 'not_deleted';
 
+    public const COLUMN_SUB_REQUIRED = 'sub_required';
+
 
     protected string $tableName = self::TABLE_NAME;
 
@@ -183,5 +185,16 @@ class UserRepository extends PrimaryRepository
     public function getPasswordHash($password): string
     {
         return $this->passwords->hash($password);
+    }
+
+
+    /**
+     * @return Selection
+     */
+    public function getRequiredBroadcastersForSubscription(): Selection
+    {
+        return $this->findBy([
+            self::COLUMN_SUB_REQUIRED => 1
+        ]);
     }
 }

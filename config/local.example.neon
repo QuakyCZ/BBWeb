@@ -1,12 +1,27 @@
 parameters:
     baseUrl: 'http://localhost:5000'
 
+    twitch:
+        clientId: ''
+        clientSecret: ''
+        redirectUri: 'http://localhost:50000/client/connections'
+
 database:
     primary:
         dsn: 'mysql:host=127.0.0.1;dbname=bbweb'
         user: bbweb
         password: 'bbweb'
     dungeonEscape:
+        dsn: 'mysql:host=127.0.0.1;dbname=roguelike'
+        user: 'root'
+        password: ''
+        autowired: false
+    rewards:
+        dsn: 'mysql:host=127.0.0.1;dbname=roguelike'
+        user: 'root'
+        password: ''
+        autowired: false
+    luckPerms:
         dsn: 'mysql:host=127.0.0.1;dbname=roguelike'
         user: 'root'
         password: ''

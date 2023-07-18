@@ -32,7 +32,9 @@
 		"marc-mabe/php-enum": "^4.7",
       	"ext-pdo": "*",
 		"friendsofphp/php-cs-fixer": "^3.13",
-		"michelf/php-markdown": "^2.0"
+		"michelf/php-markdown": "^2.0",
+		"nicklaw5/twitch-api-php": "*",
+		"symfony/console": "^6.3"
     },
 	"require-dev": {
 		"nette/tester": "^2.3",

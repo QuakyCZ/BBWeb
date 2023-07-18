@@ -1,0 +1,79 @@
+{varType bool $isConnected}
+{snippet connection}
+    <h2 class="fw-bold"><i class="fa-brands fa-twitch text-danger"></i> Twitch</h2>
+    <span>Propojen: {($isConnected ? 'common.yes' : 'common.no')|translate}</span>
+    {if $isConnected}
+        <br>
+        <button type="button"
+                id="twitch-disconnect-btn"
+                class="btn btn-outline-danger w-25 loading-btn mt-3"
+                data-toggle="sweetalert"
+                data-type="confirm"
+                data-action="ajax"
+                data-scope="warning"
+                data-text="Opravdu chcete odpojit svůj Twitch účet?"
+                data-link="{link disconnect!}"
+                data-cancel-callback="resetButton()"
+        >Odpojit</button>
+        <a n:href="verifySubscription!" class="btn btn-outline-info ajax">Ověřit odběr</a>
+    {else}
+        <br>
+        <div class="row g-1">
+            <div class="col-3">
+                <a n:href="generateToken!" id="twitch-connect-btn" class="ajax btn btn-outline-success w-100">Propojit účet</a>
+            </div>
+            <div class="col-auto">
+                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#mcModal">Informace</button>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="mcModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-bold" id="exampleModalLabel">Informace o propojení přes Twitch</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Pro přístup na Subserver je nutné ověřit odběr Nakashiho na Twitchi. Nejprve je nutné propojit webový účet s Twitchem.
+                        Následně bude možné ověřit odběr.
+                    </div>
+                </div>
+            </div>
+        </div>
+    {/if}
+{/snippet}
+<script>
+
+    $(document).ready(function () {
+        prepareButton();
+        naja.snippetHandler.addEventListener('afterUpdate', (event) => {
+            if (event.detail.snippet.id === 'snippet-twitchConnection-connection')
+            {
+                prepareButton();
+            }
+        });
+    });
+
+    function prepareButton()
+    {
+        $('#twitch-connect-btn').click(function ()
+        {
+            $(this).addClass('disabled');
+            $(this).html("<div class='spinner-border text-success' role='status'><span class='sr-only'>Loading...</span></div>");
+        });
+
+        $('#twitch-disconnect-btn').click(function ()
+        {
+            $(this).addClass('disabled');
+            $(this).html("<div class='spinner-border text-danger' role='status'><span class='sr-only'>Loading...</span></div>");
+        });
+    }
+
+    function resetButton()
+    {
+        $('#twitch-connect-btn').removeClass('disabled').text('Propojit');
+        $('#twitch-disconnect-btn').removeClass('disabled').text('Odpojit');
+    }
+</script>

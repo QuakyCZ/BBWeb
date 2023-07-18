@@ -7,5 +7,9 @@ services:
     - App\Modules\ApiModule\Model\User\UserConnectTokenMapper
     - App\Modules\ApiModule\Model\User\Connector\UserConnectFacadeFactory
     - App\Utils\FileSystem\LocalFileSystem
+    helixGuzzleClient:
+        class: NewTwitchApi\HelixGuzzleClient(%twitch.clientId%)
+    newTwitchApi:
+        class: NewTwitchApi\NewTwitchApi(@helixGuzzleClient, %twitch.clientId%, %twitch.clientSecret%)
 extensions:
     - Contributte\FormMultiplier\DI\MultiplierExtension

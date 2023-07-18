@@ -11,4 +11,6 @@ interface ContextLocator
     public function getDungeonEscape(): Explorer;
 
     public function getRewards(): Explorer;
+
+    public function getLuckPerms(): Explorer;
 }
