@@ -1,0 +1,11 @@
+#!/usr/bin/php81
+<?php declare(strict_types = 1);
+
+umask(000);
+
+require __DIR__ . '/../vendor/autoload.php';
+
+exit(App\Bootstrap::boot()
+    ->createContainer()
+    ->getByType(Contributte\Console\Application::class)
+    ->run());
