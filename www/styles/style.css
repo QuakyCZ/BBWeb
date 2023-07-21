@@ -837,6 +837,10 @@ textarea.logger {
     margin: 0 12px;
 }
 
+.text-purple {
+    color: var(--nav-accent);
+}
+
 @media (max-width: 1200px) {
     .container {
         width: 80%;
